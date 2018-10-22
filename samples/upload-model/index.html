@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modelo API sample (upload-model)</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/semantic.min.js"></script>
+    <style>
+        html,body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+        .upload-wrapper {
+            padding: 10px;
+            position: relative;
+        }
+        .file {
+            width: 87.172px;
+            line-height: 31px;
+            opacity: 0;
+            outline: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="upload-wrapper">
+        <input type="file" id="myFile" name="file" title="Upload" class="file" />
+        <button id="uploadBtn" class="ui primary button" style="position: absolute; left: 10px; top: 10px; z-index: 1;">
+            Upload
+        </button>
+        <h4 class="ui header" id="showFileName" style="display: inline; padding: 10px">No model uploaded</h4>
+        <div class="ui small progress" data-value="1" data-total="100" id="progress" style="width: 230px; margin-top: 10px;">
+            <div class="bar">
+                <div class="progress"></div>
+            </div>
+            <div class="label" id="progressShow">Uploading Model</div>
+    </div>
+
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.0-lts.js"></script>
+    <!-- <script src="/modeloapi.js"></script> -->
+    <script src="index.js"></script>
+</body>
+
+</html>

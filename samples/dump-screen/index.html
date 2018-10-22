@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Modelo API sample (Dump Screen)</title>
+  <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <script src="../../assets/js/jquery.min.js"></script>
+  <style>
+    html,body{
+      height: 100%;
+      margin:0;
+      padding:0;
+      overflow: hidden;
+    }
+    body{
+      display: flex;
+    }
+    #model{
+      height: 100%;
+      width: calc(100% - 340px);
+      display: block;
+    }
+    .dump-wrapper{
+      width:320px;
+      padding:10px;
+    }
+    .wrapper {
+      padding: 10px;
+      width: 320px;
+      min-width: 320px;
+    }
+    .wrapper label{
+      margin: 0 0 .28571429rem 0;
+      color: rgba(0,0,0,.87);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .wrapper-right label{
+      color: rgba(0,0,0,.87);
+      font-size: 1rem;
+      font-weight: 700;
+      position: fixed;
+      top: .68571429rem;
+      right: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    #dump{
+      display: block;
+      margin-bottom: 10px;
+    }
+    #screenshot{
+      width:320px;
+      height: 240px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dump-wrapper">
+    <input type="button" id="dump" value="Capture screen" class="ui primary button"/>
+    <img src="" alt="" id="screenshot" id="screenshot">
+  </div>
+  <div class="wrapper-right">
+    <label id="progress">Loading: 0</label>
+  </div>
+  <canvas id="model"></canvas>
+  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.0-lts.js"></script>
+  <!-- <script src="/modeloapi.js"></script> -->
+  <script src="index.js"></script>
+  <script>
+      $("#dump").click(function(){
+        $("#screenshot").toggle();
+      });
+      window.addEventListener('resize',function(){
+        var c=document.getElementById("model");
+        c.style.width = (this.innerWidth - 340) + 'px';
+        c.style.height=this.innerHeight +'px';
+      });
+  </script>
+</body>
+</html>
+

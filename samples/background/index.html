@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Modelo API sample (Background)</title>
+  <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <script src="../../assets/js/jquery.min.js" ></script>
+  <script src="../../assets/js/semantic.min.js"></script>
+
+  <style>
+    html,body{
+      height: 100%;margin: 0;padding: 0;overflow:hidden;
+    }
+    body{
+      display: flex;
+    }
+    .bg-selection{
+      width: 320px;
+      min-width: 320px;
+      padding: 10px;
+    }
+    .slection-content{
+      margin-top:20px;
+    }
+    #model{
+      height: 100%;
+      width: calc(100% - 320px);
+    }
+    .item{
+      display: none;
+    }
+    .item.active{
+      display: block;
+    }
+    .item-img{
+      cursor: pointer;
+      width: 140px;
+      height: 140px;
+      transition: opacity 1s ease-in-out;
+    }
+    .item-img:hover{
+      opacity: .6;
+    }
+    .item-img:first-child{
+      margin-right: 16px;
+    }
+    .wrapper {
+      padding: 10px;
+      width: 320px;
+      min-width: 320px;
+    }
+    .wrapper label{
+      margin: 0 0 .28571429rem 0;
+      color: rgba(0,0,0,.87);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .wrapper-right label{
+      color: rgba(0,0,0,.87);
+      font-size: 1rem;
+      font-weight: 700;
+      position: fixed;
+      top: .68571429rem;
+      right: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-selection">
+    <form class="ui form">
+      <div class="field">
+        <label>Choose background mode</label>
+        <select class="ui dropdown" id="bgmode">
+          <option value="0">Solid Color</option>
+          <option value="1">Wallpaper</option>
+          <option value="2">Equiprectangle</option>
+          <option value="3">Cubemap</option>
+          <option value="4">Tiled wallpaper</option>
+        </select>
+      </div>
+    </form>
+    <div class="slection-content" id="content">
+      <div class="item active">
+        <div class="ui buttons">
+          <button type="button" class="ui button white" id="default">Default</button>
+          <button type="button" class="ui button red" id="red">Red</button>
+          <button type="button" class="ui button green" id="green">Green</button>
+          <button type="button" class="ui button blue" id="blue">Blue</button>
+        </div>
+      </div>
+      <div class="item">
+        <img class="item-img" id="image1w" src="./wallpaper.jpg" /> 
+        <img class="item-img" id="image2w" src="./equirectangle.jpg" /> 
+      </div>
+      <div class="item">
+          <img class="item-img" id="image1e" src="./wallpaper.jpg" /> 
+          <img class="item-img" id="image2e" src="./equirectangle.jpg" /> 
+      </div>
+      <div class="item">
+          <img class="item-img" id="cubemap1" src="./wallpaper.jpg" style="visibility: hidden;" /> 
+          <img class="item-img" id="cubemap2" src="./wallpaper.jpg" style="visibility: hidden;" /> 
+      </div>
+      <div class="item">
+          <img class="item-img" id="image1t" src="./wallpaper.jpg" /> 
+          <img class="item-img" id="image2t" src="./equirectangle.jpg" /> 
+      </div>
+      <div class="item">
+          <img class="item-img" id="negx" src="./negx.jpg" style="visibility: hidden;" /> 
+          <img class="item-img" id="negy" src="./negy.jpg" style="visibility: hidden;" /> 
+          <img class="item-img" id="negz" src="./negz.jpg" style="visibility: hidden;" /> 
+          <img class="item-img" id="posx" src="./posx.jpg" style="visibility: hidden;" /> 
+          <img class="item-img" id="posy" src="./posy.jpg" style="visibility: hidden;" /> 
+          <img class="item-img" id="posz" src="./posz.jpg" style="visibility: hidden;" /> 
+      </div>
+
+    </div>
+  </div>
+  <div class="wrapper-right">
+    <label id="progress">Loading: 0</label>
+  </div>
+  <canvas id="model"></canvas>
+
+  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.0-lts.js"></script>
+  <!-- <script src="/modeloapi.js"></script> -->
+  <script>
+    $(function () {
+      $("#bgmode").change(function(){
+        var index=parseInt(this.value);
+        $("#content .item").removeClass("active");
+        $("#content .item:nth-child("+(index+1)+")").addClass("active");
+      })
+    })
+  </script>
+  <script src="index.js"></script>
+</body>
+
+</html>

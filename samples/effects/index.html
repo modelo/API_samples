@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Modelo API sample (Effects)</title>
+  <link href="https://cdn.bootcss.com/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <canvas id="model" width="1280" height="800" style="width: 1280px;height: 800px;position: absolute;left: 50%;top: 50%;border: solid 1px black;margin-left: -640px;margin-top: -400px;"></canvas>
+  <div class="ui thirteen column stackable grid">
+    <div class="row">
+      <div class="column">
+        <div class="ui toggle checkbox">
+          <input id="ssao" type="checkbox" name="public">
+          <label>SSAO</label>
+        </div>
+        
+        <div class="ui divider"></div>
+
+        <div class="ui toggle checkbox">
+          <input id="sketch" type="checkbox" name="public">
+          <label>Sketch</label>
+        </div>
+        
+        <div class="ui labeled input">
+          <div class="ui label">Sketch Color</div>
+          <input type="number" placeholder="" id="sketch_line_color" step="0.1">
+        </div>
+        <div class="ui labeled input">
+          <div class="ui label">Detail</div>
+          <input type="number" placeholder="" id="sketch_detail" step="0.1">
+        </div>
+        <div class="ui labeled input">
+          <div class="ui label">Contrast</div>
+          <input type="number" placeholder="" id="sketch_contrast" step="0.1">
+        </div>
+        <div class="ui toggle checkbox">
+          <input id="sketch_color" type="checkbox" name="public">
+          <label>Colorful</label>
+        </div>
+        <div class="ui labeled input">
+          <div class="ui label">Surface Color</div>
+          <input type="number" placeholder="" id="sketch_surface_color" step="0.1">
+        </div>
+        
+        <div class="ui divider"></div>
+        
+        <div class="ui toggle checkbox">
+          <input id="glow" type="checkbox" name="public">
+          <label>Glow</label>
+        </div>
+
+        <div class="ui divider"></div>
+        
+        <div class="ui toggle checkbox">
+          <input id="dof" type="checkbox" name="public">
+          <label>DOF</label>
+        </div>
+        
+        <div class="ui divider"></div>
+
+        <div class="ui toggle checkbox">
+          <input id="fog" type="checkbox" name="public">
+          <label>Fog</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://api-release.modeloapp.com/prod/modeloapi-1.0-latest.js"></script>
+  <!-- <script src="/modeloapi.js"></script> -->
+  <script language="javascript">
+    var c = document.getElementById("model");
+
+    document.body.appendChild(c);
+
+    Modelo.initialize("https://build-portal.modeloapp.com");
+
+    var modelId = 8913;
+    var token = '';
+    Modelo.Auth.signIn(token,
+      null,
+      function () {
+        var viewer = new Modelo.View.Viewer3D(c, false, 1280, 800);
+
+        document.getElementById("ssao").onchange = function(evt) {
+          viewer.setEffectEnabled("SSAO", document.getElementById("ssao").checked);
+        };
+
+        document.getElementById("sketch").onchange = function(evt) {
+          viewer.setEffectEnabled("Sketch", document.getElementById("sketch").checked);
+        };
+        document.getElementById("sketch_color").onchange = function(evt) {
+          viewer.setEffectParameter("Sketch", "colored", document.getElementById("sketch_color").checked);
+        };
+        document.getElementById("sketch_detail").oninput = function(evt) {
+          var c = parseFloat(document.getElementById("sketch_detail").value);
+          c = Math.min(Math.max(c, 0.0), 1.0) * 100.0;
+          viewer.setEffectParameter("Sketch", "detail", c);
+        };
+        document.getElementById("sketch_contrast").oninput = function(evt) {
+          var c = parseFloat(document.getElementById("sketch_contrast").value);
+          c = Math.min(Math.max(c, 0.0), 1.0) * 100.0;
+          viewer.setEffectParameter("Sketch", "contrast", c);
+        };
+        document.getElementById("sketch_line_color").oninput = function(evt) {
+          var c = parseFloat(document.getElementById("sketch_line_color").value);
+          c = Math.min(Math.max(c, 0.0), 1.0);
+          viewer.setEffectParameter("Sketch", "color", [c, c, c]);
+        };
+        document.getElementById("sketch_surface_color").oninput = function(evt) {
+          var c = parseFloat(document.getElementById("sketch_surface_color").value);
+          c = Math.min(Math.max(c, 0.0), 1.0);
+          viewer.setEffectParameter("Sketch", "surfaceColor", [c, c, c]);
+        };
+
+        document.getElementById("glow").onchange = function(evt) {
+          viewer.setEffectEnabled("Glow", document.getElementById("glow").checked);
+        };
+        document.getElementById("dof").onchange = function(evt) {
+          viewer.setEffectEnabled("DOF", document.getElementById("dof").checked);
+        };
+        document.getElementById("fog").onchange = function(evt) {
+          viewer.setEffectEnabled("Fog", document.getElementById("dof").checked);
+        };
+        viewer.loadModel(modelId,
+          null,
+          function () {
+            viewer.addInput(new Modelo.View.Input.Mouse(c));
+            
+            var keyboard = new Modelo.View.Input.Keyboard(c);
+            viewer.addInput(keyboard);
+            keyboard.addKeyUpListener(function (keyboard) {
+              if (keyboard.key === 69) {
+              }
+            });
+
+            console.log("done");
+          },
+          function (errmsg) {
+            console.log(errmsg);
+          },
+          function (per) {
+            console.log(per);
+          });
+      },
+      function (errmsg) {
+        console.log(errmsg);
+      })
+
+  </script>
+</body>
+
+</html>

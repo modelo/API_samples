@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modelo API samples (bim-tree)</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+    <style>
+        html,body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+        .bimTree-wrapper {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bimTree-wrapper">
+        <div class="ui fluid action input" style="width: 300px">
+            <input id="searchValue" type="text" placeholder="wm8vx71L">
+            <div id="searchBtn" class="ui button">Search</div>
+        </div>
+        <div class="ui message" style="width: 300px">
+            <div class="header">
+                BIM Tree
+            </div>
+            <div>
+                <pre id="bimTree-show">
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.0-lts.js"></script>
+    <!-- <script src="/modeloapi.js"></script> -->
+    <script src="index.js"></script>
+</body>
+
+</html>
