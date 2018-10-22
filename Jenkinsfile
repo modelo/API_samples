@@ -1,0 +1,17 @@
+pipeline {
+  agent any
+  stages {
+    stage('Test and Deploy') {
+      when { anyOf {  branch '1.0.0'; } }
+      steps {
+        sh '''rm Jenkinsfile README.md
+ls'''
+        withCredentials(bindings: [file(credentialsId: '15862533-4746-4599-9b5e-8c5da18a3d65', variable: 'DEV_BIM_FRONTEND_PEM')]) {
+          sh '''
+                scp -r -o StrictHostKeyChecking=no  -i $DEV_BIM_FRONTEND_PEM ./*  ubuntu@bim.modeloapp.com:/home/ubuntu/api-samples/
+             '''
+        }
+      }
+    }
+  }
+}
