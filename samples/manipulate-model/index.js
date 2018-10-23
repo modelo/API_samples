@@ -21,7 +21,7 @@ window.onload = function () {
             var fileSuffix = "";
             // Search model by modelId
             searchBtn.onclick = function () {
-                var searchId = searchValue.value;//Test ModelId: "WDrpgd8b"
+                var searchId = searchValue.value || searchValue.placeholder;
                 searchBtn.className = "ui loading button";
                 Modelo.Model.query(
                     searchId,
