@@ -2,7 +2,7 @@ pipeline {
   agent any
   stages {
     stage('Test and Deploy') {
-      when { anyOf {  branch '1.0.0'; } }
+      when { anyOf {  branch 'master'; } }
       steps {
         sh '''rm Jenkinsfile README.md
 ls'''
