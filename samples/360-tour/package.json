@@ -1,0 +1,13 @@
+{
+  "name": "background",
+  "version": "1.0.0",
+  "description": "HTTP",
+  "scripts": {
+    "server": "http-server . -p 8080"
+  },
+  "author": "Modelo",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}

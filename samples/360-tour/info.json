@@ -1,0 +1,100 @@
+{
+"panoramas": [
+    {
+        "assetId" : "pano_1",
+        "cubemaps":{
+                    "left-posx":"1024_left_posx.jpg",
+                    "left-negx":"1024_left_negx.jpg",
+                    "left-posy":"1024_left_posy.jpg",
+                    "left-negy":"1024_left_negy.jpg",
+                    "left-posz":"1024_left_posz.jpg",
+                    "left-negz":"1024_left_negz.jpg"
+                    }
+    },
+    {
+        "assetId" : "pano_2",
+        "cubemaps":{
+                    "left-posx":"1024_left_posx.jpg",
+                    "left-negx":"1024_left_negx.jpg",
+                    "left-posy":"1024_left_posy.jpg",
+                    "left-negy":"1024_left_negy.jpg",
+                    "left-posz":"1024_left_posz.jpg",
+                    "left-negz":"1024_left_negz.jpg"
+                    }
+    },
+    {
+        "assetId" : "pano_3",
+        "cubemaps":{
+                "left-posx":"1024_left_posx.jpg",
+                "left-negx":"1024_left_negx.jpg",
+                "left-posy":"1024_left_posy.jpg",
+                "left-negy":"1024_left_negy.jpg",
+                "left-posz":"1024_left_posz.jpg",
+                "left-negz":"1024_left_negz.jpg"
+                }
+    }
+],
+
+"indicators": [
+    {
+        "fromAsset": "pano_3",
+        "_id": "5bce89b1df297e1400d35b76",
+        "toAssets": [
+            {
+                "assetId": "pano_1",
+                "_id": "5bce89b1df297e1400d35b77",
+                "camera": {
+                    "phi": 0.005399483820396821,
+                    "theta": 1.3634149966688547,
+                    "fov": 74.99999999982623
+                },
+                "position": [
+                    -165.85789489746094,
+                    1056.9039306640625,
+                    -3.4060676097869873
+                ]
+            }
+        ]
+    },
+    {
+        "fromAsset": "pano_1",
+        "_id": "5bce89b1df297e1400d35b74",
+        "toAssets": [
+            {
+                "assetId": "pano_2",
+                "_id": "5bce89b1df297e1400d35b75",
+                "camera": {
+                    "phi": -0.09721489051904067,
+                    "theta": 7.753035153041688,
+                    "fov": 74.99999999982623
+                },
+                "position": [
+                    65.31584930419922,
+                    -998.5122680664062,
+                    -20.277297973632812
+                ]
+            }
+        ]
+    },
+    {
+        "fromAsset": "pano_2",
+        "_id": "5bce89b1df297e1400d35b72",
+        "toAssets": [
+            {
+                "assetId": "pano_3",
+                "_id": "5bce89b1df297e1400d35b73",
+                "camera": {
+                    "phi": -0.0918215246421112,
+                    "theta": 12.465650534954264,
+                    "fov": 74.99999999982623
+                },
+                "position": [
+                    -1006.9605712890625,
+                    16.880077362060547,
+                    -27.23171615600586
+                ]
+            }
+        ]
+    }
+]
+}
