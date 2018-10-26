@@ -1,7 +1,7 @@
 Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
 
 var bgcolor = [1, 1, 1];
-var modelId = "wm8vx71L";
+var token = 'OCRvIFoVUA';
 var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
 Modelo.Auth.signIn(appToken,
     function () {
@@ -20,7 +20,7 @@ Modelo.Auth.signIn(appToken,
         
         viewer.addInput(new Modelo.View.Input.Mouse(c)); // Add mouse to control camera.
 
-        viewer.loadModel(modelId,
+        viewer.loadModel(token,
             null,
             function () {
             },
