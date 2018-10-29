@@ -1,7 +1,7 @@
 Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
 
 var bgcolor = [1, 1, 1];
-var token = 'OCRvIFoVUA';
+var token = 'hyQHPmN973';
 var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
 Modelo.Auth.signIn(appToken,
     function () {
