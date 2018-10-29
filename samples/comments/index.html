@@ -6,23 +6,37 @@
   <title>Modelo API sample (Comments)</title>
   <link href="../../assets/css/semantic.min.css" rel="stylesheet">
   <style>
-    html,body{height: 100%;margin:0;padding: 0;overflow: hidden;}
-    body{
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
       display: flex;
     }
+
     .wrapper {
       padding: 10px;
       width: 300px;
       min-width: 300px;
     }
-    .wrapper label{
+
+    .comments-wrapper {
+      padding-top: 10px;
+    }
+
+    .wrapper label {
       margin: 0 0 .28571429rem 0;
-      color: rgba(0,0,0,.87);
+      color: rgba(0, 0, 0, .87);
       font-size: 1rem;
       font-weight: 700;
     }
-    .wrapper-right label{
-      color: rgba(0,0,0,.87);
+
+    .wrapper-right label {
+      color: rgba(0, 0, 0, .87);
       font-size: 1rem;
       font-weight: 700;
       position: fixed;
@@ -31,7 +45,8 @@
       margin: 0;
       padding: 0;
     }
-    #model{
+
+    #model {
       height: 100%;
       width: 100%;
     }
@@ -39,20 +54,20 @@
 </head>
 
 <body>
-  <div class="wrapper">
+  <div class="wrapper" style="overflow:auto;">
     <label>Press 'ESC' to destroy viewer.</label>
+    <button class="positive ui button" style="margin-top: 5px;" id="addNewComment">Add New Comment</button>
   </div>
   <div class="wrapper-right">
     <label id="progress">Loading: 0</label>
   </div>
-
   <!-- Add/display/update/delete comment -->
-
   <canvas id="model"></canvas>
-  <!--<script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.0-lts.js"></script>-->
-  <script src="/modeloapi.js"></script>
+
+  <!-- <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.0-lts.js"></script> -->
+  <!-- <script src="/modeloapi.js"></script> -->
+  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-1.0-lts.js"></script>
   <script src="index.js"></script>
 </body>
 
 </html>
-
