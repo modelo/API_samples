@@ -1,34 +1,23 @@
-Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
+Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
 
 var modelId = "93rjxWY4";
 var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
 
 Modelo.Auth.signIn(appToken,
     function () {
-        var c = document.getElementById("model");
+        var viewer = new Modelo.View.Viewer3D("model");
 
-        var w = c.clientWidth;
-        var h = c.clientHeight;
-        var viewer = new Modelo.View.Viewer3D(c, false, w, h);
-
-        window.addEventListener("resize",function() {
-            var c = document.getElementById("model");
-            var w = c.clientWidth;
-            var h = c.clientHeight;
-            viewer.resize(w, h);
-        });
-   
         viewer.loadModel(modelId, // Load the model into the viewer.
             null,
             function () {
-                viewer.addInput(new Modelo.View.Input.Mouse(c)); // Add mouse to control camera.
-                var keyboard = new Modelo.View.Input.Keyboard(c); // Add keyboard callback.
+                viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+                var keyboard = new Modelo.View.Input.Keyboard(viewer); // Add keyboard callback.
                 viewer.addInput(keyboard);
                 keyboard.addKeyUpListener(function (keyboard) {
                     if (keyboard.key === 27) {
                         viewer.destroy();
                     }
-                }); 
+                });
                 console.log("done");
             },
             function (errmsg) {

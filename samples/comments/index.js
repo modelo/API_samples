@@ -5,25 +5,14 @@ var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
 
 Modelo.Auth.signIn(appToken,
     function () {
-        var c = document.getElementById("model");
-
-        var w = c.clientWidth;
-        var h = c.clientHeight;
-        var viewer = new Modelo.View.Viewer3D(c, false, w, h);
-
-        window.addEventListener("resize", function () {
-            var c = document.getElementById("model");
-            var w = c.clientWidth;
-            var h = c.clientHeight;
-            viewer.resize(w, h);
-        });
-
+        var viewer = new Modelo.View.Viewer3D("model");
+        
         var addComment = true;
-
+        var c = document.getElementById("model");
         viewer.loadModel(modelId, // Load the model into the viewer.
             null,
             function () {
-                var mouse = new Modelo.View.Input.Mouse(c);
+                var mouse = new Modelo.View.Input.Mouse(viewer);
                 viewer.addInput(mouse); // Add mouse to control camera.
                 var addNewComment = document.getElementById("addNewComment");
                 // add a new comment
@@ -144,7 +133,7 @@ Modelo.Auth.signIn(appToken,
                     });
                 }
 
-                var keyboard = new Modelo.View.Input.Keyboard(c); // Add keyboard callback.
+                var keyboard = new Modelo.View.Input.Keyboard(viewer); // Add keyboard callback.
                 viewer.addInput(keyboard);
 
                 var parentWrapper = document.getElementsByClassName("wrapper")[0];
