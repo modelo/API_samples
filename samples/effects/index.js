@@ -42,16 +42,6 @@ Modelo.Auth.signIn(appToken,
             c = Math.min(Math.max(c, 0.0), 1.0);
             viewer.setEffectParameter("Sketch", "surfaceColor", [c, c, c]);
         };
-
-        document.getElementById("glow").onchange = function (evt) {
-            viewer.setEffectEnabled("Glow", document.getElementById("glow").checked);
-        };
-        document.getElementById("dof").onchange = function (evt) {
-            viewer.setEffectEnabled("DOF", document.getElementById("dof").checked);
-        };
-        document.getElementById("fog").onchange = function (evt) {
-            viewer.setEffectEnabled("Fog", document.getElementById("dof").checked);
-        };
         viewer.loadModel(modelId,
             null,
             function () {
