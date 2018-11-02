@@ -4,20 +4,9 @@ var modelId = "93rjxWY4";
 var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
 Modelo.Auth.signIn(appToken,
     function () {
-        var c = document.getElementById("model");
-
-        var w = c.clientWidth;
-        var h = c.clientHeight;
-        var viewer = new Modelo.View.Viewer3D(c, false, w, h);
-
-        window.addEventListener("resize",function() {
-            var c = document.getElementById("model");
-            var w = c.clientWidth;
-            var h = c.clientHeight;
-            viewer.resize(w, h);
-        });
-                
-        viewer.addInput(new Modelo.View.Input.Mouse(c)); // Add mouse to control camera.
+        var viewer = new Modelo.View.Viewer3D("model");
+     
+        viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 
         var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
         viewer.addTool(selectElementTool);

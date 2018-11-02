@@ -1,24 +1,14 @@
-Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
+Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
 
 var bgcolor = [1, 1, 1];
 var modelId = "93rjxWY4";
 var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
 Modelo.Auth.signIn(appToken,
     function () {
-        var c = document.getElementById("model");
-
-        var w = c.clientWidth;
-        var h = c.clientHeight;
-        var viewer = new Modelo.View.Viewer3D(c, false, w, h);
-
-        window.addEventListener("resize",function() {
-            var c = document.getElementById("model");
-            var w = c.clientWidth;
-            var h = c.clientHeight;
-            viewer.resize(w, h);
-        });
         
-        viewer.addInput(new Modelo.View.Input.Mouse(c)); // Add mouse to control camera.
+        var viewer = new Modelo.View.Viewer3D("model");
+
+        viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 
         viewer.loadModel(modelId,
             null,
@@ -30,7 +20,7 @@ Modelo.Auth.signIn(appToken,
                 cubemapImages.push(document.getElementById("posx"));
                 cubemapImages.push(document.getElementById("posy"));
                 cubemapImages.push(document.getElementById("posz"));
-                    
+
                 var image = document.getElementById("image1e");
 
                 var mode = document.getElementById("bgmode");
@@ -77,32 +67,32 @@ Modelo.Auth.signIn(appToken,
                     viewer.setBackgroundColor(bgcolor);
                 };
 
-                document.getElementById("image1w").onclick = function() {
+                document.getElementById("image1w").onclick = function () {
                     var i = document.getElementById("image1w");
                     viewer.setBackgroundImage(i);
                 };
-                
-                document.getElementById("image2w").onclick = function() {
+
+                document.getElementById("image2w").onclick = function () {
                     var i = document.getElementById("image2w");
                     viewer.setBackgroundImage(i);
                 };
 
-                document.getElementById("image1e").onclick = function() {
+                document.getElementById("image1e").onclick = function () {
                     var i = document.getElementById("image1e");
                     viewer.setBackgroundImage(i);
                 };
-                
-                document.getElementById("image2e").onclick = function() {
+
+                document.getElementById("image2e").onclick = function () {
                     var i = document.getElementById("image2e");
                     viewer.setBackgroundImage(i);
                 };
 
-                document.getElementById("image1t").onclick = function() {
+                document.getElementById("image1t").onclick = function () {
                     var i = document.getElementById("image1t");
                     viewer.setBackgroundImage(i);
                 };
-                
-                document.getElementById("image2t").onclick = function() {
+
+                document.getElementById("image2t").onclick = function () {
                     var i = document.getElementById("image2t");
                     viewer.setBackgroundImage(i);
                 };
