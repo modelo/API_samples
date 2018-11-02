@@ -33,23 +33,26 @@
             font-weight: 700;
             cursor: pointer;
         }
-        .wrapper label{
-          margin: 0 0 .28571429rem 0;
-          color: rgba(0,0,0,.87);
-          font-size: 1rem;
-          font-weight: 700;
+
+        .wrapper label {
+            margin: 0 0 .28571429rem 0;
+            color: rgba(0, 0, 0, .87);
+            font-size: 1rem;
+            font-weight: 700;
         }
-        .wrapper-right label{
-          color: rgba(0,0,0,.87);
-          font-size: 1rem;
-          font-weight: 700;
-          position: fixed;
-          top: .68571429rem;
-          right: 1rem;
-          margin: 0;
-          padding: 0;
+
+        .wrapper-right label {
+            color: rgba(0, 0, 0, .87);
+            font-size: 1rem;
+            font-weight: 700;
+            position: fixed;
+            top: .68571429rem;
+            right: 1rem;
+            margin: 0;
+            padding: 0;
         }
-        #result{
+
+        #result {
             word-break: break-all;
         }
     </style>
@@ -70,6 +73,13 @@
                         <option value="4">Angle</option>
                         <option value="5">Area</option>
                     </select>
+                    <select class="ui fluid search dropdown" id="unit" style="margin-top: 10px;" disabled>
+                        <option>Unit</option>
+                        <option value="0">m</option>
+                        <option value="1">cm</option>
+                        <option value="2">feet</option>
+                        <option value="3">inches</option>
+                    </select>
                 </div>
             </div>
         </form>
@@ -77,11 +87,12 @@
         <div class="ui message" id='result'>
         </div>
     </div>
-    <canvas id="model"></canvas>
+    <div id="model"></div>
     <div class="wrapper-right">
-      <label id="progress">Loading: 0</label>
+        <label id="progress">Loading: 0</label>
     </div>
-    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.0-lts.js"></script>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-1.0-lts.js"></script>
+    <!-- <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.0-lts.js"></script> -->
     <!-- <script src="/modeloapi.js"></script> -->
     <script src="index.js"></script>
 </body>
