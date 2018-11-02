@@ -1,28 +1,17 @@
-Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
+Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
 
 var modelId = "93rjxWY4";
 var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
 Modelo.Auth.signIn(appToken,
     function () {
-        var c = document.getElementById("model");
+        var viewer = new Modelo.View.Viewer3D("model");
 
-        var w = c.clientWidth;
-        var h = c.clientHeight;
-        var viewer = new Modelo.View.Viewer3D(c, false, w, h);
-
-        window.addEventListener("resize",function() {
-            var c = document.getElementById("model");
-            var w = c.clientWidth;
-            var h = c.clientHeight;
-            viewer.resize(w, h);
-        });
-                
-        viewer.addInput(new Modelo.View.Input.Mouse(c)); // Add mouse to control camera.
+        viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 
         var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
         viewer.addTool(selectElementTool);
         selectElementTool.setEnabled(true);
-        
+
         viewer.loadModel(modelId, // Load the model into the viewer.
             null,
             function () { // success
@@ -37,31 +26,31 @@ Modelo.Auth.signIn(appToken,
                     document.getElementById("l" + (i + 1)).innerHTML = names[c];
                 }
 
-                document.getElementById("e1").onchange = function() {
+                document.getElementById("e1").onchange = function () {
                     var checked = document.getElementById("e1").checked;
                     viewer.getScene().setElementsVisibility([elements[0]], checked);
                 };
-                document.getElementById("e2").onchange = function() {
+                document.getElementById("e2").onchange = function () {
                     var checked = document.getElementById("e2").checked;
                     viewer.getScene().setElementsVisibility([elements[1]], checked);
                 };
-                document.getElementById("e3").onchange = function() {
+                document.getElementById("e3").onchange = function () {
                     var checked = document.getElementById("e3").checked;
                     viewer.getScene().setElementsVisibility([elements[2]], checked);
                 };
-                document.getElementById("e4").onchange = function() {
+                document.getElementById("e4").onchange = function () {
                     var checked = document.getElementById("e4").checked;
                     viewer.getScene().setElementsVisibility([elements[3]], checked);
                 };
-                document.getElementById("e5").onchange = function() {
+                document.getElementById("e5").onchange = function () {
                     var checked = document.getElementById("e5").checked;
                     viewer.getScene().setElementsVisibility([elements[4]], checked);
                 };
-                document.getElementById("e6").onchange = function() {
+                document.getElementById("e6").onchange = function () {
                     var checked = document.getElementById("e6").checked;
                     viewer.getScene().setElementsVisibility([elements[5]], checked);
                 };
-                document.getElementById("e7").onchange = function() {
+                document.getElementById("e7").onchange = function () {
                     var checked = document.getElementById("e7").checked;
                     viewer.getScene().setElementsVisibility([elements[6]], checked);
                 };

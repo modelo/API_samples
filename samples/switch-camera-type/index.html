@@ -61,31 +61,32 @@
         }
         #model{
             height: 100%;
-            width:calc(100% -240px);
+            width:calc(100% - 240px);
         }
     </style>
 </head>
 
 <body>
     <div class="ui toggle checkbox">
-      <span class="toggle-label">perspective</span>
-      <input type="checkbox" tabindex="0" class="hidden" id="toggleCamera">
-      <span class="toggle-label">orthogonal</span>
+        <span class="toggle-label">perspective</span>
+        <input type="checkbox" tabindex="0" class="hidden" id="toggleCamera">
+        <span class="toggle-label">orthogonal</span>
     </div>
     <div class="wrapper-right">
-      <label id="progress">Loading: 0</label>
+        <label id="progress">Loading: 0</label>
     </div>
-    <canvas id="model"></canvas>
+    <div id="model"></div>
     <script>
         $(function () {
             $('.ui.checkbox').checkbox();
-            $("#toggleCamera").change(function(){
+            $("#toggleCamera").change(function () {
                 // use this value to toggle camera
                 console.log(this.checked)
             })
         })
     </script>
-  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.0-lts.js"></script>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-1.0-lts.js"></script>
+    <!-- <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.0-lts.js"></script> -->
     <!-- <script src="/modeloapi.js"></script> -->
     <script src="index.js"></script>
 </body>
