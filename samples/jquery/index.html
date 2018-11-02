@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Modelo API sample (Jquery)</title>
+  <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <script src="./jquery_1.9.1.js" charset="utf-8"></script>
+  <script src="./director_1.2.6.js" charset="utf-8"></script>
+  <script src="./route.js" charset="utf-8"></script>
+  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-1.0-lts.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+    }
+
+    a:visited {
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="padding-top: 10px; padding-left: 10px; width:130px;">
+    <div class="ui tag labels">
+      <a  href="#/index" class="ui label">modeloPage</a>
+    </div>
+    <br/>
+    <div class="ui tag labels">
+      <a  href="#/yourPage" class="ui label">yourPage</a>
+    </div>
+  </div>
+  <div class="container" style="width: calc(100% - 130px)"></div>
+</body>
+
+</html>
