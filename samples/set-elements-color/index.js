@@ -1,6 +1,6 @@
 Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
 
-var modelId = "ag8lxB8y";
+var modelId = "93rjxWY4";
 var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
 Modelo.Auth.signIn(appToken,
     function () {
@@ -20,7 +20,6 @@ Modelo.Auth.signIn(appToken,
                 // Save the selected element names here.
                 var elementNames = [];
                 viewer.getEventEmitter().on("onElementSelected", (elementNames1) => {
-                    console.log(elementNames1);
                     // Restore the element's colors.
                     if (elementNames.length !== 0) {
                         viewer.getScene().setElementsColor(elementNames, null);
