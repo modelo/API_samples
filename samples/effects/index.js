@@ -6,54 +6,82 @@ var c = document.getElementById("model");
 
 document.body.appendChild(c);
 
-
 Modelo.Auth.signIn(appToken,
     null,
     function () {
         var viewer = new Modelo.View.Viewer3D("model");
-
-        document.getElementById("ssao").onchange = function (evt) {
-            viewer.setEffectEnabled("SSAO", document.getElementById("ssao").checked);
-        };
-
+        // init slider
+        $('#range1').range({
+            min: 0.0,
+            max: 100.0,
+            start: 1.0,
+            step: 0.1,
+            onChange: function (value) {
+                return;
+            }
+        });
+        $('#range2').range({
+            min: 0.0,
+            max: 100.0,
+            start: 1.0,
+            step: 0.1,
+            onChange: function (value) {
+                return;
+            }
+        });
+        // set details and contrast
         document.getElementById("sketch").onchange = function (evt) {
             viewer.setEffectEnabled("Sketch", document.getElementById("sketch").checked);
+            $('#range1').range({
+                min: 0.0,
+                max: 100.0,
+                start: 1.0,
+                step: 0.1,
+                onChange: function (value) {
+                    viewer.setEffectParameter("Sketch", "detail", value);
+                }
+            });
+            $('#range2').range({
+                min: 0.0,
+                max: 100.0,
+                start: 1.0,
+                step: 0.1,
+                onChange: function (value) {
+                    viewer.setEffectParameter("Sketch", "contrast", value);
+                }
+            });
         };
-        document.getElementById("sketch_color").onchange = function (evt) {
-            viewer.setEffectParameter("Sketch", "colored", document.getElementById("sketch_color").checked);
+        // set sketch color
+        document.getElementById("Sketchcolor0").onclick = function (evt) {
+            viewer.setEffectParameter("Sketch", "color", [0, 0, 0]);
         };
-        document.getElementById("sketch_detail").oninput = function (evt) {
-            var c = parseFloat(document.getElementById("sketch_detail").value);
-            c = Math.min(Math.max(c, 0.0), 1.0) * 100.0;
-            viewer.setEffectParameter("Sketch", "detail", c);
+        document.getElementById("Sketchcolor128").onclick = function (evt) {
+            viewer.setEffectParameter("Sketch", "color", [0.5, 0.5, 0.5]);
         };
-        document.getElementById("sketch_contrast").oninput = function (evt) {
-            var c = parseFloat(document.getElementById("sketch_contrast").value);
-            c = Math.min(Math.max(c, 0.0), 1.0) * 100.0;
-            viewer.setEffectParameter("Sketch", "contrast", c);
+        document.getElementById("Sketchcolor248").onclick = function (evt) {
+            viewer.setEffectParameter("Sketch", "color", [1, 1, 1]);
         };
-        document.getElementById("sketch_line_color").oninput = function (evt) {
-            var c = parseFloat(document.getElementById("sketch_line_color").value);
-            c = Math.min(Math.max(c, 0.0), 1.0);
-            viewer.setEffectParameter("Sketch", "color", [c, c, c]);
+        // set surface color
+        document.getElementById("Surfacecolor0").onclick = function (evt) {
+            viewer.setEffectParameter("Sketch", "surfaceColor", [0, 0, 0]);
         };
-        document.getElementById("sketch_surface_color").oninput = function (evt) {
-            var c = parseFloat(document.getElementById("sketch_surface_color").value);
-            c = Math.min(Math.max(c, 0.0), 1.0);
-            viewer.setEffectParameter("Sketch", "surfaceColor", [c, c, c]);
+        document.getElementById("Surfacecolor128").onclick = function (evt) {
+            viewer.setEffectParameter("Sketch", "surfaceColor", [0.5, 0.5, 0.5]);
         };
+        document.getElementById("Surfacecolor248").onclick = function (evt) {
+            viewer.setEffectParameter("Sketch", "surfaceColor", [1, 1, 1]);
+        };
+        // load model
         viewer.loadModel(modelId,
             null,
             function () {
                 viewer.addInput(new Modelo.View.Input.Mouse(viewer));
-
                 var keyboard = new Modelo.View.Input.Keyboard(viewer);
                 viewer.addInput(keyboard);
                 keyboard.addKeyUpListener(function (keyboard) {
                     if (keyboard.key === 69) {
                     }
                 });
-
                 console.log("done");
             },
             function (errmsg) {
