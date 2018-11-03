@@ -12,19 +12,19 @@ Modelo.Auth.signIn(appToken,
         var viewer = new Modelo.View.Viewer3D("model");
         // init slider
         $('#range1').range({
-            min: 0.0,
+            min: 1.0,
             max: 100.0,
             start: 1.0,
-            step: 0.1,
+            step: 1.0,
             onChange: function (value) {
                 return;
             }
         });
         $('#range2').range({
-            min: 0.0,
+            min: 1.0,
             max: 100.0,
-            start: 1.0,
-            step: 0.1,
+            start: 30.0,
+            step: 1.0,
             onChange: function (value) {
                 return;
             }
@@ -33,23 +33,26 @@ Modelo.Auth.signIn(appToken,
         document.getElementById("sketch").onchange = function (evt) {
             viewer.setEffectEnabled("Sketch", document.getElementById("sketch").checked);
             $('#range1').range({
-                min: 0.0,
+                min: 1.0,
                 max: 100.0,
                 start: 1.0,
-                step: 0.1,
+                step: 1.0,
                 onChange: function (value) {
                     viewer.setEffectParameter("Sketch", "detail", value);
                 }
             });
             $('#range2').range({
-                min: 0.0,
+                min: 1.0,
                 max: 100.0,
-                start: 1.0,
-                step: 0.1,
+                start: 30.0,
+                step: 1.0,
                 onChange: function (value) {
                     viewer.setEffectParameter("Sketch", "contrast", value);
                 }
             });
+        };
+        document.getElementById("sketch_color").onchange = function (evt) {
+            viewer.setEffectParameter("Sketch", "colored", document.getElementById("sketch_color").checked);
         };
         // set sketch color
         document.getElementById("Sketchcolor0").onclick = function (evt) {
