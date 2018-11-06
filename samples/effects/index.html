@@ -5,16 +5,56 @@
   <meta charset="UTF-8">
   <title>Modelo API sample (Effects)</title>
   <link href="../../assets/css/semantic.min.css" rel="stylesheet">
-  <style>
-    html,body {
-      height: 100%;
-      padding: 0;
+  <script src="../../assets/js/jquery.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/range.css">
+  <script src="../../assets/js/range.js"></script>
+    #model{
+      width: calc(100% - 300px);
+    }
+    .form-wrapper{
+      width: 300px;
+      min-width: 300px;
+      
+    }
+    .range-wrapper{
+      position: relative;
+      margin: 10px;
+    }
+    .min,.max,.ui.range{
+      position: absolute;
+    }
+    .min{
+      right: 190px;
+    }
+    .max{
+      right: 0;
+    }
+    .ui.range{
+      left: 100px;
+      top: 0;
+      width: 160px;
+    }
+    .wrapper {
+      padding: 10px;
+      width: 300px;
+      min-width: 300px;
+    }
+    .wrapper label{
+      margin: 0 0 .28571429rem 0;
+      color: rgba(0,0,0,.87);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .wrapper-right label{
+      color: rgba(0,0,0,.87);
+      font-size: 1rem;
+      font-weight: 700;
+      position: fixed;
+      top: .68571429rem;
+      right: 1rem;
       margin: 0;
-      overflow: hidden;
-    }
-    body {
-      display: flex;
-    }
+      padding: 0;
+
     #toolWrapper{
       width: 320px;
       height: 100%;
@@ -27,45 +67,50 @@
 </head>
 
 <body>
-  <div class="ui thirteen column stackable grid" id="toolWrapper">
-    <div class="row">
-      <div class="column">
-        <div class="ui toggle checkbox">
-          <input id="ssao" type="checkbox" name="public">
-          <label>SSAO</label>
-        </div>
-        <div class="ui divider"></div>
-        <div class="ui toggle checkbox">
-          <input id="sketch" type="checkbox" name="public">
-          <label>Sketch</label>
-        </div>
-        <div class="ui labeled input" style="margin-top:5px;">
-          <div class="ui label">Sketch Color</div>
-          <input type="number" placeholder="" id="sketch_line_color" step="0.1">
-        </div>
-        <div class="ui labeled input" style="margin-top:5px;">
-          <div class="ui label">Detail</div>
-          <input type="number" placeholder="" id="sketch_detail" step="0.1">
-        </div>
-        <div class="ui labeled input" style="margin-top:5px;">
-          <div class="ui label">Contrast</div>
-          <input type="number" placeholder="" id="sketch_contrast" step="0.1">
-        </div>
-        <div class="ui toggle checkbox" style="margin-top:5px;">
-          <input id="sketch_color" type="checkbox" name="public">
-          <label>Colorful</label>
-        </div>
-        <div class="ui labeled input" style="margin-top:5px;">
-          <div class="ui label">Surface Color</div>
-          <input type="number" placeholder="" id="sketch_surface_color" step="0.1">
-        </div>
+  <div class="form-wrapper">
+    <div class="ui toggle checkbox" style="margin-top:12px; margin-left:10px;">
+      <input id="sketch" type="checkbox" name="public">
+      <label>Sketch</label>
+    </div>
+
+    <div class="ui labeled input" style="display: block;margin-top:12px; margin-left:10px; cursor: pointer">
+      <label style="margin-top: 5px;">Sketch Color</label>
+      <div style="margin-top: 5px;">
+        <div id="Sketchcolor0" style="display: inline-block;width: 45px; height: 45px; background: rgb(0,0,0)"></div>
+        <div id="Sketchcolor128" style="display: inline-block;width: 45px; height: 45px; background: rgb(128,128,128)"></div>
+        <div id="Sketchcolor248" style="display: inline-block;width: 45px; height: 45px; background: rgb(248,248,248)"></div>
+      </div>
+    </div>
+
+    <div class="range-wrapper">
+      <label>Detail</label>
+      <span class="min">1</span><span class="max">100</span>
+      <div class="ui range" id="range1"></div>
+    </div>
+    <div class="range-wrapper">
+      <label>Contrast</label>
+      <span class="min">1</span><span class="max">100</span>
+      <div class="ui range" id="range2"></div>
+    </div>
+
+    <div class="ui toggle checkbox" style="margin-top:12px; margin-left:10px;">
+      <input id="sketch_color" type="checkbox" name="public">
+      <label>Colorful</label>
+    </div>
+
+    <div class="ui labeled input" style="display: block;margin-top:12px; margin-left: 10px; cursor: pointer">
+      <label>Surface Color</label>
+      <div style="margin-top: 5px;">
+        <div id="Surfacecolor0" style="display: inline-block;width: 45px; height: 45px; background: rgb(0,0,0)"></div>
+        <div id="Surfacecolor128" style="display: inline-block;width: 45px; height: 45px; background: rgb(128,128,128)"></div>
+        <div id="Surfacecolor248" style="display: inline-block;width: 45px; height: 45px; background: rgb(248,248,248)"></div>
       </div>
     </div>
   </div>
   <div id="model"></div>
-  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-1.1-lts.js"></script>
-  <!-- <script src="https://api-release.modeloapp.com/prod/modeloapi-1.0-latest.js"></script> -->
-  <!-- <script src="/modeloapi.js"></script> -->
+
+  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-1.1-lts.js"></script>
+  <!--<script src="/modeloapi.js"></script> -->
   <script src="index.js"></script>
 </body>
 

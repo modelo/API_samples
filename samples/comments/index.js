@@ -6,7 +6,7 @@ var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
 Modelo.Auth.signIn(appToken,
     function () {
         var viewer = new Modelo.View.Viewer3D("model");
-        
+
         var addComment = true;
         var c = document.getElementById("model");
         viewer.loadModel(modelId, // Load the model into the viewer.
@@ -36,12 +36,12 @@ Modelo.Auth.signIn(appToken,
                                             modelId,
                                             function onSuccess(comments) {
                                                 // add commentsInfo success remove old comments
-                                                for(var i = 0; i<comments.length; i++){
+                                                for (var i = 0; i < comments.length; i++) {
                                                     var parentWrapper = document.getElementsByClassName("wrapper")[0];
                                                     var childCommentsInfo = document.getElementById(comments[i].id);
-                                                    if(childCommentsInfo !== null){
+                                                    if (childCommentsInfo !== null) {
                                                         parentWrapper.removeChild(childCommentsInfo);
-                                                    }else{
+                                                    } else {
                                                         continue;
                                                     }
                                                 }
@@ -84,9 +84,11 @@ Modelo.Auth.signIn(appToken,
                                                     var deleteBtn = document.createElement("button");
                                                     deleteBtn.className = "mini ui red button";
                                                     deleteBtn.innerHTML = "Delete";
-                                                    deleteBtn.onclick = function () {
+                                                    deleteBtn.onclick = function (e) {
                                                         var currentCommentId = comments[i].id;
                                                         deleteComment(currentCommentId);
+                                                        e.stopPropagation();
+
                                                     }
                                                     var updateBtn = document.createElement("button");
                                                     updateBtn.className = "mini ui blue button";
@@ -179,9 +181,11 @@ Modelo.Auth.signIn(appToken,
                             var deleteBtn = document.createElement("button");
                             deleteBtn.className = "mini ui red button";
                             deleteBtn.innerHTML = "Delete";
-                            deleteBtn.onclick = function () {
+                            deleteBtn.onclick = function (e) {
                                 var currentCommentId = comments[i].id;
                                 deleteComment(currentCommentId);
+                                e.stopPropagation();
+
                             }
                             var updateBtn = document.createElement("button");
                             updateBtn.className = "mini ui blue button";
@@ -208,7 +212,6 @@ Modelo.Auth.signIn(appToken,
                             divUiMessage.appendChild(deleteBtn);
                             divUiMessage.appendChild(updateBtn);
                         }
-                        console.log(comments);
                     },
                     function onFail(errmsg) {
                         console.log('getCommentsErr: ' + errmsg);
@@ -246,29 +249,6 @@ Modelo.Auth.signIn(appToken,
                 function activateComment(comment) {
                     Modelo.Model.activateComment(comment, viewer);
                 }
-                // keyboard.addKeyUpListener(function (keyboard) {
-                //     switch (keyboard.key) {
-                //         case 65: //'a'
-                //             addComment = true;
-                //             break;
-                //         case 66: //'b'
-                //             Modelo.Model.deleteComment(commentId,
-                //                 function (commentId) { console.log("comment deleted"); },
-                //                 function (errmsg) { console.log(errmsg); },
-                //             );
-                //             break;
-                //         case 67: //'c'
-                //             Modelo.Model.updateComment(commentId,
-                //                 "test2", "new test comment",
-                //                 function (commentId) { console.log("comment updated"); },
-                //                 function (errmsg) { console.log(errmsg); },
-                //             );
-                //             break;
-                //         case 69: //'e'
-                //             Modelo.Model.activateComment(comment, viewer);
-                //             break;
-                //     }
-                // });
                 console.log("done");
             },
             function (errmsg) {
