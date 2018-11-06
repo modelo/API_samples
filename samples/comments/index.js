@@ -88,6 +88,7 @@ Modelo.Auth.signIn(appToken,
                                                         var currentCommentId = comments[i].id;
                                                         deleteComment(currentCommentId);
                                                         e.stopPropagation();
+
                                                     }
                                                     var updateBtn = document.createElement("button");
                                                     updateBtn.className = "mini ui blue button";
@@ -184,6 +185,7 @@ Modelo.Auth.signIn(appToken,
                                 var currentCommentId = comments[i].id;
                                 deleteComment(currentCommentId);
                                 e.stopPropagation();
+
                             }
                             var updateBtn = document.createElement("button");
                             updateBtn.className = "mini ui blue button";

@@ -50,10 +50,14 @@ Modelo.Auth.signIn(appToken,
                     viewer.setEffectParameter("Sketch", "contrast", value);
                 }
             });
+
+        document.getElementById("ssao").onchange = function (evt) {
+            viewer.setEffectEnabled("SSAO", document.getElementById("ssao").checked);
         };
-        document.getElementById("sketch_color").onchange = function (evt) {
-            viewer.setEffectParameter("Sketch", "colored", document.getElementById("sketch_color").checked);
-        };
+
+        document.getElementById("sketch").onchange = function (evt) {
+            viewer.setEffectEnabled("Sketch", document.getElementById("sketch").checked);
+
         // set sketch color
         document.getElementById("Sketchcolor0").onclick = function (evt) {
             viewer.setEffectParameter("Sketch", "color", [0, 0, 0]);

@@ -10,7 +10,8 @@ window.onload = function() {
         function() {
             const modelApp = new Modelo.WebApp({
                 modelId,
-                containerId: "modelContainer"
+                containerId: "modelContainer",
+                useDefaultFavicon: true
             });
         },
         function(e) {
