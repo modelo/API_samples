@@ -13,11 +13,10 @@ window.onload = function () {
             searchBtn.onclick = function () {
                 searchBtn.className = "ui loading button";
                 show.innerHTML = "";
-                var searchId = searchValue.value;
+                var searchId = searchValue.value || searchValue.placeholder;
                 Modelo.BIM.queryBIMTree(
                     searchId,
                     function (bimTree) {
-                        console.log(bimTree);
                         var bimTreeData = JSON.stringify(bimTree, null, 2);
                         show.innerHTML = bimTreeData;
                         searchBtn.className = "ui button";
