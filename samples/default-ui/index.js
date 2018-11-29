@@ -1,4 +1,13 @@
 window.onload = function() {
+    var destroyBtn = document.getElementById('destroyBtn');
+    var modelApp;
+
+    destroyBtn.addEventListener('click', function() {
+        if (modelApp) {
+            modelApp.destroy();
+        }
+    });
+
     Modelo.init({ endpoint: "https://build-portal.modeloapp.com" });
 
     var modelId = "93rjxWY4";
@@ -8,7 +17,7 @@ window.onload = function() {
     Modelo.Auth.signIn(
         appToken,
         function() {
-            const modelApp = new Modelo.WebApp({
+            modelApp = new Modelo.WebApp({
                 modelId,
                 containerId: "modelContainer",
                 useDefaultFavicon: true
