@@ -17,28 +17,32 @@ Modelo.Auth.signIn(appToken,
             function () { // success
                 console.log("loading done");
 
-                // Save the selected element names here.
-                var elementNames = [];
-                var clicks = 0;
-                viewer.getEventEmitter().on("onElementSelected", (elementNames1) => {
-                    clicks ++;
-                    if (clicks > 2) {
+                var highlightColor = [0.6, 0.5, 0.0, 1.0];
+                var oldElementNames;
+                var searched = false;
+                viewer.getEventEmitter().on("onElementSelected", (elementNames) => {
+                    if (searched) {
                         selectElementTool.pick(null);
-                        clicks = 0;
+                        viewer.getScene().core.restoreElementsColor(oldElementNames);
+                        viewer.invalidate();
+                        searched = false;
+                        return;
                     }
-                    else if (clicks == 2 && elementNames1.length > 1) {
-                        var pathes = selectElementTool.findElementsInBetween(elementNames1[0], elementNames1[1]);
+                    if (elementNames.length == 1) {
+                        selectElementTool.pick(elementNames);
+                    } else if (elementNames.length == 2) {
+                        var pathes = selectElementTool.findElementsInBetween(elementNames[0], elementNames[1]);
                         if (pathes.length > 0) {
-                            selectElementTool.pick(pathes, true);    
-                        }
-                        else {
+                            selectElementTool.pick(pathes);
+                            viewer.getScene().core.setElementsColor(pathes, highlightColor);
+                            viewer.invalidate();
+                            oldElementNames = pathes;
+                            searched = true;
+                          } else {
                             alert("not connected");
                             selectElementTool.pick(null);
-                            clicks = 0;
+                            searched = false;
                         }
-                    }
-                    else if (clicks == 1) {
-                        selectElementTool.pick(elementNames1, true);
                     }
                 });
             },
