@@ -28,35 +28,17 @@ Modelo.Auth.signIn(appToken,
                     }
                     else if (clicks == 2 && elementNames1.length > 1) {
                         var pathes = selectElementTool.findElementsInBetween(elementNames1[0], elementNames1[1]);
-                        if (pathes) {
-                            // var myElements = [];
-                            // var elementDic = {};
-                            // pathes.forEach(function(path) {
-                            //     path.forEach(function(elemntName) {
-                            //         if (!elementDic[elemntName]) {
-                            //             elementDic[elemntName] = 1;
-                            //         }
-                            //     })
-                            // })
-                            // myElements = Object.keys(elementDic);
+                        if (pathes.length > 0) {
                             selectElementTool.pick(pathes, true);    
                         }
                         else {
                             alert("not connected");
+                            selectElementTool.pick(null);
+                            clicks = 0;
                         }
                     }
                     else if (clicks == 1) {
                         selectElementTool.pick(elementNames1, true);
-                    }
-                    // var myElements = selectElementTool.pickElementsInBetween("8888+0/1345741", "8888+0/2565958")
-                    // console.log(myElements);
-                    // selectElementTool.pick(myElements, true);
-
-                    elementNames = elementNames1;
-                    if (elementNames1.length === 0) {
-                        document.getElementById('element').innerHTML = 'Select element with left button: N/A';
-                    } else {
-                        document.getElementById('element').innerHTML = 'Select element with left button: ' + elementNames1[0];
                     }
                 });
             },
