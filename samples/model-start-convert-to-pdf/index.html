@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modelo API sample (model-start-convert-to-pdf)</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+    <script src="../../assets/js/semantic.min.js"></script>
+    <style>
+        #main {
+            padding: 2rem;
+            color: rgba(0, 0, 0, .8)
+        }
+
+        #pdfId {
+            margin: 3rem;
+            font-size: 16px;
+        }
+
+        #pdfId span {
+            font-size: 30px;
+            color: #8B7E66;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <form class="ui fluid form">
+        <div class="inline field">
+            <div class="ui right pointing label">
+                Please enter a modelId here!
+            </div>
+            <input id="input" type="text" placeholder="modelId here...">
+            <button id="button" class="ui button" type="button">send</button>
+        </div>
+    </form>
+    <div id="pdfId">Click the Send button to get the PDFId!</div>
+    <script src="http://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-1.1-lts.js"></script>
+    <script src="index.js"></script>
+</div>
+</body>
+
+</html>
