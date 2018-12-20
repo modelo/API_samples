@@ -8,6 +8,11 @@
   "author": "Modelo",
   "license": "MIT",
   "devDependencies": {
+    "compression": "^1.7.3",
+    "connect-livereload": "^0.6.0",
+    "express": "^4.16.4",
+    "gulp": "^4.0.0",
     "http-server": "^0.11.1"
-  }
+  },
+  "dependencies": {}
 }
