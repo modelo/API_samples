@@ -12,7 +12,7 @@ window.onload = function() {
 
     var modelId = "93rjxWY4";
     var container = document.querySelector("#modelContainer");
-    var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
+    var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
 
     Modelo.Auth.signIn(
         appToken,

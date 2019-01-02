@@ -1,7 +1,6 @@
 var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
+var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
 Modelo.Auth.signIn(appToken,
-    null,
     function () {
         var canvas = document.getElementById("model");
         var viewer = new Modelo.View.Viewer3D(canvas, false, 1280, 800);

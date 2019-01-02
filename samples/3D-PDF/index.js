@@ -2,8 +2,8 @@ window.onload = function () {
     // Initialize the API and specify the backend service URL
     // Modelo.initialize("https://build-portal.modeloapp.com");
     // devAPI
-    Modelo.init({"endpoint": "https://bim-portal-dev.modeloapp.com"});
-    var appToken = 'VHlsaW4sbW9kZWxvQkk1NjA='; // A sample app token
+    Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
+    var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
     Modelo.Auth.signIn(
         appToken,
         function () {

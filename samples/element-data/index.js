@@ -1,7 +1,7 @@
 window.onload = function () {
     Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
 
-    var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
+    var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
     // ElementId can be found from BIMTree
     // sample elementId: 954779
     Modelo.Auth.signIn(

@@ -1,13 +1,12 @@
 Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
 
 var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
+var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
 var c = document.getElementById("model");
 
 document.body.appendChild(c);
 
 Modelo.Auth.signIn(appToken,
-    null,
     function () {
         var viewer = new Modelo.View.Viewer3D("model");
         // init slider
