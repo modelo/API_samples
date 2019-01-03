@@ -14,7 +14,7 @@ window.onload = function () {
                 searchBtn.className = "ui loading button";
                 show.innerHTML = "";
                 var searchId = searchValue.value || searchValue.placeholder;
-                Modelo.BIM.queryBIMTree(
+                Modelo.BIM.getBIMTree(
                     searchId,
                     function (bimTree) {
                         var bimTreeData = JSON.stringify(bimTree, null, 2);
@@ -24,7 +24,7 @@ window.onload = function () {
                     function (errMsg) {
                         show.innerHTML = "No BIM Tree";
                         searchBtn.className = "ui button";
-                        console.log('queryBIMTreeErr: ' + errMsg);
+                        console.log('getBIMTreeErr: ' + errMsg);
                     }
                 );
             }

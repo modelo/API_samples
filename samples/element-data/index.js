@@ -24,7 +24,7 @@ window.onload = function () {
                 searchBtn.className = "ui loading button";
                 PropertyValueShow.className = "field";
                 // Query the bim data of element
-                Modelo.BIM.queryElementBIM(
+                Modelo.BIM.getBIMElementProperties(
                     searchModelIdValue,
                     searchElementIdValue,
                     function (properties) {
@@ -43,7 +43,7 @@ window.onload = function () {
                             propertyUnit.value = unit;
                         }
                         // User can modify property value
-                        if (numValue === null && !(strValue === null)) {
+                        if (numValue === null && strValue !== null) {
                             types = false;
                             propertyValue.value = strValue;
                             propertyValue.removeAttribute("readonly");
@@ -62,14 +62,13 @@ window.onload = function () {
                                 return false;
                             } else {
                                 if (types) {
-                                    Modelo.BIM.updateElementBIM(
+                                    Modelo.BIM.updateBIMElementProperty(
                                         searchModelIdValue,
                                         searchElementIdValue,
                                         {
                                             name: propertyName.value,
                                             groupKey: propertyGroupKey.value,
-                                            strValue: null,
-                                            numValue: Number(propertyValue.value),
+                                            numValue: isNaN(Number(propertyValue.value)) ? null : Number(propertyValue.value),
                                         },
                                         function () {
                                             propertyValue.value = propertyValue.value;
@@ -77,19 +76,19 @@ window.onload = function () {
                                             console.log("updateSucc");
                                         },
                                         function (errMsg) {
+                                            propertyValue.value = 0;
                                             updateBtn.className = "ui primary button";
                                             console.log("updateElementBIM" + errMsg);
                                         }
                                     );
                                 } else {
-                                    Modelo.BIM.updateElementBIM(
+                                    Modelo.BIM.updateBIMElementProperty(
                                         searchModelIdValue,
                                         searchElementIdValue,
                                         {
                                             name: propertyName.value,
                                             groupKey: propertyGroupKey.value,
                                             strValue: propertyValue.value,
-                                            numValue: null,
                                         },
                                         function () {
                                             propertyValue.value = propertyValue.value;

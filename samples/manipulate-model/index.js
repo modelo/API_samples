@@ -23,7 +23,7 @@ window.onload = function () {
             searchBtn.onclick = function () {
                 var searchId = searchValue.value || searchValue.placeholder;
                 searchBtn.className = "ui loading button";
-                Modelo.Model.query(
+                Modelo.Model.get(
                     searchId,
                     function (model) {
                         modelInfo = JSON.parse(JSON.stringify(model));
