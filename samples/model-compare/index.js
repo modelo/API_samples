@@ -1,13 +1,16 @@
 Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
 
-var modelId1 = "RYQJQa8x";
+var modelId1 = "p1wMBo8j";
 var modelId2 = "5YLQ328Z";
 var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
 Modelo.Auth.signIn(appToken,
     function () {
+        // Modelo.Model.compare(modelId1, modelId2, function (data) {
+        //     console.log(data);
+        // });
         var that = this;
 
-        var viewer1 = new Modelo.View.ViewerCompare("compare-model", undefined, 2);
+        var viewer1 = new Modelo.View.Viewer3DCompare("compare-model");
      
         viewer1.addInput(new Modelo.View.Input.Mouse(viewer1)); // Add mouse to control camera.
 
@@ -45,25 +48,24 @@ Modelo.Auth.signIn(appToken,
             });
             var pickElements1 = Object.keys(elements1);
             var pickElements2 = Object.keys(elements2);
-            selectElementTool.pick(pickElements1, false, 0);
-            selectElementTool.pick(pickElements2, false, 1);
-            viewer1.getScene().setElementsColor(data.newElements1, [1, 0, 0]);
-            viewer1.getScene().setElementsColor(data.newElements2, [0, 1, 0]);
-            viewer1.getScene().setElementsColor(data.modifiedElements1, [0, 0, 1]);
-            viewer1.getScene().setElementsColor(data.modifiedElements2, [1, 1, 0]);
+            viewer1.focusElementsInViewport(0, pickElements1, false);
+            viewer1.focusElementsInViewport(1, pickElements2, false);
+            viewer1.getScene().cores[0].setElementsColor(data.newElements1, [1, 0, 0]);
+            viewer1.getScene().cores[1].setElementsColor(data.newElements2, [0, 1, 0]);
+            viewer1.getScene().cores[0].setElementsColor(data.modifiedElements1, [0, 0, 1]);
+            viewer1.getScene().cores[1].setElementsColor(data.modifiedElements2, [1, 1, 0]);
         }
 
-        viewer1.loadModel(modelId1, // Load the model into the viewer.
+        viewer1.loadModelAtViewport(modelId1, // Load the model into the viewer.
             0,
             null,
             function () { // success
                 console.log("model1 loading done");
                 if (loadingDone2) {
-                    // Modelo.Model.compare(modelId1, modelId2, function(data) {
-                    //     console.log(data);
-                    //     // selectElementTool.pick(data.newElements1);
-                    //     setElementsColor(data);
-                    // });
+                    Modelo.Model.compare(modelId1, modelId2, function (data) {
+                        console.log(data);
+                        setElementsColor(data);
+                    });
                 }
                 loadingDone1 = true;
             },
@@ -76,15 +78,15 @@ Modelo.Auth.signIn(appToken,
             })
 
         
-        viewer1.loadModel(modelId2, // Load the model into the viewer.
+        viewer1.loadModelAtViewport(modelId2, // Load the model into the viewer.
             1,
             null,
             function () { // success
                 console.log("model2 loading done");
                 if (loadingDone1) {
-                    // Modelo.Model.compare(modelId1, modelId2, function(data) {
-                    //     setElementsColor(data);
-                    // });
+                    Modelo.Model.compare(modelId1, modelId2, function(data) {
+                        setElementsColor(data);
+                    });
                 }
                 loadingDone2 = true;
             },
@@ -128,6 +130,25 @@ Modelo.Auth.signIn(appToken,
                 }
             }
 
+            var isHorizontal = true;
+            document.getElementById("toggle-split").onclick = function() {
+                isHorizontal = !isHorizontal;
+                viewer1.getCamera().setSplitHorizontal(isHorizontal);
+            }
+
+            var percentage = 0.5;
+            document.getElementById("increase-percentage").onclick = function() {
+                if (percentage < 0.9) {
+                    percentage += 0.1;
+                }
+                viewer1.getCamera().setSplitPercentage(percentage);
+            }
+            document.getElementById("decrease-percentage").onclick = function() {
+                if (percentage > 0.1) {
+                    percentage -= 0.1;
+                }
+                viewer1.getCamera().setSplitPercentage(percentage);
+            }
     },
     function (err) {
         console.log(err);
