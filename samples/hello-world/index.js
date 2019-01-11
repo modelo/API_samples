@@ -1,6 +1,6 @@
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com" });
 
-const modelId = "93rjxWY4";
+const modelId = "NLYVx7rk";
 // A sample app token
 const appToken = "c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE=";
 

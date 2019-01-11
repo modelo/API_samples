@@ -10,7 +10,7 @@ window.onload = function() {
 
     Modelo.init({ endpoint: "https://build-portal.modeloapp.com" });
 
-    var modelId = "93rjxWY4";
+    var modelId = "NLYVx7rk";
     var container = document.querySelector("#modelContainer");
     var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
 

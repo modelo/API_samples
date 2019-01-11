@@ -1,4 +1,4 @@
-var modelId = "93rjxWY4";
+var modelId = "NLYVx7rk";
 var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
 Modelo.Auth.signIn(appToken,
     function () {

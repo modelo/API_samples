@@ -1,7 +1,7 @@
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com" });
 
 let bgcolor = [1, 1, 1];
-const modelId = "93rjxWY4";
+const modelId = "NLYVx7rk";
 const appToken = "c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE=";
 
 const cubemapImages = [
