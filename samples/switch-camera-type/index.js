@@ -1,10 +1,16 @@
-Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com" });
 
-var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
-Modelo.Auth.signIn(appToken,
-    function () {
-        var viewer = new Modelo.View.Viewer3D("model");
+const modelId = "93rjxWY4";
+const appToken = "c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE="; // A sample app token
+
+function updateProgress(progress) {
+    const c = document.getElementById("progress");
+    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+}
+
+Modelo.Auth.signIn(appToken)
+    .then(() => {
+        const viewer = new Modelo.View.Viewer3D("model");
 
         document.getElementById("toggleCamera").onchange = function() {
             if (document.getElementById("toggleCamera").checked) {
@@ -13,26 +19,13 @@ Modelo.Auth.signIn(appToken,
                 viewer.getCamera().transformToPerspective();
             }
             viewer.invalidate();
-        }
-   
-        viewer.loadModel(modelId, // Load the model into the viewer.
-            null,
-            function () {
-                viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
-                var keyboard = new Modelo.View.Input.Keyboard(viewer); // Add keyboard callback.
-                viewer.addInput(keyboard);
-                console.log("done");
-            },
-            function (errmsg) {
-                console.log(errmsg); // The loading error.
-            },
-            function (per) {
-                var c = document.getElementById("progress");
-                c.innerHTML = "Loading: " + Math.round(per * 100) + "%";
-            });
-    },
-    function (errmsg) {
-        console.log(errmsg); // If there is any sign-inerror.
-    });
+        };
 
-
+        viewer.loadModel(modelId, updateProgress).then(() => {
+            viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+            const keyboard = new Modelo.View.Input.Keyboard(viewer); // Add keyboard callback.
+            viewer.addInput(keyboard);
+            console.log("done");
+        });
+    })
+    .catch(e => console.log(e.message));

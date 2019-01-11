@@ -1,34 +1,26 @@
-Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com" });
 
-var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
-Modelo.Auth.signIn(appToken,
-    function () {
-       
-        var viewer = new Modelo.View.Viewer3D("model");
+const modelId = "93rjxWY4";
+const appToken = "c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE="; // A sample app token
+
+function updateProgress(progress) {
+    const c = document.getElementById("progress");
+    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+}
+
+Modelo.Auth.signIn(appToken)
+    .then(() => {
+        const viewer = new Modelo.View.Viewer3D("model");
 
         viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 
-        viewer.loadModel(modelId, // Load the model into the viewer.
-            null,
-            function () {
-                document.getElementById("dump").onclick = function () {
-                    var shot = viewer.dumpScreen(960, 640);
-                    document.getElementById("screenshot").src = shot;
-                    console.log(shot);
-                }
+        viewer.loadModel(modelId, updateProgress).then(() => {
+            document.getElementById("dump").onclick = function() {
+                const shot = viewer.dumpScreen(960, 640);
+                document.getElementById("screenshot").src = shot;
+            };
 
-                console.log("done");
-            },
-            function (errmsg) {
-                console.log(errmsg); // The loading error.
-            },
-            function (per) {
-                var c = document.getElementById("progress");
-                c.innerHTML = "Loading: " + Math.round(per * 100) + "%";
-            });
-    },
-    function (errmsg) {
-        console.log(errmsg); // If there is any sign-inerror.
-    });
-
+            console.log("done");
+        });
+    })
+    .catch(e => console.log(e.message));

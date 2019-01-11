@@ -1,10 +1,16 @@
-Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com" });
 
-var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
-Modelo.Auth.signIn(appToken, 
-    function () {
-        var viewer = new Modelo.View.Viewer3D("model");
+const modelId = "93rjxWY4";
+const appToken = "c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE="; // A sample app token
+
+function updateProgress(progress) {
+    const c = document.getElementById("progress");
+    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+}
+
+Modelo.Auth.signIn(appToken)
+    .then(() => {
+        const viewer = new Modelo.View.Viewer3D("model");
 
         document.getElementById("specular").onchange = function(evt) {
             viewer.setSpecularEnabled(document.getElementById("specular").checked);
@@ -15,51 +21,38 @@ Modelo.Auth.signIn(appToken,
         document.getElementById("ao").onchange = function(evt) {
             viewer.setEffectEnabled("SSAO", document.getElementById("ao").checked);
         };
-      
-        $('#range1').range({
+
+        $("#range1").range({
             min: 0,
             max: Math.PI,
             start: 1.0,
             step: 0.01,
-            onChange: function (value) {
+            onChange: function(value) {
                 viewer.setLightingLatitude(value);
             }
         });
-        $('#range2').range({
+        $("#range2").range({
             min: 0,
             max: 2.0 * Math.PI,
             start: 1.0,
             step: 0.01,
-            onChange: function (value) {
-                console.log(value);
+            onChange: function(value) {
                 viewer.setLightingLongitude(value);
             }
         });
-        $('#range3').range({
+        $("#range3").range({
             min: 0,
             max: 1,
             start: 0.5,
             step: 0.01,
-            onChange: function (value) {
+            onChange: function(value) {
                 viewer.setLightingIntensity(value);
             }
         });
-   
-        viewer.loadModel(modelId, // Load the model into the viewer.
-            null,
-            function () {
-                viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
-                console.log("done");
-            },
-            function (errmsg) {
-                console.log(errmsg); // The loading error.
-            },
-            function (per) {
-                var c = document.getElementById("progress");
-                c.innerHTML = "Loading: " + Math.round(per * 100) + "%";
-            });
-    },
-    function (errmsg) {
-        console.log(errmsg); // If there is any sign-inerror.
-    });
 
+        viewer.loadModel(modelId, updateProgress).then(() => {
+            viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+            console.log("done");
+        });
+    })
+    .catch(e => console.log(e.message));
