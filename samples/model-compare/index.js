@@ -101,34 +101,6 @@ Modelo.Auth.signIn(appToken,
 
             var viewer2 = null;
             var viewer1Paused = false;
-            document.getElementById("toggle-canvas").onclick = function() {
-                if (!viewer1Paused) {
-                    viewer1.pause();
-                    viewer1Paused = true;
-
-                    if (!viewer2) {
-                        viewer2 = new Modelo.View.Viewer3D("normal-model");
-                        viewer2.addInput(new Modelo.View.Input.Mouse(viewer2)); // Add mouse to control camera
-                        viewer2.loadModel(modelId1, // Load the model into the viewer.
-                            null,
-                            function () {
-    
-                            },
-                            function () {
-    
-                            },
-                            function () {
-    
-                            });
-                    } else {
-                        viewer2.resume();
-                    }
-                } else {
-                    viewer2.pause();
-                    viewer1.resume();
-                    viewer1Paused = false;
-                }
-            }
 
             var isHorizontal = true;
             document.getElementById("toggle-split").onclick = function() {
