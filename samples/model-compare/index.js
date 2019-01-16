@@ -1,6 +1,6 @@
 Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
 
-var modelId1 = "p1wMBo8j";
+var modelId1 = "g8l2v51y";
 var modelId2 = "5YLQ328Z";
 var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
 Modelo.Auth.signIn(appToken,
