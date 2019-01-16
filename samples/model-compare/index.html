@@ -10,7 +10,7 @@
         }
         .buttons-wrapper {
             padding: 10px;
-            width: 250px;
+            width: 300px;
             min-width: 250px;
         }
         .buttons-wrapper label{
@@ -49,6 +49,17 @@
         #model {
             width: calc(100% - 250px);
         }
+
+        .elementList {
+            word-wrap: break-word;
+            white-space: -moz-pre-wrap;
+            white-space: pre-wrap;
+        }
+
+        .elements-wrapper {
+            width: 280px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -61,6 +72,47 @@
         <button type="button" class="ui button white" id="toggle-split">switch split orientation</button>
         <button type="button" class="ui button white" id="increase-percentage">increase percentage</button>
         <button type="button" class="ui button white" id="decrease-percentage">decrease percentage</button>
+
+        <div class="elements-wrapper">
+            <div class="ui message">
+                <div class="header">
+                    new elements in model1
+                </div>
+                <div class="body, elementList" id="new-elements1">
+                    Info of Merged model
+                </div>
+            </div>
+        </div>
+        <div class="elements-wrapper">
+            <div class="ui message">
+                <div class="header">
+                    new elements in model2
+                </div>
+                <div class="body, elementList" id="new-elements2">
+                    Info of Merged model
+                </div>
+            </div>
+        </div>
+        <div class="elements-wrapper">
+            <div class="ui message">
+                <div class="header">
+                    modified elements in model1 
+                </div>
+                <div class="body, elementList" id="modified-elements1">
+                    Info of Merged model
+                </div>
+            </div>
+        </div>
+        <div class="elements-wrapper">
+            <div class="ui message">
+                <div class="header">
+                    modified elements in model1
+                </div>
+                <div class="body, elementList" id="modified-elements2">
+                    Info of Merged model
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="compare-model" style="width:1300px"></div>

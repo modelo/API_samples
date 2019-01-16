@@ -1,7 +1,7 @@
 Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
 
 var modelId1 = "g8l2v51y";
-var modelId2 = "5YLQ328Z";
+var modelId2 = "x1qwaA8W";
 var appToken = 'c2FtcGxlcyx0ZVNhbXBsZVBhc3M1NDE='; // A sample app token
 Modelo.Auth.signIn(appToken,
     function () {
@@ -54,6 +54,11 @@ Modelo.Auth.signIn(appToken,
             viewer1.getScene().cores[1].setElementsColor(data.newElements2, [0, 1, 0]);
             viewer1.getScene().cores[0].setElementsColor(data.modifiedElements1, [0, 0, 1]);
             viewer1.getScene().cores[1].setElementsColor(data.modifiedElements2, [1, 1, 0]);
+
+            document.getElementById("new-elements1").innerHTML = data.newElements1;
+            document.getElementById("new-elements2").innerHTML = data.newElements2;
+            document.getElementById("modified-elements1").innerHTML = data.modifiedElements1;
+            document.getElementById("modified-elements2").innerHTML = data.modifiedElements2;
         }
 
         viewer1.loadModelAtViewport(modelId1, // Load the model into the viewer.
