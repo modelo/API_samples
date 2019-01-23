@@ -1,112 +1,103 @@
-Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
+let bgcolor = [1, 1, 1];
+const modelId = "g8l2v51y";
+const appToken = " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE";
 
-var bgcolor = [1, 1, 1];
-var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
-Modelo.Auth.signIn(appToken,
-    function () {
-        
-        var viewer = new Modelo.View.Viewer3D("model");
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-        viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+const cubemapImages = [
+    document.getElementById("negx"),
+    document.getElementById("negy"),
+    document.getElementById("negz"),
+    document.getElementById("posx"),
+    document.getElementById("posy"),
+    document.getElementById("posz")
+];
+const image = document.getElementById("image1e");
+const mode = document.getElementById("bgmode");
 
-        viewer.loadModel(modelId,
-            null,
-            function () {
-                var cubemapImages = [];
-                cubemapImages.push(document.getElementById("negx"));
-                cubemapImages.push(document.getElementById("negy"));
-                cubemapImages.push(document.getElementById("negz"));
-                cubemapImages.push(document.getElementById("posx"));
-                cubemapImages.push(document.getElementById("posy"));
-                cubemapImages.push(document.getElementById("posz"));
+function updateProgress(progress) {
+    const c = document.getElementById("progress");
+    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+}
 
-                var image = document.getElementById("image1e");
+const viewer = new Modelo.View.Viewer3D("model");
 
-                var mode = document.getElementById("bgmode");
-                mode.onchange = function () {
-                    var m = parseInt(mode.value);
-                    switch (m) {
-                        case Modelo.View.BACKGROUND_SOLIDCOLOR:
-                            viewer.setBackgroundMode(Modelo.View.BACKGROUND_SOLIDCOLOR);
-                            viewer.setBackgroundColor(bgcolor);
-                            break;
-                        case Modelo.View.BACKGROUND_WALLPAPER:
-                            viewer.setBackgroundMode(Modelo.View.BACKGROUND_WALLPAPER);
-                            viewer.setBackgroundImage(image);
-                            break;
-                        case Modelo.View.BACKGROUND_EQUIRECTANGLE:
-                            viewer.setBackgroundMode(Modelo.View.BACKGROUND_EQUIRECTANGLE);
-                            viewer.setBackgroundImage(image);
-                            break;
-                        case Modelo.View.BACKGROUND_CUBEMAP:
-                            viewer.setBackgroundMode(Modelo.View.BACKGROUND_CUBEMAP);
-                            viewer.setBackgroundImage(cubemapImages);
-                            break;
-                        case Modelo.View.BACKGROUND_WALLPAPER_TILED:
-                            viewer.setBackgroundMode(Modelo.View.BACKGROUND_WALLPAPER_TILED);
-                            viewer.setBackgroundImage(image);
-                            break;
-                    }
-                };
+viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 
-                document.getElementById("default").onclick = function () {
-                    bgcolor = [1, 1, 1];
-                    viewer.setBackgroundColor(bgcolor);
-                };
-                document.getElementById("red").onclick = function () {
-                    bgcolor = [1, 0, 0];
-                    viewer.setBackgroundColor(bgcolor);
-                };
-                document.getElementById("blue").onclick = function () {
-                    bgcolor = [0, 0, 1];
-                    viewer.setBackgroundColor(bgcolor);
-                };
-                document.getElementById("green").onclick = function () {
-                    bgcolor = [0, 1, 0];
-                    viewer.setBackgroundColor(bgcolor);
-                };
+viewer.loadModel(modelId, updateProgress).then(() => {
+    mode.onchange = function () {
+        const m = parseInt(mode.value);
+        const { ViewBackground } = Modelo.View;
 
-                document.getElementById("image1w").onclick = function () {
-                    var i = document.getElementById("image1w");
-                    viewer.setBackgroundImage(i);
-                };
+        switch (m) {
+            case ViewBackground.SOLIDCOLOR:
+                viewer.setBackgroundMode(ViewBackground.SOLIDCOLOR);
+                viewer.setBackgroundColor(bgcolor);
+                break;
+            case ViewBackground.WALLPAPER:
+                viewer.setBackgroundMode(ViewBackground.WALLPAPER);
+                viewer.setBackgroundImage(image);
+                break;
+            case ViewBackground.EQUIRECTANGLE:
+                viewer.setBackgroundMode(ViewBackground.EQUIRECTANGLE);
+                viewer.setBackgroundImage(image);
+                break;
+            case ViewBackground.CUBEMAP:
+                viewer.setBackgroundMode(ViewBackground.CUBEMAP);
+                viewer.setBackgroundImage(cubemapImages);
+                break;
+            case ViewBackground.WALLPAPER_TILED:
+                viewer.setBackgroundMode(ViewBackground.WALLPAPER_TILED);
+                viewer.setBackgroundImage(image);
+                break;
+        }
+    };
 
-                document.getElementById("image2w").onclick = function () {
-                    var i = document.getElementById("image2w");
-                    viewer.setBackgroundImage(i);
-                };
+    document.getElementById("default").onclick = function () {
+        bgcolor = [1, 1, 1];
+        viewer.setBackgroundColor(bgcolor);
+    };
+    document.getElementById("red").onclick = function () {
+        bgcolor = [1, 0, 0];
+        viewer.setBackgroundColor(bgcolor);
+    };
+    document.getElementById("blue").onclick = function () {
+        bgcolor = [0, 0, 1];
+        viewer.setBackgroundColor(bgcolor);
+    };
+    document.getElementById("green").onclick = function () {
+        bgcolor = [0, 1, 0];
+        viewer.setBackgroundColor(bgcolor);
+    };
 
-                document.getElementById("image1e").onclick = function () {
-                    var i = document.getElementById("image1e");
-                    viewer.setBackgroundImage(i);
-                };
+    document.getElementById("image1w").onclick = function () {
+        const i = document.getElementById("image1w");
+        viewer.setBackgroundImage(i);
+    };
 
-                document.getElementById("image2e").onclick = function () {
-                    var i = document.getElementById("image2e");
-                    viewer.setBackgroundImage(i);
-                };
+    document.getElementById("image2w").onclick = function () {
+        const i = document.getElementById("image2w");
+        viewer.setBackgroundImage(i);
+    };
 
-                document.getElementById("image1t").onclick = function () {
-                    var i = document.getElementById("image1t");
-                    viewer.setBackgroundImage(i);
-                };
+    document.getElementById("image1e").onclick = function () {
+        const i = document.getElementById("image1e");
+        viewer.setBackgroundImage(i);
+    };
 
-                document.getElementById("image2t").onclick = function () {
-                    var i = document.getElementById("image2t");
-                    viewer.setBackgroundImage(i);
-                };
-            },
-            function (errmsg) {
-                console.log(errmsg);
-            },
-            function (per) {
-                var c = document.getElementById("progress");
-                c.innerHTML = "Loading: " + Math.round(per * 100) + "%";
-            });
-    },
-    function (errmsg) {
-        console.log(errmsg);
-    })
+    document.getElementById("image2e").onclick = function () {
+        const i = document.getElementById("image2e");
+        viewer.setBackgroundImage(i);
+    };
 
+    document.getElementById("image1t").onclick = function () {
+        const i = document.getElementById("image1t");
+        viewer.setBackgroundImage(i);
+    };
+
+    document.getElementById("image2t").onclick = function () {
+        const i = document.getElementById("image2t");
+        viewer.setBackgroundImage(i);
+    };
+});
 

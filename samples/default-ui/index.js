@@ -1,30 +1,22 @@
-window.onload = function() {
-    var destroyBtn = document.getElementById('destroyBtn');
-    var modelApp;
+window.onload = function () {
+    const destroyBtn = document.getElementById('destroyBtn');
+    let modelApp;
 
-    destroyBtn.addEventListener('click', function() {
+    destroyBtn.addEventListener('click', function () {
         if (modelApp) {
             modelApp.destroy();
         }
     });
 
-    Modelo.init({ endpoint: "https://build-portal.modeloapp.com" });
+    const modelId = "g8l2v51y";
+    const appToken = ' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE'; // A sample app token
 
-    var modelId = "93rjxWY4";
-    var container = document.querySelector("#modelContainer");
-    var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
+    Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-    Modelo.Auth.signIn(
-        appToken,
-        function() {
-            modelApp = new Modelo.WebApp({
-                modelId,
-                containerId: "modelContainer",
-                useDefaultFavicon: true
-            });
-        },
-        function(e) {
-            console.error(e);
-        }
-    );
+    modelApp = new Modelo.WebApp({
+        modelId,
+        containerId: "modelContainer",
+        useDefaultFavicon: true
+    });
+
 };

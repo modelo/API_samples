@@ -1,7 +1,6 @@
-var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
+var modelId = "g8l2v51y";
+var appToken = ' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE'; // A sample app token
 Modelo.Auth.signIn(appToken,
-    null,
     function () {
         var canvas = document.getElementById("model");
         var viewer = new Modelo.View.Viewer3D(canvas, false, 1280, 800);
