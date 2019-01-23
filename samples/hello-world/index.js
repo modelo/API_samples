@@ -1,34 +1,24 @@
-Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
+const modelId = "g8l2v51y";
+const appToken = " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE";
 
-var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-Modelo.Auth.signIn(appToken,
-    function () {
-        var viewer = new Modelo.View.Viewer3D("model");
+const viewer = new Modelo.View.Viewer3D("model");
 
-        viewer.loadModel(modelId, // Load the model into the viewer.
-            null,
-            function () {
-                viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
-                var keyboard = new Modelo.View.Input.Keyboard(viewer); // Add keyboard callback.
-                viewer.addInput(keyboard);
-                keyboard.addKeyUpListener(function (keyboard) {
-                    if (keyboard.key === 27) {
-                        viewer.destroy();
-                    }
-                });
-                console.log("done");
-            },
-            function (errmsg) {
-                console.log(errmsg); // The loading error.
-            },
-            function (per) {
-                var c = document.getElementById("progress");
-                c.innerHTML = "Loading: " + Math.round(per * 100) + "%";
-            });
-    },
-    function (errmsg) {
-        console.log(errmsg); // If there is any sign-inerror.
+viewer.loadModel(modelId, progress => {
+    // second parameter is an optional progress callback
+    const c = document.getElementById("progress");
+    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+}).then(() => {
+    // model loaded successfully
+    // add mouse to control camera.
+    viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+    // add keyboard callback.
+    const keyboard = new Modelo.View.Input.Keyboard(viewer);
+    viewer.addInput(keyboard);
+    keyboard.addKeyUpListener(keyboard => {
+        if (keyboard.key === 27) {
+            viewer.destroy();
+        }
     });
-
+});

@@ -1,56 +1,47 @@
-Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
+const modelId = "g8l2v51y";
+const appToken = " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE"; // A sample app token
 
-var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
-Modelo.Auth.signIn(appToken, 
-    function () {
-        var viewer = new Modelo.View.Viewer3D("model");
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-        viewer.setSmartCullingEnabled(false);
-        
-        viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+function updateProgress(progress) {
+    const c = document.getElementById("progress");
+    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+}
 
-        viewer.loadModel(modelId, // Load the model into the viewer.
-            null,
-            function () { // success
-                console.log("done");
+const viewer = new Modelo.View.Viewer3D("model");
 
-                // Notice that we should always add the section tool after the model is done loading.
-                // Otherwise, it will cause some unexpected errors
-                var section = new Modelo.View.Tool.Section(viewer)
-                viewer.addTool(section);
+viewer.setSmartCullingEnabled(false);
 
-                document.getElementById("section").onchange = function(evt) {
-                    var checked = document.getElementById("section").checked;
-                    console.log(checked);
-                    section.setEnabled(checked);
-                    document.getElementById("interaction").checked = checked;
-                    section.setInteractive(checked);
-                    viewer.invalidate();
-                };
+viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 
-                document.getElementById("interaction").onchange = function(evt) {
-                    section.setInteractive(document.getElementById("interaction").checked);
-                    viewer.invalidate();
-                };
-                document.getElementById("rotation").onchange = function(evt) {
-                    section.setRotatable(document.getElementById("rotation").checked);
-                    viewer.invalidate();
-                };
-                document.getElementById("resetSectionBox").addEventListener("click", function() {
-                    section.reset();
-                    viewer.invalidate();
-                });
-            },
-            function (errmsg) { // fail
-                console.error(errmsg);
-            },
-            function (per) { // on progress
-                var c = document.getElementById("progress");
-                c.innerHTML = "Loading: " + Math.round(per * 100) + "%";
-            });
-    },
-    function (err) {
-        console.log(err)
+viewer.loadModel(modelId, updateProgress).then(() => {
+    // success
+    console.log("done");
+
+    // Notice that we should always add the section tool after the model is done loading.
+    // Otherwise, it will cause some unexpected errors
+    const section = new Modelo.View.Tool.Section(viewer);
+    viewer.addTool(section);
+
+    document.getElementById("section").onchange = function (evt) {
+        const checked = document.getElementById("section").checked;
+        section.setEnabled(checked);
+        document.getElementById("interaction").checked = checked;
+        section.setInteractive(checked);
+        viewer.invalidate();
+    };
+
+    document.getElementById("interaction").onchange = function (evt) {
+        section.setInteractive(document.getElementById("interaction").checked);
+        viewer.invalidate();
+    };
+    document.getElementById("rotation").onchange = function (evt) {
+        section.setRotatable(document.getElementById("rotation").checked);
+        viewer.invalidate();
+    };
+    document.getElementById("resetSectionBox").addEventListener("click", function () {
+        section.reset();
+        viewer.invalidate();
     });
+});
 

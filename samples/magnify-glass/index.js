@@ -1,44 +1,33 @@
-Modelo.init({"endpoint": "https://build-portal.modeloapp.com"});
+const modelId = "g8l2v51y";
+const appToken = " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE"; // A sample app token
 
-var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-Modelo.Auth.signIn(appToken,
-    function () {
-        var viewer = new Modelo.View.Viewer3D("model");
-   
-        viewer.loadModel(modelId, // Load the model into the viewer.
-            null,
-            function () {
-                viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+function updateProgress(progress) {
+    const c = document.getElementById("progress");
+    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+}
 
-                var magnifyGlass = new Modelo.View.Tool.MagnifyGlass(viewer);
-                viewer.addTool(magnifyGlass);
+const viewer = new Modelo.View.Viewer3D("model");
 
-                // We should cancel magnify glass when it is used. Otherwise it 
-                // will intercept the mouse events always and make the camera
-                // rotation disabled.
-                viewer.getEventEmitter().on('MagnifyGlass-Selected', function() {
-                    magnifyGlass.setEnabled(false);
-                    document.getElementById("magnifyGlass").checked = false;
-                });
+viewer.loadModel(modelId, updateProgress).then(() => {
+    viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 
-                document.getElementById("magnifyGlass").onchange = function() {
-                    var checked = document.getElementById("magnifyGlass").checked;
-                    magnifyGlass.setEnabled(checked);
-                };
-                
-                console.log("done");
-            },
-            function (errmsg) {
-                console.log(errmsg); // The loading error.
-            },
-            function (per) {
-                var c = document.getElementById("progress");
-                c.innerHTML = "Loading: " + Math.round(per * 100) + "%";
-            });
-    },
-    function (errmsg) {
-        console.log(errmsg); // If there is any sign-inerror.
+    const magnifyGlass = new Modelo.View.Tool.MagnifyGlass(viewer);
+    viewer.addTool(magnifyGlass);
+
+    // We should cancel magnify glass when it is used. Otherwise it
+    // will intercept the mouse events always and make the camera
+    // rotation disabled.
+    viewer.getEventEmitter().on("MagnifyGlass-Selected", function () {
+        magnifyGlass.setEnabled(false);
+        document.getElementById("magnifyGlass").checked = false;
     });
 
+    document.getElementById("magnifyGlass").onchange = function () {
+        const checked = document.getElementById("magnifyGlass").checked;
+        magnifyGlass.setEnabled(checked);
+    };
+
+    console.log("done");
+});
