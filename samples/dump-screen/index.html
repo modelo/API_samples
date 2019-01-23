@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Modelo API sample (Dump Screen)</title>
-  <link href="../../assets/css/semantic.min.css" rel="stylesheet">
-  <script src="../../assets/js/jquery.min.js"></script>
-  <style>
-    html,body{
+    <meta charset="UTF-8">
+    <title>Modelo API sample (Dump Screen)</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+    <script src="../../assets/js/jquery.min.js"></script>
+    <style>
+        html,body{
       height: 100%;
       margin:0;
       padding:0;
@@ -59,26 +59,26 @@
 </head>
 
 <body>
-  <div class="dump-wrapper">
-    <input type="button" id="dump" value="Capture screen" class="ui primary button"/>
-    <img src="" alt="" id="screenshot" id="screenshot">
-  </div>
-  <div class="wrapper-right">
-    <label id="progress">Loading: 0</label>
-  </div>
-  <div id="model"></div>
-  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-2.0-lts.js"></script>
-  <script src="index.js"></script>
-  <script>
-      $("#dump").click(function(){
-        $("#screenshot").toggle();
-      });
-      window.addEventListener('resize',function(){
-        var c=document.getElementById("model");
-        c.style.width = (this.innerWidth - 340) + 'px';
-        c.style.height=this.innerHeight +'px';
-      });
-  </script>
+    <div class="dump-wrapper">
+        <input type="button" id="dump" value="Capture screen" class="ui primary button" />
+        <img src="" alt="" id="screenshot" id="screenshot">
+    </div>
+    <div class="wrapper-right">
+        <label id="progress">Loading: 0</label>
+    </div>
+    <div id="model"></div>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-2.0-lts.js"></script>
+    <script src="index.js"></script>
+    <script>
+        $("#dump").click(function () {
+            $("#screenshot").toggle();
+        });
+        window.addEventListener('resize', function () {
+            const c = document.getElementById("model");
+            c.style.width = (this.innerWidth - 340) + 'px';
+            c.style.height = this.innerHeight + 'px';
+        });
+    </script>
 </body>
-</html>
 
+</html>
