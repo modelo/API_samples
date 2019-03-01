@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Modelo API UI</title>
-  <link rel="stylesheet" href="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/fabpro/modeloapiui-1.1-lts.css" type="text/css" />
+  <link rel="stylesheet" href="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapiui-2.0-lts.css" type="text/css" />
   <style type="text/css">
     #modelContainer {
       width: 100%;
@@ -22,33 +22,34 @@
 
 <body>
   <div id="modelContainer"></div>
-  <script src="/modeloapi.js"></script>
-  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/fabpro/modeloapiui-1.1-lts.js"></script>
+  <script src="/modeloapi-2.0.0-20190301.js"></script>
+  <link rel="stylesheet" href="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapiui-2.0-lts.css" type="text/css" />
   <script>
-	Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
+	const appToken = ' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE'; // A sample app token  
+    Modelo.init({ "endpoint": "https://build-portal.modeloapp.com", appToken });
 
-        var viewer = new Modelo.View.Viewer3D("modelContainer");
-
+    var viewer = new Modelo.View.Viewer3D("modelContainer");
+    var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
+    viewer.addTool(selectElementTool);
+    selectElementTool.setEnabled(true);
 	viewer.setOITEnabled(true);
 
-        viewer.loadModel("551d4326e437414c17000005", // Load the model into the viewer.
-            null,
-            function () {
-                viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
-                var keyboard = new Modelo.View.Input.Keyboard(viewer); // Add keyboard callback.
-                viewer.addInput(keyboard);
-                keyboard.addKeyUpListener(function (keyboard) {
-                    if (keyboard.key === 27) {
-                        viewer.destroy();
-                    }
-                });
-                console.log("done");
-            },
-            function (errmsg) {
-                console.log(errmsg); // The loading error.
-            },
-            function (per) {
-            });
+viewer.loadModel("551d4326e437414c17000005", progress => {
+    
+}).then(() => {
+    // model loaded successfully
+    // add mouse to control camera.
+    viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+    // add keyboard callback.
+    const keyboard = new Modelo.View.Input.Keyboard(viewer);
+    viewer.addInput(keyboard);
+    keyboard.addKeyUpListener(keyboard => {
+        if (keyboard.key === 27) {
+            viewer.destroy();
+        }
+    });
+});
+
   </script>
 </body>
 
