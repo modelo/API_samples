@@ -43,6 +43,7 @@ gulp.task("default", () => {
 
     app.use(express.static(__dirname + "/"));
 
+    console.log("Listen to http://localhost:" + config.expressPort);
     app.listen(config.expressPort);
     
     app.get("/local/:id/:index/:file", function (request, response) {
