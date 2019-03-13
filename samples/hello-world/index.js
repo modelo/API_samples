@@ -5,6 +5,10 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 const viewer = new Modelo.View.Viewer3D("model");
 
+// viewer.loadTileset("test", function(progress) {})
+// .then(function(data) {
+//     debugger;
+// })
 viewer.loadModel(modelId, progress => {
     // second parameter is an optional progress callback
     const c = document.getElementById("progress");
