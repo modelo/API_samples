@@ -1,34 +1,22 @@
-Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
+const modelId = "g8l2v51y";
+const appToken = " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE"; // A sample app token
 
-var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
-Modelo.Auth.signIn(appToken,
-    function () {
-       
-        var viewer = new Modelo.View.Viewer3D("model");
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-        viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+function updateProgress(progress) {
+    const c = document.getElementById("progress");
+    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+}
 
-        viewer.loadModel(modelId, // Load the model into the viewer.
-            null,
-            function () {
-                document.getElementById("dump").onclick = function () {
-                    var shot = viewer.dumpScreen(960, 640);
-                    document.getElementById("screenshot").src = shot;
-                    console.log(shot);
-                }
+const viewer = new Modelo.View.Viewer3D("model");
 
-                console.log("done");
-            },
-            function (errmsg) {
-                console.log(errmsg); // The loading error.
-            },
-            function (per) {
-                var c = document.getElementById("progress");
-                c.innerHTML = "Loading: " + Math.round(per * 100) + "%";
-            });
-    },
-    function (errmsg) {
-        console.log(errmsg); // If there is any sign-inerror.
-    });
+viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+
+viewer.loadModel(modelId, updateProgress).then(() => {
+    document.getElementById("dump").onclick = function () {
+        const shot = viewer.dumpScreen(960, 640);
+        document.getElementById("screenshot").src = shot;
+    };
+    console.log("done");
+});
 

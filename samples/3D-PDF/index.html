@@ -40,33 +40,34 @@
         }
     </style>
 </head>
+
 <body>
-<div id="generate3DPDF">
-    <form class="ui fluid form">
-        <div class="inline field">
-            <div class="ui right pointing label">
-                Please enter a modelId here!
+    <div id="generate3DPDF">
+        <form class="ui fluid form">
+            <div class="inline field">
+                <div class="ui right pointing label">
+                    Please enter a modelId here!
+                </div>
+                <input id="inputGenerate3DPDF" type="text" placeholder="modelId here...">
+                <button id="buttonGenerate3DPDF" class="ui button" type="button">send</button>
             </div>
-            <input id="inputGenerate3DPDF" type="text" placeholder="modelId here...">
-            <button id="buttonGenerate3DPDF" class="ui button" type="button">send</button>
-        </div>
-    </form>
-    <div id="pdfIdGenerate3DPDF">Click the Send button to get the PDFId!</div>
-</div>
-<div id="get3DPDFURL">
-    <form class="ui fluid form">
-        <div class="inline field">
-            <div class="ui right pointing label">
-                Please enter a PDFId here!&nbsp;&nbsp;&nbsp;&nbsp;
+        </form>
+        <div id="pdfIdGenerate3DPDF">Click the Send button to get the PDFId!</div>
+    </div>
+    <div id="get3DPDFURL">
+        <form class="ui fluid form">
+            <div class="inline field">
+                <div class="ui right pointing label">
+                    Please enter a PDFId here!&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <input id="inputGet3DPDFURL" type="text" placeholder="PDFId here...">
+                <button id="buttonGet3DPDFURL" class="ui button" type="button">send</button>
             </div>
-            <input id="inputGet3DPDFURL" type="text" placeholder="PDFId here...">
-            <button id="buttonGet3DPDFURL" class="ui button" type="button">send</button>
-        </div>
-    </form>
-    <div id="pdfIdGet3DPDFURL">Click the Send button to get the PDF download link!</div>
-</div>
-<script src="http://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-1.1-lts.js"></script>
-<script src="index.js"></script>
+        </form>
+        <div id="pdfIdGet3DPDFURL">Click the Send button to get the PDF download link!</div>
+    </div>
+    <script src="http://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.0-lts.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
