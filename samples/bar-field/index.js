@@ -26,22 +26,21 @@ viewer.loadModel(modelId, progress => {
     viewer.setShadowEnabled(true);
 
     viewer.addVisualize("barField");
-    viewer.setVisualizeParameter("barField", "width", 50);
-    viewer.setVisualizeParameter("barField", "height", 50);
-    var data = new Uint8Array(50 * 50 * 24);
+    viewer.setVisualizeParameter("barField", "xres", 50);
+    viewer.setVisualizeParameter("barField", "yres", 50);
+    var data = new Float32Array(50 * 50);
     for (var i = 0; i < 50; i++) {
         for (var j = 0; j < 50; j++) {
-            var value = Math.random() * 255;
-            value = Math.sqrt((i - 25) * (i - 25) + (j - 25) * (j - 25)) * 7;
-            for (var k = 0; k < 24; k++) {
-                data[(i *50 + j) * 24 + k] = value;
-            }
+            var value = Math.random();
+                data[(i *50 + j)] = value;
         }
     }
     viewer.setVisualizeParameter("barField", "data", data);
-    viewer.setVisualizeParameter("barField", "platteTexture", "platte.png")
+    viewer.setVisualizeParameter("barField", "platteTexture", "platte.png");
+    viewer.setVisualizeParameter("barField", "barSize", 0.9);
     viewer.setVisualizeEnabled("barField", true);
     viewer.setVisualizePosition("barField", [-50, -100, 10]);
+    viewer.setVisualizeScale("barField", [50, 50, 50]);
 
     // model loaded successfully
     // add mouse to control camera.
@@ -55,3 +54,19 @@ viewer.loadModel(modelId, progress => {
         }
     });
 });
+
+document.getElementById("updateButton").onclick = function() {
+    var data = new Float32Array(50 * 50);
+    for (var i = 0; i < 50; i++) {
+        for (var j = 0; j < 50; j++) {
+            var value = Math.random();
+                data[(i *50 + j)] = value;
+        }
+    }
+    viewer.setVisualizeParameter("barField", "data", data);
+}
+
+document.getElementById("updateBarSize").onclick = function() {
+    var barSize = Math.random();
+    viewer.setVisualizeParameter("barField", "barSize", barSize);
+}
