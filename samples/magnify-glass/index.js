@@ -29,6 +29,4 @@ viewer.loadModel(modelId, updateProgress).then(() => {
     var checked = document.getElementById("magnifyGlass").checked;
     magnifyGlass.setEnabled(checked);
   };
-
-  console.log("done");
 });
