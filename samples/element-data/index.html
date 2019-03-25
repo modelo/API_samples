@@ -1,70 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Modelo API sample (element-data)</title>
-    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <title>element-data</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
     <style>
-        html,body {
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-        }
-        .elementData-wrapper {
-            padding: 10px;
-        }
+      html,
+      body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+      
+      .elementData-wrapper {
+        padding: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="elementData-wrapper">
-        <div class="ui form">
-            <div class="inline fields" style="width: auto">
-                <div class="field">
-                    <input id="searchModelId" type="text" placeholder="g8l2v51y">
-                </div>
-                <div class="field">
-                    <input id="searchElementId" type="text" placeholder="g8l2v51y+0/954779">
-                    <button id="searchBtn" class="ui button">Search</button>
-                </div>
-            </div>
+      <div class="ui form">
+        <div class="inline fields" style="width: auto">
+          <div class="field">
+            <input id="searchModelId" type="text" placeholder="g8l2v51y" />
+          </div>
+          <div class="field">
+            <input id="searchElementId" type="text" placeholder="g8l2v51y+0/954779" />
+            <button id="searchBtn" class="ui button">Search</button>
+          </div>
         </div>
-        <div class="ui message" style="width: 313px">
-            <div class="header">Element Data(defalut display the first)</div>
-            <div id="showElementData">
-                <form class="ui form">
-                    <div class="field">
-                        <label>Property Key</label>
-                        <input id="property-name" type="text" name="propertyName" readonly="">
-                    </div>
-                    <div class="field">
-                        <label>Property Group</label>
-                        <input id="property-group" type="text" name="propertyGroup" readonly="">
-                    </div>
-                    <div>
-
-                    </div>
-                    <div class="field">
-                        <label>Key Of Property Group</label>
-                        <input id="property-group-key" type="text" name="propertyGroupKey" readonly="">
-                    </div>
-                    <div class="field" id="PropertyValueShow">
-                        <label>Property Value</label>
-                        <input id="property-value" type="text" name="propertyValue" readonly="">
-                    </div>
-                    <div class="field">
-                        <label>Property Unit</label>
-                        <input id="property-unit" type="text" name="propertyUnit" readonly="">
-                    </div>
-                </form>
-                <button class="ui primary button" id="updateBtn" style="margin-top: 14px;">Update</button>
+      </div>
+      <div class="ui message" style="width: 313px">
+        <div class="header">Element Data(defalut display the first)</div>
+        <div id="showElementData">
+          <form class="ui form">
+            <div class="field">
+              <label>Property Key</label>
+              <input id="property-name" type="text" name="propertyName" readonly="" />
             </div>
+            <div class="field">
+              <label>Property Group</label>
+              <input id="property-group" type="text" name="propertyGroup" readonly="" />
+            </div>
+            <div></div>
+            <div class="field">
+              <label>Key Of Property Group</label>
+              <input id="property-group-key" type="text" name="propertyGroupKey" readonly="" />
+            </div>
+            <div class="field" id="PropertyValueShow">
+              <label>Property Value</label>
+              <input id="property-value" type="text" name="propertyValue" readonly="" />
+            </div>
+            <div class="field">
+              <label>Property Unit</label>
+              <input id="property-unit" type="text" name="propertyUnit" readonly="" />
+            </div>
+          </form>
+          <button class="ui primary button" id="updateBtn" style="margin-top: 14px;">Update</button>
         </div>
+      </div>
     </div>
 
     <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.0-lts.js"></script>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>

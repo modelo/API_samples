@@ -1,84 +1,90 @@
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Modelo API sample (Section)</title>
-    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <title>section</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
     <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        body {
-            display: flex;
-        }
-        #model{
-            height: 100%;
-            width:calc(100% - 170px);
-        }
-        .buttons-wrapper{
-          width: 170px;
-          min-width: 170px;
-        }
-        .ui.checkbox{
-          min-width: 100%;
-          padding: 10px;
-        }
-        .ui.button{
-          display: block;
-          margin-left: 10px;
-          margin-top: 10px;
-        }
-        .wrapper {
-          padding: 10px;
-          width: 300px;
-          min-width: 300px;
-        }
-        .wrapper label{
-          margin: 0 0 .28571429rem 0;
-          color: rgba(0,0,0,.87);
-          font-size: 1rem;
-          font-weight: 700;
-        }
-        .wrapper-right label{
-          color: rgba(0,0,0,.87);
-          font-size: 1rem;
-          font-weight: 700;
-          position: fixed;
-          top: .68571429rem;
-          right: 1rem;
-          margin: 0;
-          padding: 0;
-        }
-  </style>
-</head>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
 
-<body>
+      body {
+        display: flex;
+      }
+
+      #model {
+        height: 100%;
+        width: calc(100% - 170px);
+      }
+
+      .buttons-wrapper {
+        width: 170px;
+        min-width: 170px;
+      }
+
+      .ui.checkbox {
+        min-width: 100%;
+        padding: 10px;
+      }
+
+      .ui.button {
+        display: block;
+        margin-left: 10px;
+        margin-top: 10px;
+      }
+
+      .wrapper {
+        padding: 10px;
+        width: 300px;
+        min-width: 300px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
     <div class="buttons-wrapper">
-        <div class="ui toggle checkbox">
-            <input id="section" type="checkbox">
-            <label>Section</label>
-        </div>
+      <div class="ui toggle checkbox">
+        <input id="section" type="checkbox" />
+        <label>Section</label>
+      </div>
 
-        <div class="ui toggle checkbox">
-            <input id="interaction" type="checkbox">
-            <label>Interaction</label>
-        </div>
-        <div class="ui toggle checkbox">
-            <input id="rotation" type="checkbox">
-            <label>rotatable</label>
-        </div>
-        <button class="ui button" id="resetSectionBox">Reset Section Box</button>
+      <div class="ui toggle checkbox">
+        <input id="interaction" type="checkbox" />
+        <label>Interaction</label>
+      </div>
+      <div class="ui toggle checkbox">
+        <input id="rotation" type="checkbox" />
+        <label>rotatable</label>
+      </div>
+      <button class="ui button" id="resetSectionBox">Reset Section Box</button>
     </div>
     <div id="model"></div>
     <div class="wrapper-right">
-        <label id="progress">Loading: 0</label>
+      <label id="progress">Loading: 0</label>
     </div>
     <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.0-lts.js"></script>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>
