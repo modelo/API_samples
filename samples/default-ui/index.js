@@ -13,7 +13,7 @@ var appToken =
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-modelApp = new Modelo.WebApp({
+modelApp = new Modelo.UI.ModelViewer({
   modelId,
   containerId: "modelContainer",
   useDefaultFavicon: true
