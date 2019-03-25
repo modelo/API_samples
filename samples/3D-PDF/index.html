@@ -1,73 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Modelo API sample (get-PDF-download-url)</title>
-    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <title>3D-PDF</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
     <script src="../../assets/js/jquery.min.js"></script>
     <script src="../../assets/js/semantic.min.js"></script>
     <style>
-        body {
-            padding: 8rem;
-        }
+      body {
+        padding: 8rem;
+      }
 
-        #generate3DPDF {
-            width: 35rem;
-            margin: auto;
-            color: rgba(0, 0, 0, .8)
-        }
+      #generate3DPDF {
+        width: 35rem;
+        margin: auto;
+        color: rgba(0, 0, 0, 0.8);
+      }
 
-        #pdfIdGenerate3DPDF {
-            margin: 3rem;
-            font-size: 16px;
-        }
+      #pdfIdGenerate3DPDF {
+        margin: 3rem;
+        font-size: 16px;
+      }
 
-        #pdfIdGenerate3DPDF span {
-            font-size: 30px;
-            color: #8B7E66;
-        }
+      #pdfIdGenerate3DPDF span {
+        font-size: 30px;
+        color: #8b7e66;
+      }
 
-        #get3DPDFURL {
-            width: 35rem;
-            margin: auto;
-            color: rgba(0, 0, 0, .8)
-        }
+      #get3DPDFURL {
+        width: 35rem;
+        margin: auto;
+        color: rgba(0, 0, 0, 0.8);
+      }
 
-        #pdfIdGet3DPDFURL {
-            margin: 3rem;
-            font-size: 16px;
-        }
+      #pdfIdGet3DPDFURL {
+        margin: 3rem;
+        font-size: 16px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="generate3DPDF">
-        <form class="ui fluid form">
-            <div class="inline field">
-                <div class="ui right pointing label">
-                    Please enter a modelId here!
-                </div>
-                <input id="inputGenerate3DPDF" type="text" placeholder="modelId here...">
-                <button id="buttonGenerate3DPDF" class="ui button" type="button">send</button>
-            </div>
-        </form>
-        <div id="pdfIdGenerate3DPDF">Click the Send button to get the PDFId!</div>
+      <form class="ui fluid form">
+        <div class="inline field">
+          <div class="ui right pointing label">
+            Please enter a modelId here!
+          </div>
+          <input id="inputGenerate3DPDF" type="text" placeholder="modelId here..." />
+          <button id="buttonGenerate3DPDF" class="ui button" type="button">send</button>
+        </div>
+      </form>
+      <div id="pdfIdGenerate3DPDF">Click the Send button to get the PDFId!</div>
     </div>
     <div id="get3DPDFURL">
-        <form class="ui fluid form">
-            <div class="inline field">
-                <div class="ui right pointing label">
-                    Please enter a PDFId here!&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-                <input id="inputGet3DPDFURL" type="text" placeholder="PDFId here...">
-                <button id="buttonGet3DPDFURL" class="ui button" type="button">send</button>
-            </div>
-        </form>
-        <div id="pdfIdGet3DPDFURL">Click the Send button to get the PDF download link!</div>
+      <form class="ui fluid form">
+        <div class="inline field">
+          <div class="ui right pointing label">
+            Please enter a PDFId here!&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+          <input id="inputGet3DPDFURL" type="text" placeholder="PDFId here..." />
+          <button id="buttonGet3DPDFURL" class="ui button" type="button">send</button>
+        </div>
+      </form>
+      <div id="pdfIdGet3DPDFURL">Click the Send button to get the PDF download link!</div>
     </div>
     <script src="http://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.0-lts.js"></script>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>

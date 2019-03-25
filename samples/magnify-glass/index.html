@@ -1,155 +1,196 @@
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../assets/css/semantic.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../assets/css/semantic.min.css" />
     <style>
-        html,body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        body {
-            display: flex;
-        }
-        #model{
-            height: 100%;
-            width:calc(100% - 150px);
-        }
-        .tgl-box{
-            width: 150px;
-            min-width: 150px;
-            padding:10px;
-        }
-        .tgl {
-            display: none;
-        }
-        .tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
-  box-sizing: border-box;
-}
-.tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection {
-  background: none;
-}
-.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
-  background: none;
-}
-.tgl + .tgl-btn {
-  outline: 0;
-  display: block;
-  width: 6em;
-  height: 2em;
-  position: relative;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-.tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
-  position: relative;
-  display: block;
-  content: "";
-  width: 50%;
-  height: 100%;
-}
-.tgl + .tgl-btn:after {
-  left: 0;
-}
-.tgl + .tgl-btn:before {
-  display: none;
-}
-.tgl:checked + .tgl-btn:after {
-  left: 50%;
-}
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
 
-.tgl-skewed + .tgl-btn {
-  overflow: hidden;
-  -webkit-transform: skew(-10deg);
-          transform: skew(-10deg);
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  transition: all .2s ease;
-  font-family: sans-serif;
-  background: #888;
-}
-.tgl-skewed + .tgl-btn:after, .tgl-skewed + .tgl-btn:before {
-  -webkit-transform: skew(10deg);
-          transform: skew(10deg);
-  display: inline-block;
-  transition: all .2s ease;
-  width: 100%;
-  text-align: center;
-  position: absolute;
-  line-height: 2em;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-}
-.tgl-skewed + .tgl-btn:after {
-  left: 100%;
-  content: attr(data-tg-on);
-}
-.tgl-skewed + .tgl-btn:before {
-  left: 0;
-  content: attr(data-tg-off);
-}
-.tgl-skewed + .tgl-btn:active {
-  background: #888;
-}
-.tgl-skewed + .tgl-btn:active:before {
-  left: -10%;
-}
-.tgl-skewed:checked + .tgl-btn {
-  background: #86d993;
-}
-.tgl-skewed:checked + .tgl-btn:before {
-  left: -100%;
-}
-.tgl-skewed:checked + .tgl-btn:after {
-  left: 0;
-}
-.tgl-skewed:checked + .tgl-btn:active:after {
-  left: 10%;
-}
-.wrapper {
-  padding: 10px;
-  width: 300px;
-  min-width: 300px;
-}
-.wrapper label{
-  margin: 0 0 .28571429rem 0;
-  color: rgba(0,0,0,.87);
-  font-size: 1rem;
-  font-weight: 700;
-}
-.wrapper-right label{
-  color: rgba(0,0,0,.87);
-  font-size: 1rem;
-  font-weight: 700;
-  position: fixed;
-  top: .68571429rem;
-  right: 1rem;
-  margin: 0;
-  padding: 0;
-}
-	
+      body {
+        display: flex;
+      }
+
+      #model {
+        height: 100%;
+        width: calc(100% - 150px);
+      }
+
+      .tgl-box {
+        width: 150px;
+        min-width: 150px;
+        padding: 10px;
+      }
+
+      .tgl {
+        display: none;
+      }
+
+      .tgl,
+      .tgl:after,
+      .tgl:before,
+      .tgl *,
+      .tgl *:after,
+      .tgl *:before,
+      .tgl + .tgl-btn {
+        box-sizing: border-box;
+      }
+
+      .tgl::-moz-selection,
+      .tgl:after::-moz-selection,
+      .tgl:before::-moz-selection,
+      .tgl *::-moz-selection,
+      .tgl *:after::-moz-selection,
+      .tgl *:before::-moz-selection,
+      .tgl + .tgl-btn::-moz-selection {
+        background: none;
+      }
+
+      .tgl::selection,
+      .tgl:after::selection,
+      .tgl:before::selection,
+      .tgl *::selection,
+      .tgl *:after::selection,
+      .tgl *:before::selection,
+      .tgl + .tgl-btn::selection {
+        background: none;
+      }
+
+      .tgl + .tgl-btn {
+        outline: 0;
+        display: block;
+        width: 6em;
+        height: 2em;
+        position: relative;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      .tgl + .tgl-btn:after,
+      .tgl + .tgl-btn:before {
+        position: relative;
+        display: block;
+        content: "";
+        width: 50%;
+        height: 100%;
+      }
+
+      .tgl + .tgl-btn:after {
+        left: 0;
+      }
+
+      .tgl + .tgl-btn:before {
+        display: none;
+      }
+
+      .tgl:checked + .tgl-btn:after {
+        left: 50%;
+      }
+
+      .tgl-skewed + .tgl-btn {
+        overflow: hidden;
+        -webkit-transform: skew(-10deg);
+        transform: skew(-10deg);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transition: all 0.2s ease;
+        font-family: sans-serif;
+        background: #888;
+      }
+
+      .tgl-skewed + .tgl-btn:after,
+      .tgl-skewed + .tgl-btn:before {
+        -webkit-transform: skew(10deg);
+        transform: skew(10deg);
+        display: inline-block;
+        transition: all 0.2s ease;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        line-height: 2em;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+      }
+
+      .tgl-skewed + .tgl-btn:after {
+        left: 100%;
+        content: attr(data-tg-on);
+      }
+
+      .tgl-skewed + .tgl-btn:before {
+        left: 0;
+        content: attr(data-tg-off);
+      }
+
+      .tgl-skewed + .tgl-btn:active {
+        background: #888;
+      }
+
+      .tgl-skewed + .tgl-btn:active:before {
+        left: -10%;
+      }
+
+      .tgl-skewed:checked + .tgl-btn {
+        background: #86d993;
+      }
+
+      .tgl-skewed:checked + .tgl-btn:before {
+        left: -100%;
+      }
+
+      .tgl-skewed:checked + .tgl-btn:after {
+        left: 0;
+      }
+
+      .tgl-skewed:checked + .tgl-btn:active:after {
+        left: 10%;
+      }
+
+      .wrapper {
+        padding: 10px;
+        width: 300px;
+        min-width: 300px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="tgl-box">
-        <h4>magnify glass</h4>
-        <input class="tgl tgl-skewed" id="magnifyGlass" type="checkbox" />
-        <label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="magnifyGlass"></label>
+      <h4>magnify glass</h4>
+      <input class="tgl tgl-skewed" id="magnifyGlass" type="checkbox" />
+      <label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="magnifyGlass"></label>
     </div>
     <div class="wrapper-right">
-        <label id="progress">Loading: 0</label>
+      <label id="progress">Loading: 0</label>
     </div>
     <div id="model"></div>
     <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.0-lts.js"></script>
     <script src="index.js"></script>
-
-</body>
-
+  </body>
 </html>
