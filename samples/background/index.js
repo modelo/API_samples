@@ -1,10 +1,10 @@
 let bgcolor = [1, 1, 1];
-const modelId = "g8l2v51y";
-const appToken = " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE";
+var modelId = "g8l2v51y";
+var appToken = " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE";
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-const cubemapImages = [
+var cubemapImages = [
     document.getElementById("negx"),
     document.getElementById("negy"),
     document.getElementById("negz"),
@@ -12,22 +12,22 @@ const cubemapImages = [
     document.getElementById("posy"),
     document.getElementById("posz")
 ];
-const image = document.getElementById("image1e");
-const mode = document.getElementById("bgmode");
+var image = document.getElementById("image1e");
+var mode = document.getElementById("bgmode");
 
 function updateProgress(progress) {
-    const c = document.getElementById("progress");
+    var c = document.getElementById("progress");
     c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
 }
 
-const viewer = new Modelo.View.Viewer3D("model");
+var viewer = new Modelo.View.Viewer3D("model");
 
 viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 
 viewer.loadModel(modelId, updateProgress).then(() => {
     mode.onchange = function () {
-        const m = parseInt(mode.value);
-        const { ViewBackground } = Modelo.View;
+        var m = parseInt(mode.value);
+        var { ViewBackground } = Modelo.View;
 
         switch (m) {
             case ViewBackground.SOLIDCOLOR:
@@ -71,32 +71,32 @@ viewer.loadModel(modelId, updateProgress).then(() => {
     };
 
     document.getElementById("image1w").onclick = function () {
-        const i = document.getElementById("image1w");
+        var i = document.getElementById("image1w");
         viewer.setBackgroundImage(i);
     };
 
     document.getElementById("image2w").onclick = function () {
-        const i = document.getElementById("image2w");
+        var i = document.getElementById("image2w");
         viewer.setBackgroundImage(i);
     };
 
     document.getElementById("image1e").onclick = function () {
-        const i = document.getElementById("image1e");
+        var i = document.getElementById("image1e");
         viewer.setBackgroundImage(i);
     };
 
     document.getElementById("image2e").onclick = function () {
-        const i = document.getElementById("image2e");
+        var i = document.getElementById("image2e");
         viewer.setBackgroundImage(i);
     };
 
     document.getElementById("image1t").onclick = function () {
-        const i = document.getElementById("image1t");
+        var i = document.getElementById("image1t");
         viewer.setBackgroundImage(i);
     };
 
     document.getElementById("image2t").onclick = function () {
-        const i = document.getElementById("image2t");
+        var i = document.getElementById("image2t");
         viewer.setBackgroundImage(i);
     };
 });
