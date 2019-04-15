@@ -1,10 +1,9 @@
-Modelo.init({ "endpoint": "https://build-portal.modeloapp.com" });
 
-var modelId = "93rjxWY4";
-var appToken = 'c2FtcGxlcyxtb2RlbG9TQU1QTEVT'; // A sample app token
+var modelId = "gYEODnr5";
+var appToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjUsInVzZXJuYW1lIjoiZnFsIiwiaWF0IjoxNTQ4Mjk4NDIxLCJleHAiOjMzMDg0Mjk4NDIxfQ.-ZNOLrw1W9OOf9iG8QkgZuFJR5JUJmHDZvkZLsdR15Y'; // A sample app token
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-Modelo.Auth.signIn(appToken,
-    function () {
+
         var viewer = new Modelo.View.Viewer3D("model");
 
         viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
@@ -37,8 +36,4 @@ Modelo.Auth.signIn(appToken,
                 var c = document.getElementById("progress");
                 c.innerHTML = "Loading: " + Math.round(per * 100) + "%";
             });
-    },
-    function (errmsg) {
-        console.log(errmsg); // If there is any sign-inerror.
-    });
 
