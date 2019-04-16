@@ -1,24 +1,29 @@
 <div id="model1" style="width: 100%; height: 100%;"></div>
 
 <script>
-    const modelId = "g8l2v51y";
-    const appToken = ' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE'; // A sample app token
-    Modelo.init({ "endpoint": "https://build-portal.modeloapp.com", appToken });
+  var modelId = "aYeBJe8M";
+  var appToken =
+    " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE"; // A sample app token
+  Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-    console.log('signed in');
-    const viewer = new Modelo.View.Viewer3D("model1");
-    window.addEventListener("hashchange", function () {
+  console.log("signed in");
+  var viewer = new Modelo.View.Viewer3D("model1");
+  window.addEventListener(
+    "hashchange",
+    function() {
+      viewer.destroy();
+    },
+    { once: true }
+  );
+  viewer.loadModel(modelId).then(() => {
+    viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+    var keyboard = new Modelo.View.Input.Keyboard(viewer); // Add keyboard callback.
+    viewer.addInput(keyboard);
+    keyboard.addKeyUpListener(function(keyboard) {
+      if (keyboard.key === 27) {
         viewer.destroy();
-    }, { once: true });
-    viewer.loadModel(modelId).then(() => {
-        viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
-        const keyboard = new Modelo.View.Input.Keyboard(viewer); // Add keyboard callback.
-        viewer.addInput(keyboard);
-        keyboard.addKeyUpListener(function (keyboard) {
-            if (keyboard.key === 27) {
-                viewer.destroy();
-            }
-        });
-        console.log("done");
+      }
     });
+    console.log("done");
+  });
 </script>

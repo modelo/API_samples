@@ -1,115 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Modelo API sample (Lighting)</title>
-    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <title>lighting</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
     <script src="../../assets/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="../../assets/css/range.css">
+    <link rel="stylesheet" href="../../assets/css/range.css" />
     <script src="../../assets/js/range.js"></script>
     <style>
-        html,body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        body {
-            display: flex;
-        }
-        .form-wrapper{
-          width: 300px;
-          min-width: 300px;
-        }
-        .ui.checkbox{
-          left: 10px;
-          top: 10px;
-          min-width: 100%;
-          margin-bottom: 10px;
-        }
-        .range-wrapper{
-          position: relative;
-          margin: 10px;
-        }
-        .min,.max,.ui.range{
-          position: absolute;
-        }
-        .min{
-          right: 190px;
-        }
-        .max{
-          right: 0;
-        }
-        .ui.range{
-          left: 100px;
-          top: 0;
-          width: 160px;
-        }
-        .wrapper {
-          padding: 10px;
-          width: 300px;
-          min-width: 300px;
-        }
-        .wrapper label{
-          margin: 0 0 .28571429rem 0;
-          color: rgba(0,0,0,.87);
-          font-size: 1rem;
-          font-weight: 700;
-        }
-        .wrapper-right label{
-          color: rgba(0,0,0,.87);
-          font-size: 1rem;
-          font-weight: 700;
-          position: fixed;
-          top: .68571429rem;
-          right: 1rem;
-          margin: 0;
-          padding: 0;
-        }
-        #model{
-            height: 100%;
-            width:calc(100% - 300px);
-        }
-  </style>
-</head>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
 
-<body>
+      body {
+        display: flex;
+      }
+
+      .form-wrapper {
+        width: 300px;
+        min-width: 300px;
+      }
+
+      .ui.checkbox {
+        left: 10px;
+        top: 10px;
+        min-width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .range-wrapper {
+        position: relative;
+        margin: 10px;
+      }
+
+      .min,
+      .max,
+      .ui.range {
+        position: absolute;
+      }
+
+      .min {
+        right: 190px;
+      }
+
+      .max {
+        right: 0;
+      }
+
+      .ui.range {
+        left: 100px;
+        top: 0;
+        width: 160px;
+      }
+
+      .wrapper {
+        padding: 10px;
+        width: 300px;
+        min-width: 300px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+      
+      #model {
+        height: 100%;
+        width: calc(100% - 300px);
+      }
+    </style>
+  </head>
+
+  <body>
     <div class="form-wrapper">
-        <div class="ui toggle checkbox">
-            <input id="shadow" type="checkbox" name="public">
-            <label>Shadow</label>
-        </div>
-        <div class="ui toggle checkbox">
-            <input id="ao" type="checkbox" name="public">
-            <label>Ambient shadow</label>
-        </div>
-        <div class="ui toggle checkbox">
-            <input id="specular" type="checkbox" name="public">
-            <label>Specular</label>
-        </div>
-        <div class="range-wrapper">
-            <label>Latitude</label>
-            <span class="min">0</span><span class="max">π/2</span>
-            <div class="ui range" id="range1"></div>
-        </div>
-        <div class="range-wrapper">
-            <label>Longtitude</label>
-            <span class="min">0</span><span class="max">2π</span>
-            <div class="ui range" id="range2"></div>
-        </div>
-        <div class="range-wrapper">
-            <label>Brightness</label>
-            <span class="min">0</span><span class="max">1</span>
-            <div class="ui range" id="range3"></div>
-        </div>
+      <div class="ui toggle checkbox">
+        <input id="shadow" type="checkbox" name="public" />
+        <label>Shadow</label>
+      </div>
+      <div class="ui toggle checkbox">
+        <input id="ao" type="checkbox" name="public" />
+        <label>Ambient shadow</label>
+      </div>
+      <div class="ui toggle checkbox">
+        <input id="specular" type="checkbox" name="public" />
+        <label>Specular</label>
+      </div>
+      <div class="range-wrapper">
+        <label>Latitude</label>
+        <span class="min">0</span><span class="max">π/2</span>
+        <div class="ui range" id="range1"></div>
+      </div>
+      <div class="range-wrapper">
+        <label>Longtitude</label>
+        <span class="min">0</span><span class="max">2π</span>
+        <div class="ui range" id="range2"></div>
+      </div>
+      <div class="range-wrapper">
+        <label>Brightness</label>
+        <span class="min">0</span><span class="max">1</span>
+        <div class="ui range" id="range3"></div>
+      </div>
     </div>
     <div id="model"></div>
     <div class="wrapper-right">
-        <label id="progress">Loading: 0</label>
+      <label id="progress">Loading: 0</label>
     </div>
     <script src="../../modeloapi.js"></script>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>

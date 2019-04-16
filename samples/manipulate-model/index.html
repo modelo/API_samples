@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Modelo API sample (manipulate-model)</title>
-    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <title>manipulate-model</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
     <style>
-        html,body {
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-        }
-        .modelInfo-wrapper {
-            padding: 10px;
-        }     
+      html,
+      body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+      
+      .modelInfo-wrapper {
+        padding: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="modelInfo-wrapper">
-        <div class="ui fluid action input" style="width: 300px">
-            <input id="searchValue" type="text" placeholder="g8l2v51y">
-            <div id="searchBtn" class="ui button">Search</div>
+      <div class="ui fluid action input" style="width: 300px">
+        <input id="searchValue" type="text" placeholder="aYeBJe8M" />
+        <div id="searchBtn" class="ui button">Search</div>
+      </div>
+      <div class="ui fluid action input" style="width: 300px; margin: 1em 0;">
+        <input id="deleteValue" type="text" placeholder="Delete model by Id" />
+        <div id="deleteBtn" class="ui button red">Delete</div>
+      </div>
+      <div class="ui message" style="width: 300px">
+        <div class="header">
+          Model Information
         </div>
-        <div class="ui fluid action input" style="width: 300px; margin: 1em 0;">
-            <input id="deleteValue" type="text" placeholder="Delete model by Id">
-            <div id="deleteBtn" class="ui button red">Delete</div>
-        </div>
-        <div class="ui message" style="width: 300px">
-            <div class="header">
-                Model Information
+        <div>
+          <form class="ui form">
+            <div class="field">
+              <label>Model Id</label>
+              <input id="model-id" type="text" readonly="" name="modelId" />
             </div>
-            <div>
-                <form class="ui form">
-                    <div class="field">
-                        <label>Model Id</label>
-                        <input id="model-id" type="text" readonly="" name="modelId">
-                    </div>
-                    <div class="field" id="modelNameWrapper">
-                        <label>Model Name</label>
-                        <input id="model-name" type="text" readonly="" name="modelName">
-                    </div>
-                </form>
+            <div class="field" id="modelNameWrapper">
+              <label>Model Name</label>
+              <input id="model-name" type="text" readonly="" name="modelName" />
             </div>
+          </form>
         </div>
+      </div>
     </div>
 
     <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.0-lts.js"></script>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>

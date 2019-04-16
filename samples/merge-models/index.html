@@ -1,68 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Modelo API sample (merge-models)</title>
-    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <title>merge-models</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
     <style>
-        html,body {
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-        }
-        .mergeModelWrapper {
-            padding: 10px;
-        }  
-        .modelIdList {
-            padding-top: 10px;
-        }
+      html,
+      body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
 
+      .mergeModelWrapper {
+        padding: 10px;
+      }
+      
+      .modelIdList {
+        padding-top: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="mergeModelWrapper">
-        <div class="ui action input" style="width: 300px; padding-bottom: 10px;" id="addNameWrapper">
-            <input type="text" placeholder="merged model name" id="addNameInput">
-            <button class="ui button" id="addNameBtn">Add</button>
+      <div class="ui action input" style="width: 300px; padding-bottom: 10px;" id="addNameWrapper">
+        <input type="text" placeholder="merged model name" id="addNameInput" />
+        <button class="ui button" id="addNameBtn">Add</button>
+      </div>
+      <br />
+      <div class="ui action input" style="width: 300px" id="addIdWrapper">
+        <input type="text" placeholder="model id that need to be merged" id="addIdInput" />
+        <button class="ui button" id="addIdBtn">Add</button>
+      </div>
+      <div class="modelIdList">
+        <h4 class="ui header" id="listInfoTitle">Model to be merged named:</h4>
+        <ul id="infoList"></ul>
+        <div class="mergeBtnWrapper" style="padding: 10px 0px;">
+          <button class="ui blue button" id="mergeBtn">Merge</button>
+          <div class="ui left pointing red basic label" id="mergeInfoTip" style="display: none">
+            Merge failed!
+          </div>
         </div>
-        <br />
-        <div class="ui action input" style="width: 300px" id="addIdWrapper">
-            <input type="text" placeholder="model id that need to be merged" id="addIdInput">
-            <button class="ui button" id="addIdBtn">Add</button>
-        </div>
-        <div class="modelIdList">
-            <h4 class="ui header" id="listInfoTitle">Model to be merged named:</h4>
-            <ul id="infoList"></ul>
-            <div class="mergeBtnWrapper" style="padding: 10px 0px;">
-                <button class="ui blue button" id="mergeBtn">Merge</button>
-                <div class="ui left pointing red basic label" id="mergeInfoTip" style="display: none">
-                    Merge failed!
-                </div>
+      </div>
+      <div class="mergedModelInfo" style="width: 300px">
+        <div class="ui message">
+          <div class="header">
+            Info of Merged model
+          </div>
+          <form class="ui form" style="padding-top: 10px;">
+            <div class="field">
+              <label>Merged model Id</label>
+              <input id="merged-model-id" type="text" readonly="" name="mergedModelId" value="No Info" />
             </div>
-        </div>
-        <div class="mergedModelInfo" style="width: 300px">
-            <div class="ui message">
-                <div class="header">
-                    Info of Merged model
-                </div>
-                <form class="ui form" style="padding-top: 10px;">
-                    <div class="field">
-                        <label>Merged model Id</label>
-                        <input id="merged-model-id" type="text" readonly="" name="mergedModelId" value="No Info">
-                    </div>
-                    <div class="field">
-                        <label>Merged model Name</label>
-                        <input id="merged-model-name" type="text" readonly="" name="mergedModelName" value="No Info">
-                    </div>
-                </form>
+            <div class="field">
+              <label>Merged model Name</label>
+              <input id="merged-model-name" type="text" readonly="" name="mergedModelName" value="No Info" />
             </div>
+          </form>
         </div>
+      </div>
     </div>
 
     <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.0-lts.js"></script>
     <script src="index.js" defer="true"></script>
-</body>
-
+  </body>
 </html>

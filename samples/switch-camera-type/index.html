@@ -1,92 +1,96 @@
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <head>
+    <meta charset="utf-8" />
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
     <script src="../../assets/js/jquery.min.js"></script>
     <script src="../../assets/js/semantic.min.js"></script>
     <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        body {
-            display: flex;
-        }
-        .ui.checkbox{
-            width:240px;
-            min-width: 240px;
-            padding:10px;
-        }
-        .ui.checkbox label{
-            display: inline;
-            left: 80px;
-        }
-        .toggle-label{
-            position: absolute;
-        }
-        .toggle-label:first-child{
-            left: 10px;
-            top: 10px;
-            font-weight: 700;
-        }
-        .toggle-label:last-child{
-            left: 145px;
-            top:10px;
-            font-weight: 700;
-        }
-        .wrapper {
-          padding: 10px;
-          width: 320px;
-          min-width: 320px;
-        }
-        .wrapper label{
-          margin: 0 0 .28571429rem 0;
-          color: rgba(0,0,0,.87);
-          font-size: 1rem;
-          font-weight: 700;
-        }
-        .wrapper-right label{
-          color: rgba(0,0,0,.87);
-          font-size: 1rem;
-          font-weight: 700;
-          position: fixed;
-          top: .68571429rem;
-          right: 1rem;
-          margin: 0;
-          padding: 0;
-        }
-        #model{
-            height: 100%;
-            width:calc(100% - 240px);
-        }
-    </style>
-</head>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
 
-<body>
+      body {
+        display: flex;
+      }
+
+      .ui.checkbox {
+        width: 240px;
+        min-width: 240px;
+        padding: 10px;
+      }
+
+      .ui.checkbox label {
+        display: inline;
+        left: 80px;
+      }
+
+      .toggle-label {
+        position: absolute;
+      }
+
+      .toggle-label:first-child {
+        left: 10px;
+        top: 10px;
+        font-weight: 700;
+      }
+
+      .toggle-label:last-child {
+        left: 145px;
+        top: 10px;
+        font-weight: 700;
+      }
+
+      .wrapper {
+        padding: 10px;
+        width: 320px;
+        min-width: 320px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+      
+      #model {
+        height: 100%;
+        width: calc(100% - 240px);
+      }
+    </style>
+  </head>
+
+  <body>
     <div class="ui toggle checkbox">
-        <span class="toggle-label">perspective</span>
-        <input type="checkbox" tabindex="0" class="hidden" id="toggleCamera">
-        <span class="toggle-label">orthogonal</span>
+      <span class="toggle-label">perspective</span>
+      <input type="checkbox" tabindex="0" class="hidden" id="toggleCamera" />
+      <span class="toggle-label">orthogonal</span>
     </div>
     <div class="wrapper-right">
-        <label id="progress">Loading: 0</label>
+      <label id="progress">Loading: 0</label>
     </div>
     <div id="model"></div>
     <script>
-        $(function () {
-            $('.ui.checkbox').checkbox();
-            $("#toggleCamera").change(function () {
-                // use this value to toggle camera
-                console.log(this.checked)
-            })
-        })
+      $(function() {
+        $(".ui.checkbox").checkbox();
+      });
     </script>
     <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.0-lts.js"></script>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>

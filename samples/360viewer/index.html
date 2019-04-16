@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>multi-viewer</title>
+    <title>360viewer</title>
     <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
     <style>
       html,
@@ -40,15 +40,10 @@
         margin: 0;
         padding: 0;
       }
-
-      #model1 {
-        height: 60%;
-        width: 50%;
-      }
-
-      #model2 {
-        height: 60%;
-        width: 50%;
+      
+      #model {
+        height: 100%;
+        width: 100%;
       }
     </style>
   </head>
@@ -60,9 +55,8 @@
     <div class="wrapper-right">
       <label id="progress">Loading: 0</label>
     </div>
-    <div id="model1"></div>
-    <div id="model2"></div>
-    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.0-lts.js"></script>
+    <div id="model"></div>
+    <script src="/modeloapi.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
