@@ -23,7 +23,7 @@ viewer.getScene().addVisualize(barchart);
 
 barchart.setParameter("xres", 50);
 barchart.setParameter("yres", 50);
-barchart.setPosition([-50, -100, 10]);
+barchart.setPosition([-25, -25, 0]);
 barchart.setScale([50, 50, 50]);
 
 //
@@ -48,37 +48,10 @@ heatmap.getTexture();
 barchart.setParameter("dataTexture", heatmap.getTexture());
 barchart.setParameter("platteImage", "platte.png");
 barchart.setParameter("thickness", 0.9);
-
-
-viewer.loadModel(modelId, progress => {
-    // second parameter is an optional progress callback
-    const c = document.getElementById("progress");
-    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
-
-
-}).then(() => {
-    viewer.setShadowEnabled(true);
-
-    
-    setTimeout(() => {
-        barchart.setEnabled(true);
-        viewer.invalidate();
-        //volume.setEnabled(true);
-    }, 2000);
-});
-
-document.getElementById("updateButton").onclick = function() {
-    var data = new Float32Array(50 * 50);
-    for (var i = 0; i < 50; i++) {
-        for (var j = 0; j < 50; j++) {
-            var value = Math.random();
-                data[(i *50 + j)] = value;
-        }
-    }
-    viewer.setVisualizeParameter("barField", "data", data);
-}
-
-document.getElementById("updateBarSize").onclick = function() {
-    var barSize = Math.random();
-    viewer.setVisualizeParameter("barField", "barSize", barSize);
-}
+barchart.setEnabled(true);
+// Create ground geometry
+var ground = new Modelo.Scene3D.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
+ground.createSolidCube();
+ground.setScaling(40, 40, 1.0);
+viewer.getScene().addPawn(ground);
+viewer.invalidate();

@@ -49,51 +49,15 @@ viewer.getScene().addVisualize(heightMap);
 
 heightMap.setParameter("xres", 1024);
 heightMap.setParameter("yres", 1024);
-heightMap.setPosition([-50, -100, 10]);
+heightMap.setPosition([0, 0, 0]);
 heightMap.setScale([50, 50, 50]);
 heightMap.setParameter("dataTexture", heatmap.getTexture());
 heightMap.setParameter("platteImage", "platte.png");
 
-viewer.loadModel(modelId, progress => {
-    // second parameter is an optional progress callback
-    const c = document.getElementById("progress");
-    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
-}).then(() => {
-  heightMap.setEnabled(true);
-  viewer.invalidate();
-    // var xRes = 32;
-    // var yRes = 32;
-    // var data = new Array(xRes);
-    // for (var i = 0; i < xRes; i++) {
-    //     data[i] = new Array(yRes);
-    // }
+// Create ground geometry
+var ground = new Modelo.Scene3D.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
+ground.createSolidCube();
+ground.setScaling(40, 40, 1.0);
+viewer.getScene().addPawn(ground);
 
-    // rawData.forEach(function(position) {
-    //     var posX = Math.floor(position.x * xRes);
-    //     var posY = Math.floor(position.y * yRes);
-    //     data[posX][posY] ++;
-    // });
-
-    // var buffer = new Float32Array(256 * 256);
-    // var xRatio = xRes / 256;
-    // var yRatio = yRes / 256;
-    // for (var i = 0; i < 256; i++) {
-    //     for (var j = 0; j < 256; j++) {
-    //         buffer[i][j] = data[Math.floor(i * xRatio)][Math.floor(i * yRatio)];
-    //     }
-    // }
-
-    // var textureBuffer = new Float32Array(2048 * 2048);
-    
-    // for (var i = 0; i < 256; i++) {
-    //     for (var j = 0; j < 256; j++) {
-    //         textureBuffer[]
-    //     }
-    // }
-
-    setTimeout(() => {
-        heatmap.setEnabled(true);
-        //volume.setEnabled(true);
-    }, 2000);
-
-});
+heightMap.setEnabled(true);
