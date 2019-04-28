@@ -34,7 +34,6 @@ image1.onload = function() {
     viewer.getScene().addPawn(groundPlane);
 }
 
-
 // Put pawns on random positions
 for (var i = 0; i < 10; i++) {
     var cube = new Modelo.Scene3D.Pawn("cube" + i, viewer.getResourceManager(), viewer.getMaterialManager());
