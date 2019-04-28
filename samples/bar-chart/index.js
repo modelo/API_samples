@@ -1,4 +1,3 @@
-
 const modelId = "x1qwRd8W";
 const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjUsInVzZXJuYW1lIjoiZnFsIiwiaWF0IjoxNTQ4Mjk4NDIxLCJleHAiOjMzMDg0Mjk4NDIxfQ.-ZNOLrw1W9OOf9iG8QkgZuFJR5JUJmHDZvkZLsdR15Y";
 
@@ -6,7 +5,6 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 const viewer = new Modelo.View.Viewer3D("model");
 
-viewer.setSpecularIntensity(1.0);
 viewer.setLightingIntensity(1.0);
     
 viewer.addInput(new Modelo.View.Input.Mouse(viewer));
@@ -21,14 +19,11 @@ keyboard.addKeyUpListener(keyboard => {
 const barchart = new Modelo.Scene3D.Visualize.BarChart(viewer.getRenderScene());
 viewer.getScene().addVisualize(barchart);
 
-barchart.setParameter("xres", 50);
-barchart.setParameter("yres", 50);
-barchart.setPosition([-25, -25, 0]);
-barchart.setScale([50, 50, 50]);
+barchart.setParameter("xres", 2);
+barchart.setParameter("yres", 2);
+barchart.setScaling([40, 40, 20]);
 
-//
-// Heatmap map
-//
+// Use heatmap to generate the barchart input from a bunch of points.
 const heatmap = new Modelo.Scene3D.Visualize.HeatMap(viewer.getRenderScene());
 viewer.getScene().addVisualize(heatmap);
 
@@ -45,13 +40,20 @@ heatmap.setParameter("gridSize", 64);
 
 heatmap.getTexture();
 
+// Create bar chart.
 barchart.setParameter("dataTexture", heatmap.getTexture());
 barchart.setParameter("platteImage", "platte.png");
-barchart.setParameter("thickness", 0.9);
-barchart.setEnabled(true);
+barchart.setParameter("thickness", 0.8);
+
 // Create ground geometry
 var ground = new Modelo.Scene3D.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
 ground.createSolidCube();
 ground.setScaling(40, 40, 1.0);
 viewer.getScene().addPawn(ground);
 viewer.invalidate();
+
+// Defer the bar-chart rendering until the texture is loaded.
+setTimeout(() => {
+    barchart.setEnabled(true);
+}, 2000);
+
