@@ -14,7 +14,7 @@ ls'''
       }
     }
     
-    stage('Test and Deploy') {
+    stage('Deploy Develop') {
       when { anyOf {  branch 'develop'; } }
       steps {
         sh '''rm Jenkinsfile README.md
