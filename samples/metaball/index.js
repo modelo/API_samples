@@ -26,7 +26,7 @@ keyboard.addKeyUpListener(keyboard => {
 });
     
 // Create ground geometry
-var ground = new Modelo.Scene3D.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
+var ground = new Modelo.View.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
 ground.createSolidCube();
 ground.setScaling(40, 40, 1.0);
 viewer.getScene().addPawn(ground);
@@ -36,14 +36,14 @@ viewer.getScene().addPawn(ground);
 //
 var data = rawData;
 
-const metaball = new Modelo.Scene3D.Visualize.MetaBall(viewer.getRenderScene());
+const metaball = new Modelo.View.Visualize.MetaBall(viewer.getRenderScene());
 metaball.setParameter("points", data);
 metaball.setParameter("width", 512);
 metaball.setParameter("height", 512);
 metaball.setParameter("contour", true);
 
 // Paint the ground 
-var groundPlane = new Modelo.Scene3D.Pawn("ground1", viewer.getResourceManager(), viewer.getMaterialManager());
+var groundPlane = new Modelo.View.Pawn("ground1", viewer.getResourceManager(), viewer.getMaterialManager());
 groundPlane.createTexturedQuad([metaball.getTexture()]);
 groundPlane.setScaling(40, 40, 1.0);
 groundPlane.setTranslation(0, 0, 1.01);
@@ -51,7 +51,7 @@ viewer.getScene().addPawn(groundPlane);
 
 // Put pawns on random positions
 for (var i = 0; i < data.length; i++) {
-    var cube = new Modelo.Scene3D.Pawn("cube" + i, viewer.getResourceManager(), viewer.getMaterialManager());
+    var cube = new Modelo.View.Pawn("cube" + i, viewer.getResourceManager(), viewer.getMaterialManager());
     cube.createSolidCube([1, 1, 1]);
 
     var x = data[i].x * 80 - 40.0;

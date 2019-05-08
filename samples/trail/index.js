@@ -18,7 +18,7 @@ keyboard.addKeyUpListener(keyboard => {
 
 viewer.setLazyRenderingEnabled(false);
     
-var trails = new Modelo.Scene3D.Visualize.Trail(viewer.getRenderScene());
+var trails = new Modelo.View.Visualize.Trail(viewer.getRenderScene());
 viewer.getScene().addVisualize(trails);
 
 
@@ -66,7 +66,7 @@ trails.setParameter("color", [81.0 / 255.0, 185.0 / 255.0, 1.0]);
 trails.setParameter("speed", 0.02);
 
 // Create ground geometry
-var ground = new Modelo.Scene3D.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
+var ground = new Modelo.View.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
 ground.createSolidCube([26.0 / 255.0, 26.0 / 255.0, 55.0 / 255.0, 1.0]);
 ground.setScaling(40, 40, 1.0);
 viewer.getScene().addPawn(ground);
