@@ -16,15 +16,15 @@ keyboard.addKeyUpListener(keyboard => {
     }
 });
     
-const barchart = new Modelo.Scene3D.Visualize.BarChart(viewer.getRenderScene());
+const barchart = new Modelo.View.Visualize.BarChart(viewer.getRenderScene());
 viewer.getScene().addVisualize(barchart);
 
-barchart.setParameter("xres", 2);
-barchart.setParameter("yres", 2);
+barchart.setParameter("xres", 16);
+barchart.setParameter("yres", 16);
 barchart.setScaling([40, 40, 20]);
 
 // Use heatmap to generate the barchart input from a bunch of points.
-const heatmap = new Modelo.Scene3D.Visualize.HeatMap(viewer.getRenderScene());
+const heatmap = new Modelo.View.Visualize.HeatMap(viewer.getRenderScene());
 viewer.getScene().addVisualize(heatmap);
 
 var data = rawData.data;
@@ -46,7 +46,7 @@ barchart.setParameter("platteImage", "platte.png");
 barchart.setParameter("thickness", 0.8);
 
 // Create ground geometry
-var ground = new Modelo.Scene3D.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
+var ground = new Modelo.View.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
 ground.createSolidCube();
 ground.setScaling(40, 40, 1.0);
 viewer.getScene().addPawn(ground);

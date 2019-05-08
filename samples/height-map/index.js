@@ -15,7 +15,7 @@ keyboard.addKeyUpListener(keyboard => {
 });
 
 // Use heatmap to generate the heightmap input from a bunch of points.
-const heatmap = new Modelo.Scene3D.Visualize.HeatMap(viewer.getRenderScene());
+const heatmap = new Modelo.View.Visualize.HeatMap(viewer.getRenderScene());
 viewer.getScene().addVisualize(heatmap);
 
 var data = rawData.data;
@@ -29,7 +29,7 @@ heatmap.setParameter("height", 256);
 heatmap.setParameter("gridSize", 64);
 
 // Create heightmap.
-const heightMap = new Modelo.Scene3D.Visualize.HeightMap(viewer.getRenderScene());
+const heightMap = new Modelo.View.Visualize.HeightMap(viewer.getRenderScene());
 viewer.getScene().addVisualize(heightMap);
 
 heightMap.setParameter("xres", 1024);
@@ -40,7 +40,7 @@ heightMap.setScaling([40, 40, 5.0]);
 heightMap.setPosition([0, 0, 0.1]);
 
 // Create ground geometry
-var ground = new Modelo.Scene3D.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
+var ground = new Modelo.View.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
 ground.createSolidCube();
 ground.setScaling(40, 40, 1.0);
 viewer.getScene().addPawn(ground);
