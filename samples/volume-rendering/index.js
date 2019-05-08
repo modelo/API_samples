@@ -23,7 +23,7 @@ for (var i = 0; i < 2048; i++) {
     }
 }
 
-const volume = new Modelo.Scene3D.Visualize.Volume(viewer.getRenderScene());
+const volume = new Modelo.View.Visualize.Volume(viewer.getRenderScene());
 viewer.getScene().addVisualize(volume);
 
 volume.setParameter("data", { "data": textureBuffer, "width": 2048, "height": 2048} );
@@ -33,7 +33,7 @@ volume.setScaling([50, 50, 15]);
 volume.setPosition([0, 0, 7.7]);
 
 // Create ground geometry
-var ground = new Modelo.Scene3D.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
+var ground = new Modelo.View.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
 ground.createSolidCube();
 ground.setScaling(25, 25, 0.25);
 viewer.getScene().addPawn(ground);
