@@ -1,6 +1,5 @@
-var modelId = "g8l2v51y";
-var appToken =
-  " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE"; // A sample app token
+var modelId = "3rjeAG84";
+var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjUsInVzZXJuYW1lIjoiZnFsIiwiaWF0IjoxNTQ4Mjk4NDIxLCJleHAiOjMzMDg0Mjk4NDIxfQ.-ZNOLrw1W9OOf9iG8QkgZuFJR5JUJmHDZvkZLsdR15Y";
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 var viewer = new Modelo.View.Viewer3D("model");
@@ -14,49 +13,52 @@ viewer
   .then(() => {
     var mouse = new Modelo.View.Input.Mouse(viewer);
     viewer.addInput(mouse);
+    mouse.addMouseUpListener(mouse=>{
+      viewer.getCamera().core.lookTo(mouse.x, mouse.y);
+    })
     var addNewComment = document.getElementById("addNewComment");
     // add a new comment
-    addNewComment.onclick = () => {
-      c.style.cursor = "crosshair";
-      addComment = true;
-      mouse.addMouseUpListener(mouse => {
-        if (addComment) {
-          if (!mouse.moved) {
-            Modelo.Comment.create(modelId, { username: "testUser", message: "new comment" })
-              .then(commentId1 => {
-                commentId = commentId1;
-                console.log("comment created");
-                c.style.cursor = "default";
-                // create success then reget refeshed comments
-                Modelo.Comment.get(modelId)
-                  .then(comments => {
-                    // add commentsInfo success remove old comments
-                    for (let i = 0; i < comments.length; i++) {
-                      var parentWrapper = document.getElementsByClassName("wrapper")[0];
-                      var childCommentsInfo = document.getElementById(comments[i].id);
-                      if (childCommentsInfo !== null) {
-                        parentWrapper.removeChild(childCommentsInfo);
-                      } else {
-                        continue;
-                      }
-                    }
-                    // reAdd new commentsInfo
-                    for (let i = 0; i < comments.length; i++) {
-                      generateCard(comments, i);
-                    }
-                    console.log(comments);
-                  })
-                  .catch(e => console.log("getCommentsErr: " + e));
-              })
-              .catch(e => {
-                console.log(e);
-                c.style.cursor = "default";
-              });
-            addComment = false;
-          }
-        }
-      });
-    };
+    // addNewComment.onclick = () => {
+    //   c.style.cursor = "crosshair";
+    //   addComment = true;
+    //   mouse.addMouseUpListener(mouse => {
+    //     if (addComment) {
+    //       if (!mouse.moved) {
+    //         Modelo.Comment.create(modelId, { username: "testUser", message: "new comment" })
+    //           .then(commentId1 => {
+    //             commentId = commentId1;
+    //             console.log("comment created");
+    //             c.style.cursor = "default";
+    //             // create success then reget refeshed comments
+    //             Modelo.Comment.get(modelId)
+    //               .then(comments => {
+    //                 // add commentsInfo success remove old comments
+    //                 for (let i = 0; i < comments.length; i++) {
+    //                   var parentWrapper = document.getElementsByClassName("wrapper")[0];
+    //                   var childCommentsInfo = document.getElementById(comments[i].id);
+    //                   if (childCommentsInfo !== null) {
+    //                     parentWrapper.removeChild(childCommentsInfo);
+    //                   } else {
+    //                     continue;
+    //                   }
+    //                 }
+    //                 // reAdd new commentsInfo
+    //                 for (let i = 0; i < comments.length; i++) {
+    //                   generateCard(comments, i);
+    //                 }
+    //                 console.log(comments);
+    //               })
+    //               .catch(e => console.log("getCommentsErr: " + e));
+    //           })
+    //           .catch(e => {
+    //             console.log(e);
+    //             c.style.cursor = "default";
+    //           });
+    //         addComment = false;
+    //       }
+    //     }
+    //   });
+    // };
     var keyboard = new Modelo.View.Input.Keyboard(viewer); // Add keyboard callback.
     viewer.addInput(keyboard);
     var parentWrapper = document.getElementsByClassName("wrapper")[0];

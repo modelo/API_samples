@@ -5,7 +5,13 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 const viewer = new Modelo.View.Viewer3D("model");
 
-viewer.loadTileSet("../tileset.json", progress => {
+// Create ground geometry
+var ground = new Modelo.Scene3D.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
+ground.createSolidCube();
+ground.setScaling(25, 25, 0.25);
+viewer.getScene().addPawn(ground);
+
+viewer.loadTileset("../../tileset/tileset.json", progress => {
     // second parameter is an optional progress callback
     const c = document.getElementById("progress");
     c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
