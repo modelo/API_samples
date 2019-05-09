@@ -1,0 +1,83 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>select-elements</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+      }
+      body {
+        display: flex;
+      }
+      
+      .modelInfo-wrapper {
+        padding: 10px;
+      }
+      .wrapper {
+        padding: 10px;
+        width: 300px;
+        min-width: 300px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+      
+      #model {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="modelInfo-wrapper">
+      <div class="ui fluid action input" style="width: 300px">
+        <input id="guid-value" type="text" placeholder="Input the GUID" />
+        <div id="guid-button" class="ui button">Select</div>
+      </div>
+      <div class="ui message" style="width: 300px">
+        <div class="header">
+          Display Selected Element's GUID
+        </div>
+        <div>
+          <form class="ui form">
+            <div class="field" id="guid_text">
+              <label>GUID</label>
+              <input id="selected-guid" type="text" readonly="" name="selected-guid-name" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper-right">
+      <label id="progress">Loading: 0</label>
+    </div>
+    <div id="model"></div>
+
+    <!-- Need a multiple line textbox to display selected elements -->
+    <!--<script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.2-lts.js"></script>-->
+    <script src="/modeloapi.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
+

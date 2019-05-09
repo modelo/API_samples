@@ -45,14 +45,15 @@ for (var i = 0; i < 10; i++) {
     viewer.getScene().addPawn(cube);
 }
 
-for (var i = 0; i < 10; i++) {
-    var plane = new Modelo.View.PawnBillboard("plane" + i, viewer.getResourceManager(), viewer.getMaterialManager());
-    plane.createSolidQuad([1, 0, 0]);
-
-    var x = Math.random() * 80 - 40.0;
-    var y = Math.random() * 80 - 40.0;
-    plane.setTranslation(x, y, 2.02);
-    viewer.getScene().addPawn(plane);
-}
+// FIXME: PawnBillboard is not enabled so far.
+//for (var i = 0; i < 10; i++) {
+//    var plane = new Modelo.View.PawnBillboard("plane" + i, viewer.getResourceManager(), viewer.getMaterialManager());
+//    plane.createSolidQuad([1, 0, 0]);
+//
+//    var x = Math.random() * 80 - 40.0;
+//    var y = Math.random() * 80 - 40.0;
+//    plane.setTranslation(x, y, 2.02);
+//    viewer.getScene().addPawn(plane);
+//}
 
 
