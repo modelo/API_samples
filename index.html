@@ -201,7 +201,6 @@
                 "360-image-viewer",
                 "model-compare-viewer",                
                 'darktheme',
-                "pingan",
                 'model-compare-ui',
                 "default-ui",
                 'dwg-ui',
@@ -329,14 +328,15 @@
 
         }
 
-        var load = function ( file ) {
+        var load = function ( file,  suffix ) {
+            var suffix = suffix || "";
 
             if ( selected !== null ) divs[ selected ].className = 'link';
 
             divs[ file ].className = 'link selected';
 
             window.location.hash = file;
-            viewer.src = 'samples/' + file + '/index.html';
+            viewer.src = 'samples/' + file + '/index.html' + '?' + suffix;
             viewer.focus();
 
             button.style.display = '';

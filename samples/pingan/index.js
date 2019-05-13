@@ -1,4 +1,7 @@
-var modelId = "W1N7wqYR";
+
+var splitted = window.location.href.split('?'); // Get model ID from URL
+
+var modelId = splitted[1] || "W1N7wqYR";
 var appToken =
     " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE";
 
