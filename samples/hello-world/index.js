@@ -1,6 +1,5 @@
-var modelId = "g8l2v51y";
-var appToken =
-  " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE";
+var modelId = "4YkOEJYg";
+var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjUsInVzZXJuYW1lIjoiZnFsIiwiaWF0IjoxNTQ4Mjk4NDIxLCJleHAiOjMzMDg0Mjk4NDIxfQ.-ZNOLrw1W9OOf9iG8QkgZuFJR5JUJmHDZvkZLsdR15Y";
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
@@ -16,6 +15,7 @@ viewer
     // model loaded successfully
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+    viewer.addInput(new Modelo.View.Input.Touch(viewer));
     // add keyboard callback.
     var keyboard = new Modelo.View.Input.Keyboard(viewer);
     viewer.addInput(keyboard);

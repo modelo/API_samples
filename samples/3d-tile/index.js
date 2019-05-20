@@ -18,3 +18,5 @@ viewer.loadTileset("../../tileset/tileset.json", progress => {
     const c = document.getElementById("progress");
     c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
 });
+
+// viewer.setRenderingLinesEnabled(true);
