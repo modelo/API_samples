@@ -38,9 +38,11 @@ var data = rawData;
 
 const metaball = new Modelo.View.Visualize.MetaBall(viewer.getRenderScene());
 metaball.setParameter("points", data);
-metaball.setParameter("width", 512);
-metaball.setParameter("height", 512);
+metaball.setParameter("width", 1024);
+metaball.setParameter("height", 1024);
 metaball.setParameter("contour", true);
+metaball.setParameter("contourColor", [1, 0, 0, 1.0]);
+metaball.setParameter("color", [1.0, 0.45, 0.45, 1.0]);
 
 // Paint the ground 
 var groundPlane = new Modelo.View.Pawn("ground1", viewer.getResourceManager(), viewer.getMaterialManager());
@@ -52,13 +54,13 @@ viewer.getScene().addPawn(groundPlane);
 // Put pawns on random positions
 for (var i = 0; i < data.length; i++) {
     var cube = new Modelo.View.Pawn("cube" + i, viewer.getResourceManager(), viewer.getMaterialManager());
-    cube.createSolidCube([1, 1, 1]);
+    cube.createSolidCube([0.8, 0.8, 0.8]);
 
     var x = data[i].x * 80 - 40.0;
     var y = data[i].y * 80 - 40.0;
-    cube.setTranslation(x, y, 2.02);
+    cube.setTranslation(x, y, 2.013);
+    cube.setScaling(0.6, 0.6, 0.6);
     viewer.getScene().addPawn(cube);
 }
-
 
 viewer.invalidate();
