@@ -19,8 +19,8 @@ keyboard.addKeyUpListener(keyboard => {
 const barchart = new Modelo.View.Visualize.BarChart(viewer.getRenderScene());
 viewer.getScene().addVisualize(barchart);
 
-barchart.setParameter("xres", 16);
-barchart.setParameter("yres", 16);
+barchart.setParameter("xres", 32);
+barchart.setParameter("yres", 32);
 barchart.setScaling([40, 40, 20]);
 
 // Use heatmap to generate the barchart input from a bunch of points.
@@ -43,7 +43,7 @@ heatmap.getTexture();
 // Create bar chart.
 barchart.setParameter("dataTexture", heatmap.getTexture());
 barchart.setParameter("platteImage", "platte.png");
-barchart.setParameter("thickness", 0.8);
+barchart.setParameter("thickness", 0.9);
 
 // Create ground geometry
 var ground = new Modelo.View.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
