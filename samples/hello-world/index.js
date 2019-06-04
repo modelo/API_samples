@@ -1,10 +1,27 @@
-var modelId = "4YkOEJYg";
-var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjUsInVzZXJuYW1lIjoiZnFsIiwiaWF0IjoxNTQ4Mjk4NDIxLCJleHAiOjMzMDg0Mjk4NDIxfQ.-ZNOLrw1W9OOf9iG8QkgZuFJR5JUJmHDZvkZLsdR15Y";
+var modelId = "M15O5P8l";
+var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTIsInVzZXJuYW1lIjoiZW5uZWFkIiwiaXNQZXJtYW5lbnQiOnRydWUsImlhdCI6MTU1MjI5MjQxNiwiZXhwIjozMzA4ODI5MjQxNn0.ismoQ_424YAY7xTgbb9rZ7Ze7y59vJnMNAnu6UmfB5M";
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 var viewer = new Modelo.View.Viewer3D("model");
 
+
+    // Add select element tool.
+    var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
+    viewer.addTool(selectElementTool);
+    selectElementTool.setEnabled(true);
+
+    // Register the element selected event.
+    var elementNames = [];
+    viewer.getEventEmitter().on("onElementSelected", function(elementInfos) {
+      console.log(elementInfos);
+      elementNames = [];
+      elementInfos.forEach(function(elementInfo) {
+        var elementName = elementInfo.modelId + "+" + elementInfo.fileName + "/" + elementInfo.elementName;
+        elementNames.push(elementName);
+      });
+    });
+    
 viewer
   .loadModel(modelId, progress => {
     // second parameter is an optional progress callback
@@ -24,4 +41,11 @@ viewer
         viewer.destroy();
       }
     });
+
+    viewer.getScene().setModelVisibility(modelId, true);
+    viewer.setSmartCullingEnabled(true);
   });
+
+  // viewer
+  // .loadModel("q8ZLDJ1a", progress => {
+  // })

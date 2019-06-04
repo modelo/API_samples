@@ -13,10 +13,28 @@ const viewer = new Modelo.View.Viewer3D("model");
 var mouse = new Modelo.View.Input.Mouse(viewer);
 viewer.addInput(mouse);
 
-viewer.loadTileset("../../tileset/tileset.json", progress => {
+// Add select element tool.
+var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
+viewer.addTool(selectElementTool);
+selectElementTool.setEnabled(true);
+
+// Register the element selected event.
+var elementNames = [];
+viewer.getEventEmitter().on("onElementSelected", function (elementInfos) {
+    console.log(elementInfos);
+    elementNames = [];
+    elementInfos.forEach(function (elementInfo) {
+        var elementName = elementInfo.modelId + "+" + elementInfo.fileName + "/" + elementInfo.elementName;
+        elementNames.push(elementName);
+    });
+});
+
+viewer.loadTileset("345", progress => {
     // second parameter is an optional progress callback
     const c = document.getElementById("progress");
     c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
 });
 
-// viewer.setRenderingLinesEnabled(true);
+viewer.getRenderScene().setProgressiveRenderingEnabled(false);
+
+viewer.setRenderingLinesEnabled(true);
