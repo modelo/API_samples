@@ -12,6 +12,7 @@ const viewer = new Modelo.View.Viewer3D("model");
 // viewer.getScene().addPawn(ground);
 var mouse = new Modelo.View.Input.Mouse(viewer);
 viewer.addInput(mouse);
+viewer.addInput(new Modelo.View.Input.Touch(viewer));
 
 // Add select element tool.
 var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
@@ -29,7 +30,7 @@ viewer.getEventEmitter().on("onElementSelected", function (elementInfos) {
     });
 });
 
-viewer.loadTileset("345", progress => {
+viewer.loadTileset("jidian", progress => {
     // second parameter is an optional progress callback
     const c = document.getElementById("progress");
     c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";

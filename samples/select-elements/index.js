@@ -1,14 +1,11 @@
-var modelId = "g8l2v51y";
-var appToken =
-  " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE"; // A sample app token
-Modelo.Auth.signIn(
-  appToken,
-  function() {
-    var canvas = document.getElementById("model");
-    var viewer = new Modelo.View.Viewer3D(canvas, false, 1280, 800);
+var modelId = "GY2al01b";
+var appToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjUsInVzZXJuYW1lIjoiZnFsIiwiaWF0IjoxNTQ4Mjk4NDIxLCJleHAiOjMzMDg0Mjk4NDIxfQ.-ZNOLrw1W9OOf9iG8QkgZuFJR5JUJmHDZvkZLsdR15Y"; // A sample app token
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
+
+var viewer = new Modelo.View.Viewer3D("model");
 
     // Add mouse control.
-    var mouse = viewer.addInput(new Modelo.View.Input.Mouse(canvas));
+    var mouse = viewer.addInput(new Modelo.View.Input.Mouse(viewer));
 
     // Add select element tool.
     var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
@@ -17,42 +14,53 @@ Modelo.Auth.signIn(
 
     // Register the element selected event.
     var elementNames = [];
+    var firstTime = true;
     viewer.getEventEmitter().on("onElementSelected", function(elementInfos) {
-      console.log(elementInfos);
-      elementNames = [];
-      elementInfos.forEach(function(elementInfo) {
-        var elementName = elementInfo.modelId + "+" + elementInfo.fileName + "/" + elementInfo.elementName;
-        elementNames.push(elementName);
-      });
+      // if (!elementInfos || elementInfos.length === 0) {
+      //   return;
+      // }
+      // var elementId = elementInfos[0];
+      // var elementIds = selectElementTool.findConnectedElements(elementId);
+      // selectElementTool.pick(elementIds);
+      // selectElementTool.pick(elementInfos);
+      // viewer.getScene().setElementsVisibility(elementInfos, false, true);
+
+      console.log(viewer.dumpScreen(1024, 1024));
+      if (firstTime) {
+
+        firstTime = false
+      } else {
+
+      }
+      // viewer.getScene().core.setElementsColor(elementInfos, [1, 0, 0])
     });
 
     document.getElementById("region-select").onchange = function(evt) {
       selectElementTool.setRegionSelectEnabled(document.getElementById("region-select").checked);
     };
 
+    var magnifyGlass = new Modelo.View.Tool.MagnifyGlass(viewer);
+    // magnifyGlass.addInput(mouse);
+    viewer.addTool(magnifyGlass);
     document.getElementById("select-focus").onchange = function(evt) {
-      selectElementTool.setCloseUpEnabled(document.getElementById("select-focus").checked);
+      // selectElementTool.setCloseUpEnabled(document.getElementById("select-focus").checked);
+      magnifyGlass.setEnabled(true);
     };
 
-    var modelId = "5roeqpYL"; // Check out the model ID in the project page.
-    viewer.loadModel(
-      modelId, // Load the model into the viewer.
-      null,
-      function() {
-        // success
-        console.log("loading done");
-      },
-      function(errmsg) {
-        // fail
-        console.error(errmsg);
-      },
-      function(per) {
-        // on progress
-        console.log("download completes " + Math.round(per * 100) + "%");
-      }
-    );
-  },
-  function(err) {
-    console.log(err);
-  }
-);
+
+    viewer
+      .loadModel(modelId, progress => {
+        // second parameter is an optional progress callback
+        var c = document.getElementById("progress");
+      })
+      .then(() => {
+        viewer.getScene().setModelVisibility(modelId, true);
+        viewer.setSmartCullingEnabled(true);
+        viewer.setRenderingLinesEnabled(true);
+
+        viewer.getScene().setElementsColor(["GY2al01b+0/2954022"], [1, 0, 0]);
+        viewer.getScene().setElementsColor([], null);
+        viewer.getScene().setElementsColor(["GY2al01b+0/2905506"], [1, 0, 0]);
+        viewer.getScene().setElementsColor(["GY2al01b+0/2954022"], null);
+
+      });
