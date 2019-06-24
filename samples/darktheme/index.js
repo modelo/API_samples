@@ -11,6 +11,8 @@ viewer
         // second parameter is an optional progress callback
         var c = document.getElementById("progress");
         c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+
+        viewer.setBackgroundColor([0, 0, 0, 1]);
     })
     .then(() => {
         viewer.addInput(new Modelo.View.Input.Mouse(viewer));
