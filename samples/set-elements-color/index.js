@@ -1,4 +1,4 @@
-var modelId = "g8l2v51y";
+var modelId = "G8z6zQ8j";
 var appToken =
   " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlhdCI6MTU0ODE0NjI3NywiZXhwIjozMzA4NDE0NjI3N30.XoUmS8836nUVm0mASqL6qiaXgg34Xn4lyieaPtrn5mE"; // A sample app token
 
@@ -21,6 +21,7 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   // success
   console.log("loading done");
 
+  selectElementTool.setRegionSelectEnabled(true);
   // Save the selected element names here.
   let elementNames = [];
   viewer.getEventEmitter().on("onElementSelected", elementNames1 => {

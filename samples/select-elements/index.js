@@ -6,6 +6,7 @@ var viewer = new Modelo.View.Viewer3D("model");
 
     // Add mouse control.
     var mouse = viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+    viewer.getCamera().setMouseZoomSpeed(10.0);
 
     // Add select element tool.
     var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);

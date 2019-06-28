@@ -30,7 +30,7 @@ viewer.getEventEmitter().on("onElementSelected", function (elementInfos) {
     });
 });
 
-viewer.loadTileset("jidian", progress => {
+viewer.loadTileset("house", progress => {
     // second parameter is an optional progress callback
     const c = document.getElementById("progress");
     c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
