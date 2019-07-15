@@ -38,4 +38,4 @@ viewer.loadTileset("house", progress => {
 
 viewer.getRenderScene().setProgressiveRenderingEnabled(false);
 
-viewer.setRenderingLinesEnabled(true);
+// viewer.setRenderingLinesEnabled(true);

@@ -6,7 +6,9 @@ var viewer = new Modelo.View.Viewer3D("model");
 
     // Add mouse control.
     var mouse = viewer.addInput(new Modelo.View.Input.Mouse(viewer));
-    viewer.getCamera().setMouseZoomSpeed(10.0);
+
+    var cameraManipulator = new Modelo.View.Tool.CameraManipulator(viewer);
+    // viewer.getCamera().setMouseZoomSpeed(10.0);
 
     // Add select element tool.
     var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
@@ -17,16 +19,16 @@ var viewer = new Modelo.View.Viewer3D("model");
     var elementNames = [];
     var firstTime = true;
     viewer.getEventEmitter().on("onElementSelected", function(elementInfos) {
-      // if (!elementInfos || elementInfos.length === 0) {
-      //   return;
-      // }
-      // var elementId = elementInfos[0];
-      // var elementIds = selectElementTool.findConnectedElements(elementId);
-      // selectElementTool.pick(elementIds);
+      if (!elementInfos || elementInfos.length === 0) {
+        return;
+      }
+      var elementId = elementInfos[0];
+      var elementIds = selectElementTool.findConnectedElements(elementId);
+      selectElementTool.pick(elementIds);
       // selectElementTool.pick(elementInfos);
       // viewer.getScene().setElementsVisibility(elementInfos, false, true);
 
-      console.log(viewer.dumpScreen(1024, 1024));
+      // console.log(viewer.dumpScreen(1024, 1024));
       if (firstTime) {
 
         firstTime = false
@@ -57,11 +59,13 @@ var viewer = new Modelo.View.Viewer3D("model");
       .then(() => {
         viewer.getScene().setModelVisibility(modelId, true);
         viewer.setSmartCullingEnabled(true);
-        viewer.setRenderingLinesEnabled(true);
+        // viewer.setRenderingLinesEnabled(true);
 
         viewer.getScene().setElementsColor(["GY2al01b+0/2954022"], [1, 0, 0]);
         viewer.getScene().setElementsColor([], null);
         viewer.getScene().setElementsColor(["GY2al01b+0/2905506"], [1, 0, 0]);
         viewer.getScene().setElementsColor(["GY2al01b+0/2954022"], null);
 
+
+        cameraManipulator.setMouseZoomScaling(100.0);
       });

@@ -1,9 +1,11 @@
-var modelId = "M15O5P8l";
-var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTIsInVzZXJuYW1lIjoiZW5uZWFkIiwiaXNQZXJtYW5lbnQiOnRydWUsImlhdCI6MTU1MjI5MjQxNiwiZXhwIjozMzA4ODI5MjQxNn0.ismoQ_424YAY7xTgbb9rZ7Ze7y59vJnMNAnu6UmfB5M";
+var modelId = "z8AlmqYX";
+var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjUsInVzZXJuYW1lIjoiZnFsIiwiaWF0IjoxNTQ4Mjk4NDIxLCJleHAiOjMzMDg0Mjk4NDIxfQ.-ZNOLrw1W9OOf9iG8QkgZuFJR5JUJmHDZvkZLsdR15Y";
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-var viewer = new Modelo.View.Viewer3D("model");
+var viewer = new Modelo.View.Viewer3D("model", {
+  isMobile: false
+});
 
 
     // Add select element tool.
@@ -44,6 +46,8 @@ viewer
 
     viewer.getScene().setModelVisibility(modelId, true);
     viewer.setSmartCullingEnabled(true);
+
+    viewer.setEffectEnabled("SSAO", true);
   });
 
   // viewer
