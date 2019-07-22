@@ -37,11 +37,12 @@ viewer.getScene().addPawn(ground);
 var data = rawData;
 
 const metaball = new Modelo.View.Visualize.MetaBall(viewer.getRenderScene());
-metaball.setParameter("points", data);
+metaball.setParameter("points", data.slice(0, 3));
 metaball.setParameter("width", 1024);
 metaball.setParameter("height", 1024);
 metaball.setParameter("contour", true);
 metaball.setParameter("contourColor", [1, 0, 0, 1.0]);
+metaball.setParameter("backgroundColor", [1, 1, 1, 0.0]);
 metaball.setParameter("color", [1.0, 0.45, 0.45, 1.0]);
 
 // Paint the ground 
@@ -50,6 +51,22 @@ groundPlane.createTexturedQuad([metaball.getTexture()]);
 groundPlane.setScaling(40, 40, 1.0);
 groundPlane.setTranslation(0, 0, 1.01);
 viewer.getScene().addPawn(groundPlane);
+
+const metaball2 = new Modelo.View.Visualize.MetaBall(viewer.getRenderScene());
+metaball2.setParameter("points", data.slice(3, data.length));
+metaball2.setParameter("width", 1024);
+metaball2.setParameter("height", 1024);
+metaball2.setParameter("contour", true);
+metaball2.setParameter("contourColor", [0, 0, 1, 1.0]);
+metaball2.setParameter("backgroundColor", [1, 1, 1, 0.0]);
+metaball2.setParameter("color", [0.45, 0.45, 1.0, 1.0]);
+
+// Paint the ground 
+var groundPlane2 = new Modelo.View.Pawn("ground2", viewer.getResourceManager(), viewer.getMaterialManager());
+groundPlane2.createTexturedQuad([metaball2.getTexture()]);
+groundPlane2.setScaling(40, 40, 1.0);
+groundPlane2.setTranslation(0, 0, 1.01);
+viewer.getScene().addPawn(groundPlane2);
 
 // Put pawns on random positions
 for (var i = 0; i < data.length; i++) {
@@ -64,3 +81,7 @@ for (var i = 0; i < data.length; i++) {
 }
 
 viewer.invalidate();
+
+document.getElementById("enable-foreground").onclick = function() {
+    metaball2.setParameter("foregroundImage", "./foreground.png");
+}
