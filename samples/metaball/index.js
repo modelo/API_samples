@@ -81,3 +81,7 @@ for (var i = 0; i < data.length; i++) {
 }
 
 viewer.invalidate();
+
+document.getElementById("enable-foreground").onclick = function() {
+    metaball2.setParameter("foregroundImage", "./foreground.png");
+}
