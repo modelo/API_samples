@@ -30,7 +30,16 @@ viewer.getEventEmitter().on("onElementSelected", function (elementInfos) {
     });
 });
 
-viewer.loadTileset("house", progress => {
+viewer.getEventEmitter().on("onTileElementSelected", function (elementIds) {
+    if (elementIds.length > 0) {
+        console.log(elementIds);
+        viewer.getScene().setTileElementsColor(elementIds, [1, 0, 0]);
+
+        viewer.getScene().setTileElementsVisibility(elementIds, false);
+    }
+});
+
+viewer.loadTileset("345", progress => {
     // second parameter is an optional progress callback
     const c = document.getElementById("progress");
     c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
