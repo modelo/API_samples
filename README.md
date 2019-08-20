@@ -3,7 +3,7 @@ Modelo API samples
 
 # Run
 * Execute `npm install`.
-* After installing packages, execute `npm run sever`.
+* After installing packages, execute `npm run server`.
 * Open "http://localhost:8080" in Chrome.
 
 # Deployment
