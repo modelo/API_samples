@@ -73,4 +73,4 @@ var pointsArray = [
 
 pointsArray.forEach(function(points) {
   ribbon.addRibbon(points);
-})
+});
