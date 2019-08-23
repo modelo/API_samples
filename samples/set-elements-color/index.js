@@ -16,7 +16,9 @@ viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control ca
 var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
 viewer.addTool(selectElementTool);
 selectElementTool.setEnabled(true);
-
+viewer.getEventEmitter().on("onPointPicked", point => {
+  console.log(point);
+})
 viewer.loadModel(modelId, updateProgress).then(() => {
   // success
   console.log("loading done");
