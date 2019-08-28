@@ -40,8 +40,8 @@ var ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
 ribbon.setEnabled(true);
 viewer.getScene().addVisualize(ribbon);
 ribbon.setParameter("width", 2);
-ribbon.setParameter("unitLenght", 1000);
-ribbon.setParameter("speed", 3);
+ribbon.setParameter("unitLenght", 10000);
+ribbon.setParameter("speed", 1);
 ribbon.setParameter("platteTexture", "./platte.png");
 
 var pointsArray = [
