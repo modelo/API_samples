@@ -1,4 +1,4 @@
-var modelId = "2YDjdbr5";
+var modelId = "nr6WDZ1p";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1NTIwMTIyMTksImV4cCI6MzMwODgwMTIyMTl9.Fb-AKOuaWYxwIMmyu3T6GENkUrbP8J21MffB78IpXU0";
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
