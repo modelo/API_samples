@@ -1,5 +1,4 @@
-const modelId = "x1qwRd8W";
-const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjUsInVzZXJuYW1lIjoiZnFsIiwiaWF0IjoxNTQ4Mjk4NDIxLCJleHAiOjMzMDg0Mjk4NDIxfQ.-ZNOLrw1W9OOf9iG8QkgZuFJR5JUJmHDZvkZLsdR15Y";
+var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
@@ -45,7 +44,4 @@ ground.createSolidCube();
 ground.setScaling(40, 40, 1.0);
 viewer.getScene().addPawn(ground);
 
-// Defer the height map rendering until the texture is loaded.
-setTimeout(() => {
-    heightMap.setEnabled(true);
-}, 2000);
+heightMap.setEnabled(true);
