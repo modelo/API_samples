@@ -1,4 +1,4 @@
-var modelId = "WrKLzv1X";
+var modelId = "aYegjzrM";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA";
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
@@ -40,8 +40,8 @@ var ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
 ribbon.setEnabled(true);
 viewer.getScene().addVisualize(ribbon);
 ribbon.setParameter("width", 2);
-ribbon.setParameter("unitLenght", 10000);
-ribbon.setParameter("speed", 1);
+ribbon.setParameter("unitLenght", 40000);
+ribbon.setParameter("speed", 0.5);
 ribbon.setParameter("platteTexture", "./platte.png");
 
 for (var key in pathes) {
