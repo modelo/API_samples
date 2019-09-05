@@ -8,3 +8,17 @@ var viewer = new Modelo.View.Viewer3D("model");
 
 viewer.loadGLTFModel("http://localhost:8080/samples/GLTF/Avocado/Avocado.gltf");
 viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+
+
+var cubemapImages = [
+  document.getElementById("negx"),
+  document.getElementById("negy"),
+  document.getElementById("negz"),
+  document.getElementById("posx"),
+  document.getElementById("posy"),
+  document.getElementById("posz")
+];
+
+var { ViewBackground } = Modelo.View;
+viewer.setBackgroundMode(ViewBackground.CUBEMAP);
+viewer.setBackgroundImage(cubemapImages);
