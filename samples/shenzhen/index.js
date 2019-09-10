@@ -40,9 +40,9 @@ var ribbon1 = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene())
 ribbon1.setEnabled(true);
 viewer.getScene().addVisualize(ribbon1);
 ribbon1.setParameter("width", 3);
-ribbon1.setParameter("unitLenght", 20000);
-ribbon1.setParameter("speed", 1);
-ribbon1.setParameter("platteTexture", "./platte.png");
+ribbon1.setParameter("unitLenght", 50000);
+ribbon1.setParameter("speed", 0.2);
+ribbon1.setParameter("platteTexture", "./platteMetro.png");
 
 for (var key in pathes1) {
   var path = pathes1[key];
@@ -58,10 +58,10 @@ for (var key in pathes1) {
 var ribbon2 = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
 ribbon2.setEnabled(true);
 viewer.getScene().addVisualize(ribbon2);
-ribbon2.setParameter("width", 3);
-ribbon2.setParameter("unitLenght", 20000);
-ribbon2.setParameter("speed", 1);
-ribbon2.setParameter("platteTexture", "./platte.png");
+ribbon2.setParameter("width", 1);
+ribbon2.setParameter("unitLenght", 50000);
+ribbon2.setParameter("speed", 0.2);
+ribbon2.setParameter("platteTexture", "./platteMetro.png");
 
 for (var key in pathes2) {
   var path = pathes2[key];
