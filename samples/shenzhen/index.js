@@ -1,4 +1,4 @@
-var modelId = "W1NMLZrR";
+var modelId = "q1xq9mYJ";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA";
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
@@ -26,7 +26,7 @@ viewer
   viewer.setBackgroundColor([26.0 / 255.0, 26.0 / 255.0, 55.0 / 255.0, 1.0]);
 
   viewer.setEffectEnabled("Sketch", true);
-  viewer.setEffectParameter("Sketch", "color", [0.0 / 255.0, 255.0 / 255.0, 243.0 / 255.0]);
+  viewer.setEffectParameter("Sketch", "color", [180 / 255.0, 180 / 255.0, 180 / 255.0]);
   viewer.setEffectParameter("Sketch", "colored", true);
   //this.setEffectParameter("Sketch", "surfaceColor", [51.0 / 255.0, 145.0 / 255.0, 1.0, 0.2]);
   viewer.setEffectParameter("Sketch", "transparents", true);
@@ -39,10 +39,10 @@ viewer.setLazyRenderingEnabled(false);
 var ribbon1 = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
 ribbon1.setEnabled(true);
 viewer.getScene().addVisualize(ribbon1);
-ribbon1.setParameter("width", 3);
-ribbon1.setParameter("unitLenght", 50000);
+ribbon1.setParameter("width", 2);
+ribbon1.setParameter("unitLenght", 40000);
 ribbon1.setParameter("speed", 0.2);
-ribbon1.setParameter("platteTexture", "./platteMetro.png");
+ribbon1.setParameter("platteTexture", "./platte.png");
 
 for (var key in pathes1) {
   var path = pathes1[key];
@@ -58,9 +58,9 @@ for (var key in pathes1) {
 var ribbon2 = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
 ribbon2.setEnabled(true);
 viewer.getScene().addVisualize(ribbon2);
-ribbon2.setParameter("width", 1);
-ribbon2.setParameter("unitLenght", 50000);
-ribbon2.setParameter("speed", 0.2);
+ribbon2.setParameter("width", 2);
+ribbon2.setParameter("unitLenght", 40000);
+ribbon2.setParameter("speed", 0.3);
 ribbon2.setParameter("platteTexture", "./platteMetro.png");
 
 for (var key in pathes2) {
