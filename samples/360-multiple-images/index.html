@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Modelo API Sample (360-multiple-images)</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+      }
+
+      .wrapper {
+        padding: 10px;
+        width: 300px;
+        min-width: 300px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      #container {
+        height: 100%;
+        width: 100%;
+        position: relative;
+      }
+
+      #indicators {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+
+      .indicator {
+        width: 42px;
+        height: 42px;
+        border-radius: 100%;
+        background-color: #f75223;
+        border: 2px solid white;
+        position: relative;
+        top: -18px;
+        left: -18px;
+        cursor: pointer;
+        pointer-events: auto;
+      }
+
+      .indicator-icon {
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2232%22%20height%3D%2214%22%20viewBox%3D%220%200%2032%2014%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3E360tour_arrow_white%3C%2Ftitle%3E%3Cpath%20d%3D%22M16.13.112l15.778%2013.52c.084.072.093.198.02.282-.05.06-.134.085-.21.06L16.06%209.02c-.04-.013-.08-.013-.12%200L.283%2013.974c-.106.033-.218-.025-.25-.13-.025-.077-.002-.16.06-.213L15.87.112c.075-.065.185-.065.26%200z%22%20fill%3D%22%23FFF%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E");
+        left: 5px;
+        top: 13px;
+        width: 28px;
+        height: 28px;
+        position: absolute;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <label>Press 'ESC' to destroy viewer.</label>
+    </div>
+    <div class="wrapper-right">
+      <label id="progress">Loading: 0</label>
+    </div>
+    <div id="container">
+      <div id="indicators"></div>
+    </div>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.3-lts.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
