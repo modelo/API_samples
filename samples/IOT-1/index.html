@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>background</title>
+  <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../assets/css/range.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/semantic.min.js"></script>
+  <script src="../../assets/js/range.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+    }
+
+    #model {
+      height: 100%;
+      width: calc(100% - 320px);
+    }
+
+    .item {
+      display: none;
+    }
+
+    .item.active {
+      display: block;
+    }
+
+    .item-img {
+      cursor: pointer;
+      width: 140px;
+      height: 140px;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .item-img:hover {
+      opacity: 0.6;
+    }
+
+    .item-img:first-child {
+      margin-right: 16px;
+    }
+
+    .wrapper {
+      padding: 10px;
+      width: 320px;
+      min-width: 320px;
+    }
+
+    .wrapper label {
+      margin: 0 0 0.28571429rem 0;
+      color: rgba(0, 0, 0, 0.87);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .wrapper-right label {
+      color: rgba(0, 0, 0, 0.87);
+      font-size: 1rem;
+      font-weight: 700;
+      position: fixed;
+      top: 0.68571429rem;
+      right: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .range-wrapper {
+      position: relative;
+      margin: 10px;
+    }
+
+    .min,
+    .max,
+    .ui.range {
+      position: absolute;
+    }
+
+    .min {
+      right: 190px;
+    }
+
+    .max {
+      right: 0;
+    }
+
+    .ui.range {
+      left: 100px;
+      top: 0;
+      width: 160px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div id="elements">
+      <label>已高亮元素</label>
+      <ul class="list-group"></ul>
+    </div>
+    <div class="ui toggle checkbox" style="margin-top:12px; margin-left:10px;">
+      <input id="glow" type="checkbox" name="public" />
+      <label>Glow</label>
+    </div>
+
+    <div class="range-wrapper">
+      <label>intensity</label>
+      <span class="min">0</span><span class="max">1</span>
+      <div class="ui range" id="intensity1"></div>
+    </div>
+
+    <div class="ui toggle checkbox" style="margin-top:12px; margin-left:10px;">
+      <input id="highlight" type="checkbox" name="public" />
+      <label>highlight</label>
+    </div>
+
+    <div class="range-wrapper">
+      <label>intensity</label>
+      <span class="min">0</span><span class="max">1</span>
+      <div class="ui range" id="intensity2"></div>
+    </div>
+
+    <div class="range-wrapper">
+      <label>radius</label>
+      <span class="min">0</span><span class="max">5</span>
+      <div class="ui range" id="radius"></div>
+    </div>
+  </div>
+  <div class="wrapper-right">
+    <label id="progress">Loading: 0</label>
+  </div>
+  <div id="model"></div>
+  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.4-lts.js"></script>
+  <script>
+    $(function () {
+      $("#bgmode").change(function () {
+        var index = parseInt(this.value);
+        $("#content .item").removeClass("active");
+        $("#content .item:nth-child(" + (index + 1) + ")").addClass("active");
+      });
+    });
+  </script>
+  <script src="index.js"></script>
+</body>
+
+</html>

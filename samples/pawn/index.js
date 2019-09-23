@@ -27,7 +27,7 @@ image1.src = "/chessboard.jpg";
 image1.onload = function() {
     var groundPlane = new Modelo.View.Pawn("ground1", viewer.getResourceManager(), viewer.getMaterialManager());
     groundPlane.createTexturedQuad([image1]);
-    groundPlane.setScaling(40, 40, 1.0);
+    groundPlane.setScaling(40, 80, 1.0);
     groundPlane.setTranslation(0, 0, 1.01);
     viewer.getScene().addPawn(groundPlane);
 }
