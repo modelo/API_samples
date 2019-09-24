@@ -8,11 +8,11 @@ var viewer = new Modelo.View.Viewer3DDark("model");
 viewer.setRenderingLinesEnabled(true);
 viewer
   .loadModel(modelId, progress => {
-    // second parameter is an optional progress callback
-    var c = document.getElementById("progress");
-    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+  // /assets/js/utils.js
+  updateProgress(progress);
   })
   .then(() => {
+  setCommonDark(viewer);
     // model loaded successfully
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));

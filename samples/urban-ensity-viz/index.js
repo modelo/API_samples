@@ -8,12 +8,14 @@ function updateProgress(progress) {
   c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
 }
 
-const viewer = new Modelo.View.Viewer3DDark("model");
+const viewer = new Modelo.View.Viewer3D("model");
 viewer.addInput(new Modelo.View.Input.Mouse(viewer));
 viewer.loadModel(modelId, progress => {
-  updateProgress(progress);
-  if (progress === 1) {
-    const barchart = new Modelo.View.Visualize.BarChart(viewer.getRenderScene());
+    // /assets/js/utils.js
+    updateProgress(progress);
+}).then(() => {
+  setCommonDark(viewer);
+  const barchart = new Modelo.View.Visualize.BarChart(viewer.getRenderScene());
     viewer.getScene().addVisualize(barchart);
     
     barchart.setParameter("xres", 32);
@@ -35,14 +37,6 @@ viewer.loadModel(modelId, progress => {
     heatmap.setParameter("height", 256);
     heatmap.setParameter("gridSize", 64);
     
-    // // Create bar chart.
-    // barchart.setParameter("dataTexture", heatmap.getTexture());
-    // barchart.setParameter("platteImage", "platte.png");
-    // barchart.setParameter("thickness", 0.9);
-    
-    // barchart.setEnabled(true);
-    // viewer.invalidate();
-
     const heightMap = new Modelo.View.Visualize.HeightMap(viewer.getRenderScene());
     viewer.getScene().addVisualize(heightMap);
 
@@ -50,16 +44,13 @@ viewer.loadModel(modelId, progress => {
     heightMap.setParameter("yres", 1024);
     heightMap.setParameter("dataTexture", heatmap.getTexture());
     heightMap.setParameter("platteImage", "platte.png");
-    heightMap.setScaling([30000, 20000, 5.0]);
-    heightMap.setPosition([-1061.8787841796868, -2433.9294433593736,-1.9054728746414178]);
+    heightMap.setScaling([3000, 2000, 5.0]);
+    heightMap.setPosition([-1061.8787841796868, -4833.9294433593736, -1.9054728746414178]);
     heightMap.setEnabled(true);
 
     Modelo.Comment.get(modelId).then(res => {
-      console.log(res)
       Modelo.Comment.activate(res[res.length - 1].id);
     })
-  }
-}).then((e) => {
 });
 
 

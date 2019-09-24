@@ -66,50 +66,84 @@ const busStopData = [
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-function updateProgress(progress) {
-  var c = document.getElementById("progress");
-  c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
-}
-
-
 const viewer = new Modelo.View.Viewer3D("model");
 viewer.addInput(new Modelo.View.Input.Mouse(viewer));
 viewer.loadModel(modelId, progress => {
+  // /assets/js/utils.js
   updateProgress(progress);
-  if (progress === 1) {
-    Modelo.Comment.get(modelId).then(res => {
-      Modelo.Comment.activate(res[res.length - 1].id);
-    });
-  
-    metroData.map((item, index) => {
-      const text = new Modelo.View.Text3D("metro" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-      text.setContent("M")
-      text.setTranslation(item[0] * 5, item[1] * 5, 1000);
-      text.setScaling(100, 30, 500);
-      text.setColor([1, 0.3, 0.2]);
-      viewer.getScene().addText3D(text);
-    })
+}).then(() => {
+  setCommonDark(viewer);
 
-    gasStationData.map((item, index) => {
-      const text = new Modelo.View.Text3D("gasStation" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-      text.setContent("G")
-      text.setTranslation(item[0] * 5, item[1] * 5, 1000);
-      text.setScaling(100, 30, 500);
-      text.setColor([1, 0.3, 0.2]);
-      viewer.getScene().addText3D(text);
-    });
 
-    busStopData.map((item, index) => {
-      const image = new Image();
-      image.src = "./chessboard.svg";
-      image.onload = function() {
-          const groundPlane = new Modelo.View.Pawn("ground" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-          groundPlane.createTexturedQuad([image]);
-          groundPlane.setScaling(50, 50, 1000);
-          groundPlane.setTranslation(item[0] * 5, item[1] * 5, 1000);
-          viewer.getScene().addPawn(groundPlane);
-      }
-    })
+  metroData.map((item, index) => {
+    const text = new Modelo.View.Text3D("metro" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+    text.setContent("M")
+    text.setTranslation(item[0] * 3.28, item[1] * 3.28, 1000);
+    text.setScaling(100, 30, 300);
+    text.setColor([1, 0.3, 0.2]);
+    viewer.getScene().addText3D(text);
+
+    const image = new Image();
+    image.src = "./metro.svg";
+    image.onload = function() {
+        const groundPlane = new Modelo.View.Pawn("metroImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+        groundPlane.createTexturedQuad([image]);
+        groundPlane.setScaling(50, 50, 1000);
+        groundPlane.setTranslation(item[0] *  3.28, item[1] *  3.28, 800);
+        viewer.getScene().addPawn(groundPlane);
+    }
+  })
+
+  gasStationData.map((item, index) => {
+    const text = new Modelo.View.Text3D("gasStation" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+    text.setContent("G")
+    text.setTranslation(item[0] * 5, item[1] * 5, 1000);
+    text.setScaling(100, 30, 300);
+    text.setColor([1, 0.3, 0.2]);
+    viewer.getScene().addText3D(text);
+
+    const image = new Image();
+    image.src = "./gas.svg";
+    image.onload = function() {
+        const groundPlane = new Modelo.View.Pawn("gasStationImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+        groundPlane.createTexturedQuad([image]);
+        groundPlane.setScaling(50, 50, 1000);
+        groundPlane.setTranslation(item[0] * 5, item[1] * 5, 800);
+        viewer.getScene().addPawn(groundPlane);
+    }
+  });
+
+  busStopData.map((item, index) => {
+
+    const text = new Modelo.View.Text3D("bus" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+    text.setContent("B")
+    text.setTranslation(item[0] * 5, item[1] * 5, 150);
+    text.setScaling(100, 30, 300);
+    text.setColor([1, 0.3, 0.2]);
+    viewer.getScene().addText3D(text);
+
+    const image = new Image();
+    image.src = "./bus.svg";
+    image.onload = function() {
+        const groundPlane = new Modelo.View.Pawn("busImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+        groundPlane.createTexturedQuad([image]);
+        groundPlane.setScaling(100, 100, 0);
+        groundPlane.setTranslation(item[0] * 5, item[1] * 5, 0);
+        viewer.getScene().addPawn(groundPlane);
+    }
+  })
+  Modelo.Comment.get(modelId).then(res => {
+    Modelo.Comment.activate(res[res.length - 1].id);
+  });
+
+  document.getElementById('configButton').onclick = () => {
+    const configValues = $('#configForm').serializeArray();
+    if (configValues) {
+      configValues.map(values => {
+        if (values.value) {
+          ribbon.setParameter(values.name, values.value);
+        }
+      });
+    }
   }
-
-}).then(() => {});
+});

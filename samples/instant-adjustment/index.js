@@ -37,7 +37,11 @@ const colors = [
         value: [0, 0, 1]
     }
 ];
-viewer.loadModel(modelId, updateProgress).then(() => {
+viewer.loadModel(modelId, progress => {
+ // /assets/js/utils.js
+  updateProgress(progress);
+}).then(() => {
+  setCommonDark(viewer);
     let elementNames = [];
     let elements = [];
     const names = viewer.getScene().getElementsNames();

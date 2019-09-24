@@ -14,10 +14,10 @@ keyboard.addKeyUpListener(keyboard => {
 });
     
 // Create ground geometry
-var ground = new Modelo.View.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
-ground.createSolidCube();
-ground.setScaling(40, 40, 1.0);
-viewer.getScene().addPawn(ground);
+// var ground = new Modelo.View.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
+// ground.createSolidCube();
+// ground.setScaling(40, 40, 1.0);
+// viewer.getScene().addPawn(ground);
 
 //
 // Metaball image

@@ -5,11 +5,6 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 document.body.appendChild(document.getElementById("model"));
 
-function updateProgress(progress) {
-    var c = document.getElementById("progress");
-    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
-}
-
 $("#intensity1").range({
     min: 0.0,
     max: 1.0,
@@ -104,7 +99,11 @@ document.getElementById("glow").onchange = function(evt) {
   });
 }
 
-viewer.loadModel(modelId, updateProgress).then(() => {
+viewer.loadModel(modelId, progress => {
+    // /assets/js/utils.js
+    updateProgress(progress);
+}).then(() => {
+  setCommonDark(viewer);
   names = viewer.getScene().getElementsNames().filter((item, index) => index % 1000 === 0);
   for (let i = 0; i < names.length; i++) {
     const element = document.createElement('li');

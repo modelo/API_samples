@@ -3,79 +3,14 @@ var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-const pointsArray = [
-    [
-      [
-        72871.494146899742,
-        -125467.92343027331,
-        0.0
-      ],
-      [
-        72871.494146899742,
-        -123614.41521915198,
-        0.0
-      ],
-      [
-        74976.713349654834,
-        -123614.41521915198,
-        0.0
-      ],
-      [
-        74976.713349654834,
-        -121943.96954740067,
-        0.0
-      ],
-      [
-        85731.637537642775,
-        -121943.96954740067,
-        0.0
-      ],
-      [
-        85731.637537642775,
-        -117115.69507151673,
-        0.0
-      ],
-      [
-        83237.410438726423,
-        -117115.69507151673,
-        0.0
-      ]
-    ],
-    [
-      [
-        59973.877586595438,
-        -125630.54755817684,
-        0.0
-      ],
-      [
-        59973.877586595438,
-        -122129.47649272544,
-        0.0
-      ],
-      [
-        51461.469505890091,
-        -122129.47649272544,
-        0.0
-      ],
-      [
-        51461.469505890091,
-        -117530.030191054,
-        0.0
-      ],
-      [
-        54665.063944865222,
-        -117530.030191054,
-        0.0
-      ]
-    ]
-];
 const viewer = new Modelo.View.Viewer3DDark("model");
 viewer.setRenderingLinesEnabled(true);
 viewer.loadModel(modelId, progress => {
-    const c = document.getElementById("progress");
-    c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
+  // /assets/js/utils.js
+  updateProgress(progress);
   })
   .then(() => {
+  setCommonDark(viewer);
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
     viewer.addInput(new Modelo.View.Input.Touch(viewer));
     var keyboard = new Modelo.View.Input.Keyboard(viewer);
@@ -96,7 +31,15 @@ viewer.loadModel(modelId, progress => {
   ribbon.setParameter("width", 2);
   ribbon.setParameter("unitLenght", 1000);
   ribbon.setParameter("speed", 1);
-  ribbon.setParameter("platteTexture", "./platte.png");
+  ribbon.setParameter("platteTexture", "platte.png");
+  let pointsArray = [];
+  for (const key in escapePathData) {
+    pointsArray.push(escapePathData[key]);
+  }
   pointsArray.forEach(function(points) {
+    // points.forEach(function(point) {
+    //   point[0] = point[0] / 100;
+    //   point[1] = point[1] / 100;
+    // });
     ribbon.addRibbon(points);
   });
