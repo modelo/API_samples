@@ -52,7 +52,15 @@ function modeloMetaball(data, config) {
     var points = data.points;
     var min = data.min, max = data.max;
     var relativePoints = [];
+    // mm to foot
+    min[0] /= 304;
+    min[1] /= 304;
+    max[0] /= 304;
+    max[1] /= 304;
     points.forEach((point, index) => {
+        // mm to foot
+        point.x = point.x / 304;
+        point.y = point.y / 304;
         relativePoints[index] = {
             x: (point.x - min[0]) / (max[0] - min[0]),
             y: (point.y - min[1]) / (max[1] - min[1])
@@ -72,8 +80,8 @@ function modeloMetaball(data, config) {
     for (let i = 0; i < points.length; i++) {
         const cube = new Modelo.View.Pawn("cube" + i, viewer.getResourceManager(), viewer.getMaterialManager());
         cube.createSolidCube();
-        const x = points[i].x / 304;
-        const y = points[i].y / 304;
+        const x = points[i].x;
+        const y = points[i].y;
         cube.setTranslation(x, y, 1.8);
         cube.setScaling(0.6, 0.6, 0.6);
         viewer.getScene().addPawn(cube);
@@ -81,7 +89,6 @@ function modeloMetaball(data, config) {
     const groundPlane = new Modelo.View.Pawn("ground2", viewer.getResourceManager(), viewer.getMaterialManager());
     groundPlane.createTexturedQuad([metaball.getTexture()]);
 
-    max[0] /= 304; max[1] /= 304; min[0] /= 304; min[1] /= 304;
     groundPlane.setScaling((max[0] - min[0]) * 0.5, (max[1] - min[1]) * 0.5, 1.0);
     groundPlane.setTranslation((max[0] + min[0]) * 0.5, (max[1] + min[1]) * 0.5, 1.0);
     viewer.getScene().addPawn(groundPlane);
