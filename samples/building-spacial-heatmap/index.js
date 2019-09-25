@@ -17,87 +17,30 @@ function updateProgress(progress) {
 const viewer = new Modelo.View.Viewer3DDark("model");
 viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 
-
-const volumeData = {
+const outlineInfo = {
   "2-13": {
-    "outerLoop": [
-      [
-        42603.193350421549,
-        -129397.75751955743
-      ],
-      [
-        95079.242763671573,
-        -129397.75751955743
-      ],
-      [
-        95079.242763671573,
-        -114544.75351938422
-      ],
-      [
-        42603.193350421549,
-        -114544.75351938422
-      ],
-      [
-        42603.193350421549,
-        -129397.75751955743
-      ]
-    ],
+    "outerLoop": [[140.14208338954458, -425.6505181564389], [312.76066698576176, -425.6505181564389], [312.76066698576176, -376.79195236639544], [140.14208338954458, -376.79195236639544], [140.14208338954458, -425.6505181564389]],
     "innerLoop": []
   },
   "1": {
-    "outerLoop": [
-      [
-        76771.533524249346,
-        -133618.49885709694
-      ],
-      [
-        95079.242763671573,
-        -133618.49885709694
-      ],
-      [
-        95079.242763671573,
-        -114544.75351938422
-      ],
-      [
-        42603.193350421549,
-        -114544.75351938422
-      ],
-      [
-        42603.193350421549,
-        -133618.49885709694
-      ],
-      [
-        62163.374831401488,
-        -133618.49885709694
-      ],
-      [
-        62163.37483140151,
-        -129397.75751953124
-      ],
-      [
-        76771.533524249375,
-        -129397.75751953124
-      ],
-      [
-        76771.533524249346,
-        -133618.49885709694
-      ]
-    ],
+    "outerLoop": [[252.5379392245044,-439.5345357141347],[312.76066698576176,-439.5345357141347],[312.76066698576176,-376.79195236639544],[140.14208338954458,-376.79195236639544],[140.14208338954458,-439.5345357141347],[204.48478562961017,-439.5345357141347],[252.5379392245044,-439.5345357141347]],
     "innerLoop": []
   },
   "max": [
-    95079.243,
-    -114544.754
+    322.7606677631579, -350.7919539473684, 127.94604934210527
   ],
   "min": [
-    42603.193,
-    -133618.499
+    130.1420822368421, -465.53453618421054, 0
   ]
 }
-
-
-let myMax = [-Infinity, -Infinity];
-let myMin = [Infinity, Infinity];
+const width = 1024;
+const height = 256;
+const gridSizeX = 8;
+const gridSizeY = 2;
+const min = outlineInfo.min;
+const max = outlineInfo.max;
+const dia = subtract(max, min);
+const layers = 13;
 
 function subtract(pt1, pt2) {
   var res = [];
@@ -112,15 +55,14 @@ function length(pt) {
 }
 
 function getCoord(point, min, dia) {
-  const width = 2048;
-  const height = 2048;
+
   var res = [];
   var tmp = subtract(point, min);
   res[0] = tmp[0] / dia[0];
   res[1] = 1.0 - tmp[1] / dia[1];
 
-  res[0] = res[0] * width / 8;
-  res[1] = res[1] * height / 8;
+  res[0] = res[0] * width / gridSizeX;
+  res[1] = res[1] * height / gridSizeY;
   return res;
 }
 
@@ -137,56 +79,39 @@ function drawPolyline(points, color, left, topPixel, min, max, dia, ctx) {
     coord[0] += left;
     coord[1] += topPixel;
     region.lineTo(coord[0], coord[1]);
-    if (point[0] > myMax[0]) {
-      myMax[0] = point[0];
-    }
-    if (point[1] > myMax[1]) {
-      myMax[1] = point[1];
-    }
-    if (point[0] < myMin[0]) {
-      myMin[0] = point[0];
-    }
-    if (point[1] < myMin[1]) {
-      myMin[1] = point[1];
-    }
   }
   region.closePath();
   ctx.fillStyle = color;
   ctx.fill(region);
 }
 
-function getVolumImage() {
+// generate mask image according to the outline of each floor with canvas2D.
+function getMaskImage() {
   const canvas = document.getElementById('volume');
   const ctx = canvas.getContext('2d');
-
-  const width = 2048;
-  const height = 2048;
-  const min = volumeData.min;
-  const max = volumeData.max;
-  const dia = subtract(max, min);
 
   ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, width, height);
 
-  for (const key in volumeData) {
+  for (const key in outlineInfo) {
     const arr = key.split('-');
     const bottom = parseInt(arr[0]);
-    let topCoord = parseInt(arr[0]);
+    let top = parseInt(arr[0]);
     if (arr.length == 2) {
-      topCoord = parseInt(arr[1]);
+      top = parseInt(arr[1]);
     }
-    var pathes = volumeData[key];
-    for (let i = bottom - 1; i < topCoord; i++) {
-      const row = Math.floor(i / 8);
-      const col = i % 8;
+    var outline = outlineInfo[key];
+    for (let i = bottom - 1; i < top; i++) {
+      const row = Math.floor(i / gridSizeX);
+      const col = i % gridSizeX;
 
-      const left = col * width / 8;
-      const topPixel = row * height / 8;
+      const leftPixel = col * width / gridSizeX;
+      const topPixel = row * height / gridSizeY;
 
-      drawPolyline(pathes.outerLoop, 'white', left, topPixel, min, max, dia, ctx);
+      drawPolyline(outline.outerLoop, 'white', leftPixel, topPixel, min, max, dia, ctx);
 
-      pathes.innerLoop.forEach(function (points) {
-        drawPolyline(points, 'black', left, topPixel, min, max, dia, ctx);
+      outline.innerLoop.forEach(function (points) {
+        drawPolyline(points, 'black', leftPixel, topPixel, min, max, dia, ctx);
       });
     }
   }
@@ -207,38 +132,68 @@ viewer.loadModel(modelId, progress => {
     // /assets/js/utils.js
     updateProgress(progress);
 }).then(() => {
-  setCommonDark(viewer);
+  const heatmap = new Modelo.View.Visualize.HeatMap(viewer.getRenderScene());
+  viewer.getScene().addVisualize(heatmap);
+  heatmap.setParameter("width", 128);
+  heatmap.setParameter("height", 128);
+  heatmap.setParameter("gridSize", 16);
+
+  /****** Generate heatmap data for each floor *****/
   let imageDatas = [];
-  for (let i = 0; i < 56; i++) {
-    imageDatas.push(Math.random())
+  for (let i = 0; i < layers; i++) {
+    var data = [];
+    for (var j = 0; j < 20; j++) {
+      data[j] = {
+        x: Math.random(),
+        y: Math.random(),
+        number: Math.random() * 10
+      }
+    }
+    heatmap.setParameter("points", data);
+    var imageData = heatmap.getImageData();
+    imageDatas.push(new Float32Array(imageData));
   }
-  const len = imageDatas.length;
-  let volumeRenderingData = base64ToArrayBuffer(getVolumImage());
-  for (let i = 0; i < 8; i++) {
-    for (let j = 0; j < 8; j++) {
-      for (let ii = 0; ii < 256; ii++) {
-        for (let jj = 0; jj < 256; jj++) {
-          volumeRenderingData[i * 256 * 256 * 8 + ii * 256 * 8 + j * 256 + jj] = (volumeRenderingData[i * 256 * 256 *8 + ii * 256 * 8 + j * 256 + jj] || 0) * (imageDatas[i * 8 + j]);
-          //volumeRenderingData[jj + j * 256 + (ii + i * 256) * 2048] = (volumeRenderingData[jj + j * 256 +  (jj + i * 256) * 2048] || 0) * imageDatas[i * 8 + j] * 0.05;
-          if (ii > 56 && ii < 200 && jj > 56 && jj < 200) {
-            volumeRenderingData[i * 256 * 256 * 8 + ii * 256 * 8 + j * 256 + jj] = 0;
+
+  let randomVolumeData = new Float32Array(width * height);
+  for (let i = 0; i < gridSizeY; i++) {
+    for (let j = 0; j < gridSizeX; j++) {
+      if (i * 8 + j >= layers) {
+        continue;
+      }
+      for (let ii = 0; ii < 128; ii++) {
+        for (let jj = 0; jj < 128; jj++) {
+          randomVolumeData[i * 128 * 128 * 8 + ii * 128 * 8 + j * 128 + jj] = imageDatas[i * 8 + j][ii * 128 + jj];
+          if (i == 0 && j == 0) {
+            randomVolumeData[i * 128 * 128 * 8 + ii * 128 * 8 + j * 128 + jj] = 1.0;
           }
         }
       }
     }
   }
+  /****** Generate heatmap data for each floor *****/
+
+
   const volume = new Modelo.View.Visualize.MultiLayerVolume(viewer.getRenderScene());
   viewer.getScene().addVisualize(volume);
 
-  console.log(volumeRenderingData)
   volume.setParameter("platteImage", "platte.png");
+  volume.setParameter("gridSize", [gridSizeX, gridSizeY]); // indicates the heatmap layout of each floor.
   volume.setParameter("data", {
-    "data": volumeRenderingData,
-    "width": 2048,
-    "height": 2048
+    "data": randomVolumeData,
+    "width": width,
+    "height": height
   });
-  volume.setParameter("layer3", 64);
-  volume.setScaling([300, 200, 140]);
-  volume.setPosition([220, -400, 60]);
+  volume.setParameter("maskImage", getMaskImage()); // The mask image, make tiny difference to this building because it's an almost cuboid.
+  volume.setParameter("layers", layers); // total floor numbers of the building.
+  volume.setScaling([dia[0], dia[1], dia[2]]);
+  var center = [(min[0] + max[0]) / 2, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2];
+  volume.setPosition(center);
   volume.setEnabled(true);
+
+  // Turn on the code below to see the image of the final volume rendering effect.
+  // var ground = new Modelo.View.Pawn("ground", viewer.getResourceManager(), viewer.getMaterialManager());
+  // ground.createTexturedQuad(volume.getVolumeTexture());
+  // ground.setScaling(dia[0], dia[0], 10);
+  // ground.setTranslation(center[0], center[1], 0);
+  // viewer.getScene().addPawn(ground, false);
 });
