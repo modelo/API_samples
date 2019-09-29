@@ -51,6 +51,7 @@ viewer.loadModel(modelId, progress => {
     const points = [];
     const xres = 28;
     const yres = 22;
+
     for (let i = 0 ; i < data.length; i += 2) {
         const gridIndex = data[i];
         const numPoints = data[i + 1];
@@ -71,8 +72,8 @@ viewer.loadModel(modelId, progress => {
     heatmap.setParameter("gridSize", 8);
     heatmap.setParameter("blend", true);
     heatmap.setParameter("platteImage", "platte.png");
-    heatmap.setScaling([9000, 7000, 1]);
-    heatmap.setPosition([3550.8787841796868, -8833.9294433593736, -1.9054728746414178]);
+    heatmap.setScaling([9000, 7200, 1]);
+    heatmap.setPosition([3550.8787841796868, -8633.9294433593736, -1.9054728746414178]);
     heatmap.setParameter("maxValue", 6000);
     heatmap.setEnabled(true);
 

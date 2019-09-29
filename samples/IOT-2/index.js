@@ -1,9 +1,9 @@
-var modelId = "yYGeoDre";
-var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
+const modelId = "yYGeoDre";
+const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-var viewer = new Modelo.View.Viewer3DDark("model");
+const viewer = new Modelo.View.Viewer3DDark("model");
 
 viewer.setRenderingLinesEnabled(true);
 viewer
@@ -18,19 +18,18 @@ viewer
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
     viewer.addInput(new Modelo.View.Input.Touch(viewer));
     // add keyboard callback.
-    var keyboard = new Modelo.View.Input.Keyboard(viewer);
+    const keyboard = new Modelo.View.Input.Keyboard(viewer);
     viewer.addInput(keyboard);
     keyboard.addKeyUpListener(keyboard => {
       if (keyboard.key === 27) {
         viewer.destroy();
       }
     });
-
     viewer.setSmartCullingEnabled(false);
   });
 
 viewer.setLazyRenderingEnabled(false);
-var ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
+const ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
 ribbon.setEnabled(true);
 viewer.getScene().addVisualize(ribbon);
 ribbon.setParameter("width", 2);
@@ -38,7 +37,7 @@ ribbon.setParameter("unitLenght", 1000);
 ribbon.setParameter("speed", 1);
 ribbon.setParameter("platteTexture", "../building-spacial-heatmap/platte.png");
 
-var pointsArray = [
+const pointsArray = [
   [[3432, 1485,0.3],
   [2832, 1496,0.3],
   [2205, 1495,0.3],
