@@ -77,8 +77,8 @@ viewer.loadModel(modelId, progress => {
 
   metroData.map((item, index) => {
     const text = new Modelo.View.Text3D("metro" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-    text.setContent("M")
-    text.setTranslation(item[0] * 3.28, item[1] * 3.28, 1000);
+    text.setContent("Metro")
+    text.setTranslation(item[0] * 3.28, item[1] * 3.28, 150);
     text.setScaling(100, 30, 300);
     text.setColor([1, 0.3, 0.2]);
     viewer.getScene().addText3D(text);
@@ -89,15 +89,15 @@ viewer.loadModel(modelId, progress => {
         const groundPlane = new Modelo.View.Pawn("metroImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
         groundPlane.createTexturedQuad([image]);
         groundPlane.setScaling(50, 50, 1000);
-        groundPlane.setTranslation(item[0] *  3.28, item[1] *  3.28, 800);
+        groundPlane.setTranslation(item[0] *  3.28, item[1] *  3.28, 0);
         viewer.getScene().addPawn(groundPlane);
     }
   })
 
   gasStationData.map((item, index) => {
     const text = new Modelo.View.Text3D("gasStation" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-    text.setContent("G")
-    text.setTranslation(item[0] * 5, item[1] * 5, 1000);
+    text.setContent("GasStation")
+    text.setTranslation(item[0] * 5, item[1] * 5, 150);
     text.setScaling(100, 30, 300);
     text.setColor([1, 0.3, 0.2]);
     viewer.getScene().addText3D(text);
@@ -107,8 +107,8 @@ viewer.loadModel(modelId, progress => {
     image.onload = function() {
         const groundPlane = new Modelo.View.Pawn("gasStationImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
         groundPlane.createTexturedQuad([image]);
-        groundPlane.setScaling(50, 50, 1000);
-        groundPlane.setTranslation(item[0] * 5, item[1] * 5, 800);
+        groundPlane.setScaling(100, 100, 0);
+        groundPlane.setTranslation(item[0] * 5, item[1] * 5, 0);
         viewer.getScene().addPawn(groundPlane);
     }
   });
@@ -116,7 +116,7 @@ viewer.loadModel(modelId, progress => {
   busStopData.map((item, index) => {
 
     const text = new Modelo.View.Text3D("bus" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-    text.setContent("B")
+    text.setContent("BusStop")
     text.setTranslation(item[0] * 5, item[1] * 5, 150);
     text.setScaling(100, 30, 300);
     text.setColor([1, 0.3, 0.2]);

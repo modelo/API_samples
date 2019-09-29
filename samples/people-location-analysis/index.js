@@ -9,9 +9,6 @@ Modelo.init({
 
 const viewer = new Modelo.View.Viewer3D("model");
 viewer.setRenderingLinesEnabled(true);
-
-
-
 viewer.loadModel(modelId, progress => {
   // /assets/js/utils.js
   updateProgress(progress);
