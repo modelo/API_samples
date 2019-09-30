@@ -35,8 +35,8 @@ for (var i = 0; i < 64; i++) {
     imageDatas.push(new Float32Array(imageData));
 }
 
-var volumeRenderingData = new Float32Array(2048*2048);
-for (var i = 0; i < 8; i++) {
+var volumeRenderingData = new Float32Array(2048*1536);
+for (var i = 0; i < 6; i++) {
     for (var j = 0; j < 8; j++) {
         // var offset = i * 256 * 256 * 8 + j * 256 * 256;
         for (var ii = 0; ii < 256; ii++) {
@@ -54,9 +54,10 @@ for (var i = 0; i < 8; i++) {
 const volume = new Modelo.View.Visualize.MultiLayerVolume(viewer.getRenderScene());
 viewer.getScene().addVisualize(volume);
 
+volume.setParameter("gridSize", [8, 6]); // Set the grid size of the texture.
 volume.setParameter("platteImage", "platte.png");
-volume.setParameter("data", { "data": volumeRenderingData, "width": 2048, "height": 2048 });
-volume.setParameter("layer3", 64);
+volume.setParameter("data", { "data": volumeRenderingData, "width": 2048, "height": 1536 });
+volume.setParameter("layers", 48); // total layers of data
 volume.setScaling([10, 10, 20]);
 volume.setPosition([0, 0, 7.7]);
 volume.setRotation([0, 0, 1], 0.5);

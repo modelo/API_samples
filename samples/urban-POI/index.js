@@ -74,20 +74,20 @@ viewer.loadModel(modelId, progress => {
 }).then(() => {
   setCommonDark(viewer);
 
-
   metroData.map((item, index) => {
-    const text = new Modelo.View.Text3D("metro" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+    const text = new Modelo.View.Text3DBillboard("metro" + index, viewer.getResourceManager(), viewer.getMaterialManager());
     text.setContent("Metro")
     text.setTranslation(item[0] * 3.28, item[1] * 3.28, 150);
     text.setScaling(100, 30, 300);
     text.setColor([1, 0.3, 0.2]);
+    text.setFaceCameraZ(true);
     viewer.getScene().addText3D(text);
 
     const image = new Image();
     image.src = "./metro.svg";
     image.onload = function() {
-        const groundPlane = new Modelo.View.Pawn("metroImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-        groundPlane.createTexturedQuad([image]);
+        const groundPlane = new Modelo.View.PawnBillboard("metroImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+        groundPlane.createSolidQuad([image]);
         groundPlane.setScaling(50, 50, 1000);
         groundPlane.setTranslation(item[0] *  3.28, item[1] *  3.28, 0);
         viewer.getScene().addPawn(groundPlane);
@@ -95,11 +95,12 @@ viewer.loadModel(modelId, progress => {
   })
 
   gasStationData.map((item, index) => {
-    const text = new Modelo.View.Text3D("gasStation" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+    const text = new Modelo.View.Text3DBillboard("gasStation" + index, viewer.getResourceManager(), viewer.getMaterialManager());
     text.setContent("GasStation")
     text.setTranslation(item[0] * 5, item[1] * 5, 150);
     text.setScaling(100, 30, 300);
     text.setColor([1, 0.3, 0.2]);
+    text.setFaceCameraZ(true);
     viewer.getScene().addText3D(text);
 
     const image = new Image();
@@ -115,18 +116,19 @@ viewer.loadModel(modelId, progress => {
 
   busStopData.map((item, index) => {
 
-    const text = new Modelo.View.Text3D("bus" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+    const text = new Modelo.View.Text3DBillboard("bus" + index, viewer.getResourceManager(), viewer.getMaterialManager());
     text.setContent("BusStop")
     text.setTranslation(item[0] * 5, item[1] * 5, 150);
     text.setScaling(100, 30, 300);
     text.setColor([1, 0.3, 0.2]);
+    text.setFaceCameraZ(true);
     viewer.getScene().addText3D(text);
 
     const image = new Image();
     image.src = "./bus.svg";
     image.onload = function() {
-        const groundPlane = new Modelo.View.Pawn("busImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-        groundPlane.createTexturedQuad([image]);
+        const groundPlane = new Modelo.View.PawnBillboard("busImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
+        groundPlane.createSolidQuad([image]);
         groundPlane.setScaling(100, 100, 0);
         groundPlane.setTranslation(item[0] * 5, item[1] * 5, 0);
         viewer.getScene().addPawn(groundPlane);

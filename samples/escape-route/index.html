@@ -24,7 +24,7 @@
 
     #model {
       height: 100%;
-      width: 100%;
+      width: calc(100% - 320px);
     }
 
     .item {
@@ -50,6 +50,10 @@
       margin-right: 16px;
     }
 
+    .wrapper {
+      width: 320px;
+      height: 100%;
+    }
     .wrapper-right label {
       color: rgba(0, 0, 0, 0.87);
       font-size: 1rem;
@@ -65,20 +69,12 @@
 
 <body>
 
+  <div class="wrapper"></div>
   <div class="wrapper-right">
     <label id="progress">Loading: 0</label>
   </div>
   <div id="model"></div>
   <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.4-lts.js"></script>
-  <script>
-    $(function () {
-      $("#bgmode").change(function () {
-        var index = parseInt(this.value);
-        $("#content .item").removeClass("active");
-        $("#content .item:nth-child(" + (index + 1) + ")").addClass("active");
-      });
-    });
-  </script>
   <script src="escapePathData.js"></script>
   <script src="/assets/js/utils.js"></script>
   <script src="index.js"></script>
