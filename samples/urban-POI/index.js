@@ -1,3 +1,16 @@
+let dataBillboard = [];
+document.getElementById('configButton').onclick = () => {
+  const configValues = $('#configForm').serializeArray();
+  if (configValues) {
+    dataBillboard.map((billboard, index) => {
+      billboard.map(item => {
+        configValues[index * 2].value && item.setContent(configValues[index * 2].value);
+        configValues[index * 2 + 1].value && item.setColor(configValues[index * 2 + 1].value);
+      });
+    })
+  }
+}
+
 const modelId = "j1mXXDrb";
 const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
@@ -64,6 +77,36 @@ const busStopData = [
   [-1607.984594, 910.184275, 0]
 ]
 
+/**
+ * 
+ * @param {*} viewer Modelo.View.View3D
+ * @param {*} data  data to show text3D and pawns
+ * @param {*} text3DConfig text3D config options
+ * @param {*} pawnConfig pawn config options
+ */
+function setText3DAndPawn(viewer, data, text3DConfig, pawnConfig) {
+  return data.map((item, index) => {
+    const text = new Modelo.View.Text3DBillboard(text3DConfig.textContent + index, viewer.getResourceManager(), viewer.getMaterialManager());
+    text.setContent(text3DConfig.textContent);
+    text.setTranslation(item[0] * 3.28, item[1] * 3.28, 250);
+    text.setScaling(...text3DConfig.scale);
+    text.setColor(text3DConfig.color);
+    text.setFaceCameraZ(text3DConfig.faceCameraZ);
+    viewer.getScene().addText3D(text);
+
+    const image = new Image();
+    image.src = pawnConfig.imgSrc;
+    image.onload = function () {
+      const pawnBillboard = new Modelo.View.PawnBillboard(text3DConfig.textContent + index, viewer.getResourceManager(), viewer.getMaterialManager());
+      pawnBillboard.createTexturedQuad(image);
+      pawnBillboard.setScaling(...pawnConfig.scale);
+      pawnBillboard.setTranslation(item[0] * 3.28, item[1] * 3.28, 400);
+      viewer.getScene().addPawn(pawnBillboard);
+    }
+    return text;
+  }); 
+}
+
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 const viewer = new Modelo.View.Viewer3D("model");
@@ -72,78 +115,56 @@ viewer.loadModel(modelId, progress => {
   // /assets/js/utils.js
   updateProgress(progress);
 }).then(() => {
-  setCommonDark(viewer);
-
-
-  metroData.map((item, index) => {
-    const text = new Modelo.View.Text3D("metro" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-    text.setContent("Metro")
-    text.setTranslation(item[0] * 3.28, item[1] * 3.28, 150);
-    text.setScaling(100, 30, 300);
-    text.setColor([1, 0.3, 0.2]);
-    viewer.getScene().addText3D(text);
-
-    const image = new Image();
-    image.src = "./metro.svg";
-    image.onload = function() {
-        const groundPlane = new Modelo.View.Pawn("metroImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-        groundPlane.createTexturedQuad([image]);
-        groundPlane.setScaling(50, 50, 1000);
-        groundPlane.setTranslation(item[0] *  3.28, item[1] *  3.28, 0);
-        viewer.getScene().addPawn(groundPlane);
+  setDarkTheme(viewer);
+  // load metro data
+  dataBillboard[0] = setText3DAndPawn(
+    viewer,
+    metroData,
+    {
+      textContent: 'metro',
+      scale: [300, 30, 300],
+      color: [1, 0.3, 0.2],
+      faceCameraZ: true
+    },
+    {
+      imgSrc: './metro.svg',
+      scale: [100, 100, 100]
     }
-  })
+  );
 
-  gasStationData.map((item, index) => {
-    const text = new Modelo.View.Text3D("gasStation" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-    text.setContent("GasStation")
-    text.setTranslation(item[0] * 5, item[1] * 5, 150);
-    text.setScaling(100, 30, 300);
-    text.setColor([1, 0.3, 0.2]);
-    viewer.getScene().addText3D(text);
-
-    const image = new Image();
-    image.src = "./gas.svg";
-    image.onload = function() {
-        const groundPlane = new Modelo.View.Pawn("gasStationImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-        groundPlane.createTexturedQuad([image]);
-        groundPlane.setScaling(100, 100, 0);
-        groundPlane.setTranslation(item[0] * 5, item[1] * 5, 0);
-        viewer.getScene().addPawn(groundPlane);
+  // load gas station data
+  dataBillboard[1] = setText3DAndPawn(
+    viewer,
+    gasStationData,
+    {
+      textContent: 'GasStation',
+      scale: [300, 30, 300],
+      color: [1, 0.3, 0.2],
+      faceCameraZ: true
+    },
+    {
+      imgSrc: './gas.svg',
+      scale: [100, 100, 100]
     }
-  });
+  );
 
-  busStopData.map((item, index) => {
-
-    const text = new Modelo.View.Text3D("bus" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-    text.setContent("BusStop")
-    text.setTranslation(item[0] * 5, item[1] * 5, 150);
-    text.setScaling(100, 30, 300);
-    text.setColor([1, 0.3, 0.2]);
-    viewer.getScene().addText3D(text);
-
-    const image = new Image();
-    image.src = "./bus.svg";
-    image.onload = function() {
-        const groundPlane = new Modelo.View.Pawn("busImage" + index, viewer.getResourceManager(), viewer.getMaterialManager());
-        groundPlane.createTexturedQuad([image]);
-        groundPlane.setScaling(100, 100, 0);
-        groundPlane.setTranslation(item[0] * 5, item[1] * 5, 0);
-        viewer.getScene().addPawn(groundPlane);
+  //  load busstop data
+  dataBillboard[2] = setText3DAndPawn(
+    viewer,
+    busStopData,
+    {
+      textContent: 'BusStop',
+      scale: [300, 30, 300],
+      color: [1, 0.3, 0.2],
+      faceCameraZ: true
+    },
+    {
+      imgSrc: './bus.svg',
+      scale: [100, 100, 100]
     }
-  })
+  );
+
   Modelo.Comment.get(modelId).then(res => {
     Modelo.Comment.activate(res[res.length - 1].id);
   });
-
-  document.getElementById('configButton').onclick = () => {
-    const configValues = $('#configForm').serializeArray();
-    if (configValues) {
-      configValues.map(values => {
-        if (values.value) {
-          ribbon.setParameter(values.name, values.value);
-        }
-      });
-    }
-  }
 });

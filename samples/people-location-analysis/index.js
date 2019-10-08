@@ -15,7 +15,7 @@ viewer.loadModel(modelId, progress => {
 }).then(() => {
     
     const bbox =  [-89.5673828125, -83.00537109375, -161.33059692382812, 89.56739807128906, -49.967777252197266, -92.43257904052734];
-    setCommonDark(viewer);
+    setDarkTheme(viewer);
     viewer.addTool(new Modelo.View.Tool.Section(viewer));
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
     viewer.addInput(new Modelo.View.Input.Touch(viewer));

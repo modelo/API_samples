@@ -12,7 +12,7 @@ viewer.loadModel(modelId, progress => {
   .then(() => {
     
     const bbox = [-101.78817749023438, -83.82557678222656, -180.5775146484375, 101.7881851196289, -54.82966232299805, -96.28856658935547];
-    setCommonDark(viewer);
+    setDarkTheme(viewer);
     viewer.addTool(new Modelo.View.Tool.Section(viewer));
     const sectionTool = viewer.getTool('Section');
     sectionTool.setEnabled(true);

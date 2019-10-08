@@ -12,7 +12,7 @@ viewer
   updateProgress(progress);
   })
   .then(() => {
-  setCommonDark(viewer);
+  setDarkTheme(viewer);
     // model loaded successfully
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));

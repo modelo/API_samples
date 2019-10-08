@@ -41,7 +41,7 @@ viewer.loadModel(modelId, progress => {
  // /assets/js/utils.js
   updateProgress(progress);
 }).then(() => {
-  setCommonDark(viewer);
+  setDarkTheme(viewer);
     let elementNames = [];
     let elements = [];
     const names = viewer.getScene().getElementsNames();

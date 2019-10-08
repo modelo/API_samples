@@ -103,7 +103,7 @@ viewer.loadModel(modelId, progress => {
     // /assets/js/utils.js
     updateProgress(progress);
 }).then(() => {
-  setCommonDark(viewer);
+  setDarkTheme(viewer);
   names = viewer.getScene().getElementsNames().filter((item, index) => index % 1000 === 0);
   for (let i = 0; i < names.length; i++) {
     const element = document.createElement('li');

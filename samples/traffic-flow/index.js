@@ -3,13 +3,12 @@ const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZ
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 const viewer = new Modelo.View.Viewer3D("model");
-
 viewer.loadModel(modelId, progress => {
     // /assets/js/utils.js
     updateProgress(progress);
   })
   .then(() => {
-    setCommonDark(viewer);
+    setDarkTheme(viewer);
     // model loaded successfully
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));

@@ -1,4 +1,4 @@
-function setCommonDark(viewer) {
+function setDarkTheme(viewer) {
     viewer.setBackgroundColor([26.0 / 255.0, 26.0 / 255.0, 55.0 / 255.0, 1.0]);
     viewer.setEffectEnabled("Sketch", true);
     viewer.setEffectParameter("Sketch", "color", [0.0 / 255.0, 255.0 / 255.0, 243.0 / 255.0]);
