@@ -10,7 +10,6 @@ viewer.loadModel(modelId, progress => {
     updateProgress(progress);
 }).then(() => {
     setDarkTheme(viewer);
-
     const heatmap = new Modelo.View.Visualize.HeatMap(viewer.getRenderScene());
     viewer.getScene().addVisualize(heatmap);
     const points = [];
@@ -25,11 +24,19 @@ viewer.loadModel(modelId, progress => {
         if (y >= 22) {
             console.error("wrong grid index!");
         }
-  
         const xx = (x + 0.5) / 28;
         const yy = (y + 0.5) / 22;
-        points.push({x: xx, y: yy, number:numPoints});
+        points.push({x: xx, y: yy, number: numPoints});
     }
+
+    const text = new Modelo.View.Text3DBillboard("text3", viewer.getResourceManager(), viewer.getMaterialManager());
+    text.setContent(points[0].numPoints + '');
+    text.setTranslation(points[0].x, points[0].y, 100);
+    text.setScaling(50, 50, 50);
+    text.setColor([1, 0, 0]);
+    text.setFaceCameraZ(true);
+    viewer.getScene().addText3D(text);
+
     heatmap.setParameter("points", points);
     heatmap.setParameter("width", 256);
     heatmap.setParameter("height", 256);

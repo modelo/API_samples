@@ -5,7 +5,7 @@ document.getElementById('configButton').onclick = () => {
     dataBillboard.map((billboard, index) => {
       billboard.map(item => {
         configValues[index * 2].value && item.setContent(configValues[index * 2].value);
-        configValues[index * 2 + 1].value && item.setColor(configValues[index * 2 + 1].value);
+        configValues[index * 2 + 1].value && item.setColor(JSON.parse(configValues[index * 2 + 1].value));
       });
     })
   }

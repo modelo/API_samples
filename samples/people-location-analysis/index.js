@@ -12,9 +12,9 @@ viewer.setRenderingLinesEnabled(true);
 viewer.loadModel(modelId, progress => {
   // /assets/js/utils.js
   updateProgress(progress);
-}).then(() => {
+}).then( async () => {
     
-    const bbox =  [-89.5673828125, -83.00537109375, -161.33059692382812, 89.56739807128906, -49.967777252197266, -92.43257904052734];
+    const bbox = [-101.78817749023438, -83.82557678222656, -180.5775146484375, 101.7881851196289, -54.82966232299805, -96.28856658935547];
     setDarkTheme(viewer);
     viewer.addTool(new Modelo.View.Tool.Section(viewer));
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
@@ -33,19 +33,18 @@ viewer.loadModel(modelId, progress => {
     sectionTool.setSectionBox(bbox);
     sectionTool.setInteractive(true);
     const metaballConfig = {
-        width: 512,
-        height: 128,
+        width: 256 * 6,
+        height: 140 * 6,
         contour: true,
         contourColor:  [1, 0, 0, 1.0],
         backgroundColor: [1, 1, 1, 1],
         color: [1.0, 0.45, 0.45, 1.0]
     };
-    modeloMetaball(rawData, metaballConfig);
+    await modeloMetaball(rawData, metaballConfig);
 });
 
 
-function modeloMetaball(data, config) {
-    // viewer.getTool('Section').setEnabled(false);
+async function modeloMetaball(data, config) {
     var points = data.points;
     var min = data.min, max = data.max;
     var relativePoints = [];
@@ -72,20 +71,21 @@ function modeloMetaball(data, config) {
     metaball.setParameter("contourColor", config.contourColor);
     metaball.setParameter("backgroundColor", config.backgroundColor);
     metaball.setParameter("color", config.color);
-    metaball.setParameter("radius", 16);
+    metaball.setParameter("radius", 54);
+
+    const personModel = new Modelo.View.PawnBillboard("Person", viewer.getResourceManager(), viewer.getMaterialManager());
+    await personModel.load('z8ApoqYX').then( () => {
+        viewer.getScene().addPawn(personModel);
+    })
 
     for (let i = 0; i < points.length; i++) {
-        const cube = new Modelo.View.Pawn("cube" + i, viewer.getResourceManager(), viewer.getMaterialManager());
-        cube.createSolidCube();
-        const x = points[i].x;
-        const y = points[i].y;
-        cube.setTranslation(x, y, 1.8);
-        cube.setScaling(0.6, 0.6, 0.6);
-        viewer.getScene().addPawn(cube);
+        const person = personModel.clone('person-' + i);
+        person.setTranslation(points[i].x, points[i].y, 0);
+        person.setScaling(20, 20, 20);
+        viewer.getScene().addPawn(person);
     }
     const groundPlane = new Modelo.View.Pawn("ground2", viewer.getResourceManager(), viewer.getMaterialManager());
     groundPlane.createTexturedQuad([metaball.getTexture()]);
-
     groundPlane.setScaling((max[0] - min[0]) * 0.5, (max[1] - min[1]) * 0.5, 1.0);
     groundPlane.setTranslation((max[0] + min[0]) * 0.5, (max[1] + min[1]) * 0.5, 1.0);
     viewer.getScene().addPawn(groundPlane);
