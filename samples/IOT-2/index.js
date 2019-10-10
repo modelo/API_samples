@@ -14,7 +14,7 @@ viewer
     updateProgress(progress);
   })
   .then(() => {
-    // setDarkTheme(viewer);
+    setDarkTheme(viewer);
     // model loaded successfully
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
@@ -39,8 +39,13 @@ viewer
   });
 
 let settingFlag = [false, false, false, false];
+let tmpPoints = [];
 document.getElementById('configButtonPipline').onclick = function () {
-  $('#configButtonPipline').addClass('buttonActive');
+  if ($('#configButtonPipline').hasClass('buttonActive')) {
+    $('button').removeClass('buttonActive');
+  } else {
+    $('#configButtonPipline').addClass('buttonActive');
+  }
   viewer.setEffectEnabled("Highlight", !settingFlag[0]);
   viewer.setEffectParameter("Highlight", "radius", 1);
   viewer.setEffectParameter("Highlight", "intensity", 0.3);
@@ -55,24 +60,39 @@ document.getElementById('configButtonSkin').onclick = function () {
   setElementsVisibility('configButtonSkin', 2, 'electromechanical')
 }
 
-document.getElementById('configButtonAnimation').onclick =  () => {
-  $('button').removeClass('buttonActive');
-  $('#configButtonAnimation').addClass('buttonActive');
+document.getElementById('configButtonAnimation').onclick = () => {
+  console.log($('.btn .btn-block .buttonActive'))
+  if ($('.btn').hasClass('buttonActive')) {
+    $('.btn').removeClass('buttonActive');
+  } else {
+    $('#configButtonAnimation').addClass('buttonActive');
+  }
   const pointsArray = [[61541.709401, -126486.802841, -3695.236848],
-    [57619.247141, -126486.802841, -3695.236848],
-    [51727.136449, -126486.802841, -3695.236848],
-    [49474.579165, -125166.390935, -3695.236848],
-    [44371.704917, -125166.390935, -3695.236848],
-    [44371.704917, -121963.288052, -3695.236848],
-    [46163.72454, -121963.288052, -3426.229175],
-    [92951.656527, -121963.288052, -3426.229175]];
-    setRibbon([...pointsArray]);
+  [57619.247141, -126486.802841, -3695.236848],
+  [51727.136449, -126486.802841, -3695.236848],
+  [49474.579165, -125166.390935, -3695.236848],
+  [44371.704917, -125166.390935, -3695.236848],
+  [44371.704917, -121963.288052, -3695.236848],
+  [46163.72454, -121963.288052, -3426.229175],
+  [92951.656527, -121963.288052, -3426.229175]];
+  setRibbon([...pointsArray]);
 }
 
+/**
+ * Set elements visibility
+ * @param {*} buttonId 
+ * @param {*} index 
+ * @param {*} type 
+ */
 function setElementsVisibility(buttonId, index, type) {
-  $(`#${buttonId}`).removeClass('buttonActive');
-  $(`#${buttonId}`).addClass('buttonActive');
-  for(const key in elements) {
+  document.getElementById("panelLabel").style.visibility = 'hidden';
+  if ($(`.btn`).hasClass('buttonActive')) {
+    $('.btn').removeClass('buttonActive');
+  } else {
+    $(`#${buttonId}`).addClass('buttonActive');
+  }
+
+  for (const key in elements) {
     if (type === key) {
       viewer.getScene().setElementsVisibility(elements[key], !settingFlag[index]);
     } else {
@@ -87,10 +107,11 @@ function setElementsVisibility(buttonId, index, type) {
  * @param {*} pointsArray 
  */
 function setRibbon(pointsArray) {
-  for(const key in elements) {
+  for (const key in elements) {
     if ('rooms' !== key) {
       viewer.getScene().setElementsVisibility(elements[key], false);
-      viewer.getScene().setElementsColor(elements[key], [1, 1, 1, 0.0]);
+    } else {
+      viewer.getScene().setElementsColor(elements.rooms, [1, 1, 1, 0.0]);
     }
   }
   const ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
@@ -101,19 +122,38 @@ function setRibbon(pointsArray) {
   ribbon.setParameter("speed", 1);
   ribbon.setParameter("platteTexture", "./platte.png");
 
-  pointsArray.forEach(function(point) {
+  pointsArray.forEach(function (point) {
     point[0] = point[0] / 304;
     point[1] = point[1] / 304;
     point[2] = point[2] / 304;
   });
   ribbon.addRibbon(pointsArray);
-  ribbon.setScaling(1.6, 0.6, 0.6);
 
-  const position3D = [92951.656527 / 304, -121963.288052/ 304, -3426.229175/ 304];
-  viewer.setUpdateCallback(function() {
+  const position3D = pointsArray[0];
+  viewer.setUpdateCallback(function () {
     const position2D = viewer.getCamera().project(position3D);
-    document.getElementById("panelLabel").style.visibility = 'block';
+    if (tmpPoints.length > 0 && Math.floor(position2D[0]) === Math.floor(tmpPoints[0]) && Math.floor(position2D[1]) === Math.floor(tmpPoints[1])) {
+      return;
+    }
+    tmpPoints = position2D;
+    document.getElementById("panelLabel").style.visibility = 'visible';
     document.getElementById("panelLabel").style.left = position2D[0] + "px";
     document.getElementById("panelLabel").style.top = position2D[1] + "px";
+    // drawLine(position2D);
   });
+}
+
+/**
+ * Setting SVG lines to connect panel
+ * @param {*} points 
+ */
+function drawLine(points) {
+  const svg = document.getElementById('panelLine');
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  line.setAttribute("x1", points[0]);
+  line.setAttribute("y1", points[1]);
+  line.setAttribute("x2", points[0] + 100);
+  line.setAttribute("y2", points[1] + 100);
+  line.setAttribute("style", "stroke:rgb(255, 0, 0); stroke-width: 2");
+  svg.appendChild(line);
 }
