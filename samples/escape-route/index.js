@@ -43,6 +43,7 @@ viewer.loadModel(modelId, progress => {
   for (const key in escapePathData) {
     pointsArray.push(escapePathData[key]);
   }
+  console.log(pointsArray)
   pointsArray.forEach(function(points) {
     points.forEach(function(point) {
       point[0] = point[0] / 304;

@@ -1,4 +1,5 @@
-const modelId = "j1mXXDrb";
+let lastElement = '';
+const modelId = "p1wbbNrj";
 const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
@@ -8,17 +9,8 @@ function updateProgress(progress) {
     c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
 }
 
-const viewer = new Modelo.View.Viewer3DDark("model");
-
+const viewer = new Modelo.View.Viewer3D("model");
 viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
-
-const selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
-viewer.addTool(selectElementTool);
-selectElementTool.setEnabled(true);
-viewer.getEventEmitter().on("onPointPicked", point => {
-  console.log(point);
-})
-
 const colors = [
     {
         color: 'default',
@@ -38,27 +30,58 @@ const colors = [
     }
 ];
 viewer.loadModel(modelId, updateProgress).then(() => {
-    let elementNames = [];
-    let elements = [];
-    const names = viewer.getScene().getElementsNames();
-    viewer.getEventEmitter().on("onElementSelected", elementNames1 => {
-        // Restore the element's colors.
-        if (elementNames.length !== 0) {
-        viewer.getScene().setElementsColor(elementNames, null);
-        }
-        elementNames = elementNames1;
-        if (elementNames1.length === 0) {
-        document.getElementById("element").innerHTML = "Select element with left button: N/A";
-        } else {
-        document.getElementById("element").innerHTML = "Select element with left button: " + elementNames1[0];
-        }
-    });
+    setDarkTheme(viewer);
+    chartSetting();
+})
 
-    colors.forEach(item => {
-        document.getElementById(item.color).onclick = function() {
-            viewer.getScene().setElementsColor(elementNames, item.value);
-            document.getElementById("element-selected").innerHTML = "Selected Color: " + item.color;
-        }
-    });
-});
 
+function chartSetting() {
+    const myChart = echarts.init(document.getElementById('main'));
+    
+    option = {
+        title: {
+            text: '天气情况统计',
+            left: 'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            // orient: 'vertical',
+            // top: 'middle',
+            bottom: 0,
+            left: 'center',
+            data: ['structure', 'electromechanical','building', 'rooms']
+        },
+        series : [
+            {
+                type: 'pie',
+                radius : '65%',
+                center: ['50%', '50%'],
+                selectedMode: 'single',
+                data:[
+                    {value:elements.structure.length,name: 'structure'},
+                    {value:elements.electromechanical.length, name: 'electromechanical'},
+                    {value:elements.building.length, name: 'building'},
+                    {value:elements.rooms.length, name: 'rooms'},
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    myChart.setOption(option);
+    myChart.on('click',  (params) => {
+        if (lastElement !== '') {
+            viewer.getScene().setElementsColor(elements[lastElement], null);
+        }
+        lastElement = params.name;
+        viewer.getScene().setElementsColor(elements[lastElement], params.color);
+    });
+}

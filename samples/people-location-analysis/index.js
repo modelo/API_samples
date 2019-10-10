@@ -33,11 +33,11 @@ viewer.loadModel(modelId, progress => {
     sectionTool.setSectionBox(bbox);
     sectionTool.setInteractive(true);
     const metaballConfig = {
-        width: 256 * 6,
-        height: 140 * 6,
+        width: 840,
+        height: 336,
         contour: true,
         contourColor:  [1, 0, 0, 1.0],
-        backgroundColor: [1, 1, 1, 1],
+        backgroundColor: [1, 1, 1, 0],
         color: [1.0, 0.45, 0.45, 1.0]
     };
     await modeloMetaball(rawData, metaballConfig);
@@ -71,9 +71,10 @@ async function modeloMetaball(data, config) {
     metaball.setParameter("contourColor", config.contourColor);
     metaball.setParameter("backgroundColor", config.backgroundColor);
     metaball.setParameter("color", config.color);
-    metaball.setParameter("radius", 54);
+    metaball.setParameter("radius", 24);
 
-    const personModel = new Modelo.View.PawnBillboard("Person", viewer.getResourceManager(), viewer.getMaterialManager());
+    const personModel = new Modelo.View.PawnBillboard("PersonModel", viewer.getResourceManager(), viewer.getMaterialManager());
+    // load person model
     await personModel.load('z8ApoqYX').then( () => {
         viewer.getScene().addPawn(personModel);
     })
@@ -84,9 +85,10 @@ async function modeloMetaball(data, config) {
         person.setScaling(20, 20, 20);
         viewer.getScene().addPawn(person);
     }
-    const groundPlane = new Modelo.View.Pawn("ground2", viewer.getResourceManager(), viewer.getMaterialManager());
+
+    const groundPlane = new Modelo.View.Pawn("groundPlane", viewer.getResourceManager(), viewer.getMaterialManager());
     groundPlane.createTexturedQuad([metaball.getTexture()]);
     groundPlane.setScaling((max[0] - min[0]) * 0.5, (max[1] - min[1]) * 0.5, 1.0);
-    groundPlane.setTranslation((max[0] + min[0]) * 0.5, (max[1] + min[1]) * 0.5, 1.0);
+    groundPlane.setTranslation((max[0] + min[0]) * 0.5, (max[1] + min[1]) * 0.5, 0);
     viewer.getScene().addPawn(groundPlane);
 }

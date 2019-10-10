@@ -6,6 +6,8 @@
   <title>background</title>
   <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../../assets/css/range.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="../../assets/js/jquery.min.js"></script>
   <script src="../../assets/js/semantic.min.js"></script>
   <script src="../../assets/js/range.js"></script>
@@ -68,7 +70,34 @@
 
 <body>
   <div class="wrapper">
-    
+    <div class="page-header">
+      <h1> <small>Urban Ensity Viz Settings</small></h1>
+    </div>
+    <form class="form-horizontal" id="configForm">
+      <div class="form-group">
+        <label for="inputGridSize" class="col-sm-3 control-label">GridSize</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="inputGridSize" name="gridSize" placeholder="8">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputBlend" class="col-sm-3 control-label">Blend</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="inputBlend" name="blend" placeholder="1 = true, 0 = false">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputBlend" class="col-sm-3 control-label">Data</label>
+        <div class="col-sm-9">
+            <button type="button" class="btn btn-default" id="randomData">Random Heatmap Data</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-10">
+          <button type="button" class="btn btn-default" id="configButton">Apply</button>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="wrapper-right">
     <label id="progress">Loading: 0</label>
