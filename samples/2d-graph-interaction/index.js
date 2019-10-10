@@ -1,5 +1,5 @@
 let lastElement = '';
-const modelId = "p1wbbNrj";
+const modelId = "q8Z27w8a";
 const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
@@ -40,7 +40,7 @@ function chartSetting() {
     
     option = {
         title: {
-            text: '天气情况统计',
+            text: '',
             left: 'center'
         },
         tooltip : {
@@ -48,11 +48,9 @@ function chartSetting() {
             formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
         legend: {
-            // orient: 'vertical',
-            // top: 'middle',
             bottom: 0,
             left: 'center',
-            data: ['structure', 'electromechanical','building', 'rooms']
+            data: ['type1', 'type2','type3', 'type4']
         },
         series : [
             {
@@ -61,10 +59,10 @@ function chartSetting() {
                 center: ['50%', '50%'],
                 selectedMode: 'single',
                 data:[
-                    {value:elements.structure.length,name: 'structure'},
-                    {value:elements.electromechanical.length, name: 'electromechanical'},
-                    {value:elements.building.length, name: 'building'},
-                    {value:elements.rooms.length, name: 'rooms'},
+                    {value:elements.type1.length, name: 'type1'},
+                    {value:elements.type2.length, name: 'type2'},
+                    {value:elements.type3.length, name: 'type3'},
+                    {value:elements.type4.length, name: 'type4'},
                 ],
                 itemStyle: {
                     emphasis: {
@@ -82,6 +80,31 @@ function chartSetting() {
             viewer.getScene().setElementsColor(elements[lastElement], null);
         }
         lastElement = params.name;
-        viewer.getScene().setElementsColor(elements[lastElement], params.color);
+        viewer.getScene().setElementsColor(elements[lastElement], hexToRGB(params.color));
     });
+}
+
+/**
+ * hex to rgb color
+ * @param {*} color 
+ */
+function hexToRGB(color) {
+    const sColor = color.toLowerCase();
+    const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+    if (sColor && reg.test(sColor)) {
+        if (sColor.length === 4) {
+            const sColorNew = "#";
+            for (let i=1; i<4; i+=1) {
+                sColorNew += sColor.slice(i, i+1).concat(sColor.slice(i, i+1));    
+            }
+            sColor = sColorNew;
+        }
+        const sColorChange = [];
+        for (let i=1; i<7; i+=2) {
+            sColorChange.push(parseInt("0x"+sColor.slice(i, i+2)) / 255);    
+        }
+        return sColorChange;
+    } else {
+        return [0, 0, 0]
+    }
 }

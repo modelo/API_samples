@@ -67,9 +67,42 @@
       border-radius:3px;
       border:1px solid rgba(199,199,199,1);
     }
+    .btn:focus, .btn:active {
+      outline: none;
+      color: #fff;
+    }
     .buttonActive {
       background:rgba(70,70,124,1);
       color: #fff;
+    }
+    #panelLabel {
+      background:rgba(26,26,55,0.73);
+      border-radius:3px;
+      position: absolute;
+      padding: 10px 40px;
+      visibility: hidden;
+    }
+
+    #panelLabel p {
+      margin: 0;
+      color:rgba(255,255,255,1);
+      font-family:PingFangSC-Medium,PingFangSC;
+    }
+    .panelLabel-title {
+      font-size:16px;
+      font-weight:500;
+      line-height:22px;
+    }
+    .panelLabel-text {
+      font-size:11px;
+      font-weight:400;
+      line-height:16px;
+    }
+    .label-temperature {
+      color: #00FFFD;
+    }
+    .label-speed {
+      color: #FFD500;
     }
   </style>
 </head>
@@ -100,7 +133,11 @@
   <div class="wrapper-right">
     <label id="progress">Loading: 0</label>
   </div>
-  <div id="model"></div>
+  <div id="model"><div id="panelLabel">
+    <p class="panelLabel-title">空调风管</p>
+    <p class="panelLabel-text">温度：<label class="label-temperature">22</label></p>
+    <p class="panelLabel-text">风量：<label class="label-speed">2</label></p>
+  </div></div>
   <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.4-lts.js"></script>
   <script src="./data.js"></script>
   <script src="/assets/js/utils.js"></script>

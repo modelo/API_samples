@@ -3,9 +3,11 @@ document.getElementById('configButton').onclick = () => {
   const configValues = $('#configForm').serializeArray();
   if (configValues) {
     dataBillboard.map((billboard, index) => {
+      console.log((configValues[index * 3 + 1].value));
       billboard.map(item => {
-        configValues[index * 2].value && item.setContent(configValues[index * 2].value);
-        configValues[index * 2 + 1].value && item.setColor(JSON.parse(configValues[index * 2 + 1].value));
+        !!configValues[index * 3].value && item.setContent(configValues[index * 3].value);
+        !!configValues[index * 3 + 1].value && item.setScaling(...JSON.parse(configValues[index * 3 + 1].value));
+        !!configValues[index * 3 + 2].value && item.setColor(JSON.parse(configValues[index * 3 + 2].value));
       });
     })
   }

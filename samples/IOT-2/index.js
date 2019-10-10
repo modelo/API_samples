@@ -1,4 +1,4 @@
-const modelId = "p1wbbNrj";
+const modelId = "gYEqjqY5";
 const appToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
@@ -14,7 +14,7 @@ viewer
     updateProgress(progress);
   })
   .then(() => {
-    setDarkTheme(viewer);
+    // setDarkTheme(viewer);
     // model loaded successfully
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
@@ -40,7 +40,6 @@ viewer
 
 let settingFlag = [false, false, false, false];
 document.getElementById('configButtonPipline').onclick = function () {
-  $('button').removeClass('buttonActive');
   $('#configButtonPipline').addClass('buttonActive');
   viewer.setEffectEnabled("Highlight", !settingFlag[0]);
   viewer.setEffectParameter("Highlight", "radius", 1);
@@ -71,7 +70,7 @@ document.getElementById('configButtonAnimation').onclick =  () => {
 }
 
 function setElementsVisibility(buttonId, index, type) {
-  $('button').removeClass('buttonActive');
+  $(`#${buttonId}`).removeClass('buttonActive');
   $(`#${buttonId}`).addClass('buttonActive');
   for(const key in elements) {
     if (type === key) {
@@ -89,15 +88,12 @@ function setElementsVisibility(buttonId, index, type) {
  */
 function setRibbon(pointsArray) {
   for(const key in elements) {
-    if ('structure' !== key) {
+    if ('rooms' !== key) {
       viewer.getScene().setElementsVisibility(elements[key], false);
+      viewer.getScene().setElementsColor(elements[key], [1, 1, 1, 0.0]);
     }
   }
-  //viewer.getScene().setElementsColor(elements.structure, [1, 1, 1, 0]);
-
-
   const ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
-
   ribbon.setEnabled(true);
   viewer.getScene().addVisualize(ribbon);
   ribbon.setParameter("width", 5);
@@ -112,4 +108,12 @@ function setRibbon(pointsArray) {
   });
   ribbon.addRibbon(pointsArray);
   ribbon.setScaling(1.6, 0.6, 0.6);
+
+  const position3D = [92951.656527 / 304, -121963.288052/ 304, -3426.229175/ 304];
+  viewer.setUpdateCallback(function() {
+    const position2D = viewer.getCamera().project(position3D);
+    document.getElementById("panelLabel").style.visibility = 'block';
+    document.getElementById("panelLabel").style.left = position2D[0] + "px";
+    document.getElementById("panelLabel").style.top = position2D[1] + "px";
+  });
 }
