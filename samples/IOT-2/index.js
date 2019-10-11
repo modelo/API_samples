@@ -1,4 +1,4 @@
-const modelId = "gYEqjqY5";
+const modelId = "W1NM3grR";
 const appToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
@@ -27,7 +27,7 @@ viewer
         viewer.destroy();
       }
     });
-    viewer.getScene().setElementsColor(elements.electromechanical, [1.0, 1.0, 1.0]);
+    // viewer.getScene().setElementsColor(elements.electromechanical, [1.0, 1.0, 1.0]);
     viewer.setEffectEnabled("Highlight", true);
     viewer.getRenderScene().getEffect("Highlight").addElements(elements.electromechanical, {
       emissiveColor: [1.0, 0.0, 0.0]
@@ -61,7 +61,6 @@ document.getElementById('configButtonSkin').onclick = function () {
 }
 
 document.getElementById('configButtonAnimation').onclick = () => {
-  console.log($('.btn .btn-block .buttonActive'))
   if ($('.btn').hasClass('buttonActive')) {
     $('.btn').removeClass('buttonActive');
   } else {
@@ -107,17 +106,13 @@ function setElementsVisibility(buttonId, index, type) {
  * @param {*} pointsArray 
  */
 function setRibbon(pointsArray) {
-  for (const key in elements) {
-    if ('rooms' !== key) {
-      viewer.getScene().setElementsVisibility(elements[key], false);
-    } else {
-      viewer.getScene().setElementsColor(elements.rooms, [1, 1, 1, 0.0]);
-    }
-  }
+  viewer.getScene().setElementsVisibility(elements.building, false);
+  viewer.getScene().setElementsVisibility(elements.structure, false);
+  viewer.getScene().setElementsColor(elements.rooms, [1, 1, 1, 0.15]);
   const ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
   ribbon.setEnabled(true);
   viewer.getScene().addVisualize(ribbon);
-  ribbon.setParameter("width", 5);
+  ribbon.setParameter("width", 10);
   ribbon.setParameter("unitLenght", 1000);
   ribbon.setParameter("speed", 1);
   ribbon.setParameter("platteTexture", "./platte.png");
@@ -129,7 +124,7 @@ function setRibbon(pointsArray) {
   });
   ribbon.addRibbon(pointsArray);
 
-  const position3D = pointsArray[0];
+  const position3D = pointsArray[2];
   viewer.setUpdateCallback(function () {
     const position2D = viewer.getCamera().project(position3D);
     if (tmpPoints.length > 0 && Math.floor(position2D[0]) === Math.floor(tmpPoints[0]) && Math.floor(position2D[1]) === Math.floor(tmpPoints[1])) {
@@ -137,9 +132,9 @@ function setRibbon(pointsArray) {
     }
     tmpPoints = position2D;
     document.getElementById("panelLabel").style.visibility = 'visible';
-    document.getElementById("panelLabel").style.left = position2D[0] + "px";
-    document.getElementById("panelLabel").style.top = position2D[1] + "px";
-    // drawLine(position2D);
+    document.getElementById("panelLabel").style.left = position2D[0] + 50 + "px";
+    document.getElementById("panelLabel").style.top = position2D[1] + 40 + "px";
+    drawLine(position2D);
   });
 }
 
@@ -149,11 +144,31 @@ function setRibbon(pointsArray) {
  */
 function drawLine(points) {
   const svg = document.getElementById('panelLine');
-  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  line.setAttribute("x1", points[0]);
-  line.setAttribute("y1", points[1]);
-  line.setAttribute("x2", points[0] + 100);
-  line.setAttribute("y2", points[1] + 100);
-  line.setAttribute("style", "stroke:rgb(255, 0, 0); stroke-width: 2");
-  svg.appendChild(line);
+  $('svg').empty();
+  const line1 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  const line2 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+
+  circle.setAttribute('cx', points[0]);
+  circle.setAttribute('cy', points[1]);
+  circle.setAttribute('r', 5);
+  circle.setAttribute('fill', '#FF8247');
+
+  line1.setAttribute("x1", points[0]);
+  line1.setAttribute("y1", points[1]);
+  line1.setAttribute("x2", points[0] + 70);
+  line1.setAttribute("y2", points[1]);
+
+  line2.setAttribute("x1", points[0] + 70);
+  line2.setAttribute("y1", points[1])
+  line2.setAttribute("x2", points[0] + 120);
+  line2.setAttribute("y2", points[1] + 40);
+
+  line1.setAttribute("style", "stroke: #FF8247; stroke-width: 2");
+  line2.setAttribute("style", "stroke: #FF8247; stroke-width: 2");
+  circle.setAttribute("style", "stroke: #FF8247; stroke-width: 2");
+
+  svg.appendChild(circle);
+  svg.appendChild(line1);
+  svg.appendChild(line2);
 }
