@@ -102,7 +102,7 @@ function setText3DAndPawn(viewer, data, text3DConfig, pawnConfig) {
       const pawnBillboard = new Modelo.View.PawnBillboard(text3DConfig.textContent + index, viewer.getResourceManager(), viewer.getMaterialManager());
       pawnBillboard.createTexturedQuad(image);
       pawnBillboard.setScaling(...pawnConfig.scale);
-      pawnBillboard.setTranslation(item[0] * 3.28, item[1] * 3.28, 400);
+      pawnBillboard.setTranslation(item[0] * 3.28, item[1] * 3.28, 500);
       viewer.getScene().addPawn(pawnBillboard);
     }
     return text;
@@ -129,8 +129,8 @@ viewer.loadModel(modelId, progress => {
       faceCameraZ: true
     },
     {
-      imgSrc: './metro.svg',
-      scale: [100, 100, 100]
+      imgSrc: './metro.png',
+      scale: [200, 200, 200]
     }
   );
 
@@ -145,8 +145,8 @@ viewer.loadModel(modelId, progress => {
       faceCameraZ: true
     },
     {
-      imgSrc: './gas.svg',
-      scale: [100, 100, 100]
+      imgSrc: './gas.png',
+      scale: [200, 200, 200]
     }
   );
 
@@ -161,8 +161,8 @@ viewer.loadModel(modelId, progress => {
       faceCameraZ: true
     },
     {
-      imgSrc: './bus.svg',
-      scale: [100, 100, 100]
+      imgSrc: './bus.png',
+      scale: [200, 200, 200]
     }
   );
 

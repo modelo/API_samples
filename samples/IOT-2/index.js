@@ -60,6 +60,7 @@ document.getElementById('configButtonSkin').onclick = function () {
   setElementsVisibility('configButtonSkin', 2, 'electromechanical')
 }
 
+let ribbon;
 document.getElementById('configButtonAnimation').onclick = () => {
   if ($('.btn').hasClass('buttonActive')) {
     $('.btn').removeClass('buttonActive');
@@ -74,7 +75,16 @@ document.getElementById('configButtonAnimation').onclick = () => {
   [44371.704917, -121963.288052, -3695.236848],
   [46163.72454, -121963.288052, -3426.229175],
   [92951.656527, -121963.288052, -3426.229175]];
-  setRibbon([...pointsArray]);
+  if (settingFlag[3]) {
+    viewer.getScene().removeVisualize(ribbon);
+    for (const key in elements) {
+      viewer.getScene().setElementsVisibility(elements[key], true);
+    }
+    $('svg').empty();
+    document.getElementById("panelLabel").style.visibility = 'hidden';
+  } else {
+    setRibbon([...pointsArray]);
+  }
 }
 
 /**
@@ -109,9 +119,9 @@ function setRibbon(pointsArray) {
   viewer.getScene().setElementsVisibility(elements.building, false);
   viewer.getScene().setElementsVisibility(elements.structure, false);
   viewer.getScene().setElementsColor(elements.rooms, [1, 1, 1, 0.15]);
-  const ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
+  ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
   ribbon.setEnabled(true);
-  viewer.getScene().addVisualize(ribbon);
+  viewer.getScene().addVisualize(ribbon); 
   ribbon.setParameter("width", 10);
   ribbon.setParameter("unitLenght", 1000);
   ribbon.setParameter("speed", 1);
@@ -124,18 +134,27 @@ function setRibbon(pointsArray) {
   });
   ribbon.addRibbon(pointsArray);
 
-  const position3D = pointsArray[2];
+  const position3D = pointsArray[2];  
   viewer.setUpdateCallback(function () {
-    const position2D = viewer.getCamera().project(position3D);
-    if (tmpPoints.length > 0 && Math.floor(position2D[0]) === Math.floor(tmpPoints[0]) && Math.floor(position2D[1]) === Math.floor(tmpPoints[1])) {
-      return;
-    }
-    tmpPoints = position2D;
-    document.getElementById("panelLabel").style.visibility = 'visible';
-    document.getElementById("panelLabel").style.left = position2D[0] + 50 + "px";
-    document.getElementById("panelLabel").style.top = position2D[1] + 40 + "px";
-    drawLine(position2D);
+    setPanel(position3D);
   });
+  settingFlag[3] = !settingFlag[3];
+}
+
+/**
+ * Setting the panel when the model is update
+ * @param {*} position3D 
+ */
+function setPanel(position3D) {
+  const position2D = viewer.getCamera().project(position3D);
+  if (tmpPoints.length > 0 && Math.abs(position2D[0] - tmpPoints[0]) < 3 && Math.abs(position2D[1] - tmpPoints[1]) < 3) {
+    return;
+  }
+  tmpPoints = position2D;
+  document.getElementById("panelLabel").style.visibility = 'visible';
+  document.getElementById("panelLabel").style.left = position2D[0] + 50 + "px";
+  document.getElementById("panelLabel").style.top = position2D[1] + 40 + "px";
+  drawLine(position2D);
 }
 
 /**
@@ -145,6 +164,7 @@ function setRibbon(pointsArray) {
 function drawLine(points) {
   const svg = document.getElementById('panelLine');
   $('svg').empty();
+
   const line1 = document.createElementNS("http://www.w3.org/2000/svg", "line");
   const line2 = document.createElementNS("http://www.w3.org/2000/svg", "line");
   const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");

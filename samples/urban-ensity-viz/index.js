@@ -23,7 +23,6 @@ document.getElementById('configButton').onclick = () => {
 
 function setHeatmap(viewer, points, heatmapConfig) {
     heatmapPoints = points;
-    console.log(points.length)
     heatmap = new Modelo.View.Visualize.HeatMap(viewer.getRenderScene());
     viewer.getScene().addVisualize(heatmap);
     heatmap.setParameter("points", points);
