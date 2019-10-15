@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>background</title>
+  <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../assets/css/range.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/semantic.min.js"></script>
+  <script src="../../assets/js/range.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+    }
+
+    #model {
+      height: 100%;
+      width: calc(100% - 320px);
+    }
+
+    .item {
+      display: none;
+    }
+
+    .item.active {
+      display: block;
+    }
+
+    .item-img {
+      cursor: pointer;
+      width: 140px;
+      height: 140px;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .item-img:hover {
+      opacity: 0.6;
+    }
+
+    .item-img:first-child {
+      margin-right: 16px;
+    }
+
+    .wrapper-right label {
+      color: rgba(0, 0, 0, 0.87);
+      font-size: 1rem;
+      font-weight: 700;
+      position: fixed;
+      top: 0.68571429rem;
+      right: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      width: 320px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="page-header">
+      <h1> <small>Urban Ensity Viz Settings</small></h1>
+    </div>
+    <form class="form-horizontal" id="configForm">
+      <div class="form-group">
+        <label for="inputGridSize" class="col-sm-3 control-label">GridSize</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="inputGridSize" name="gridSize" placeholder="8">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputBlend" class="col-sm-3 control-label">Blend</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="inputBlend" name="blend" placeholder="1 = true, 0 = false">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputBlend" class="col-sm-3 control-label">Data</label>
+        <div class="col-sm-9">
+            <button type="button" class="btn btn-default" id="randomData">Random Heatmap Data</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-10">
+          <button type="button" class="btn btn-default" id="configButton">Apply</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="wrapper-right">
+    <label id="progress">Loading: 0</label>
+  </div>
+  <div id="model">
+    <div id="label" style="width: 10px; height: 10px; position: absolute; color: yellow"></div>
+  </div>
+  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.4-lts.js"></script>
+  <script>
+    $(function () {
+      $("#bgmode").change(function () {
+        var index = parseInt(this.value);
+        $("#content .item").removeClass("active");
+        $("#content .item:nth-child(" + (index + 1) + ")").addClass("active");
+      });
+    });
+  </script>
+  <script src="/assets/js/utils.js"></script>
+  <script src="./data.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>
