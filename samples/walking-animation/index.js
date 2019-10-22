@@ -16,8 +16,10 @@ viewer.getScene().addPawn(ground);
 
 var path = [
   [-10, -10, 1.0],
-  [-10, 10, 1.0],
-  [10, 10, 1.0],
+  [-10, 9, 1.0],
+  [-9, 10, 1.0],
+  [9, 10, 1.0],
+  [10, 9, 1.0],
   [10, -10, 1.0]
 ];
 var person = new Modelo.View.Pawn("person", viewer.getResourceManager(), viewer.getMaterialManager());
@@ -34,7 +36,7 @@ person.loadGltfModel("./scene.gltf").then(function() {
   skeleton.doAnimation(animation);
 
   // Set the scaling and rotation of the person so that it can move forwad.
-  person.setScaling(1, 1, 1);
+  person.setScaling(1.5, 1.5, 1.5);
   person.rotate(3.1416, [0, 0, 1], [0, 0, 0]);
 
   var pathFollowingAnimator = new Modelo.View.Tool.PathFollowingAnimator(viewer, path);
@@ -50,8 +52,8 @@ person.loadGltfModel("./scene.gltf").then(function() {
 var ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
 ribbon.setEnabled(true);
 viewer.getScene().addVisualize(ribbon);
-ribbon.setParameter("width", 4);
-ribbon.setParameter("unitLenght", 1000);
-ribbon.setParameter("speed", 1);
+ribbon.setParameter("width", 10);
+ribbon.setParameter("unitLenght", 1);
+ribbon.setParameter("speed", -1);
 ribbon.setParameter("platteTexture", "./platte.png");
 ribbon.addRibbon(path);
