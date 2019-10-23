@@ -7,7 +7,7 @@ var appToken =
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-var viewer = new Modelo.View.Viewer3D("model");
+var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 
 viewer.setBackgroundColor([0, 0, 0, 1])
 viewer
@@ -19,6 +19,7 @@ viewer
     })
     .then(() => {
         viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+        viewer.addInput(new Modelo.View.Input.Touch(viewer));
     });
 
 viewer.setRenderingLinesEnabled(true);

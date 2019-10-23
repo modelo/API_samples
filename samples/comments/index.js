@@ -2,7 +2,7 @@ var modelId = "q8ZjpB8a";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA" // A sample app token
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-var viewer = new Modelo.View.Viewer3D("model");
+var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 let addComment = true;
 var c = document.getElementById("model");
 viewer

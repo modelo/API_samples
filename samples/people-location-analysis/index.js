@@ -7,7 +7,7 @@ Modelo.init({
     appToken
 });
 
-const viewer = new Modelo.View.Viewer3D("model");
+const viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 viewer.setRenderingLinesEnabled(true);
 viewer.loadModel(modelId, progress => {
   // /assets/js/utils.js

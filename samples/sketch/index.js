@@ -6,7 +6,7 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 document.body.appendChild(container);
 
-var viewer = new Modelo.View.Viewer3D("model");
+var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 // init slider
 $("#range1").range({
   min: 1.0,
@@ -77,6 +77,7 @@ document.getElementById("Surfacecolor248").onclick = function(evt) {
 // load model
 viewer.loadModel(modelId).then(() => {
   viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+  viewer.addInput(new Modelo.View.Input.Touch(viewer));
   var keyboard = new Modelo.View.Input.Keyboard(viewer);
   viewer.addInput(keyboard);
   keyboard.addKeyUpListener(function(keyboard) {

@@ -7,7 +7,7 @@ Modelo.Auth.signIn(appToken,
 
         var that = this;
 
-        var viewer1 = new Modelo.View.Viewer3D("model");
+        var viewer1 = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
      
         viewer1.addInput(new Modelo.View.Input.Mouse(viewer1)); // Add mouse to control camera.
 

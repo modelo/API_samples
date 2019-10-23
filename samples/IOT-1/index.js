@@ -37,6 +37,7 @@ $("#radius").range({
 
 const viewer = new Modelo.View.Viewer3DDark("model");
 viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+viewer.addInput(new Modelo.View.Input.Touch(viewer));
 let initiated = false;
 let names = [];
 document.getElementById("highlight").onchange = function(evt) {
