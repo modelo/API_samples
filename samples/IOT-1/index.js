@@ -35,7 +35,7 @@ $("#radius").range({
   }
 });
 
-const viewer = new Modelo.View.Viewer3DDark("model");
+const viewer = new Modelo.View.Viewer3DDark("model", { isMobile: isMobile() });
 viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 viewer.addInput(new Modelo.View.Input.Touch(viewer));
 let initiated = false;
