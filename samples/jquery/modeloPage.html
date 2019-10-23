@@ -16,6 +16,7 @@
   );
   viewer.loadModel(modelId).then(() => {
     viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+    viewer.addInput(new Modelo.View.Input.Touch(viewer));
     var keyboard = new Modelo.View.Input.Keyboard(viewer); // Add keyboard callback.
     viewer.addInput(keyboard);
     keyboard.addKeyUpListener(function(keyboard) {

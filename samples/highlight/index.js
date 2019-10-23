@@ -68,6 +68,7 @@ document.getElementById("highlight").onchange = function(evt) {
 // load model
 viewer.loadModel(modelId).then(() => {
   viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+  viewer.addInput(new Modelo.View.Input.Touch(viewer));
   var keyboard = new Modelo.View.Input.Keyboard(viewer);
   viewer.addInput(keyboard);
   keyboard.addKeyUpListener(function(keyboard) {

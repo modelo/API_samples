@@ -18,5 +18,6 @@ viewer
     })
     .then(() => {
         viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+        viewer.addInput(new Modelo.View.Input.Touch(viewer));
     });
 

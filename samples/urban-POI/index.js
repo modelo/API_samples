@@ -111,8 +111,9 @@ function setText3DAndPawn(viewer, data, text3DConfig, pawnConfig) {
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-const viewer = new Modelo.View.Viewer3D("model");
+const viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+viewer.addInput(new Modelo.View.Input.Touch(viewer));
 viewer.loadModel(modelId, progress => {
   // /assets/js/utils.js
   updateProgress(progress);

@@ -8,7 +8,7 @@ function updateProgress(progress) {
   c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
 }
 
-var viewer = new Modelo.View.Viewer3D("model");
+var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 
 document.getElementById("specular").onchange = function(evt) {
   viewer.setSpecularEnabled(document.getElementById("specular").checked);
@@ -50,5 +50,6 @@ $("#range3").range({
 
 viewer.loadModel(modelId, updateProgress).then(() => {
   viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
+  viewer.addInput(new Modelo.View.Input.Touch(viewer));
   console.log("done");
 });
