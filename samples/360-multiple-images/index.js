@@ -8,6 +8,7 @@ const viewer = new Modelo.View.Viewer360(containerId);
 
 // add mouse to control camera.
 viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+viewer.addInput(new Modelo.View.Input.Touch(viewer));
 // add keyboard callback.
 const keyboard = new Modelo.View.Input.Keyboard(viewer);
 viewer.addInput(keyboard);

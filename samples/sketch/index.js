@@ -6,7 +6,7 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 document.body.appendChild(container);
 
-var viewer = new Modelo.View.Viewer3D("model");
+var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 // init slider
 $("#range1").range({
   min: 1.0,
@@ -66,17 +66,18 @@ document.getElementById("Sketchcolor248").onclick = function(evt) {
 };
 // set surface color
 document.getElementById("Surfacecolor0").onclick = function(evt) {
-  viewer.setEffectParameter("Sketch", "surfaceColor", [0, 0, 0]);
+  viewer.setEffectParameter("Sketch", "surfaceColor", [0, 0, 0, 1.0]);
 };
 document.getElementById("Surfacecolor128").onclick = function(evt) {
-  viewer.setEffectParameter("Sketch", "surfaceColor", [0.5, 0.5, 0.5]);
+  viewer.setEffectParameter("Sketch", "surfaceColor", [0.5, 0.5, 0.5, 1.0]);
 };
 document.getElementById("Surfacecolor248").onclick = function(evt) {
-  viewer.setEffectParameter("Sketch", "surfaceColor", [1, 1, 1]);
+  viewer.setEffectParameter("Sketch", "surfaceColor", [1, 1, 1, 1.0]);
 };
 // load model
 viewer.loadModel(modelId).then(() => {
   viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+  viewer.addInput(new Modelo.View.Input.Touch(viewer));
   var keyboard = new Modelo.View.Input.Keyboard(viewer);
   viewer.addInput(keyboard);
   keyboard.addKeyUpListener(function(keyboard) {

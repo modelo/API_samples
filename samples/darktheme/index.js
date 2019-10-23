@@ -3,7 +3,7 @@ const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZ
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-var viewer = new Modelo.View.Viewer3DDark("model");
+var viewer = new Modelo.View.Viewer3DDark("model", { isMobile: isMobile() });
 
 viewer
     .loadModel(modelId, progress => {
@@ -15,4 +15,5 @@ viewer
     })
     .then(() => {
         viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+        viewer.addInput(new Modelo.View.Input.Touch(viewer));
     });

@@ -2,9 +2,10 @@ var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-const viewer = new Modelo.View.Viewer3D("model");
+const viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 
 viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+viewer.addInput(new Modelo.View.Input.Touch(viewer));
 const keyboard = new Modelo.View.Input.Keyboard(viewer);
 viewer.addInput(keyboard);
 keyboard.addKeyUpListener(keyboard => {
