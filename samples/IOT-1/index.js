@@ -35,7 +35,7 @@ $("#radius").range({
   }
 });
 
-const viewer = new Modelo.View.Viewer3DDark("model", { isMobile: isMobile() });
+const viewer = new Modelo.View.Viewer3D("model");
 viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 viewer.addInput(new Modelo.View.Input.Touch(viewer));
 let initiated = false;
@@ -43,7 +43,7 @@ let names = [];
 document.getElementById("highlight").onchange = function(evt) {
   const highlightChecked = document.getElementById("highlight").checked;
   viewer.setEffectEnabled("Highlight", highlightChecked);
-  if (highlightChecked && !initiated) {
+  if (highlightChecked) {
       initiated = true;
       viewer.getRenderScene().getEffect("Highlight").addElements(names, {
         emissiveColor: [1.0, 0.0, 0.0]
@@ -74,12 +74,14 @@ document.getElementById("highlight").onchange = function(evt) {
 document.getElementById("glow").onchange = function(evt) {
   const checked = document.getElementById("glow").checked;
   viewer.setEffectEnabled("Glow", checked);
-  if (checked && !initiated) {
+  if (checked) {
     initiated = true;
-    viewer.getScene().setElementsColor(item, [1.0, 1.0, 0.0]);
+    viewer.getScene().setElementsColor(names, [1.0, 1.0, 0.0]);
     viewer.getRenderScene().getEffect("Glow").addElements(names, {
       emissiveColor: [1.0, 1.0, 0.0]
     });
+  } else {
+    viewer.getScene().setElementsColor(names, null);
   }
   $("#intensity1").range({
       min: 0.0,
