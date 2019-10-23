@@ -17,6 +17,9 @@ viewer
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
     viewer.addInput(new Modelo.View.Input.Touch(viewer));
+
+    viewer.getCamera().setSensitivity({"touchPan": 0.9});
+
     viewer.setSmartCullingEnabled(false);
     viewer.setSpecularEnabled(true);
   });
