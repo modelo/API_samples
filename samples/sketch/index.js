@@ -66,13 +66,13 @@ document.getElementById("Sketchcolor248").onclick = function(evt) {
 };
 // set surface color
 document.getElementById("Surfacecolor0").onclick = function(evt) {
-  viewer.setEffectParameter("Sketch", "surfaceColor", [0, 0, 0]);
+  viewer.setEffectParameter("Sketch", "surfaceColor", [0, 0, 0, 1.0]);
 };
 document.getElementById("Surfacecolor128").onclick = function(evt) {
-  viewer.setEffectParameter("Sketch", "surfaceColor", [0.5, 0.5, 0.5]);
+  viewer.setEffectParameter("Sketch", "surfaceColor", [0.5, 0.5, 0.5, 1.0]);
 };
 document.getElementById("Surfacecolor248").onclick = function(evt) {
-  viewer.setEffectParameter("Sketch", "surfaceColor", [1, 1, 1]);
+  viewer.setEffectParameter("Sketch", "surfaceColor", [1, 1, 1, 1.0]);
 };
 // load model
 viewer.loadModel(modelId).then(() => {
