@@ -39,7 +39,7 @@ person.loadGltfModel("./scene.gltf").then(function() {
   person.setScaling(1.5, 1.5, 1.5);
   person.rotate(3.1416, [0, 0, 1], [0, 0, 0]);
 
-  var pathFollowingAnimator = new Modelo.View.Tool.PathFollowingAnimator(viewer, path);
+  var pathFollowingAnimator = new Modelo.View.PathFollowingAnimator(viewer, path);
   // Attach the person to the path following animation.
   pathFollowingAnimator.addPawn(person);
   // Set the path following animation speed.
