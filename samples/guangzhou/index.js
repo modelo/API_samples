@@ -58,3 +58,5 @@ for (var key in pathes) {
   });
   ribbon.addRibbon(path);
 }
+
+viewer.setEffectParameter("Glow", "intensity", 1.2);
