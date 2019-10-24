@@ -133,3 +133,5 @@ pointsArray.forEach(function(points) {
   });
   ribbon.addRibbon(points);
 });
+
+viewer.setEffectParameter("Glow", "intensity", 1.2);

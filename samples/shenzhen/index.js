@@ -34,7 +34,7 @@ viewer
     viewer.setEffectParameter("Sketch", "colored", true);
     viewer.setEffectParameter("Sketch", "transparents", true);
     viewer.setEffectParameter("Sketch", "contrast", 60),
-    viewer.setEffectParameter("Sketch", "detail", 20)
+    viewer.setEffectParameter("Sketch", "detail", 20);
   }
 
 
@@ -80,3 +80,5 @@ for (var key in pathes2) {
   });
   ribbon2.addRibbon(path);
 }
+
+viewer.setEffectParameter("Glow", "intensity", 1.2);
