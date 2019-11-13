@@ -7,7 +7,8 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 document.body.appendChild(container);
 
 var viewer = new Modelo.View.Viewer3D("model", {
-  stencil: true
+  stencil: true,
+  isMobile: isMobile()
 });
 // init slider
 $("#intensity").range({
