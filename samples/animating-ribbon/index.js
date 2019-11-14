@@ -60,7 +60,7 @@ var pointsArray = [
   [2889,  1520, 0.3],
   [3386,  1520, 0.3]],
 
-  [[1913, 1483, 0.3]
+  [[1913, 1483, 0.3],
   [415, 1518, 0.3]],
   
   [[3412, 1616, 0.3],
@@ -71,6 +71,7 @@ var pointsArray = [
   [1944, 2242, 0.3]]
 ]
 
+var ribbons = [];
 pointsArray.forEach(function(points) {
-  ribbon.addRibbon(points);
+  ribbons.push(ribbon.addRibbon(points));
 });
