@@ -67,21 +67,21 @@ viewer
   });
 
   Modelo.Model.get(modelId).then(function(res) {
-    var index = res.downloadUrl.findIndex(function(item) { return item.filename === "floorPlans.json"});
+    var index = res.attachments.findIndex(function(item) { return item.filename === "floorPlans.json"});
     if (index !== -1) {
       // Get uploaded svg files.
-      $.get(res.downloadUrl[index].url, function(data) {
+      $.get(res.attachments[index].url, function(data) {
         var floorPlans = Object.values(data);
         if (floorPlans.length === 0) {
           return;
         }
         // Get the url of svg file.
-        index = res.downloadUrl.findIndex(function(item) {
+        index = res.attachments.findIndex(function(item) {
           var strs = item.filename.split("_");
           return strs[strs.length - 1] === floorPlans[0].file;
         });
         if (index !== -1) {
-          $.get(res.downloadUrl[index].url, function(data){
+          $.get(res.attachments[index].url, function(data){
             document.getElementById("svg-container").innerHTML = data;
 
             window.addEventListener('mouseup', (e) => {
