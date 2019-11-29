@@ -57,6 +57,17 @@
         margin: 0;
         padding: 0;
       }
+    
+      .thumbnail {
+        position:relative;
+        width:100px;
+        height:100px;
+        left: 0px;
+        margin-top: 20px;
+        text-align: center;
+        padding-top: 20px;
+        box-shadow: 4px 4px 4px #888888;    
+      }
 
       #model {
         width: calc(100% - 250px);
@@ -66,9 +77,11 @@
 
   <body>
     <div class="buttons-wrapper">
-      <label id="element">Select element with left button: N/A</label>
-      <button type="button" class="ui button white" id="random-color">Random Color</button>
-      <button type="button" class="ui button white" id="change-texture">Change Texture</button>
+      <label id="element">Element selected: N/A</label>
+      <button type="button" class="ui button white" id="random-color">Assign Random Color</button>
+      <div id="thumbnail1" class = "thumbnail" style="background-image: url('texture.jpg'); ">Click to <br>Change Textures</div>
+      <div id="thumbnail2" class = "thumbnail" style="background-image: url('texture 2.jpg'); ">Click to <br>Change Textures</div>
+      <div id="thumbnail3" class = "thumbnail" style="background-image: url('texture 3.jpg'); ">Click to <br>Change Textures</div>
     </div>
     <div class="wrapper-right">
       <label id="progress">Loading: 0</label>

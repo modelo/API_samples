@@ -1,5 +1,5 @@
-var modelId = "q8ZjpB8a";
-var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
+var modelId = "GY2KL28b";
+var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTEsInVzZXJuYW1lIjoid2FuZ2p1bnJlbiIsImlhdCI6MTU0ODI5NDMxMSwiZXhwIjozMzA4NDI5NDMxMX0.Ruz4m7XJAyYQRNDsFeJEd8Z44UqotOA-CPau4q91G2Y"
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
@@ -16,9 +16,16 @@ viewer.addInput(new Modelo.View.Input.Touch(viewer));
 var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
 viewer.addTool(selectElementTool);
 selectElementTool.setEnabled(true);
+
+viewer.setEffectEnabled("Sketch", true);
+viewer.setEffectParameter("Sketch", "colored", true);
+viewer.setShadowEnabled(true);
+viewer.setEffectEnabled("SSAO", true);
+
 viewer.getEventEmitter().on("onPointPicked", point => {
   console.log(point);
 })
+
 viewer.loadModel(modelId, updateProgress).then(() => {
   // success
   console.log("loading done");
@@ -51,8 +58,12 @@ viewer.loadModel(modelId, updateProgress).then(() => {
         }
       });
     }
+    if (elementNames.length == 0){
+      window.alert("Please select an element first.");
+    }
   };
-  document.getElementById("change-texture").onclick = function() {
+
+  document.getElementById("thumbnail1").addEventListener('click',function(event) {
     if (elementNames) {
       elementNames.forEach(function(elementName) {
         var materials = viewer.getScene().getElementMaterials(elementName);
@@ -60,8 +71,48 @@ viewer.loadModel(modelId, updateProgress).then(() => {
           materials.forEach(function(material) {
             material.setDiffuseTexture("./texture.jpg");
           });
+          selectElementTool.pick([], false);
         }
       });
     }
-  };
+    if (elementNames.length == 0){
+      window.alert("Please select an element with texture first.");
+    }
+  });
+
+  document.getElementById("thumbnail2").addEventListener('click',function(event) {
+    if (elementNames) {
+      elementNames.forEach(function(elementName) {
+        var materials = viewer.getScene().getElementMaterials(elementName);
+        if (materials) {
+          materials.forEach(function(material) {
+            material.setDiffuseTexture("./texture 2.jpg");
+          });
+          selectElementTool.pick([], false);
+        }
+      });
+    }
+    if (elementNames.length == 0){
+      window.alert("Please select an element with texture first.");
+    }
+  });
+
+  document.getElementById("thumbnail3").addEventListener('click',function(event) {
+    if (elementNames) {
+      elementNames.forEach(function(elementName) {
+        var materials = viewer.getScene().getElementMaterials(elementName);
+        if (materials) {
+          materials.forEach(function(material) {
+            material.setDiffuseTexture("./texture 3.jpg");
+          });
+          selectElementTool.pick([], false);
+        }
+      });
+    }
+    if (elementNames.length == 0){
+      window.alert("Please select an element with texture first.");
+    }
+  });
+
+  
 });
