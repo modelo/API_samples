@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>background</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.3.0/echarts-en.common.js"></script>
+    <script src="../../assets/js/jquery.min.js"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+      }
+      
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper .button {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+      }
+      #model {
+        position: relative;
+        height: 100%;
+        width: calc(100% - 320px);
+      }
+
+      .item {
+        display: none;
+      }
+
+      .item.active {
+        display: block;
+      }
+
+      .item-img {
+        cursor: pointer;
+        width: 140px;
+        height: 140px;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .item-img:hover {
+        opacity: 0.6;
+      }
+
+      .item-img:first-child {
+        margin-right: 16px;
+      }
+
+      .wrapper {
+        padding: 10px;
+        width: 320px;
+        min-width: 320px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        /* position: fixed; */
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+      }
+      #panelLabel {
+      background:rgba(255,255,255,0.85);
+      border-radius:3px;
+      position: absolute;
+      padding: 10px 40px;
+      visibility: hidden;
+    }
+
+    #panelLabel p {
+      margin: 0;
+      color:rgba(0,0,0,1);
+      font-family:PingFangSC-Medium,PingFangSC;
+    }
+    .panelLabel-title {
+      font-size:16px;
+      font-weight:500;
+      line-height:22px;
+    }
+    .panelLabel-text {
+      font-size:11px;
+      font-weight:400;
+      line-height:16px;
+    }
+    .label-temperature {
+      color: #00CED1;
+    }
+    .label-speed {
+      color: #CD950C;
+    }
+    #panelLine {
+      position: absolute;
+    }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+        <div class="page-header">
+            <h1> <small>2D Graph Interaction</small></h1>
+          </div>
+        <div id="main" style="width: 300px;height:300px;"></div>
+    </div>
+    <div class="wrapper-right">
+      <label id="progress">Loading: 0</label>
+    </div>
+    <div id="model">
+      <div id="panelLabel">
+        <p class="panelLabel-title">举个栗子</p>
+        <p class="panelLabel-text">数据：<label class="label-temperature">666 &#176;C </label></p>
+        <p class="panelLabel-text">数据：<label class="label-speed">888 m/s</label></p>
+      </div>
+      <svg id="panelLine" pointer-events="none" width="100%" height="100%"></svg>
+    </div>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.6-lts.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="./data.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

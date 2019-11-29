@@ -3,7 +3,7 @@ var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-var viewer = new Modelo.View.Viewer3D("model");
+var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 
 viewer.setRenderingLinesEnabled(true);
 viewer
@@ -17,6 +17,7 @@ viewer
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
     viewer.addInput(new Modelo.View.Input.Touch(viewer));
+    viewer.getCamera().setSensitivity({"touchPan": 0.9});
     viewer.setSmartCullingEnabled(false);
     viewer.setSpecularEnabled(true);
   });
@@ -25,11 +26,14 @@ viewer
 
   viewer.setBackgroundColor([26.0 / 255.0, 26.0 / 255.0, 55.0 / 255.0, 1.0]);
 
-  viewer.setEffectEnabled("Sketch", true);
-  viewer.setEffectParameter("Sketch", "color", [0.0 / 255.0, 255.0 / 255.0, 243.0 / 255.0]);
-  viewer.setEffectParameter("Sketch", "colored", true);
-  //this.setEffectParameter("Sketch", "surfaceColor", [51.0 / 255.0, 145.0 / 255.0, 1.0, 0.2]);
-  viewer.setEffectParameter("Sketch", "transparents", true);
+  if (!isMobile()) {
+    viewer.setEffectEnabled("Sketch", true);
+    viewer.setEffectParameter("Sketch", "color", [180 / 255.0, 180 / 255.0, 180 / 255.0]);
+    viewer.setEffectParameter("Sketch", "colored", true);
+    viewer.setEffectParameter("Sketch", "transparents", true);
+    viewer.setEffectParameter("Sketch", "contrast", 60),
+    viewer.setEffectParameter("Sketch", "detail", 20)
+  }
 
   // Turn on SSAO effect
   viewer.setEffectEnabled("SSAO", true);

@@ -3,7 +3,7 @@ var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-var viewer = new Modelo.View.Viewer3DDark("model");
+var viewer = new Modelo.View.Viewer3DDark("model", { isMobile: isMobile() });
 
 viewer.setRenderingLinesEnabled(true);
 viewer
@@ -60,7 +60,7 @@ var pointsArray = [
   [2889,  1520, 0.3],
   [3386,  1520, 0.3]],
 
-  [[1913, 1483, 0.3]
+  [[1913, 1483, 0.3],
   [415, 1518, 0.3]],
   
   [[3412, 1616, 0.3],
@@ -71,6 +71,7 @@ var pointsArray = [
   [1944, 2242, 0.3]]
 ]
 
+var ribbons = [];
 pointsArray.forEach(function(points) {
-  ribbon.addRibbon(points);
+  ribbons.push(ribbon.addRibbon(points));
 });

@@ -2,9 +2,10 @@ var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-const viewer = new Modelo.View.Viewer3D("model");
+const viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 
 viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+viewer.addInput(new Modelo.View.Input.Touch(viewer));
 const keyboard = new Modelo.View.Input.Keyboard(viewer);
 viewer.addInput(keyboard);
 keyboard.addKeyUpListener(keyboard => {
@@ -34,7 +35,7 @@ metaball.setParameter("backgroundColor", [1, 1, 1, 0.0]);
 metaball.setParameter("color", [1.0, 0.45, 0.45, 1.0]);
 
 // Paint the ground 
-var groundPlane = new Modelo.View.Pawn("ground1", viewer.getResourceManager(), viewer.getMaterialManager());
+const groundPlane = new Modelo.View.Pawn("ground1", viewer.getResourceManager(), viewer.getMaterialManager());
 groundPlane.createTexturedQuad([metaball.getTexture()]);
 groundPlane.setScaling(40, 40, 1.0);
 groundPlane.setTranslation(0, 0, 1.01);
@@ -50,19 +51,18 @@ metaball2.setParameter("backgroundColor", [1, 1, 1, 0.0]);
 metaball2.setParameter("color", [0.45, 0.45, 1.0, 1.0]);
 
 // Paint the ground 
-var groundPlane2 = new Modelo.View.Pawn("ground2", viewer.getResourceManager(), viewer.getMaterialManager());
+const groundPlane2 = new Modelo.View.Pawn("ground2", viewer.getResourceManager(), viewer.getMaterialManager());
 groundPlane2.createTexturedQuad([metaball2.getTexture()]);
 groundPlane2.setScaling(40, 40, 1.0);
 groundPlane2.setTranslation(0, 0, 1.01);
 viewer.getScene().addPawn(groundPlane2);
 
 // Put pawns on random positions
-for (var i = 0; i < data.length; i++) {
-    var cube = new Modelo.View.Pawn("cube" + i, viewer.getResourceManager(), viewer.getMaterialManager());
+for (let i = 0; i < data.length; i++) {
+    const cube = new Modelo.View.Pawn("cube" + i, viewer.getResourceManager(), viewer.getMaterialManager());
     cube.createSolidCube([0.8, 0.8, 0.8]);
-
-    var x = data[i].x * 80 - 40.0;
-    var y = data[i].y * 80 - 40.0;
+    const x = data[i].x * 80 - 40.0;
+    const y = data[i].y * 80 - 40.0;
     cube.setTranslation(x, y, 2.013);
     cube.setScaling(0.6, 0.6, 0.6);
     viewer.getScene().addPawn(cube);

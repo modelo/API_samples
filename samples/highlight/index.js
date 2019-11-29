@@ -7,7 +7,8 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 document.body.appendChild(container);
 
 var viewer = new Modelo.View.Viewer3D("model", {
-  stencil: true
+  stencil: true,
+  isMobile: isMobile()
 });
 // init slider
 $("#intensity").range({
@@ -68,6 +69,7 @@ document.getElementById("highlight").onchange = function(evt) {
 // load model
 viewer.loadModel(modelId).then(() => {
   viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+  viewer.addInput(new Modelo.View.Input.Touch(viewer));
   var keyboard = new Modelo.View.Input.Keyboard(viewer);
   viewer.addInput(keyboard);
   keyboard.addKeyUpListener(function(keyboard) {

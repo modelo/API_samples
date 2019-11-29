@@ -2,10 +2,11 @@ var modelId = "q8ZjpB8a";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA" // A sample app token
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-var viewer = new Modelo.View.Viewer3D("model");
+var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 
 // Add mouse control.
 var mouse = viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+viewer.addInput(new Modelo.View.Input.Touch(viewer));
 
 // Add select element tool.
 var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);

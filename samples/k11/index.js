@@ -3,7 +3,7 @@ var splitted = window.location.href.split('?'); // Get model ID from URL
 
 var modelId = splitted[1] || "q1x6408J";
 var appToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsInVzZXJuYW1lIjoic2FtcGxlcyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1NTIwMTIyMTksImV4cCI6MzMwODgwMTIyMTl9.Fb-AKOuaWYxwIMmyu3T6GENkUrbP8J21MffB78IpXU0";
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
@@ -18,5 +18,6 @@ viewer
     })
     .then(() => {
         viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+        viewer.addInput(new Modelo.View.Input.Touch(viewer));
     });
 

@@ -1,4 +1,4 @@
-var modelId1 = "q8ZjpB8a";
+var modelId1 = "j1mXXDrb";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
@@ -24,7 +24,7 @@ viewer1
     });
   });
 
-var modelId2 = "q8ZjpB8a";
+var modelId2 = "Vr4BBRYg";
 var viewer2 = new Modelo.View.Viewer3D("model2");
 viewer2
   .loadModel(modelId2, progress => {
