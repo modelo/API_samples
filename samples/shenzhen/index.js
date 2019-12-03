@@ -30,7 +30,7 @@ viewer
 
   if (!isMobile()) {
     viewer.setEffectEnabled("Sketch", true);
-    viewer.setEffectParameter("Sketch", "color", [180 / 255.0, 180 / 255.0, 180 / 255.0]);
+    viewer.setEffectParameter("Sketch", "color", [0.0 / 255.0, 255.0 / 255.0, 243.0 / 255.0]);
     viewer.setEffectParameter("Sketch", "colored", true);
     viewer.setEffectParameter("Sketch", "transparents", true);
     viewer.setEffectParameter("Sketch", "contrast", 60),
