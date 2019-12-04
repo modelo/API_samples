@@ -51,4 +51,7 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   document.getElementById("blue").onclick = function() {
     viewer.getScene().setElementsColor(elementNames, [0, 0, 1]);
   };
+  document.getElementById("hide").onclick = function() {
+    viewer.getScene().setElementsVisibility(elementNames, false);
+  };
 });
