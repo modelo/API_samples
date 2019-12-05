@@ -42,6 +42,7 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   document.getElementById("default").onclick = function() {
     viewer.getScene().setElementsColor(elementNames, null);
   };
+  
   document.getElementById("red").onclick = function() {
     viewer.getScene().setElementsColor(elementNames, [1, 0, 0]);
   };
