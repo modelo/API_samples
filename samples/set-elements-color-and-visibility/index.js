@@ -1,5 +1,6 @@
 var modelId = "q8ZjpB8a";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA" // A sample app token
+var HiddenElements = [];
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
@@ -27,9 +28,9 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   let elementNames = [];
   viewer.getEventEmitter().on("onElementSelected", elementNames1 => {
     // Restore the element's colors.
-    if (elementNames.length !== 0) {
+    /*if (elementNames.length !== 0) {
       viewer.getScene().setElementsColor(elementNames, null);
-    }
+    }*/
 
     elementNames = elementNames1;
     if (elementNames1.length === 0) {
@@ -42,6 +43,7 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   document.getElementById("default").onclick = function() {
     viewer.getScene().setElementsColor(elementNames, null);
   };
+  
   document.getElementById("red").onclick = function() {
     viewer.getScene().setElementsColor(elementNames, [1, 0, 0]);
   };
@@ -50,5 +52,14 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   };
   document.getElementById("blue").onclick = function() {
     viewer.getScene().setElementsColor(elementNames, [0, 0, 1]);
+  };
+  document.getElementById("hide").onclick = function() {
+    HiddenElements.push(elementNames);
+    viewer.getScene().setElementsVisibility(elementNames, false);
+  };
+  document.getElementById("show").onclick = function() {
+    HiddenElements.forEach(element => {
+      viewer.getScene().setElementsVisibility(element, true);
+    });
   };
 });
