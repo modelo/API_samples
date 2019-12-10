@@ -10,6 +10,7 @@ var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
 viewer.addTool(selectElementTool);
 selectElementTool.setEnabled(true);
 
+
 viewer
   .loadModel(modelId, progress => {
     // second parameter is an optional progress callback
