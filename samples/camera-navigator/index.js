@@ -1,24 +1,20 @@
-var modelId = "2YDOma15";
-var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjUsInVzZXJuYW1lIjoiZnFsIiwiaWF0IjoxNTQ4Mjk4NDIxLCJleHAiOjMzMDg0Mjk4NDIxfQ.-ZNOLrw1W9OOf9iG8QkgZuFJR5JUJmHDZvkZLsdR15Y";
+var modelId = "a8bv6085";
+var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA";
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
-
 var cameraNavigator = new Modelo.View.Tool.CameraNavigator(viewer);
-    // Add select element tool.
-
-    // Register the element selected event.
-    var elementNames = [];
-    viewer.getEventEmitter().on("onElementSelected", function(elementInfos) {
-      console.log(elementInfos);
-      elementNames = [];
-      elementInfos.forEach(function(elementInfo) {
-        var elementName = elementInfo.modelId + "+" + elementInfo.fileName + "/" + elementInfo.elementName;
-        elementNames.push(elementName);
-      });
-    });
     
+var keyPoints = [];
+
+var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
+
+viewer.setEffectEnabled("Sketch", true);
+viewer.setEffectParameter("Sketch", "colored", true);
+viewer.setShadowEnabled(true);
+viewer.setEffectEnabled("SSAO", true);
+
 viewer
   .loadModel(modelId, progress => {
     // second parameter is an optional progress callback
@@ -30,39 +26,41 @@ viewer
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
     viewer.addInput(new Modelo.View.Input.Touch(viewer));
-    var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
+
+    //添加构件选择工具以打开鼠标光标选择选项
     viewer.addTool(selectElementTool);
     selectElementTool.setEnabled(true);
-    // add keyboard callback.
-    var keyboard = new Modelo.View.Input.Keyboard(viewer);
-    viewer.addInput(keyboard);
-    keyboard.addKeyUpListener(keyboard => {
-      if (keyboard.key === 27) {
-        viewer.destroy();
-      }
-    });
+
+    //通过使用鼠标点击事件，来获得鼠标在三维中的位置,然后把返回的点放入关键帧点列中
+    viewer.getEventEmitter().on("onPointPicked", point => {
+      keyPoints.push([point[0],point[1],point[2]+6]);
+      document.getElementById("points").innerHTML = 'Points selected：' + keyPoints.length;
+    })
 
     viewer.setSmartCullingEnabled(false);
-
-
   });
 
 
   document.getElementById("start").onclick = function() {
-    var keyPoints = [
-      [-70.29447174072266, -148.99954223632812, 10 + -13.434694290161133],
-      [-73.63975524902344, 58.515968322753906,  10 + 9.770840644836426],
-      [21.529281616210938, 39.228309631347656,  10 + 9.85794448852539],
-      [12.574904441833496, -137.81053161621094, 10 + -8.65424156188964]
-    ]
+    if(keyPoints.length == 0){
+      window.alert("click on the model surface to add navigation points.");
+    }
+    else if(keyPoints.length < 2){
+     window.alert("you don't have enough points to start the navigation.");
+    }
+    else{
+      cameraNavigator.setSpeed(0.5);
+      cameraNavigator.setRotationDuration(20);
+      cameraNavigator.clearKeyPoints();
 
-    cameraNavigator.setSpeed(0.5);
-    cameraNavigator.setRotationDuration(20);
-    cameraNavigator.clearKeyPoints();
-    keyPoints.forEach(function(keyPoint) {
-      cameraNavigator.addKeyPoint(keyPoint);
-    });
-    cameraNavigator.start();
+      keyPoints.forEach(function(keyPoint) {
+        cameraNavigator.addKeyPoint(keyPoint);
+      });
+      selectElementTool.pick([], false);
+      cameraNavigator.start();
+      keyPoints = [];
+      document.getElementById("points").innerHTML ='Points selected：'+ keyPoints.length;
+    }
   }
 
   document.getElementById("stop").onclick = function() {
