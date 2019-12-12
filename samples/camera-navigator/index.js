@@ -10,10 +10,7 @@ var keyPoints = [];
 
 var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
 
-viewer.setEffectEnabled("Sketch", true);
-viewer.setEffectParameter("Sketch", "colored", true);
-viewer.setShadowEnabled(true);
-viewer.setEffectEnabled("SSAO", true);
+
 
 viewer
   .loadModel(modelId, progress => {
@@ -22,6 +19,11 @@ viewer
     c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
   })
   .then(() => {
+    viewer.setEffectEnabled("Sketch", true);
+    viewer.setEffectParameter("Sketch", "colored", true);
+    viewer.setShadowEnabled(true);
+    viewer.setEffectEnabled("SSAO", true);
+
     // model loaded successfully
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
@@ -30,6 +32,8 @@ viewer
     //添加构件选择工具以打开鼠标光标选择选项
     viewer.addTool(selectElementTool);
     selectElementTool.setEnabled(true);
+    selectElementTool.setCloseUpEnabled(false);
+    selectElementTool.setHighlightEnabled(false);
 
     //通过使用鼠标点击事件，来获得鼠标在三维中的位置,然后把返回的点放入关键帧点列中
     viewer.getEventEmitter().on("onPointPicked", point => {
