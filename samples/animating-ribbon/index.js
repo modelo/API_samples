@@ -1,9 +1,10 @@
-var modelId = "z8AP9mYX";
+var modelId = "78RqEjYX";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTEsInVzZXJuYW1lIjoid2FuZ2p1bnJlbiIsImlhdCI6MTU0ODI5NDMxMSwiZXhwIjozMzA4NDI5NDMxMX0.Ruz4m7XJAyYQRNDsFeJEd8Z44UqotOA-CPau4q91G2Y"
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 var viewer = new Modelo.View.Viewer3DDark("model", { isMobile: isMobile() });
+//var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
 var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
 
 viewer.setRenderingLinesEnabled(true);
@@ -18,6 +19,7 @@ viewer
     // add mouse to control camera.
     viewer.addInput(new Modelo.View.Input.Mouse(viewer));
     viewer.addInput(new Modelo.View.Input.Touch(viewer));
+    
     // add keyboard callback.
     var keyboard = new Modelo.View.Input.Keyboard(viewer);
     viewer.addInput(keyboard);
@@ -41,20 +43,30 @@ viewer
   });
 
 viewer.setLazyRenderingEnabled(false);
+
+
 var ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
 ribbon.setEnabled(true);
 viewer.getScene().addVisualize(ribbon);
-ribbon.setParameter("width", 300);
-ribbon.setParameter("unitLenght", 20);
-ribbon.setParameter("speed", 0.5);
-ribbon.setParameter("platteTexture", "./arrowLine.png");
+ribbon.setParameter("width", 20);
+ribbon.setParameter("unitLenght", 30);
+ribbon.setParameter("speed", -0.5);
+ribbon.setParameter("platteTexture", "./warm.png");
 
-var pointsArray = [
-   [[223.88925170898438, 177.96585083007812, -5.224310398101807],
-  [223.94088745117188, 213.5816192626953, -5.258899688720703]]
-]
+var ribbon2= new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
+ribbon2.setEnabled(true);
+viewer.getScene().addVisualize(ribbon2);
+ribbon2.setParameter("width", 8);
+ribbon2.setParameter("unitLenght", 30);
+ribbon2.setParameter("speed", 0.5);
+ribbon2.setParameter("platteTexture", "./cold.png");
 
 var ribbons = [];
+var ribbons2 = [];
 pointsArray.forEach(function(points) {
   ribbons.push(ribbon.addRibbon(points));
+});
+
+pointsArray2.forEach(function(points) {
+  ribbons2.push(ribbon2.addRibbon(points));
 });
