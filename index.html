@@ -6,7 +6,7 @@
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-control" content="no-cache">
         <meta http-equiv="Cache" content="no-cache">
-        <title>Modelo API Samples</title>
+        <title>M.Build API Samples</title>
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link rel="icon" type="image/png" href="./modelo.png" sizes="16x16" />
         <style>
@@ -198,82 +198,82 @@
         <script>
 
         var files = {
-            "Smart-Cities": [
-                "beijing",
-                "shanghai",
-                "guangzhou",
-                "shenzhen"
+            "智慧城市|Smart-Cities": [
+                "北京|beijing",
+                "上海|shanghai",
+                "广州|guangzhou",
+                "深圳|shenzhen"
             ],
-            "View": [
+            "视窗|View": [
                 //"local-model",
-                "model-viewer",
-                "model-compare-viewer",                
-                "360-image-viewer",
-                "360-multiple-images",
-                'darktheme',
-                'model-compare-ui',
-                "default-ui",
-                'dwg-ui',
-                "sketch-ui",                                
+                "模型视窗|model-viewer",
+                "模型对比视窗|model-compare-viewer",
+                "360全景图视窗|360-image-viewer",
+                "360全景图跳转|360-multiple-images",
+                '暗色模式|darktheme',
+                '模型对比用户界面|model-compare-ui',
+                "默认用户界面|default-ui",
+                'DWG文件浏览界面|dwg-ui',
+                "手绘板界面|sketch-ui",
             ],
-            "Scene": [
-                "pawn",
-                "text3D",
-                "background",
-                "dump-screen",
-                "guid",
-                "camera-manipulation",
-                "set-elements-color-and-visibility",
-                "change-elements-material",
-                "switch-camera-type",
-                "html-labels",
-                "2D-3D"
+            "场景|Scene": [
+                "目标替换|pawn",
+                "立体文字|text3D",
+                "环境背景|background",
+                "截屏|dump-screen",
+                "全局ID|guid",
+                "相机控制|camera-manipulation",
+                "设置构件颜色和可见|set-elements-color-and-visibility",
+                "改变构件颜色|change-elements-material",
+                "切换相机透视模式|switch-camera-type",
+                "html标签定位|html-labels",
+                "二三维联动|2D-3D"
             ],
-            "Rendering Effects": [
-                "lighting",
-		        "explode-view",
-                "sketch",
-                "glow",
-                "highlight",
-                "depth-of-field"
+            "渲染特效|Rendering Effects": [
+                "光照|lighting",
+		            "模型炸开|explode-view",
+                "边线效果|sketch",
+                "物体发光|glow",
+                "高亮边缘|highlight",
+                "景深效果|depth-of-field"
             ],
-            "Tools": [
-                "section",
-                "magnify-glass",
-                "ruler",
-                "camera-navigator"
+            "工具|Tools": [
+                "剖面|section",
+                "放大镜|magnify-glass",
+                "量尺|ruler",
+                "相机漫游|camera-navigator"
             ],
-            "Model": [
-                "manipulate-model",
-                "upload-model",
-                "merge-models",
-                "comments",
-                "3d-pdf"
+            "模型|Model": [
+                "编辑模型|manipulate-model",
+                "上传模型|upload-model",
+                "合并模型|merge-models",
+                "备注卡片|comments",
+                "三维PDF|3d-pdf"
             ],
-            "BIM": [
-                "bim-tree",
-                "element-data"
+            "建筑信息模型|BIM": [
+                "BIM信息树|bim-tree",
+                "构件信息|element-data"
             ],
-	        "Visualization": [
-                "animating-ribbon",
-                "volume-rendering",
-                "multi-layer-volume",
-                "bar-chart",
-                "height-map",
-                "metaball",
-                "trail",
-                "walking-animation"
+	        "可视化|Visualization": [
+                "动态流线|animating-ribbon",
+                "气体渲染|volume-rendering",
+                "空间热力图|multi-layer-volume",
+                "三维柱状图|bar-chart",
+                "高程热力图|height-map",
+                "二维变形球|metaball",
+                "轨迹|trail",
+                "行走动画|walking-animation"
 	        ],
-            "Integration": [
+            "整合|Integration": [
                 "jquery"
             ],
-            "Revit Case": [
+            "演示案例|Test Case": [
                 "switch-style",
-                "2d-graph-interaction",
+                "二维图表联动|2d-graph-interaction",
                 "instant-adjustment",
                 "IOT-1",
                 "people-location-analysis",
-                'building-spacial-heatmap',
+                '楼宇空间热力图|building-spacial-heatmap',
                 "IOT-2",
                 "escape-route",
                 "traffic-flow",
@@ -369,7 +369,7 @@
             divs[ file ].className = 'link selected';
 
             window.location.hash = file;
-            viewer.src = 'samples/' + file + '/index.html' + '?' + suffix;
+            viewer.src = 'samples/' + file.slice(file.indexOf("|")+1) + '/index.html' + '?' + suffix;
             viewer.focus();
 
             button.style.display = '';
