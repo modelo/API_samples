@@ -1,4 +1,4 @@
-var modelId = "z8AP4qYX";
+var modelId = "xrajq31m";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
@@ -36,27 +36,21 @@ viewer
   
 >>>>>>> origin/newSamples
 
-const water = [modelId+"+0/100002"];
-const road = [modelId+"+0/100003"];
-const ground = [modelId+"+0/100008"];
-const greenland = [modelId+"+0/100010"];
-const sportsbuildings = [modelId+"+0/100009"];
-const institutionalbuildings = [modelId+"+0/100007"];
-const commercialbuildings = [modelId+"+0/100004"];
-const residentialbuildings = [modelId+"+0/100006"];
-const facilitybuildings = [modelId+"+0/100005"];
+const water = [modelId+"+0/100010"];
+const road = [modelId+"+0/100009"];
+const ground = [modelId+"+0/100007"];
+const greenland = [modelId+"+0/100006"];
+const sportsbuildings = [modelId+"+0/100003"];
+const institutionalbuildings = [modelId+"+0/100004"];
+const commercialbuildings = [modelId+"+0/100002"];
+const residentialbuildings = [modelId+"+0/100005"];
+const facilitybuildings = [modelId+"+0/100008"];
 
+const sportsboard = [modelId+"+0/100012"];
+const institutionalboard = [modelId+"+0/100013"];
+const commercialboard = [modelId+"+0/100014"];
+const residentialboard = [modelId+"+0/100011"];
 
-document.getElementById("explode").onclick = function() {
-  viewer.enterExplodedView([road,greenland,sportsbuildings, institutionalbuildings, commercialbuildings, residentialbuildings, facilitybuildings,], [[0, 0, 0], [0,0,500],[0,0,1000],[0, 0, 1000], [0, 0, 1000], [0, 0, 1000], [0, 0, 1000]]);
-  exploeded =!exploeded;
-};
-
-document.getElementById("restore").onclick = function() {
-  viewer.quitExplodedView();
-  exploeded =!exploeded;
-  selectElementTool.pick([], false);
-};
 
 document.getElementById("commercial").onclick = function() {
   if(exploeded){
@@ -65,7 +59,7 @@ document.getElementById("commercial").onclick = function() {
     exploeded =!exploeded;
   }
   else{
-    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings, institutionalbuildings, commercialbuildings, residentialbuildings, facilitybuildings,], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,0],[0, 0, 0], [0, 0, 1000], [0, 0, 0], [0, 0, 0]]);
+    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings, institutionalbuildings, commercialbuildings,commercialboard, residentialbuildings, facilitybuildings,], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,0],[0, 0, 0], [0, 0, 1000],[0, 0, 1000], [0, 0, 0], [0, 0, 0]]);
     selectElementTool.pick(commercialbuildings, true);
     exploeded =!exploeded;
   }
@@ -79,7 +73,7 @@ document.getElementById("residential").onclick = function() {
     exploeded =!exploeded;
   }
   else{
-    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings, institutionalbuildings, commercialbuildings, residentialbuildings, facilitybuildings,], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,0],[0, 0, 0], [0, 0, 0], [0, 0, 1000], [0, 0, 0]]);
+    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings, institutionalbuildings, commercialbuildings, residentialbuildings,residentialboard, facilitybuildings,], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,0],[0, 0, 0], [0, 0, 0], [0, 0, 1000], [0, 0, 1000],[0, 0, 0]]);
     selectElementTool.pick(residentialbuildings, true);
     exploeded =!exploeded;
   }
@@ -92,7 +86,7 @@ document.getElementById("institutional").onclick = function() {
     exploeded =!exploeded;
   }
   else{
-    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings, institutionalbuildings, commercialbuildings, residentialbuildings, facilitybuildings,], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,0],[0, 0, 1000], [0, 0, 0], [0, 0, 0], [0, 0, 0]]);
+    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings, institutionalbuildings,institutionalboard, commercialbuildings, residentialbuildings, facilitybuildings,], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,0],[0, 0, 1000],[0, 0, 1000], [0, 0, 0], [0, 0, 0], [0, 0, 0]]);
     selectElementTool.pick(institutionalbuildings, true);
     exploeded =!exploeded;
   }
@@ -105,7 +99,7 @@ document.getElementById("sports").onclick = function() {
     exploeded =!exploeded;
   }
   else{
-    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings, institutionalbuildings, commercialbuildings, residentialbuildings, facilitybuildings,], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,1000],[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]);
+    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings,sportsboard, institutionalbuildings, commercialbuildings, residentialbuildings, facilitybuildings], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,1000],[0,0,1000],[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]);
     selectElementTool.pick(sportsbuildings, true);
     exploeded =!exploeded;
   }
