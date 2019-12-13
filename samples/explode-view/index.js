@@ -31,6 +31,7 @@ viewer
       }
     });
   });
+  
 
 const water = [modelId+"+0/100002"];
 const road = [modelId+"+0/100003"];
@@ -51,6 +52,7 @@ document.getElementById("explode").onclick = function() {
 document.getElementById("restore").onclick = function() {
   viewer.quitExplodedView();
   exploeded =!exploeded;
+  selectElementTool.pick([], false);
 };
 
 document.getElementById("commercial").onclick = function() {
