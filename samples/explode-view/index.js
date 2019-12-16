@@ -31,10 +31,7 @@ viewer
       }
     });
   });
-<<<<<<< HEAD
-=======
   
->>>>>>> origin/newSamples
 
 const water = [modelId+"+0/100010"];
 const road = [modelId+"+0/100009"];
@@ -63,49 +60,6 @@ document.getElementById("commercial").onclick = function() {
     selectElementTool.pick(commercialbuildings, true);
     exploeded =!exploeded;
   }
-<<<<<<< HEAD
-};
-
-document.getElementById("residential").onclick = function() {
-  if(exploeded){
-    viewer.quitExplodedView() 
-    selectElementTool.pick([], false);
-    exploeded =!exploeded;
-  }
-  else{
-    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings, institutionalbuildings, commercialbuildings, residentialbuildings,residentialboard, facilitybuildings,], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,0],[0, 0, 0], [0, 0, 0], [0, 0, 1000], [0, 0, 1000],[0, 0, 0]]);
-    selectElementTool.pick(residentialbuildings, true);
-    exploeded =!exploeded;
-  }
-};
-
-document.getElementById("institutional").onclick = function() {
-  if(exploeded){
-    viewer.quitExplodedView() 
-    selectElementTool.pick([], false);
-    exploeded =!exploeded;
-  }
-  else{
-    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings, institutionalbuildings,institutionalboard, commercialbuildings, residentialbuildings, facilitybuildings,], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,0],[0, 0, 1000],[0, 0, 1000], [0, 0, 0], [0, 0, 0], [0, 0, 0]]);
-    selectElementTool.pick(institutionalbuildings, true);
-    exploeded =!exploeded;
-  }
-};
-
-document.getElementById("sports").onclick = function() {
-  if(exploeded){
-    viewer.quitExplodedView() 
-    selectElementTool.pick([], false);
-    exploeded =!exploeded;
-  }
-  else{
-    viewer.enterExplodedView([ground,water,road,greenland,sportsbuildings,sportsboard, institutionalbuildings, commercialbuildings, residentialbuildings, facilitybuildings], [[0, 0, 10],[0, 0, 0],[0, 0, 0], [0,0,0],[0,0,1000],[0,0,1000],[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]);
-    selectElementTool.pick(sportsbuildings, true);
-    exploeded =!exploeded;
-  }
-};
-
-=======
 };
 
 document.getElementById("residential").onclick = function() {
@@ -147,6 +101,5 @@ document.getElementById("sports").onclick = function() {
   }
 };
 
->>>>>>> origin/newSamples
 
 
