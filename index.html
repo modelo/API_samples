@@ -371,7 +371,7 @@
 
         if ( window.location.hash !== '' ) {
 
-            load( window.location.hash.substring( 1 ) );
+            load( decodeURI(window.location.hash).substring( 1 ) );
 
         }
 
