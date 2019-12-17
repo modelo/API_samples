@@ -270,10 +270,7 @@ const ControlList = [
       view: ModelComments.Monitor3,
       noCircle: true,
       panelElements: [
-        'q1xqW2YJ+0/100029',
-        'q1xqW2YJ+0/100030',
-        'q1xqW2YJ+0/100031',
-        'q1xqW2YJ+0/100032'
+        
       ],
       panelData: [
         {
@@ -539,7 +536,12 @@ const ControlList = [
       title: '水位监测',
       view: ModelComments.Monitor5,
       noCircle: false,
-      panelElements: ['q1xqW2YJ+0/100030'],
+      panelElements: [
+        ['q1xqW2YJ+0/100029',
+        'q1xqW2YJ+0/100030',
+        'q1xqW2YJ+0/100031',
+        'q1xqW2YJ+0/100032']
+      ],
       panelData: [
         {
           lineDirection: 'top',
