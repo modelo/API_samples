@@ -198,7 +198,7 @@
         <script>
 
         var files = {
-            "智慧城市|Smart-Cities": [
+            "城市地图|City-Maps": [
                 "北京|beijing",
                 "上海|shanghai",
                 "广州|guangzhou",
@@ -224,7 +224,7 @@
                 "全局ID|guid",
                 "相机控制|camera-manipulation",
                 "设置构件颜色和可见|set-elements-color-and-visibility",
-                "改变构件颜色|change-elements-material",
+                "改变构件材质|change-elements-material",
                 "切换相机透视模式|switch-camera-type",
                 "html标签定位|html-labels",
                 "二三维联动|2D-3D"
@@ -365,13 +365,13 @@
 
             button.style.display = '';
 
-            selected = file;
+            selected = file.slice(file.indexOf("|")+1);
 
         };
 
         if ( window.location.hash !== '' ) {
 
-            load( window.location.hash.substring( 1 ) );
+            load( decodeURI(window.location.hash).substring( 1 ) );
 
         }
 

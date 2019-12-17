@@ -33,8 +33,8 @@ viewer
     viewer.setEffectParameter("Sketch", "color", [0.0 / 255.0, 255.0 / 255.0, 243.0 / 255.0]);
     viewer.setEffectParameter("Sketch", "colored", true);
     viewer.setEffectParameter("Sketch", "transparents", true);
-    viewer.setEffectParameter("Sketch", "contrast", 60),
-    viewer.setEffectParameter("Sketch", "detail", 20);
+    viewer.setEffectParameter("Sketch", "contrast", 30),
+    viewer.setEffectParameter("Sketch", "detail", 10);
   }
 
 
@@ -81,4 +81,5 @@ for (var key in pathes2) {
   ribbon2.addRibbon(path);
 }
 
-viewer.setEffectParameter("Glow", "intensity", 1.2);
+// viewer.setEffectEnabled("Glow", false);
+viewer.setEffectParameter("Glow", "intensity", 0.75);
