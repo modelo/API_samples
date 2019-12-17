@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<div lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -26,7 +26,8 @@
 
         #model {
             height: 100%;
-            width: calc(100% - 320px);
+            width: 100%;
+            /* width: calc(100% - 320px); */
             position: relative;
         }
 
@@ -54,9 +55,9 @@
         }
 
         .wrapper {
-            padding: 10px;
-            width: 320px;
-            min-width: 320px;
+            /* padding: 10px; */
+            /* width: 320px; */
+            /* min-width: 320px; */
         }
 
         .wrapper label {
@@ -147,7 +148,6 @@
 
         .MonitorController__itemTitle {
             font-size: 17px;
-            font-family: PingFangSC-Semibold, PingFangSC;
             font-weight: 600;
             color: rgba(255, 255, 255, 1);
             line-height: 24px;
@@ -215,7 +215,7 @@
             color: #DBDBDB;
         }
 
-        .Panel__tableContentRow:nth-child(2) {
+        .Panel__tableContentRow span:nth-child(2) {
             font-size: 25px;
         }
 
@@ -276,8 +276,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
-    </div>
+    <div class="wrapper"> </div>
     <div class="wrapper-right">
         <label id="progress">Loading: 0</label>
     </div>
@@ -288,9 +287,9 @@
     </div>
 
     <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.7-lts.js"></script>
-    <!-- <script src="/assets/js/utils.js"></script> -->
-    <!-- <script src="data.js"></script> -->
+    <script src="/assets/js/utils.js"></script>
+    <script src="data.js"></script>
     <script src="index.js"></script>
 </body>
 
-</div>
+</html>
