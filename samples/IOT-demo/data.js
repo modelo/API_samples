@@ -269,7 +269,12 @@ const ControlList = [
       title: '环境监控',
       view: ModelComments.Monitor3,
       noCircle: true,
-      panelElements: [],
+      panelElements: [
+        'q1xqW2YJ+0/100029',
+        'q1xqW2YJ+0/100030',
+        'q1xqW2YJ+0/100031',
+        'q1xqW2YJ+0/100032'
+      ],
       panelData: [
         {
           lineDirection: '',
