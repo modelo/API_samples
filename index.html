@@ -319,7 +319,7 @@
             var sampleDoc = viewer.contentDocument || viewer.contentWindow.document;
             var highlightedLines = sampleDoc.getElementById('highlightedLines') || '';
             var lines = !!highlightedLines ? highlightedLines.innerHTML : '';
-            window.open( 'https://github.com/modelo/API_samples/blob/master/samples/' + selected + '/index.js' + lines );
+            window.open( 'https://github.com/modelo/API_samples/blob/master/samples/' + selected.slice(selected.indexOf("|")+1) + '/index.js' + lines );
 
         }, false );
         button.style.display = 'none';
@@ -374,7 +374,7 @@
 
             button.style.display = '';
 
-            selected = file.slice(file.indexOf("|")+1);
+            selected = file;
 
         };
 
