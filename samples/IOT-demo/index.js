@@ -1,26 +1,69 @@
-const modelId = "q1xqW2YJ";
+const modelId = "p1wOq31j";
 const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 let activeIndex = 0;
 let modeloPanelList = [];
 let panels = [];
-let comments = []
+let comments = [];
+let ribbonGroup = null;
+let lastRibbons = [];
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
-const viewer = new Modelo.View.Viewer3D("model");
+const viewer = new Modelo.View.Viewer3DDark("model", {
+    stencil: true
+});
 viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 viewer.addInput(new Modelo.View.Input.Touch(viewer));
 viewer.setEffectEnabled("Highlight", true);
 viewer.setEffectParameter("Highlight", "intensity", 1.0);
+
 viewer.loadModel(modelId, progress => {
     updateProgress(progress);
 }).then( async () => {
     viewer.getCamera().transformToPerspective();
     comments = await Modelo.Comment.get(modelId);
-    setDarkTheme(viewer);
+    // setDarkTheme(viewer);
     initController();
     initModeloPanels();
-    console.log(comments)
 });
+
+// 渲染顶部控制按钮
+async function initController() {
+    const container = document.getElementById('controller');
+    container.innerHTML = ControlList.map((control, index) => {
+        return `
+            <div class="MonitorController__item ${index !== 0 ? '' : 'MonitorController__item--active'}" data-index="${index}">
+                <div class="MonitorController__itemTitle">${control.title}</div>
+                <img src="${control.icon}" alt="" class="MonitorController__itemImage" />
+            </div>
+        `
+        // return `<iot-controller-item title="${control.title}" icon="${control.icon}"></iot-controller-item>`
+    }).join('');
+
+    highlightElements(getHighlightElements(activeIndex), [222 / 255, 73 / 255, 25 / 255]);
+
+    Modelo.Comment.activate(comments[0].id);
+    if (activeIndex === 0) {
+        lastRibbons = await renderRibbonEffect();
+    }
+    // 顶部导航按钮事件
+    $('.MonitorController__item').on('click', async function () {
+        if (ribbonGroup) {
+            lastRibbons.forEach(ribbon => {
+                ribbonGroup.removeRibbon(ribbon);
+            })
+        }
+        $(this).addClass('MonitorController__item--active').siblings().removeClass('MonitorController__item--active');
+        highlightElements(getHighlightElements(activeIndex), null);
+        activeIndex = Number($(this).attr('data-index'));
+        highlightElements(getHighlightElements(activeIndex), [222 / 255, 73 / 255, 25 / 255]);
+        Modelo.Comment.activate(comments.find(c => c.extData.username === ControlList[activeIndex].view).id);
+        if (activeIndex === 0) {
+            lastRibbons = await renderRibbonEffect();
+        } else if (activeIndex === 5) {
+            renderHeatmap();
+        }
+    });
+}
 
 function getHighlightElements(id) {
   const elements = ControlList[id].panelElements;
@@ -43,29 +86,7 @@ function getHighlightElements(id) {
     }
   });
 }
-// 渲染顶部控制按钮
-function initController() {
-    const container = document.getElementById('controller');
-    container.innerHTML = ControlList.map((control, index) => {
-        return `
-            <div class="MonitorController__item ${index !== 0 ? '' : 'MonitorController__item--active'}" data-index="${index}">
-                <div class="MonitorController__itemTitle">${control.title}</div>
-                <img src="${control.icon}" alt="" class="MonitorController__itemImage" />
-            </div>
-        `
-    }).join('');
-    highlightElements(getHighlightElements(activeIndex), [222 / 255, 73 / 255, 25 / 255]);
-    Modelo.Comment.activate(comments[0].id);
 
-    // 顶部导航按钮事件
-    $('.MonitorController__item').on('click', function () {
-        $(this).addClass('MonitorController__item--active').siblings().removeClass('MonitorController__item--active');
-        highlightElements(getHighlightElements(activeIndex), null);
-        activeIndex = Number($(this).attr('data-index'));
-        highlightElements(getHighlightElements(activeIndex), [222 / 255, 73 / 255, 25 / 255]);
-        Modelo.Comment.activate(comments.find(c => c.extData.username === ControlList[activeIndex].view).id);
-    });
-}
 
 /**
  * 高亮元素
@@ -90,17 +111,63 @@ function highlightElements(elements, color) {
 }
 
 /**
+ * 渲染流体动画
+ */
+async function renderRibbonEffect() {
+    viewer.setRenderingLinesEnabled(true);
+    viewer.setSmartCullingEnabled(false);
+    viewer.setLazyRenderingEnabled(false);
+    const elements = (await Modelo.BIM.getTreeInfo(modelId)).elements;
+    ribbonGroup = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
+    ribbonGroup.setEnabled(true);
+    viewer.getScene().addVisualize(ribbonGroup);
+    ribbonGroup.setParameter("width", 10);
+    ribbonGroup.setParameter("unitLenght", 30);
+    ribbonGroup.setParameter("speed", -0.5);
+    ribbonGroup.setParameter("platteTexture", "./svg/warm.png");
+    return Object.keys(gasPath).map(key => {
+        const points = gasPath[key].map(point => [point[0] / 304, point[1] / 304, point[2] / 304]);
+        return ribbonGroup.addRibbon(points);
+    });
+}
+
+function formatHeatmapData() {
+    return Object.keys(WaterFlow).map(key => {
+        return {
+            outerLoop: WaterFlow[key].map(point => point * 3.2808),
+            innerLoop: [],
+            max: WaterFlowMaxMin[key][0].map(point => point * 3.2808),
+            min: WaterFlowMaxMin[key][1].map(point => point * 3.2808)
+        }
+    })
+}
+
+function renderHeatmap() {
+    const heatmapConfig = {
+        width: 1024,
+        height: 256,
+        gridSizeX: 8,
+        gridSizeY: 2,
+        layers: 20
+   }
+    const modeloHeatmap = new ModeloHeatmap(viewer, heatmapConfig, formatHeatmapData()[0]);
+    modeloHeatmap.renderHeatmap();
+}
+
+
+/**
  * 模型更新时，同步更新所需要绘制的panel的坐标点
  */
 function initModeloPanels() {
     viewer.setUpdateCallback(() => {
+        const lastPanels = panels;
         panels = ControlList[activeIndex].panelElements.map(item => {
             const bbox = viewer.getScene().getElementsBBox(typeof item === 'string' ? [item] : item);
             const center2D = viewer.getCamera().project([
                 (bbox[0] + bbox[3]) / 2,
                 (bbox[1] + bbox[4]) / 2,
                 (bbox[2] + bbox[5]) / 2
-            ]);
+            ]).map(v => v >> 0);
             const allPointsDistance = [
                 [bbox[0], bbox[1], bbox[2]],
                 [bbox[0], bbox[1], bbox[5]],
@@ -115,13 +182,16 @@ function initModeloPanels() {
                 const dx = Math.abs(point2D[0] - center2D[0]);
                 const dy = Math.abs(point2D[1] - center2D[1]);
                 const distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-                return distance;
+                return distance >> 0;
             });
             return {
                 radius: Math.max(...allPointsDistance),
                 center: center2D
             }
         });
+        // panel 位置没有更新不需要重新渲染dom
+        if (JSON.stringify(lastPanels) === JSON.stringify(panels)) return;
+
         formatPanelData();
         renderPanels();
     });
@@ -156,7 +226,7 @@ function formatPanelData() {
         modeloPanelList.push({
             circleConfig: {
                 lineLength: 50,
-                radius: panels.length > 0 && activeIndex !== 4 ? panel.radius : 50,
+                radius: Math.min(panels.length > 0 && activeIndex !== 4 ? panel.radius : 50, 80),
                 centerPoint: panels.length > 0 ? panel.center : [300, 600],
                 noCircle: ControlList[activeIndex].noCircle
             },
