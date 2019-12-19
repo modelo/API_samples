@@ -55,6 +55,8 @@
         }
 
         .wrapper {
+            display: none;
+            width: 0;
             /* padding: 10px; */
             /* width: 320px; */
             /* min-width: 320px; */
@@ -106,10 +108,15 @@
         .controller {
             pointer-events: all;
             z-index: 8;
-            display: flex;
-            justify-content: center;
+            /* display: flex;
+            justify-content: center; */
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            column-gap: 20px;
+            align-items: end;
             position: absolute;
             left: 50%;
+            bottom: 0;
             transform: translateX(-50%);
         }
 
@@ -118,9 +125,9 @@
             width: 100px;
             height: 73px;
             text-align: center;
-            border-radius: 0 0 10px 10px;
+            border-radius:10px 10px 0 0 ;
             border: 3px solid #e6b644;
-            border-top: none;
+            border-bottom: none;
             display: grid;
             grid-template-areas:
                 ". img img .";
@@ -276,19 +283,22 @@
 </head>
 
 <body>
-    <div class="wrapper"> </div>
+    <div class="wrapper"><canvas id="volume" width="1024" height="256" style="visibility: hidden"></canvas></div>
     <div class="wrapper-right">
         <label id="progress">Loading: 0</label>
     </div>
+    <iot-controller></iot-controller>
 
     <div id="model">
         <div id="controller" class="controller"></div>
         <div id="ElementsPanel"></div>
     </div>
 
+    <script src="./components/iot-controller.js"></script>
     <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.7-lts.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script src="data.js"></script>
+    <script src="heatmap.js"></script>
     <script src="index.js"></script>
 </body>
 

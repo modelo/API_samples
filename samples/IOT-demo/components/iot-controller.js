@@ -1,15 +1,22 @@
-<template id='iot-controller-item'>
-    <div class="MonitorController__item" onClick={() => setElementId(control.id)}>
-        <div class="MonitorController__itemTitle">{control.title}</div>
-        <img src={control.icon} alt="" class="MonitorController__itemImage" />
-    </div>
-</template>
+const template = document.createElement('template');
+template.innerHTML = `
+<div class="MonitorController__item">
+    <div class="MonitorController__itemTitle"></div>
+    <img src="" alt="" class="MonitorController__itemImage" />
+</div>
+`;
 
 class IOTControllerItem extends HTMLElement {
     constructor() {
-      super();
-        const templateElem = document.getElementById('iot-controller-item');
-        const content = templateElem.content.cloneNode(true);
+        super();
+        // const shodow = this.attachShadow({ mode: 'open' });
+        const content = template.content.cloneNode(true);
+        content.querySelector('.MonitorController__itemTitle').innerText = this.getAttribute('title');
+        content.querySelector('.MonitorController__itemImage').src = this.getAttribute('icon');
+        this.$item = content.querySelector('.MonitorController__item');
+        this.$item.addEventListener('click', () => {
+            this.$item.addClass('MonitorController__item--active')
+        });
         this.appendChild(content);
     }
 }
