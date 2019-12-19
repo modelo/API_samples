@@ -1,0 +1,16 @@
+{
+"buffers":[
+  {
+    "byteLength":14238324,
+    "meshes":2928
+  }
+],
+"modelgraph.bin": {
+  "byteLength": 44793 
+},
+"model.bin":{
+  "bbox":[48.75000,48.75000,-14.00000,231.25000,146.43750,109.57367],
+  "nodes": 2928,
+  "byteLength": 304520
+}
+}
