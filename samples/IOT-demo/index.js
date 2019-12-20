@@ -145,21 +145,25 @@ async function renderRibbons() {
         "path1": "./svg/cold.png"
     }
     Object.keys(gasPath).map(key => {
-        viewer.setRenderingLinesEnabled(true);
-        viewer.setSmartCullingEnabled(false);
-        viewer.setLazyRenderingEnabled(false);
-        ribbonGroup = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
-        ribbonGroup.setEnabled(true);
-        viewer.getScene().addVisualize(ribbonGroup);
-        ribbonGroup.setParameter("width", 10);
-        ribbonGroup.setParameter("unitLenght", 50);
-        ribbonGroup.setParameter("speed", -0.5);
-        ribbonGroup.setParameter("platteTexture", plattes[key]);
+        let ribbonGroup = null;
         const points = gasPath[key].map(point => [point[0] / 304, point[1] / 304, point[2] / 304]);
-        ribbonGroups[ribbonGroup.name] = {
-            group: ribbonGroup,
-            ribbons: ribbonGroup.addRibbon(points)
-        };
+
+        if (ribbonGroups[key]) {
+            ribbonGroup = ribbonGroups[key].group;
+        } else {
+            ribbonGroup = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
+            ribbonGroup.setEnabled(true);
+            viewer.getScene().addVisualize(ribbonGroup);
+            ribbonGroup.setParameter("width", 10);
+            ribbonGroup.setParameter("unitLenght", 50);
+            ribbonGroup.setParameter("speed", -0.5);
+            ribbonGroup.setParameter("platteTexture", plattes[key]);
+            ribbonGroups[key] = {
+                group: ribbonGroup,
+                ribbons: null
+            };
+        }
+        ribbonGroups[key].ribbons = ribbonGroup.addRibbon(points);
     });
 }
 
@@ -170,9 +174,9 @@ async function renderRibbons() {
  */
 function removeRibbons() {
     ribbonGroups && Object.keys(ribbonGroups).length !== 0 && Object.keys(ribbonGroups).map(key => {
-        ribbonGroups[key].group.removeRibbon(ribbonGroups[key].ribbons)
+        ribbonGroups[key].group.removeRibbon(ribbonGroups[key].ribbons);
+        ribbonGroups[key].ribbons = null;
     });
-    ribbonGroups = {};
 }
 
 /**

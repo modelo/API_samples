@@ -8,7 +8,7 @@ class ModeloHeatmap {
             max: outlineInfo.max,
             dia: this.subtract(outlineInfo.max, outlineInfo.min)
         };
-
+        this.maskImage = this.getMaskImage();
     }
 
     subtract(pt1, pt2) {
@@ -107,7 +107,7 @@ class ModeloHeatmap {
             "height": height
         });
         volume.setPosition(position);
-        volume.setParameter("maskImage", this.getMaskImage()); // The mask image, make tiny difference to this building because it's an almost cuboid.
+        volume.setParameter("maskImage", this.maskImage); // The mask image, make tiny difference to this building because it's an almost cuboid.
         volume.setParameter("layers", this.heatmapConfig.layers); // total floor numbers of the building.
         volume.setScaling(scale);
         volume.setEnabled(true);
