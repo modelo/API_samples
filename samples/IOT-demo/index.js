@@ -6,7 +6,7 @@ let panels = [];
 let comments = [];
 let ribbonGroup = null;
 let lastRibbons = [];
-
+let heatmaps = [];
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 const viewer = new Modelo.View.Viewer3DDark("model", {
     stencil: true
@@ -111,6 +111,10 @@ function highlightElements(elements, color) {
     }
 }
 
+/**
+ * 转换视角
+ * @param {*} view 
+ */
 function gotoView(view) {
     const { at, distance, fov, phi, theta } = view;
     viewer.getCamera().core.lookTo(at, distance * Math.sin((fov * Math.PI) / 360));
@@ -152,17 +156,22 @@ function formatHeatmapData() {
 }
 
 function renderHeatmap() {
+    if (heatmaps.length > 0) {
+        return;
+    }
     const heatmapConfig = {
         width: 1024,
         height: 256,
         gridSizeX: 8,
-        gridSizeY: 2,
-        layers: 16
+        gridSizeY: 3,
+        layers: 20
    }
+   let randomVolumeData = new Float32Array(heatmapConfig.width * heatmapConfig.height);
    formatHeatmapData().forEach(data => {
         const modeloHeatmap = new ModeloHeatmap(viewer, heatmapConfig, data);
-        modeloHeatmap.renderModeloHeatmap();
+        heatmaps.push(modeloHeatmap.renderModeloHeatmap(randomVolumeData));
    })
+
 }
 
 
@@ -174,15 +183,14 @@ function renderVolume() {
             textureBuffer[i * 2048 + j] = Math.max(0.0, 1 - distance / 512);
         }
     }
-
     const volume = new Modelo.View.Visualize.Volume(viewer.getRenderScene());
     viewer.getScene().addVisualize(volume);
-    volume.setEnabled(true);
     volume.setParameter("data", { "data": textureBuffer, "width": 2048, "height": 2048} );
     volume.setParameter("platteImage", "./svg/platte.png");
     volume.setParameter("gradientImage", "./svg/density.png");
-    volume.setScaling([50, 50, 15]);
-    volume.setPosition([0, 0, 7.7]);
+    volume.setScaling([50, 50, 20]);
+    volume.setPosition([-93, -45, -8]);
+    volume.setEnabled(true);
 }
 
 /**
