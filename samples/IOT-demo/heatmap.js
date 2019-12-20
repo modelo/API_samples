@@ -37,7 +37,7 @@ class ModeloHeatmap {
     drawPolyline(points, color, left, topPixel, ctx) {
         let region = new Path2D();
         let point = points[0];
-        const coord = this.getCoord(point);
+        let coord = this.getCoord(point);
         coord[0] += left;
         coord[1] += topPixel;
         region.moveTo(coord[0], coord[1]);
@@ -96,7 +96,7 @@ class ModeloHeatmap {
         return bytes;
     }
 
-    renderHeatmap() {
+    renderModeloHeatmap() {
         const heatmap = new Modelo.View.Visualize.HeatMap(this.viewer.getRenderScene());
         this.viewer.getScene().addVisualize(heatmap);
         heatmap.setParameter("width", 128);
@@ -108,11 +108,11 @@ class ModeloHeatmap {
         for (let i = 0; i < this.heatmapConfig.layers; i++) {
             const data = [];
             for (let j = 0; j < 20; j++) {
-            data[j] = {
-                x: Math.random(),
-                y: Math.random(),
-                number: Math.random() * 10
-            }
+                data[j] = {
+                    x: Math.random(),
+                    y: Math.random(),
+                    number: Math.random() * 10
+                }
             }
             heatmap.setParameter("points", data);
             const imageData = heatmap.getImageData();
@@ -127,10 +127,10 @@ class ModeloHeatmap {
             }
             for (let ii = 0; ii < 128; ii++) {
                 for (let jj = 0; jj < 128; jj++) {
-                randomVolumeData[i * 128 * 128 * 8 + ii * 128 * 8 + j * 128 + jj] = imageDatas[i * 8 + j][ii * 128 + jj];
-                if (i == 0 && j == 0) {
-                    randomVolumeData[i * 128 * 128 * 8 + ii * 128 * 8 + j * 128 + jj] = 1.0;
-                }
+                    randomVolumeData[i * 128 * 128 * 8 + ii * 128 * 8 + j * 128 + jj] = imageDatas[i * 8 + j][ii * 128 + jj];
+                    if (i == 0 && j == 0) {
+                        randomVolumeData[i * 128 * 128 * 8 + ii * 128 * 8 + j * 128 + jj] = 1.0;
+                    }
                 }
             }
             }
@@ -146,9 +146,7 @@ class ModeloHeatmap {
             "width": this.heatmapConfig.width,
             "height": this.heatmapConfig.height
         });
-        const t = this.getMaskImage();
-        console.log(t)
-        volume.setParameter("maskImage", t); // The mask image, make tiny difference to this building because it's an almost cuboid.
+        volume.setParameter("maskImage", this.getMaskImage()); // The mask image, make tiny difference to this building because it's an almost cuboid.
         volume.setParameter("layers", this.heatmapConfig.layers); // total floor numbers of the building.
         volume.setScaling([this.heatmapConfig.dia[0], this.heatmapConfig.dia[1], this.heatmapConfig.dia[2]]);
         volume.setEnabled(true);
