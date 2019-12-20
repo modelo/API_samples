@@ -8,7 +8,6 @@ class ModeloHeatmap {
             max: outlineInfo.max,
             dia: this.subtract(outlineInfo.max, outlineInfo.min)
         };
-        
     }
 
     subtract(pt1, pt2) {
@@ -96,7 +95,7 @@ class ModeloHeatmap {
         return bytes;
     }
 
-    renderModeloHeatmap() {
+    renderModeloHeatmap(randomVolumeData) {
         const heatmap = new Modelo.View.Visualize.HeatMap(this.viewer.getRenderScene());
         this.viewer.getScene().addVisualize(heatmap);
         heatmap.setParameter("width", 128);
@@ -118,8 +117,6 @@ class ModeloHeatmap {
             const imageData = heatmap.getImageData();
             imageDatas.push(new Float32Array(imageData));
         }
-
-        let randomVolumeData = new Float32Array(this.heatmapConfig.width * this.heatmapConfig.height);
         for (let i = 0; i < this.heatmapConfig.gridSizeY; i++) {
             for (let j = 0; j < this.heatmapConfig.gridSizeX; j++) {
             if (i * 8 + j >= this.heatmapConfig.layers) {
@@ -146,10 +143,13 @@ class ModeloHeatmap {
             "width": this.heatmapConfig.width,
             "height": this.heatmapConfig.height
         });
+        const center = [(this.heatmapConfig.min[0] + this.heatmapConfig.max[0]) / 2, (this.heatmapConfig.min[1] + this.heatmapConfig.max[1]) / 2, (this.heatmapConfig.min[2] + this.heatmapConfig.max[2]) / 2];
+        volume.setPosition(center.map(i => i / 304));
         volume.setParameter("maskImage", this.getMaskImage()); // The mask image, make tiny difference to this building because it's an almost cuboid.
         volume.setParameter("layers", this.heatmapConfig.layers); // total floor numbers of the building.
-        volume.setScaling([this.heatmapConfig.dia[0], this.heatmapConfig.dia[1], this.heatmapConfig.dia[2]]);
+        volume.setScaling([this.heatmapConfig.dia[0], this.heatmapConfig.dia[1], this.heatmapConfig.dia[2]].map(i => i /304));
         volume.setEnabled(true);
+        return heatmap;
     }
 }
 
