@@ -4,9 +4,10 @@ let activeIndex = 0;
 let modeloPanelList = [];
 let panels = [];
 let comments = [];
-let ribbonGroup = null;
-let lastRibbons = [];
+let ribbonGroups = {};
 let heatmaps = [];
+let volume = null;
+
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 const viewer = new Modelo.View.Viewer3DDark("model", {
     stencil: true
@@ -36,34 +37,48 @@ async function initController() {
         `
         // return `<iot-controller-item title="${control.title}" icon="${control.icon}"></iot-controller-item>`
     }).join('');
+    initAction(0, -1);
 
-    highlightElements(getHighlightElements(activeIndex), [222 / 255, 73 / 255, 25 / 255]);
-
-    gotoView(ModelCommentsData[ControlList[0].view])
-    
-    if (activeIndex === 0) {
-        lastRibbons = await renderRibbonEffect();
-    }
     // 顶部导航按钮事件
     $('.MonitorController__item').on('click', async function () {
-        if (ribbonGroup) {
-            lastRibbons.forEach(ribbon => {
-                ribbonGroup.removeRibbon(ribbon);
-            })
-        }
+        // 选中导航样式，高亮当前导航下元素
         $(this).addClass('MonitorController__item--active').siblings().removeClass('MonitorController__item--active');
-        highlightElements(getHighlightElements(activeIndex), null);
-        activeIndex = Number($(this).attr('data-index'));
-        highlightElements(getHighlightElements(activeIndex), [222 / 255, 73 / 255, 25 / 255]);
-        gotoView(ModelCommentsData[ControlList[activeIndex].view])
-        if (activeIndex === 0) {
-            lastRibbons = await renderRibbonEffect();
-        } else if (activeIndex === 5) {
-            renderHeatmap();
-        } else if (activeIndex === 2) {
-            renderVolume();
-        }
+        initAction(Number($(this).attr('data-index')), activeIndex)
     });
+}
+
+const initAction = async (selected, prevActiveIndex) => {
+    activeIndex = selected;
+    prevActiveIndex >= 0 && highlightElements(getHighlightElements(prevActiveIndex), null);
+    highlightElements(getHighlightElements(activeIndex), [222 / 255, 73 / 255, 25 / 255]);
+    gotoView(ModelCommentsData[ControlList[activeIndex].view])
+    switch(activeIndex) {
+        case 0: {
+            removeHeatmaps();
+            removeVolume(volume);
+            await renderRibbons();
+            break;
+        }
+        case 2: {
+            removeHeatmaps();
+            removeRibbons();
+
+            volume = renderVolume();
+            break;
+        }
+        case 5: {
+            removeRibbons();
+            removeVolume(volume);
+
+            renderHeatmaps();
+            break;
+        }
+        default: {
+            removeHeatmaps();
+            removeVolume(volume);
+            removeRibbons();
+        }
+    }
 }
 
 function getHighlightElements(id) {
@@ -112,7 +127,7 @@ function highlightElements(elements, color) {
 }
 
 /**
- * 转换视角
+ * 转换视角（也可以调用 Modelo.Comment.activate(commentId)来实现视角切换效果，需要为模型设置comment）
  * @param {*} view 
  */
 function gotoView(view) {
@@ -122,26 +137,47 @@ function gotoView(view) {
 }
 
 /**
- * 渲染流体动画
+ * 渲染ribbon效果
  */
-async function renderRibbonEffect() {
-    viewer.setRenderingLinesEnabled(true);
-    viewer.setSmartCullingEnabled(false);
-    viewer.setLazyRenderingEnabled(false);
-    const elements = (await Modelo.BIM.getTreeInfo(modelId)).elements;
-    ribbonGroup = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
-    ribbonGroup.setEnabled(true);
-    viewer.getScene().addVisualize(ribbonGroup);
-    ribbonGroup.setParameter("width", 10);
-    ribbonGroup.setParameter("unitLenght", 30);
-    ribbonGroup.setParameter("speed", -0.5);
-    ribbonGroup.setParameter("platteTexture", "./svg/warm.png");
-    return Object.keys(gasPath).map(key => {
+async function renderRibbons() {
+    const plattes = {
+        "path0": "./svg/warm.png",
+        "path1": "./svg/cold.png"
+    }
+    Object.keys(gasPath).map(key => {
+        viewer.setRenderingLinesEnabled(true);
+        viewer.setSmartCullingEnabled(false);
+        viewer.setLazyRenderingEnabled(false);
+        ribbonGroup = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
+        ribbonGroup.setEnabled(true);
+        viewer.getScene().addVisualize(ribbonGroup);
+        ribbonGroup.setParameter("width", 10);
+        ribbonGroup.setParameter("unitLenght", 50);
+        ribbonGroup.setParameter("speed", -0.5);
+        ribbonGroup.setParameter("platteTexture", plattes[key]);
         const points = gasPath[key].map(point => [point[0] / 304, point[1] / 304, point[2] / 304]);
-        return ribbonGroup.addRibbon(points);
+        ribbonGroups[ribbonGroup.name] = {
+            group: ribbonGroup,
+            ribbons: ribbonGroup.addRibbon(points)
+        };
     });
 }
 
+/**
+ * 移除ribbon效果
+ * @param {Visualize.AnimatingRibbon} ribbonGroup 渲染Ribbon时的AnimatingRibbon对象
+ * @param {*} ribbons
+ */
+function removeRibbons() {
+    ribbonGroups && Object.keys(ribbonGroups).length !== 0 && Object.keys(ribbonGroups).map(key => {
+        ribbonGroups[key].group.removeRibbon(ribbonGroups[key].ribbons)
+    });
+    ribbonGroups = {};
+}
+
+/**
+ * 格式化heatmap所需要的数据
+ */
 function formatHeatmapData() {
     return Object.keys(WaterFlow).map(key => {
         return {
@@ -155,10 +191,14 @@ function formatHeatmapData() {
     })
 }
 
-function renderHeatmap() {
+/**
+ * 渲染heatmap效果
+ */
+function renderHeatmaps() {
     if (heatmaps.length > 0) {
         return;
     }
+    heatmaps = [];
     const heatmapConfig = {
         width: 1024,
         height: 256,
@@ -171,26 +211,43 @@ function renderHeatmap() {
         const modeloHeatmap = new ModeloHeatmap(viewer, heatmapConfig, data);
         heatmaps.push(modeloHeatmap.renderModeloHeatmap(randomVolumeData));
    })
-
 }
 
+/**
+ * 移除heatmap效果
+ */
+function removeHeatmaps() {
+    heatmaps.forEach(heatmap => {
+        viewer.getScene().removeVisualize(heatmap);
+    });
+    heatmaps = [];
+}
 
+/**
+ * 渲染Volume效果
+ */
 function renderVolume() {
     const textureBuffer = new Float32Array(2048 * 2048);
-    for (var i = 0; i < 2048; i++) {
-        for (var j = 0; j < 2048; j++) {
-            var distance = Math.sqrt(Math.pow((i - 1024), 2) + Math.pow((j - 1024), 2));
-            textureBuffer[i * 2048 + j] = Math.max(0.0, 1 - distance / 512);
-        }
-    }
+    textureBuffer.fill(1.0)
+    const center = [(BoxData.min[0] + BoxData.max[0]) / 2, (BoxData.min[1] + BoxData.max[1]) / 2, (BoxData.min[2] + BoxData.max[2]) / 2];
     const volume = new Modelo.View.Visualize.Volume(viewer.getRenderScene());
     viewer.getScene().addVisualize(volume);
     volume.setParameter("data", { "data": textureBuffer, "width": 2048, "height": 2048} );
-    volume.setParameter("platteImage", "./svg/platte.png");
+    volume.setParameter("platteImage", "./svg/waterTank.png");
     volume.setParameter("gradientImage", "./svg/density.png");
-    volume.setScaling([50, 50, 20]);
-    volume.setPosition([-93, -45, -8]);
+    volume.setScaling([BoxData['max'][0] - BoxData['min'][0], BoxData['max'][1] - BoxData['min'][1], BoxData['max'][2] - BoxData['min'][2]].map(i => i / 304));
+    volume.setPosition(center.map(i => i / 304));
     volume.setEnabled(true);
+    return volume;
+}
+
+/**
+ * 移除volume效果
+ * @param {*} volume 
+ */
+function removeVolume(volume) {
+    volume && viewer.getScene().removeVisualize(volume);
+    volume = null;
 }
 
 /**

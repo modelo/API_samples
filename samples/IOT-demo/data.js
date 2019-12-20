@@ -28,7 +28,7 @@ const ControlList = [
   {
     id: 0,
     icon: './svg/environment-monitor.svg',
-    title: '默认',
+    title: '管道',
     view: ModelComments.Monitor1,
     noCircle: false,
     panelElements: ['a8bvqn85+0/101543'],
@@ -41,7 +41,7 @@ const ControlList = [
             headers: [
               {
                 key: 'label',
-                label: '室内环境监测',
+                label: '管道监测',
                 colType: PanelDataColType.Form
               },
               {
@@ -53,22 +53,22 @@ const ControlList = [
             dataList: [
               {
                 label: {
-                  label: '室内温度',
+                  label: '温度',
                   value: '24'
                 },
                 unit: 'direction--up'
               },
               {
                 label: {
-                  label: '室内光线',
-                  value: '150 lux'
+                  label: '流速',
+                  value: '150 m³/s'
                 },
                 unit: 'direction--down'
               },
               {
                 label: {
-                  label: '室内湿度',
-                  value: '60%'
+                  label: '压强',
+                  value: '60 Pa'
                 },
                 unit: 'direction--up'
               },
@@ -90,7 +90,7 @@ const ControlList = [
     
     {
       id: 1,
-      icon: './svg/water-pressure.svg',
+      icon: './svg/monitor1.svg',
       title: '震动',
       view: ModelComments.Monitor2,
       noCircle: false,
@@ -245,12 +245,48 @@ const ControlList = [
             width: 150,
             height: 200
           }
+        },
+        {
+          lineDirection: 'top',
+          panelContent: {
+            type: 'table',
+            data: {
+              headers: [
+                {
+                  key: 'name',
+                  label: '水泵',
+                  colType: PanelDataColType.Text
+                },
+                {
+                  key: 'unit',
+                  label: 'ml',
+                  colType: PanelDataColType.Text
+                }
+              ],
+              dataList: [
+                {
+                  name: '水压',
+                  unit: '30pa'
+                },
+                {
+                  name: '水流',
+                  unit: '0.8'
+                },
+                {
+                  name: '振动',
+                  unit: '正常'
+                }
+              ]
+            },
+            width: 150,
+            height: 200
+          }
         }
       ]
     },
     {
       id: 2,
-      icon: './svg/valve-control.svg',
+      icon: './svg/monitor2.svg',
       title: '水箱',
       view: ModelComments.Monitor3,
       noCircle: false,
@@ -392,8 +428,8 @@ const ControlList = [
               headers: [
                 {
                   key: 'name',
-                  label: '水位监测',
-                  colType: PanelDataColType.Direction
+                  label: '阀门状态',
+                  colType: PanelDataColType.Text
                 },
                 {
                   key: 'value',
@@ -403,9 +439,9 @@ const ControlList = [
               ],
               dataList: [
                 {
-                  name: 'direction--progress',
-                  value: '2.0m'
-                }
+                  name: '正常',
+                  value: ''
+                },
               ]
             },
             width: 140,
@@ -420,8 +456,8 @@ const ControlList = [
               headers: [
                 {
                   key: 'name',
-                  label: '水位监测',
-                  colType: PanelDataColType.Direction
+                  label: '阀门状态',
+                  colType: PanelDataColType.Text
                 },
                 {
                   key: 'value',
@@ -431,9 +467,9 @@ const ControlList = [
               ],
               dataList: [
                 {
-                  name: 'direction--progress',
-                  value: '2.0m'
-                }
+                  name: '正常',
+                  value: ''
+                },
               ]
             },
             width: 140,
@@ -444,7 +480,7 @@ const ControlList = [
     },
     {
       id: 5,
-      icon: './svg/environment-monitor.svg',
+      icon: './svg/monitor5.svg',
       title: '气压',
       view: ModelComments.Monitor6,
       noCircle: true,
@@ -458,7 +494,7 @@ const ControlList = [
               headers: [
                 {
                   key: 'label',
-                  label: '室内环境监测',
+                  label: '气压监测',
                   colType: PanelDataColType.Form
                 },
                 {
@@ -470,29 +506,29 @@ const ControlList = [
               dataList: [
                 {
                   label: {
-                    label: '室内温度',
-                    value: '24'
+                    label: '气罐1',
+                    value: '24 Pa'
                   },
                   unit: 'direction--up'
                 },
                 {
                   label: {
-                    label: '室内光线',
-                    value: '150 lux'
+                    label: '气罐2',
+                    value: '150 Pa'
                   },
                   unit: 'direction--down'
                 },
                 {
                   label: {
-                    label: '室内湿度',
-                    value: '60%'
+                    label: '气罐3',
+                    value: '60 Pa'
                   },
                   unit: 'direction--up'
                 },
                 {
                   label: {
-                    label: '室内漏水',
-                    value: 'N / a'
+                    label: '气罐4',
+                    value: '20 Pa'
                   },
                   unit: 'direction--common'
                 }
@@ -3540,4 +3576,18 @@ const gasPath = {
   ]
 ]
 }
-  
+
+
+const BoxData = {
+  '1': {
+    outerLoop: [
+      [-27327.062603, -15829.181552, -4100.000011],
+      [-27327.062603, -11829.181521, -4100.000011],
+      [-30127.062625, -11829.181521, -4100.000011],
+      [-30127.062625, -15829.181552, -4100.000011]
+    ],
+    innerLoop: []
+  },
+  'min': [-30127.063,-11829.182,-4100.000],
+  'max': [-27327.063,-15829.182,-1100.000]
+}

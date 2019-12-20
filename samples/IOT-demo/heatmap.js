@@ -8,6 +8,7 @@ class ModeloHeatmap {
             max: outlineInfo.max,
             dia: this.subtract(outlineInfo.max, outlineInfo.min)
         };
+
     }
 
     subtract(pt1, pt2) {
@@ -95,6 +96,24 @@ class ModeloHeatmap {
         return bytes;
     }
 
+    renderModeloMultiVolume(gridSize, data, width, height, position, scale) {
+        const volume = new Modelo.View.Visualize.MultiLayerVolume(this.viewer.getRenderScene());
+        this.viewer.getScene().addVisualize(volume);
+        volume.setParameter("platteImage", "./svg/warm.png");
+        volume.setParameter("gridSize", gridSize); // indicates the heatmap layout of each floor.
+        volume.setParameter("data", {
+            "data": data,
+            "width": width,
+            "height": height
+        });
+        volume.setPosition(position);
+        volume.setParameter("maskImage", this.getMaskImage()); // The mask image, make tiny difference to this building because it's an almost cuboid.
+        volume.setParameter("layers", this.heatmapConfig.layers); // total floor numbers of the building.
+        volume.setScaling(scale);
+        volume.setEnabled(true);
+        return volume;
+    }
+
     renderModeloHeatmap(randomVolumeData) {
         const heatmap = new Modelo.View.Visualize.HeatMap(this.viewer.getRenderScene());
         this.viewer.getScene().addVisualize(heatmap);
@@ -124,9 +143,9 @@ class ModeloHeatmap {
             }
             for (let ii = 0; ii < 128; ii++) {
                 for (let jj = 0; jj < 128; jj++) {
-                    randomVolumeData[i * 128 * 128 * 8 + ii * 128 * 8 + j * 128 + jj] = imageDatas[i * 8 + j][ii * 128 + jj];
+                    randomVolumeData[i * 128 * 128 * 8 + ii * 128 * 8 + j * 128 + jj] = imageDatas[i * 8 + j][ii * 128 + jj] * 0.8;
                     if (i == 0 && j == 0) {
-                        randomVolumeData[i * 128 * 128 * 8 + ii * 128 * 8 + j * 128 + jj] = 1.0;
+                        randomVolumeData[i * 128 * 128 * 8 + ii * 128 * 8 + j * 128 + jj] = 1;
                     }
                 }
             }
@@ -134,22 +153,15 @@ class ModeloHeatmap {
         }
         /****** Generate heatmap data for each floor *****/
 
-        const volume = new Modelo.View.Visualize.MultiLayerVolume(this.viewer.getRenderScene());
-        this.viewer.getScene().addVisualize(volume);
-        volume.setParameter("platteImage", "./svg/platte.png");
-        volume.setParameter("gridSize", [this.heatmapConfig.gridSizeX, this.heatmapConfig.gridSizeY]); // indicates the heatmap layout of each floor.
-        volume.setParameter("data", {
-            "data": randomVolumeData,
-            "width": this.heatmapConfig.width,
-            "height": this.heatmapConfig.height
-        });
         const center = [(this.heatmapConfig.min[0] + this.heatmapConfig.max[0]) / 2, (this.heatmapConfig.min[1] + this.heatmapConfig.max[1]) / 2, (this.heatmapConfig.min[2] + this.heatmapConfig.max[2]) / 2];
-        volume.setPosition(center.map(i => i / 304));
-        volume.setParameter("maskImage", this.getMaskImage()); // The mask image, make tiny difference to this building because it's an almost cuboid.
-        volume.setParameter("layers", this.heatmapConfig.layers); // total floor numbers of the building.
-        volume.setScaling([this.heatmapConfig.dia[0], this.heatmapConfig.dia[1], this.heatmapConfig.dia[2]].map(i => i /304));
-        volume.setEnabled(true);
-        return heatmap;
+        return this.renderModeloMultiVolume(
+            [this.heatmapConfig.gridSizeX, this.heatmapConfig.gridSizeY],
+            randomVolumeData,
+            this.heatmapConfig.width,
+            this.heatmapConfig.height,
+            center.map(i => i / 304),
+            [this.heatmapConfig.dia[0], this.heatmapConfig.dia[1], this.heatmapConfig.dia[2]].map(i => i /304)
+        );
     }
 }
 
