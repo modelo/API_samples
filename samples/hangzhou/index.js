@@ -1,4 +1,4 @@
-var modelId = "q1xq9mYJ";
+var modelId = "nr6bpmrp";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA";
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
@@ -30,7 +30,7 @@ viewer
 
   if (!isMobile()) {
     viewer.setEffectEnabled("Sketch", true);
-    viewer.setEffectParameter("Sketch", "color", [0.0 / 255.0, 255.0 / 255.0, 243.0 / 255.0]);
+    viewer.setEffectParameter("Sketch", "color", [220 / 255.0, 220 / 255.0, 220 / 255.0]);
     viewer.setEffectParameter("Sketch", "colored", true);
     viewer.setEffectParameter("Sketch", "transparents", true);
     viewer.setEffectParameter("Sketch", "contrast", 30),
@@ -81,4 +81,4 @@ for (var key in pathes2) {
   ribbon2.addRibbon(path);
 }
 
-viewer.setEffectParameter("Glow", "intensity", 0.75);
+viewer.setEffectParameter("Glow", "intensity", 0.75); 
