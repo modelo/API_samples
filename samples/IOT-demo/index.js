@@ -1,4 +1,4 @@
-const modelId = "p1wOq31j";
+const modelId = "a8bvqn85";
 const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 let activeIndex = 0;
 let modeloPanelList = [];
@@ -20,8 +20,6 @@ viewer.loadModel(modelId, progress => {
     updateProgress(progress);
 }).then( async () => {
     viewer.getCamera().transformToPerspective();
-    comments = await Modelo.Comment.get(modelId);
-    // setDarkTheme(viewer);
     initController();
     initModeloPanels();
 });
@@ -41,7 +39,8 @@ async function initController() {
 
     highlightElements(getHighlightElements(activeIndex), [222 / 255, 73 / 255, 25 / 255]);
 
-    Modelo.Comment.activate(comments[0].id);
+    gotoView(ModelCommentsData[ControlList[0].view])
+    
     if (activeIndex === 0) {
         lastRibbons = await renderRibbonEffect();
     }
@@ -56,11 +55,13 @@ async function initController() {
         highlightElements(getHighlightElements(activeIndex), null);
         activeIndex = Number($(this).attr('data-index'));
         highlightElements(getHighlightElements(activeIndex), [222 / 255, 73 / 255, 25 / 255]);
-        Modelo.Comment.activate(comments.find(c => c.extData.username === ControlList[activeIndex].view).id);
+        gotoView(ModelCommentsData[ControlList[activeIndex].view])
         if (activeIndex === 0) {
             lastRibbons = await renderRibbonEffect();
         } else if (activeIndex === 5) {
             renderHeatmap();
+        } else if (activeIndex === 2) {
+            renderVolume();
         }
     });
 }
@@ -110,6 +111,12 @@ function highlightElements(elements, color) {
     }
 }
 
+function gotoView(view) {
+    const { at, distance, fov, phi, theta } = view;
+    viewer.getCamera().core.lookTo(at, distance * Math.sin((fov * Math.PI) / 360));
+    viewer.getCamera().core.rotateTo(phi, theta);
+}
+
 /**
  * 渲染流体动画
  */
@@ -134,10 +141,12 @@ async function renderRibbonEffect() {
 function formatHeatmapData() {
     return Object.keys(WaterFlow).map(key => {
         return {
-            outerLoop: WaterFlow[key].map(point => point * 3.2808),
-            innerLoop: [],
-            max: WaterFlowMaxMin[key][0].map(point => point * 3.2808),
-            min: WaterFlowMaxMin[key][1].map(point => point * 3.2808)
+            [key]: {
+                outerLoop: WaterFlow[key],
+                innerLoop: []
+            },
+            max: WaterFlowMinMax[key][1],
+            min: WaterFlowMinMax[key][0]
         }
     })
 }
@@ -148,12 +157,33 @@ function renderHeatmap() {
         height: 256,
         gridSizeX: 8,
         gridSizeY: 2,
-        layers: 20
+        layers: 16
    }
-    const modeloHeatmap = new ModeloHeatmap(viewer, heatmapConfig, formatHeatmapData()[0]);
-    modeloHeatmap.renderHeatmap();
+   formatHeatmapData().forEach(data => {
+        const modeloHeatmap = new ModeloHeatmap(viewer, heatmapConfig, data);
+        modeloHeatmap.renderModeloHeatmap();
+   })
 }
 
+
+function renderVolume() {
+    const textureBuffer = new Float32Array(2048 * 2048);
+    for (var i = 0; i < 2048; i++) {
+        for (var j = 0; j < 2048; j++) {
+            var distance = Math.sqrt(Math.pow((i - 1024), 2) + Math.pow((j - 1024), 2));
+            textureBuffer[i * 2048 + j] = Math.max(0.0, 1 - distance / 512);
+        }
+    }
+
+    const volume = new Modelo.View.Visualize.Volume(viewer.getRenderScene());
+    viewer.getScene().addVisualize(volume);
+    volume.setEnabled(true);
+    volume.setParameter("data", { "data": textureBuffer, "width": 2048, "height": 2048} );
+    volume.setParameter("platteImage", "./svg/platte.png");
+    volume.setParameter("gradientImage", "./svg/density.png");
+    volume.setScaling([50, 50, 15]);
+    volume.setPosition([0, 0, 7.7]);
+}
 
 /**
  * 模型更新时，同步更新所需要绘制的panel的坐标点
@@ -368,37 +398,12 @@ function renderPanels() {
               <circle
                 cx=${item.circleConfig.centerPoint[0]}
                 cy=${item.circleConfig.centerPoint[1]}
-                r=${Math.abs(item.circleConfig.radius - 5)}
-                strokeDasharray={${dash}, ${10}}
-                fill="none"
-                stroke="#E6B644"
-                strokeWidth="1"
-              >
-                <animateTransform
-                  attributeName="transform"
-                  attributeType="XML"
-                  begin="0s"
-                  dur="5s"
-                  type="rotate"
-                  from={0 ${item.circleConfig.centerPoint[0]} ${
-            item.circleConfig.centerPoint[1]
-            }}
-                  to={360 ${item.circleConfig.centerPoint[0]} ${
-            item.circleConfig.centerPoint[1]
-            }}
-                  repeatCount="indefinite"
-                />
-              </circle>
-
-              <circle
-                cx=${item.circleConfig.centerPoint[0]}
-                cy=${item.circleConfig.centerPoint[1]}
-                r=${item.circleConfig.radius}
-                fill="none"
+                r=${5}
+                fill="#E6B644"
                 stroke="#E6B644"
                 strokeWidth="2"
               />
-              <line stroke="#E6B644" strokeWidth="2" x1="${lineConfig.x1}" x2="${lineConfig.x2}" y1="${lineConfig.y1}" y2="${lineConfig.y2}" />
+              <line stroke="#E6B644" strokeWidth="2" x1="${item.circleConfig.centerPoint[0]}" x2="${lineConfig.x2}" y1="${item.circleConfig.centerPoint[1]}" y2="${lineConfig.y2}" />
             </g>`
     })
     container.innerHTML = `
