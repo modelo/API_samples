@@ -173,7 +173,6 @@ viewer.loadModel(modelId, progress => {
   }
   /****** Generate heatmap data for each floor *****/
 
-
   const volume = new Modelo.View.Visualize.MultiLayerVolume(viewer.getRenderScene());
   viewer.getScene().addVisualize(volume);
 
