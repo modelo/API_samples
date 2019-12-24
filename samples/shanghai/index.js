@@ -28,11 +28,11 @@ viewer
 
   if (!isMobile()) {
     viewer.setEffectEnabled("Sketch", true);
-    viewer.setEffectParameter("Sketch", "color", [180 / 255.0, 180 / 255.0, 180 / 255.0]);
+    viewer.setEffectParameter("Sketch", "color", [0 / 255.0, 239 / 255.0, 255 / 255.0]);
     viewer.setEffectParameter("Sketch", "colored", true);
     viewer.setEffectParameter("Sketch", "transparents", true);
-    viewer.setEffectParameter("Sketch", "contrast", 60),
-    viewer.setEffectParameter("Sketch", "detail", 20)
+    viewer.setEffectParameter("Sketch", "contrast", 25),
+    viewer.setEffectParameter("Sketch", "detail", 10)
   }
 
   // Turn on SSAO effect
