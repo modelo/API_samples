@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>background</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/range.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/semantic.min.js"></script>
+    <script src="../../assets/js/range.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body {
+            display: flex;
+        }
+
+        #model {
+            height: 100%;
+            width: 100%;
+            /* width: calc(100% - 320px); */
+            position: relative;
+        }
+
+        .item {
+            display: none;
+        }
+
+        .item.active {
+            display: block;
+        }
+
+        .item-img {
+            cursor: pointer;
+            width: 140px;
+            height: 140px;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .item-img:hover {
+            opacity: 0.6;
+        }
+
+        .item-img:first-child {
+            margin-right: 16px;
+        }
+
+        .wrapper {
+            display: none;
+            width: 0;
+            /* padding: 10px; */
+            /* width: 320px; */
+            /* min-width: 320px; */
+        }
+
+        .wrapper label {
+            margin: 0 0 0.28571429rem 0;
+            color: rgba(0, 0, 0, 0.87);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .wrapper-right label {
+            color: rgba(0, 0, 0, 0.87);
+            font-size: 1rem;
+            font-weight: 700;
+            position: fixed;
+            top: 0.68571429rem;
+            right: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .range-wrapper {
+            position: relative;
+            margin: 10px;
+        }
+
+        .min,
+        .max,
+        .ui.range {
+            position: absolute;
+        }
+
+        .min {
+            right: 190px;
+        }
+
+        .max {
+            right: 0;
+        }
+
+        .ui.range {
+            left: 100px;
+            top: 0;
+            width: 160px;
+        }
+
+        .controller {
+            pointer-events: all;
+            z-index: 8;
+            /* display: flex;
+            justify-content: center; */
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            column-gap: 5px;
+            align-items: end;
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+        }
+
+        .MonitorController__item {
+            margin: 0 5px;
+            width: 100px;
+            height: 73px;
+            text-align: center;
+            border-radius:5px 5px 0 0 ;
+            border: 2px solid #65e064;
+            border-bottom: none;
+            display: grid;
+            grid-template-areas:
+                ". img img .";
+            transition: all 0.3s ease-in-out;
+        }
+
+        .MonitorController__item:hover {
+            transition: all 0.5s;
+            transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+            cursor: pointer;
+            background: linear-gradient(180deg, rgba(169, 215, 56, 0.85) 0%, rgba(210, 202, 184, 0.16) 100%);
+            height: 125px;
+            grid-template-areas:
+                ". title title ."
+                ". img img .";
+        }
+
+        .MonitorController__item--active {
+            background: linear-gradient(180deg, rgba(169, 215, 56, 0.85) 0%, rgba(210, 202, 184, 0.16) 100%);
+            height: 125px;
+            grid-template-areas:
+                ". title title ."
+                ". img img .";
+        }
+
+        .MonitorController__itemTitle {
+            font-size: 17px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 1);
+            line-height: 24px;
+            display: none;
+
+        }
+
+        .MonitorController__item:hover .MonitorController__itemTitle,
+        .MonitorController__item--active .MonitorController__itemTitle {
+            display: grid;
+            grid-area: title;
+            align-self: center;
+            justify-self: center;
+        }
+
+        .MonitorController__itemImage {
+            grid-area: img;
+            width: 24px;
+            height: 24px;
+            align-self: center;
+            justify-self: center;
+        }
+
+        .ElementsPanel {
+            height: 100%;
+        }
+
+        #ElementsPanel__svg {
+            position: absolute;
+            z-index: 7;
+            top: 0;
+        }
+
+        .Panel__tableHeader {
+            line-height: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            color: rgba(169, 215, 56, 0.85);
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(169, 215, 56, 0.85);
+        }
+
+        .ElementsPanel__contentPanel {
+            padding: 20px;
+            background: rgba(169, 215, 56, 0.45);
+            pointer-events: none;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 7;
+        }
+
+        .ElementsPanel__contentPanel .Panel__tableContent {
+            overflow: auto;
+        }
+
+        .Panel__tableContentRow {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            padding: 8px 0;
+            color: rgba(169, 215, 56, 0.85);
+        }
+
+        .Panel__tableContentRow span:nth-of-type(1) {
+            font-size: 12px;
+            color: #DBDBDB;
+        }
+
+        .Panel__tableContentRow span:nth-child(2) {
+            font-size: 25px;
+        }
+
+        .Panel__tableContentRow .form-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #DBDBDB;
+        }
+
+        .Panel__tableContentRow .form-value {
+            font-size: 36px;
+            font-weight: 600;
+            color: rgba(169, 215, 56, 0.85);
+        }
+
+
+        .direction--up {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 12px solid rgba(169, 215, 56, 0.85);
+        }
+
+        .direction--down {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #f13b3b;
+        }
+
+        .direction--common {
+            width: 16px;
+            height: 3px;
+            line-height: 16px;
+            background: rgba(169, 215, 56, 0.85);
+        }
+
+        .direction--progress {
+            width: 6px;
+            height: 40px;
+            border: 1px solid rgba(169, 215, 56, 0.85);
+            position: relative;
+
+        }
+
+        .direction--progress::before {
+            content: ' ';
+            width: 4px;
+            height: 25px;
+            left: 0px;
+            bottom: 0;
+            position: absolute;
+            background: rgba(169, 215, 56, 0.85);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper"><canvas id="volume" width="1024" height="256" style="visibility: hidden"></canvas></div>
+    <div class="wrapper-right">
+        <label id="progress">Loading: 0</label>
+    </div>
+    <iot-controller></iot-controller>
+
+    <div id="model">
+        <div id="controller" class="controller"></div>
+        <div id="ElementsPanel"></div>
+    </div>
+
+    <script src="./components/iot-controller.js"></script>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.7-lts.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="data.js"></script>
+    <script src="heatmap.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
