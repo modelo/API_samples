@@ -50,7 +50,7 @@ async function initController() {
 const initAction = async (selected, prevActiveIndex) => {
     activeIndex = selected;
     prevActiveIndex >= 0 && highlightElements(getHighlightElements(prevActiveIndex), null);
-    highlightElements(getHighlightElements(activeIndex), [222 / 255, 73 / 255, 25 / 255]);
+    highlightElements(getHighlightElements(activeIndex), [169 / 255, 215 / 255, 56 / 255]);
     gotoView(ModelCommentsData[ControlList[activeIndex].view])
     switch(activeIndex) {
         case 0: {
@@ -468,11 +468,11 @@ function renderPanels() {
                 cx=${item.circleConfig.centerPoint[0]}
                 cy=${item.circleConfig.centerPoint[1]}
                 r=${5}
-                fill="#E6B644"
-                stroke="#E6B644"
+                fill="#a9d738"
+                stroke="#a9d738"
                 strokeWidth="2"
               />
-              <line stroke="#E6B644" strokeWidth="2" x1="${item.circleConfig.centerPoint[0]}" x2="${lineConfig.x2}" y1="${item.circleConfig.centerPoint[1]}" y2="${lineConfig.y2}" />
+              <line stroke="#a9d738" strokeWidth="2" x1="${item.circleConfig.centerPoint[0]}" x2="${lineConfig.x2}" y1="${item.circleConfig.centerPoint[1]}" y2="${lineConfig.y2}" />
             </g>`
     })
     container.innerHTML = `
