@@ -10,12 +10,14 @@ let volume = null;
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 const viewer = new Modelo.View.Viewer3DDark("model", {
-    stencil: true
+    stencil: true,
+    isMobile: isMobile()
 });
 viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 viewer.addInput(new Modelo.View.Input.Touch(viewer));
 viewer.setEffectEnabled("Highlight", true);
 viewer.setEffectParameter("Highlight", "intensity", 1.0);
+viewer.setLazyRenderingEnabled(false);
 
 viewer.loadModel(modelId, progress => {
     updateProgress(progress);
