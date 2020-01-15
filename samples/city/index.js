@@ -39,9 +39,13 @@ viewer
       var triangle3 = triangle1.clone();
       var triangle4 = triangle1.clone();
       triangle1.setDiffuseColor([1, 1, 0]);
+      triangle1.setTransparent(0.4);
       triangle2.setDiffuseColor([1, 1, 0]);
+      triangle2.setTransparent(0.4);
       triangle3.setDiffuseColor([1, 1, 0]);
+      triangle3.setTransparent(0.4);
       triangle4.setDiffuseColor([1, 1, 0]);
+      triangle4.setTransparent(0.4);
       triangle1.setScaling(400, 400, 400);
       triangle2.setScaling(400, 400, 400);
       triangle3.setScaling(400, 400, 400);
@@ -103,11 +107,53 @@ viewer
     image_circle.onload = function () {
       circle1.createTexturedQuad(image_circle);
       circle1.setScaling(1000, 1000, 1);
-      circle1.setTranslation(120668.1328125, 47596.25390625, 600);
+      circle1.setTranslation(120668.1328125, 47596.25390625, 100);
       viewer.getScene().addPawn(circle1, false);
       viewer.getRenderScene().getEffect("Glow").addPawn(circle1);
       setInterval(function () {
-        circle1.rotate(0.01, [0, 0, 1], [120668.1328125, 47596.25390625, 600]);
+        circle1.rotate(0.01, [0, 0, 1], [120668.1328125, 47596.25390625, 100]);
+      }, 10);
+    }
+
+    var circle2 = new Modelo.View.Pawn("circle1", viewer.getResourceManager(), viewer.getMaterialManager());
+    var image_circle = new Image();
+    image_circle.src = "./circular_03.png";
+    image_circle.onload = function () {
+      circle2.createTexturedQuad(image_circle);
+      circle2.setScaling(1000, 1000, 1);
+      circle2.setTranslation(125475.4375, 55741.0546875, 100);
+      viewer.getScene().addPawn(circle2, false);
+      viewer.getRenderScene().getEffect("Glow").addPawn(circle2);
+      setInterval(function () {
+        circle2.rotate(0.01, [0, 0, 1], [125475.4375, 55741.0546875, 100]);
+      }, 10);
+    }
+
+    var circle3 = new Modelo.View.Pawn("circle1", viewer.getResourceManager(), viewer.getMaterialManager());
+    var image_circle = new Image();
+    image_circle.src = "./circular_03.png";
+    image_circle.onload = function () {
+      circle3.createTexturedQuad(image_circle);
+      circle3.setScaling(1000, 1000, 1);
+      circle3.setTranslation(117580.8984375, 56858.41015625, 100);
+      viewer.getScene().addPawn(circle3, false);
+      viewer.getRenderScene().getEffect("Glow").addPawn(circle3);
+      setInterval(function () {
+        circle3.rotate(0.01, [0, 0, 1], [117580.8984375, 56858.41015625, 100]);
+      }, 10);
+    }
+
+    var circle4 = new Modelo.View.Pawn("circle1", viewer.getResourceManager(), viewer.getMaterialManager());
+    var image_circle = new Image();
+    image_circle.src = "./circular_03.png";
+    image_circle.onload = function () {
+      circle4.createTexturedQuad(image_circle);
+      circle4.setScaling(1000, 1000, 1);
+      circle4.setTranslation(134168.1875, 61590.73828125, 100);
+      viewer.getScene().addPawn(circle4, false);
+      viewer.getRenderScene().getEffect("Glow").addPawn(circle4);
+      setInterval(function () {
+        circle4.rotate(0.01, [0, 0, 1], [134168.1875, 61590.73828125, 100]);
       }, 10);
     }
 
@@ -183,8 +229,8 @@ var stripe1 = new Modelo.View.Visualize.AnimatingStripe(viewer.getRenderScene())
 stripe1.setEnabled(true);
 viewer.getScene().addVisualize(stripe1);
 stripe1.setParameter("width", 100);
-stripe1.setParameter("unitLenght", 100000);
-stripe1.setParameter("speed", 0.2);
+stripe1.setParameter("unitLenght", 50000);
+stripe1.setParameter("speed", 0.4);
 stripe1.setParameter("platteTexture", "./traffic_02.png");
 
 for (var key in pathes1) {
@@ -202,8 +248,8 @@ var stripe2 = new Modelo.View.Visualize.AnimatingStripe(viewer.getRenderScene())
 stripe2.setEnabled(true);
 viewer.getScene().addVisualize(stripe2);
 stripe2.setParameter("width", 100);
-stripe2.setParameter("unitLenght", 100000);
-stripe2.setParameter("speed", 0.2);
+stripe2.setParameter("unitLenght", 50000);
+stripe2.setParameter("speed", 0.4);
 stripe2.setParameter("platteTexture", "./traffic_04.png");
 
 for (var key in pathes2) {
@@ -220,9 +266,9 @@ for (var key in pathes2) {
 var ribbon3 = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
 ribbon3.setEnabled(true);
 viewer.getScene().addVisualize(ribbon3);
-ribbon3.setParameter("width", 2);
+ribbon3.setParameter("width", 1);
 ribbon3.setParameter("unitLenght", 60000);
-ribbon3.setParameter("speed", 0.2);
+ribbon3.setParameter("speed", 0.15);
 ribbon3.setParameter("platteTexture", "./platteMetro.png");
 
 for (var key in pathes3) {
@@ -231,11 +277,11 @@ for (var key in pathes3) {
     //meter to feet.
     point[0] = point[0] * 3.2808;
     point[1] = point[1] * 3.2808;
-    point[2] = point[2] * 3.2808
+    point[2] = point[2] * 3.2808;
   });
   ribbon3.addRibbon(path);
   // break;
 }
 
-viewer.setEffectParameter("Glow", "intensity", 0.4);
+viewer.setEffectParameter("Glow", "intensity", 0.05);
 
