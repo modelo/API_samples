@@ -7,11 +7,13 @@ var viewer = new Modelo.View.Viewer3D("model", { isMobile: isMobile() });
 
 viewer.setRenderingLinesEnabled(true);
 viewer
-  .loadModel(modelId, progress => {
+  .loadModel(modelId, {
+    onProgress: progress => {
     // second parameter is an optional progress callback
     var c = document.getElementById("progress");
     c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
-  })
+  },
+  usePbr: true})
   .then(() => {
     // model loaded successfully
     // add mouse to control camera.
@@ -21,15 +23,23 @@ viewer
     viewer.getCamera().setSensitivity({ "touchPan": 0.9 });
 
     var images = ["./star.jpg", "./star.jpg", "./star.jpg", "./star.jpg", "./star.jpg", "./star.jpg"];
-    viewer.setReflectionMap(images, () => {
-      viewer._materialManager._materials["zY7P6G87mat2"].setReflectionIntensity(0.1); //topomesh
-      viewer._materialManager._materials["zY7P6G87mat3"].setReflectionIntensity(0.2); //watersurf
-      viewer._materialManager._materials["zY7P6G87mat4"].setReflectionIntensity(0.7); //bdg-glow
-      viewer._materialManager._materials["zY7P6G87mat5"].setReflectionIntensity(0.2); //bdg>80a
-      viewer._materialManager._materials["zY7P6G87mat6"].setReflectionIntensity(0.2); //bdg>80b
-      viewer._materialManager._materials["zY7P6G87mat7"].setReflectionIntensity(0.2); //bdg<80
-      viewer._materialManager._materials["zY7P6G87mat8"].setReflectionIntensity(0.2); //bdg<40
-    });
+    viewer.setReflectionImages(images);
+
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat2", "metallic", 0.1);//.setReflectionIntensity(0.1); //topomesh
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat3", "metallic", 0.2);//.setReflectionIntensity(0.2); //watersurf
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat4", "metallic", 0.7);//.setReflectionIntensity(0.7); //bdg-glow
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat5", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg>80a
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat6", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg>80b
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat7", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg<80
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat8", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg<40
+
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat2", "roughness", 0.0);//.setReflectionIntensity(0.1); //topomesh
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat3", "roughness", 0.0);//.setReflectionIntensity(0.2); //watersurf
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat4", "roughness", 0.0);//.setReflectionIntensity(0.7); //bdg-glow
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat5", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg>80a
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat6", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg>80b
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat7", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg<80
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat8", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg<40
 
 
     // Add animating triangles
@@ -39,13 +49,13 @@ viewer
       var triangle3 = triangle1.clone();
       var triangle4 = triangle1.clone();
       triangle1.setDiffuseColor([1, 1, 0]);
-      triangle1.setTransparent(0.4);
+      triangle1.setOpacity(0.4);
       triangle2.setDiffuseColor([1, 1, 0]);
-      triangle2.setTransparent(0.4);
+      triangle2.setOpacity(0.4);
       triangle3.setDiffuseColor([1, 1, 0]);
-      triangle3.setTransparent(0.4);
+      triangle3.setOpacity(0.4);
       triangle4.setDiffuseColor([1, 1, 0]);
-      triangle4.setTransparent(0.4);
+      triangle4.setOpacity(0.4);
       triangle1.setScaling(400, 400, 400);
       triangle2.setScaling(400, 400, 400);
       triangle3.setScaling(400, 400, 400);
@@ -163,57 +173,106 @@ viewer
     // index.js:21 Float32Array(4) [134168.1875, 61590.73828125, 18.966535568237305, 1]
 
     // add animating cylinder.
-    var image1 = new Image();
-    image1.src = "./gradual_change_red_02.png";
-    image1.onload = function () {
-      var bucket1 = new Modelo.View.Pawn("bucket", viewer.getResourceManager(), viewer.getMaterialManager());
-      bucket1.createTextureBucket(image1);
-      bucket1.setTranslation(120668.1328125, 47596.25390625, 6.8329620361328125);
-      viewer.getScene().addPawn(bucket1, false);
-      viewer.getRenderScene().getEffect("Glow").addPawn(bucket1);
-      var scale1 = 0;
-      setInterval(function () {
-        scale1 = Math.max(1, (scale1 + 100) % 20000);
-        // console.log(scale);
-        bucket1.setScaling(scale1 * 0.2, scale1 * 0.2, scale1 * 0.07);
-        bucket1.setTransparent(1 - scale1 / 20000);
-      }, 10);
 
-      var scale2 = 0;
-      var bucket2 = bucket1.clone();
-      bucket2.setTranslation(125475.4375, 55741.0546875, 15.012162208557129);
-      viewer.getScene().addPawn(bucket2, false);
-      viewer.getRenderScene().getEffect("Glow").addPawn(bucket2);
-      setInterval(function () {
-        scale2 = Math.max(1, (scale2 + 100) % 20000);
-        // console.log(scale);
-        bucket2.setScaling(scale2 * 0.2, scale2 * 0.2, scale2 * 0.07);
-        bucket2.setTransparent(1 - scale2 / 20000);
-      }, 10);
+    // var bucket1 = new Modelo.View.Pawn("bucket", viewer.getResourceManager(), viewer.getMaterialManager());
+    // bucket1.load("5YLBJXrZ").then(function() {
+    //   bucket1.setTranslation(120668.1328125, 47596.25390625, 6.8329620361328125);
+    //   bucket1.setScaling(10000, 10000, 10000);
+    //   viewer.getRenderScene().getEffect("Glow").addPawn(bucket1);
+    //   var scale1 = 0;
+      // setInterval(function () {
+      //   scale1 = Math.max(1, (scale1 + 100) % 20000);
+      //   // console.log(scale);
+      //   bucket1.setScaling(scale1 * 0.2, scale1 * 0.2, scale1 * 0.07);
+      //   bucket1.setOpacity(1 - scale1 / 20000);
+      // }, 10);
 
-      var scale3 = 0;
-      var bucket3 = bucket1.clone();
-      bucket3.setTranslation(117580.8984375, 56858.41015625, -15.853614807128906);
-      viewer.getScene().addPawn(bucket3, false);
-      viewer.getRenderScene().getEffect("Glow").addPawn(bucket3);
-      setInterval(function () {
-        scale3 = Math.max(1, (scale3 + 100) % 20000);
-        // console.log(scale);
-        bucket3.setScaling(scale3 * 0.2, scale3 * 0.2, scale3 * 0.07);
-        bucket3.setTransparent(1 - scale3 / 20000);
-      }, 10);
+      // var scale2 = 0;
+      // var bucket2 = bucket1.clone();
+      // bucket2.setTranslation(125475.4375, 55741.0546875, 15.012162208557129);
+      // viewer.getScene().addPawn(bucket2, false);
+      // viewer.getRenderScene().getEffect("Glow").addPawn(bucket2);
+      // setInterval(function () {
+      //   scale2 = Math.max(1, (scale2 + 100) % 20000);
+      //   // console.log(scale);
+      //   bucket2.setScaling(scale2 * 0.2, scale2 * 0.2, scale2 * 0.07);
+      //   bucket2.setOpacity(1 - scale2 / 20000);
+      // }, 10);
 
-      var scale4 = 0;
-      var bucket4 = bucket1.clone();
-      bucket4.setTranslation(134168.1875, 61590.73828125, 18.966535568237305);
-      viewer.getScene().addPawn(bucket4, false);
-      viewer.getRenderScene().getEffect("Glow").addPawn(bucket4);
-      setInterval(function () {
-        scale4 = Math.max(1, (scale4 + 100) % 20000);
-        bucket4.setScaling(scale4 * 0.2, scale4 * 0.2, scale4 * 0.07);
-        bucket4.setTransparent(1 - scale4 / 20000);
-      }, 10);
-    }
+      // var scale3 = 0;
+      // var bucket3 = bucket1.clone();
+      // bucket3.setTranslation(117580.8984375, 56858.41015625, -15.853614807128906);
+      // viewer.getScene().addPawn(bucket3, false);
+      // viewer.getRenderScene().getEffect("Glow").addPawn(bucket3);
+      // setInterval(function () {
+      //   scale3 = Math.max(1, (scale3 + 100) % 20000);
+      //   // console.log(scale);
+      //   bucket3.setScaling(scale3 * 0.2, scale3 * 0.2, scale3 * 0.07);
+      //   bucket3.setOpacity(1 - scale3 / 20000);
+      // }, 10);
+
+      // var scale4 = 0;
+      // var bucket4 = bucket1.clone();
+      // bucket4.setTranslation(134168.1875, 61590.73828125, 18.966535568237305);
+      // viewer.getScene().addPawn(bucket4, false);
+      // viewer.getRenderScene().getEffect("Glow").addPawn(bucket4);
+      // setInterval(function () {
+      //   scale4 = Math.max(1, (scale4 + 100) % 20000);
+      //   bucket4.setScaling(scale4 * 0.2, scale4 * 0.2, scale4 * 0.07);
+      //   bucket4.setOpacity(1 - scale4 / 20000);
+      // }, 10);
+    // });
+    // var image1 = new Image();
+    // image1.src = "./gradual_change_red_02.png";
+    // image1.onload = function () {
+    //   var bucket1 = new Modelo.View.Pawn("bucket", viewer.getResourceManager(), viewer.getMaterialManager());
+    //   bucket1.createTextureBucket(image1);
+    //   bucket1.setTranslation(120668.1328125, 47596.25390625, 6.8329620361328125);
+    //   viewer.getScene().addPawn(bucket1, false);
+    //   viewer.getRenderScene().getEffect("Glow").addPawn(bucket1);
+    //   var scale1 = 0;
+    //   setInterval(function () {
+    //     scale1 = Math.max(1, (scale1 + 100) % 20000);
+    //     // console.log(scale);
+    //     bucket1.setScaling(scale1 * 0.2, scale1 * 0.2, scale1 * 0.07);
+    //     bucket1.setOpacity(1 - scale1 / 20000);
+    //   }, 10);
+
+    //   var scale2 = 0;
+    //   var bucket2 = bucket1.clone();
+    //   bucket2.setTranslation(125475.4375, 55741.0546875, 15.012162208557129);
+    //   viewer.getScene().addPawn(bucket2, false);
+    //   viewer.getRenderScene().getEffect("Glow").addPawn(bucket2);
+    //   setInterval(function () {
+    //     scale2 = Math.max(1, (scale2 + 100) % 20000);
+    //     // console.log(scale);
+    //     bucket2.setScaling(scale2 * 0.2, scale2 * 0.2, scale2 * 0.07);
+    //     bucket2.setOpacity(1 - scale2 / 20000);
+    //   }, 10);
+
+    //   var scale3 = 0;
+    //   var bucket3 = bucket1.clone();
+    //   bucket3.setTranslation(117580.8984375, 56858.41015625, -15.853614807128906);
+    //   viewer.getScene().addPawn(bucket3, false);
+    //   viewer.getRenderScene().getEffect("Glow").addPawn(bucket3);
+    //   setInterval(function () {
+    //     scale3 = Math.max(1, (scale3 + 100) % 20000);
+    //     // console.log(scale);
+    //     bucket3.setScaling(scale3 * 0.2, scale3 * 0.2, scale3 * 0.07);
+    //     bucket3.setOpacity(1 - scale3 / 20000);
+    //   }, 10);
+
+    //   var scale4 = 0;
+    //   var bucket4 = bucket1.clone();
+    //   bucket4.setTranslation(134168.1875, 61590.73828125, 18.966535568237305);
+    //   viewer.getScene().addPawn(bucket4, false);
+    //   viewer.getRenderScene().getEffect("Glow").addPawn(bucket4);
+    //   setInterval(function () {
+    //     scale4 = Math.max(1, (scale4 + 100) % 20000);
+    //     bucket4.setScaling(scale4 * 0.2, scale4 * 0.2, scale4 * 0.07);
+    //     bucket4.setOpacity(1 - scale4 / 20000);
+    //   }, 10);
+    // }
   });
 
 viewer.setRenderingLinesEnabled(true);
@@ -221,7 +280,11 @@ viewer.setSmartCullingEnabled(false);
 
 // setup skybox
 viewer.setBackgroundMode(Modelo.View.ViewBackground.EQUIRECTANGLE);
-viewer.setBackgroundImage("background.jpg");
+var img = new  Image;
+img.src = "background.jpg";
+img.onload = function() {
+  viewer.setBackgroundImage(img);
+}
 
 // Traffic animation
 viewer.setLazyRenderingEnabled(false);
