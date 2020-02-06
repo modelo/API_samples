@@ -25,7 +25,7 @@ viewer
     var images = ["./star.jpg", "./star.jpg", "./star.jpg", "./star.jpg", "./star.jpg", "./star.jpg"];
     viewer.setReflectionImages(images);
 
-    viewer.setMaterialParameter("zY7P6G87mxPbr-mat4", "reflectionIntensity", 2.0);
+    viewer.setMaterialParameter("zY7P6G87mxPbr-mat4", "reflectionIntensity", 5.0);
 
     viewer.setMaterialParameter("zY7P6G87mxPbr-mat2", "metallic", 0.1);//.setReflectionIntensity(0.1); //topomesh
     viewer.setMaterialParameter("zY7P6G87mxPbr-mat3", "metallic", 0.2);//.setReflectionIntensity(0.2); //watersurf
@@ -180,7 +180,7 @@ viewer
     bucket1.load("3rjPyXY4").then(function() {
       bucket1.setTranslation(120668.1328125, 47596.25390625, 150.8329620361328125);
       viewer.getScene().addPawn(bucket1, false);
-      bucket1.setDiffuseColor([1.0, 0.4, 0.26]);
+      bucket1.setDiffuseColor([255/255, 227/255, 76/255]);
       viewer.getRenderScene().getEffect("Glow").addPawn(bucket1);
       var scale1 = 0;
       setInterval(function () {
