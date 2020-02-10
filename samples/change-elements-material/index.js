@@ -47,13 +47,16 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   });
 
   document.getElementById("random-color").onclick = function() {
+    // 获取随机颜色值
     var randomColor = [Math.random(), Math.random(), Math.random()];
     if (elementNames) {
       elementNames.forEach(function(elementName) {
-        var materials = viewer.getScene().getElementMaterials(elementName);
-        if (materials) {
-          materials.forEach(function(material) {
-            material.setDiffuse(randomColor);
+        // 获取elementName对应的材质名称（全局唯一）
+        var materialsNames = viewer.getScene().getElementMaterialNames(elementName);
+        if (materialsNames) {
+          materialsNames.forEach(function(materialName) {
+            // 对每个材质名称，设置其颜色值
+            viewer.setMaterialParameter(materialName, "color", randomColor);
           });
         }
       });
@@ -63,13 +66,34 @@ viewer.loadModel(modelId, updateProgress).then(() => {
     }
   };
 
+  document.getElementById("reset-texture").onclick = function() {
+    if (elementNames) {
+      elementNames.forEach(function(elementName) {
+        // 获取elementName对应的材质名称（全局唯一）
+        var materialNames = viewer.getScene().getElementMaterialNames(elementName);
+        if (materialNames) {
+          materialNames.forEach(function(materialName) {
+            // 对每个材质名称，设置贴图，传入null，表示还原为默认贴图
+            viewer.setMaterialParameter(materialName, "colorTexture", null);
+          });
+          selectElementTool.pick([], false);
+        }
+      });
+    }
+    if (elementNames.length == 0){
+      window.alert("Please select an element with texture first.");
+    }
+  }
+
   document.getElementById("thumbnail1").addEventListener('click',function(event) {
     if (elementNames) {
       elementNames.forEach(function(elementName) {
-        var materials = viewer.getScene().getElementMaterials(elementName);
-        if (materials) {
-          materials.forEach(function(material) {
-            material.setDiffuseTexture("./texture.jpg");
+         // 获取elementName对应的材质名称（全局唯一）
+        var materialNames = viewer.getScene().getElementMaterialNames(elementName);
+        if (materialNames) {
+          materialNames.forEach(function(materialName) {
+             // 对每个材质名称，设置贴图, 传入参数为贴图路径
+            viewer.setMaterialParameter(materialName, "colorTexture", "./texture.jpg");
           });
           selectElementTool.pick([], false);
         }
@@ -83,10 +107,12 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   document.getElementById("thumbnail2").addEventListener('click',function(event) {
     if (elementNames) {
       elementNames.forEach(function(elementName) {
-        var materials = viewer.getScene().getElementMaterials(elementName);
-        if (materials) {
-          materials.forEach(function(material) {
-            material.setDiffuseTexture("./texture 2.jpg");
+        // 获取elementName对应的材质名称（全局唯一）
+        var materialNames = viewer.getScene().getElementMaterialNames(elementName);
+        if (materialNames) {
+          materialNames.forEach(function(materialName) {
+            // 对每个材质名称，设置贴图, 传入参数为贴图路径
+            viewer.setMaterialParameter(materialName, "colorTexture", "./texture 2.jpg");
           });
           selectElementTool.pick([], false);
         }
@@ -100,10 +126,12 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   document.getElementById("thumbnail3").addEventListener('click',function(event) {
     if (elementNames) {
       elementNames.forEach(function(elementName) {
-        var materials = viewer.getScene().getElementMaterials(elementName);
-        if (materials) {
-          materials.forEach(function(material) {
-            material.setDiffuseTexture("./texture 3.jpg");
+        // 获取elementName对应的材质名称（全局唯一）
+        var materialNames = viewer.getScene().getElementMaterialNames(elementName);
+        if (materialNames) {
+          materialNames.forEach(function(materialName) {
+            // 对每个材质名称，设置贴图, 传入参数为贴图路径
+            viewer.setMaterialParameter(materialName, "colorTexture", "./texture 3.jpg");
           });
           selectElementTool.pick([], false);
         }
@@ -113,6 +141,4 @@ viewer.loadModel(modelId, updateProgress).then(() => {
       window.alert("Please select an element with texture first.");
     }
   });
-
-  
 });
