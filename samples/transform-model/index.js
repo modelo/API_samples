@@ -19,7 +19,7 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   console.log("loading done");
 
   // 新建Transform工具，参数分别是viewer，modelId和transform工具的显示比例，默认值为1.
-  var transform = new Modelo.View.Tool.TransformGizmo(viewer, modelId, 1.0);
+  var transform = new Modelo.View.Tool.TransformGizmo(viewer, modelId, 0.5);
   // 将工具加入到viewer中
   viewer.addTool(transform);
   document.getElementById("transform-model").onclick = function() {
@@ -30,5 +30,4 @@ viewer.loadModel(modelId, updateProgress).then(() => {
     alert("The transform matrix is: [" + transform.getTransformMatrix() + "]\n" + 
     "You can use this matrix to transform the model when calling viewer.loadModel");    
   }
-  
 });
