@@ -1,5 +1,5 @@
-var modelId = "GY2KL28b";
-var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTEsInVzZXJuYW1lIjoid2FuZ2p1bnJlbiIsImlhdCI6MTU0ODI5NDMxMSwiZXhwIjozMzA4NDI5NDMxMX0.Ruz4m7XJAyYQRNDsFeJEd8Z44UqotOA-CPau4q91G2Y"
+var modelId = "DY0q4e8x";
+var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
