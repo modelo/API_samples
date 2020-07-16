@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modelo API Sample(multi-model)</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+    <script src="../../assets/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../assets/css/range.css" />
+    <script src="../../assets/js/range.js"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+      }
+
+      .form-wrapper {
+        width: 300px;
+        min-width: 300px;
+      }
+
+      .ui.checkbox {
+        left: 10px;
+        top: 10px;
+        min-width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .range-wrapper {
+        position: relative;
+        margin: 10px;
+      }
+
+      .min,
+      .max,
+      .ui.range {
+        position: absolute;
+      }
+
+      .min {
+        right: 190px;
+      }
+
+      .max {
+        right: 0;
+      }
+
+      .ui.range {
+        left: 100px;
+        top: 0;
+        width: 160px;
+      }
+
+      .wrapper {
+        padding: 10px;
+        width: 300px;
+        min-width: 300px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+      
+      #model {
+        height: 100%;
+        width: calc(100% - 300px);
+      }
+    </style>
+</head>
+
+<body>
+      <div id="model1" style="width:1000px"></div>
+    <div id="model2" style="width:1000px"></div>
+    <div id="model3" style="width:1000px"></div>
+
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.8-lts.js"></script> 
+    <script src="/assets/js/utils.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
