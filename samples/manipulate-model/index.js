@@ -1,8 +1,6 @@
 let modelInfo = null; // Store model information
 var searchValue = document.getElementById("searchValue");
 var searchBtn = document.getElementById("searchBtn");
-var deleteBtn = document.getElementById("deleteBtn");
-var deleteValue = document.getElementById("deleteValue");
 var inputModelId = document.getElementById("model-id");
 var inputModelName = document.getElementById("model-name");
 var modelNameWrapper = document.getElementById("modelNameWrapper");
@@ -67,19 +65,4 @@ inputModelName.onblur = e => {
       })
       .catch(e => console.log("updateErr: " + e));
   }
-};
-// Delete model by modelId
-deleteBtn.onclick = () => {
-  var deleteModelId = deleteValue.value;
-  deleteBtn.className = "ui loading button red";
-  Modelo.Model.remove(deleteModelId)
-    .then(modelId => {
-      deleteBtn.className = "ui button red";
-      console.log("deleteId: " + modelId);
-      console.log("delete success");
-    })
-    .catch(e => {
-      console.log("deleteErr: " + e);
-      deleteBtn.className = "ui button red";
-    });
 };
