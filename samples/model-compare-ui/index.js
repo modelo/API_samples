@@ -6,7 +6,7 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 // Compare two models by modelIds
 var viewer = new Modelo.UI.ModelCompareViewer({
   containerId: "modelContainer",
-  baseModelId: "q8ZjpB8a",
+  baseModelId: "3rjZVNr4",
   updatedModelId: "98yzX5rK",
   onReady: viewer => {
     console.log("viewer ready", viewer);

@@ -1,4 +1,4 @@
-var modelId = "q8ZjpB8a";
+var modelId = "3rjZVNr4";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA" // A sample app token
 var container = document.getElementById("model");
 
@@ -25,12 +25,12 @@ document.getElementById("glow").onchange = function(evt) {
   if (checked && !initiated) {
     initiated = true;
 
-    viewer.getScene().setElementsColor(["q8ZjpB8a+0/954779"], [1.0, 1.0, 0.0]);
-    viewer.getScene().setElementsColor(["q8ZjpB8a+0/701300"], [0.0, 1.0, 0.0]);
-    viewer.getRenderScene().getEffect("Glow").addElements(["q8ZjpB8a+0/954779"], {
+    viewer.getScene().setElementsColor(["3rjZVNr4+0/954779"], [1.0, 1.0, 0.0]);
+    viewer.getScene().setElementsColor(["3rjZVNr4+0/701300"], [0.0, 1.0, 0.0]);
+    viewer.getRenderScene().getEffect("Glow").addElements(["3rjZVNr4+0/954779"], {
       emissiveColor: [1.0, 1.0, 0.0]
     });
-    viewer.getRenderScene().getEffect("Glow").addElements(["q8ZjpB8a+0/701300"], {
+    viewer.getRenderScene().getEffect("Glow").addElements(["3rjZVNr4+0/701300"], {
       emissiveColor: [0.0, 1.0, 0.0]
     })
   }
