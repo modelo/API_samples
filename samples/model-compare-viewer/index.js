@@ -3,7 +3,7 @@ const appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZ
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 
-var modelId1 = "q8ZjpB8a";
+var modelId1 = "3rjZVNr4";
 var modelId2 = "98yzX5rK";
 
 var that = this;
