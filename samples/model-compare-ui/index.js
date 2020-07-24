@@ -7,7 +7,7 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 var viewer = new Modelo.UI.ModelCompareViewer({
   containerId: "modelContainer",
   baseModelId: "3rjZVNr4",
-  updatedModelId: "98yzX5rK",
+  updatedModelId: "a8bbbn85",
   onReady: viewer => {
     console.log("viewer ready", viewer);
   },

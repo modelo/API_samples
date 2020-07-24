@@ -31,7 +31,7 @@ const ControlList = [
     title: '管道',
     view: ModelComments.Monitor1,
     noCircle: false,
-    panelElements: ['a8bvqn85+0/101543'],
+    panelElements: ['Q8PDnO8k+0/101543'],
     panelData: [
       {
         lineDirection: 'top',
@@ -95,11 +95,11 @@ const ControlList = [
       view: ModelComments.Monitor2,
       noCircle: false,
       panelElements: [
-        'a8bvqn85+0/100141',
-        'a8bvqn85+0/100145',
-        'a8bvqn85+0/100152',
-        'a8bvqn85+0/100195',
-        'a8bvqn85+0/100196'
+        'Q8PDnO8k+0/100141',
+        'Q8PDnO8k+0/100145',
+        'Q8PDnO8k+0/100152',
+        'Q8PDnO8k+0/100195',
+        'Q8PDnO8k+0/100196'
       ],
       panelData: [
         {
@@ -290,7 +290,7 @@ const ControlList = [
       title: '水箱',
       view: ModelComments.Monitor3,
       noCircle: false,
-      panelElements: ['a8bvqn85+0/100139'],
+      panelElements: ['Q8PDnO8k+0/100139'],
       panelData: [
         {
           lineDirection: 'left',
@@ -327,7 +327,7 @@ const ControlList = [
       icon: './svg/staff-record.svg',
       title: '人员',
       view: ModelComments.Monitor4,
-      panelElements: ['a8bvqn85+0/100038'],
+      panelElements: ['Q8PDnO8k+0/100038'],
       noCircle: false,
       panelData: [
         {
@@ -418,7 +418,7 @@ const ControlList = [
       title: '阀门',
       view: ModelComments.Monitor5,
       noCircle: false,
-      panelElements: ['a8bvqn85+0/100208', 'a8bvqn85+0/100218'],
+      panelElements: ['Q8PDnO8k+0/100208', 'Q8PDnO8k+0/100218'],
       panelData: [
         {
           lineDirection: 'left',
