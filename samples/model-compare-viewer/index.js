@@ -4,7 +4,7 @@ Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
 
 var modelId1 = "3rjZVNr4";
-var modelId2 = "98yzX5rK";
+var modelId2 = "a8bbbn85";
 
 var that = this;
 

@@ -1,4 +1,4 @@
-var modelId = "DY0q4e8x";
+var modelId = "Q8PDnO8k";
 var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
@@ -44,29 +44,34 @@ viewer
 
 viewer.setLazyRenderingEnabled(false);
 
+let ribbonGroups = {};
+  const plattes = {
+      "path0": "warm.png",
+      "path1": "cold.png"
+  }
+  Object.keys(gasPath).map(key => {
+      let ribbonGroup = null;
+      const points = gasPath[key].map(point => [point[0] / 304, point[1] / 304, point[2] / 304]);
 
-var ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
-ribbon.setEnabled(true);
-viewer.getScene().addVisualize(ribbon);
-ribbon.setParameter("width", 20);
-ribbon.setParameter("unitLenght", 30);
-ribbon.setParameter("speed", -0.5);
-ribbon.setParameter("platteTexture", "./warm.png");
+      if (ribbonGroups[key]) {
+          ribbonGroup = ribbonGroups[key].group;
+      } else {
+          ribbonGroup = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
+          ribbonGroup.setEnabled(true);
+          viewer.getScene().addVisualize(ribbonGroup);
+          ribbonGroup.setParameter("width", 10);
+          ribbonGroup.setParameter("unitLenght", 50);
+          ribbonGroup.setParameter("speed", -0.5);
+          ribbonGroup.setParameter("platteTexture", plattes[key]);
+          ribbonGroups[key] = {
+              group: ribbonGroup,
+              ribbons: null
+          };
+      }
+      ribbonGroups[key].ribbons = ribbonGroup.addRibbon(points);
+  });
 
-var ribbon2= new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
-ribbon2.setEnabled(true);
-viewer.getScene().addVisualize(ribbon2);
-ribbon2.setParameter("width", 8);
-ribbon2.setParameter("unitLenght", 30);
-ribbon2.setParameter("speed", 0.5);
-ribbon2.setParameter("platteTexture", "./cold.png");
 
-var ribbons = [];
-var ribbons2 = [];
-pointsArray.forEach(function(points) {
-  ribbons.push(ribbon.addRibbon(points));
-});
 
-pointsArray2.forEach(function(points) {
-  ribbons2.push(ribbon2.addRibbon(points));
-});
+
+

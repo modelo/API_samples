@@ -57,7 +57,7 @@ for (var key in pathes1) {
     //meter to feet.
     point[0] = point[0] * 3.2808;
     point[1] = point[1] * 3.2808;
-    point[2] = 1.0
+    point[2] = 1.0;
   });
   ribbon1.addRibbon(path);
 }
@@ -76,7 +76,7 @@ for (var key in pathes2) {
     //meter to feet.
     point[0] = point[0] * 3.2808;
     point[1] = point[1] * 3.2808;
-    point[2] = 1.0
+    point[2] = 1.0;
   });
   ribbon2.addRibbon(path);
 }
