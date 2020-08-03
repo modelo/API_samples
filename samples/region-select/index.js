@@ -30,5 +30,12 @@ viewer
     var selectElementTool = new Modelo.View.Tool.SelectElements(viewer);
     viewer.addTool(selectElementTool);
     selectElementTool.setEnabled(true);
-    selectElementTool.setRegionSelectEnabled(true); 
+    
+    document.getElementById("region-select").onclick = function() {
+      selectElementTool.setRegionSelectEnabled(true); 
+    }
+    let elementNames = [];
+    viewer.getEventEmitter().on("onElementSelected", elementNames => {
+    selectElementTool.setRegionSelectEnabled(false);
+    });
   });
