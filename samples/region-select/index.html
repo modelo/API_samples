@@ -17,12 +17,6 @@
         display: flex;
       }
 
-      .wrapper {
-        padding: 10px;
-        width: 300px;
-        min-width: 300px;
-      }
-
       .wrapper label {
         margin: 0 0 0.28571429rem 0;
         color: rgba(0, 0, 0, 0.87);
@@ -45,17 +39,29 @@
         height: 100%;
         width: 100%;
       }
+
+      .buttons-wrapper .button {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .buttons-wrapper {
+        position:absolute;
+        top:9px;
+        left:9px;
+      }
     </style>
   </head>
 
   <body>
-    <div class="wrapper">
-      <label>Press 'ESC' to destroy viewer.</label>
-    </div>
-    <div class="wrapper-right">
+      <div class="wrapper-right">
       <label id="progress">Loading: 0</label>
     </div>
     <div id="model"></div>
+    <div class="buttons-wrapper">
+      <button class="ui button" id="region-select">region-select</button>
+    </div>
     <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.8-lts.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script src="./index.js"></script>
