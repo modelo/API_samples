@@ -58,20 +58,16 @@
         width: 100%;
       }
 
-      #commercial {
-        background-color: orange;
+      #building_01 {
+        background-color:burlywood;
       }
 
-      #residential {
-        background-color:greenyellow;
+      #building_02 {
+        background-color:lightgray;
       }
 
-      #institutional {
-        background-color:blue;
-      }
-
-      #sports{
-        background-color:pink;
+      #building_03 {
+        background-color:gray;
       }
 
       #panelLabel {
@@ -103,22 +99,17 @@
 
   <body>
     <div class="buttons-wrapper">
-      <input type="button" id="commercial" value="Commercial" class="ui primary button" />
-      <input type="button" id="residential" value="Residential" class="ui primary button" />
-      <input type="button" id="institutional" value="Institutional" class="ui primary button" />
-      <input type="button" id="sports" value="Sports" class="ui primary button" />
+      <input type="button" id="building_01" value="building_01" class="ui primary button" />
+      <input type="button" id="building_02" value="building_02" class="ui primary button" />
+      <input type="button" id="building_03" value="building_03" class="ui primary button" />
     </div>
     
     <div class="wrapper-right">
       <label id="progress">Loading: 0</label>
     </div>
     <div id="model">
-      <div id="panelLabel">
-        <p class="panelLabel-title">举个栗子</p>
-        <p class="panelLabel-text">数据：<label class="label-temperature">666 &#176;C </label></p>
-        <p class="panelLabel-text">数据：<label class="label-speed">888 m/s</label></p>
-      </div>
     </div>
+    <script src="element.js"></script>
     <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.8-lts.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script src="index.js"></script>
