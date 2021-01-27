@@ -1,0 +1,700 @@
+0_rac_basic_sample_project.rvt(0)
+ Ceiling
+  墙
+   基本墙
+    Wall - Timber Clad
+     655533
+  屋顶
+   基本屋顶
+    Warm Roof - Timber
+     724430
+  栏杆扶手
+   栏杆扶手
+    SH_1100mm
+     933840
+  环境
+   RPC Male
+    Alex
+     954779
+ Foundation
+  墙
+   基本墙
+    Interior - Partition
+     976752
+  结构基础
+   M_Pile Cap-600 Pile
+    600 x 600 x 900mm
+     512522
+     512469
+     512319
+     512449
+     512394
+     512445
+     512277
+     512526
+     512473
+     512297
+   M_Pile-Steel Pipe
+    600mm Diameter
+     512528
+     512447
+     512475
+     512524
+     512396
+     512279
+     512451
+     512299
+     512471
+     512321
+ Level 1
+  专用设备
+   Miele Built-in Microwave M 8260-2
+    Miele Microwave M 8260-2
+     696998
+   Miele Built-in Rangehood DA 2210
+    Rangehood DA-2210
+     679009
+   Miele MasterCool KF 1911 Vi
+    Miele Fridge/Freezer KF 1911 Vi
+     684791
+   Miele Oven H 5681 BP
+    Miele Oven H 5681 BP
+     686184
+   Miele Tumble Dryer T 7944 C
+    Miele Tumble Dryer T 7944 C
+     677695
+   Vase (3)-with Flower
+    Vase (3)-with Flower
+     986988
+   Wine Bottles
+    Wine Bottles
+     993091
+  卫浴装置
+   Faucet-8inch_Reach-Kohler-Purist-7507
+    Chrome-Polished_Chrome-CP
+     213811
+   Lavatory-TOTO-Luminist_Rectangle_Vessel_LLT151
+    Standard
+     936823
+   Sink-Offset-Kohler-Vault-3823_4
+    Steel-Stainless-NA
+     211850
+  场地
+   M_Wind Power Generator
+    9 Meters High
+     554644
+     418977
+     418985
+  墙
+   基本墙
+    Cavity wall_sliders
+     977133
+    CL_W1
+     493790
+     493612
+     493697
+     627729
+     627064
+     628523
+    Foundation - 300mm Concrete
+     493879
+    Interior - 165 Partition (1-hr)
+     425745
+     424922
+     906885
+    Wall - Timber Clad
+     849032
+     845266
+     418079
+     422243
+     198749
+     427092
+  天花板
+   复合天花板
+    3000 x 3000mm Grid
+     697612
+  家具
+   Bar Chair
+    Bar Chair
+     988640
+     988459
+     988462
+     988396
+     988128
+     988603
+   Dining Chair (3)
+    Dining Chair (3)
+     990621
+     990648
+     990645
+     990647
+     990646
+     990317
+     990596
+     990620
+   Table-Dining 01 (M)
+    1800 x 900 mm
+     989521
+     989344
+  常规模型
+   aalto vase - tall
+    White
+     993980
+   Miele Built-under Dishwasher G 4101 U CS
+    Miele Built-under Dishwasher G 4101 U CS
+     694796
+   Miele Induction Cooktop KM 6350 LPT
+    Miele Induction Cooktop 6350 LPT
+     680539
+   Miele Washing Machine W 5820 WPS
+    Miele Washing Machine W 5820 WPS
+     674370
+   Walvit_Hung Bowl_604118 W
+    Walvit
+     935747
+   Water Glass
+    Water Glass
+     997121
+     997051
+     997115
+     997069
+     996881
+     997117
+     997033
+     997119
+   White Porcelain Plate
+    Fine China - Plate
+     997120
+     997032
+     997050
+     997068
+     994782
+     997114
+     997118
+     997116
+  幕墙嵌板
+   System Panel
+    Glazed
+     977415
+     977201
+     977197
+     977199
+     977413
+     977203
+     709256
+     977425
+     708089
+     424759
+     977406
+     977423
+     977419
+     977417
+     707847
+     977421
+     423100
+     976944
+     976942
+     704284
+     977507
+     707723
+     976946
+     704282
+     424758
+     977193
+     977195
+     977191
+     977182
+  幕墙竖梃
+   Rectangular Mullion
+    64 x 128 rectangular
+     707861
+     704300
+     704299
+     704298
+     708090
+     708091
+     707727
+     707728
+     707729
+     707726
+     707859
+     977409
+     707857
+     708092
+     976960
+     976959
+     976958
+     977248
+     977247
+     976961
+     976957
+     976940
+     976939
+     977446
+     976956
+     976955
+     976954
+     709251
+     709253
+     709258
+     708093
+     977408
+     709249
+     709259
+     977251
+     977250
+     977249
+     709261
+     977253
+     977252
+     704297
+     977611
+     978557
+     978559
+     977610
+     977607
+     977608
+     977609
+     977453
+     977448
+     977447
+     977445
+     977449
+     977452
+     977451
+     977450
+     977606
+     977594
+     977515
+     977514
+     977595
+     977597
+     977598
+     977596
+     977513
+     977603
+     977604
+     977605
+     977602
+     977599
+     977600
+     977601
+     424787
+     423136
+     977433
+     977411
+     423134
+     423139
+     423148
+     977434
+     423138
+     704293
+     704291
+     704296
+     704294
+     704288
+     977410
+     704290
+     704289
+     977444
+     977439
+     424786
+     977440
+     977443
+     977442
+     977441
+     424779
+     977435
+     977436
+     977437
+     423149
+     424778
+     977438
+     424777
+  建筑地坪
+   建筑地坪
+    Pad 2
+     523064
+  植物
+   RPC Tree - Deciduous
+    Honey Locust - 25 
+     946708
+     947379
+     947330
+    Lombardy Poplar - 40 
+     946759
+    Red Ash - 25 
+     946631
+  楼板
+   楼板
+    Concrete-Domestic 425mm
+     495352
+    Generic 150mm
+     176804
+    Insitu Concrete 225mm
+     647908
+  橱柜
+   4500_Kitchen Island
+    4500_Kitchen Island
+     690286
+   4500_Kitchen Island_DW
+    4500_Kitchen Island_DW
+     690080
+  照明设备
+   SH_Lighting-Pendant-Litecontrol-Mod66-8_Foot_09
+    P-D-66N28T8
+     802782
+     812954
+  环境
+   M_RPC Beetle
+    M_RPC Beetle
+     950367
+  电气设备
+   Photovoltaic-Panel-SolarWorld-SunModule-(235-240)
+    SunModule SW 245 Silver Mono - 10 Deg. Angle
+     778316
+     800340
+     800342
+     800329
+     800325
+     800280
+     800381
+     800350
+     800383
+     800348
+     800389
+     800391
+  结构柱
+   M_Concrete-Round-Column with Drop Caps
+    M_1000
+     414482
+   M_L-Anglel-Column
+    L127X127X9.5
+     708715
+  门
+   Curtain Wall Dbl Glass
+    Curtain Wall Dbl Glass
+     704286
+     704276
+   Entrance door
+    Entrance door
+     423107
+     709246
+   M_Double-Flush
+    1730 x 2134mm
+     906937
+   Single-Flush
+    800 x 2100
+     422466
+     425292
+ Level 1 Living Rm.
+  天花板
+   复合天花板
+    3000 x 3000mm Grid
+     704053
+  家具
+   Cabinet 1
+    W1500XD400XH530
+     984486
+   M_TV - Flat Screen
+    0810mm
+     985756
+   Seat - Single with Island
+    Model with Island
+     981963
+   Seating - Artemis - Lounge chair
+    Seating - Artemis - Lounge chair
+     735739
+     736435
+   Side Table 2 (2)
+    Side Table 2 (2)
+     987054
+     987167
+   Sofa - Ottoman
+    W600XD600
+     982762
+     983388
+     983236
+     983156
+     983164
+    W600XD600 2
+     983030
+     983306
+  常规模型
+   fire place hang
+    fire place hang
+     701300
+  幕墙嵌板
+   System Panel
+    Glazed
+     909738
+     909736
+     909737
+     909735
+  幕墙竖梃
+   Rectangular Mullion
+    64 x 128 rectangular
+     909753
+     909756
+     909754
+     909755
+     909752
+     909758
+     909759
+     909757
+     909751
+  栏杆扶手
+   栏杆扶手
+    SH_1100mm
+     566588
+  楼板
+   楼板
+    Generic 150mm
+     550255
+    Timber Suspended Floor
+     512683
+  环境
+   RPC Female
+    YinYin
+     954641
+  窗
+   Single Window
+    Standard
+     735853
+     736330
+     736152
+     744523
+     744522
+     744524
+     736223
+     744525
+ Level 2
+  卫浴装置
+   Bathtub-TOTO-Nexus-FBF794S
+    01 Cotton
+     420270
+   DC_Tankworks_PLM_5000L
+    5000L 3500x900x1860
+     778420
+     778575
+   Lavatory-TOTO-Luminist_Rectangle_Vessel_LLT151
+    Standard
+     698859
+     938763
+     937573
+  墙
+   基本墙
+    Interior - Partition
+     430064
+     937935
+     430318
+     506797
+     506386
+     497540
+     430361
+     430412
+     430859
+     429964
+     939084
+     938974
+     768442
+    Retaining - 300mm Concrete
+     745997
+     746235
+     599951
+     599841
+     765620
+     765523
+     746766
+     746589
+     746634
+    SIP 202mm Wall - conc clad
+     530178
+     198694
+     428588
+     428745
+    Wall - Timber Clad
+     234869
+  常规模型
+   Walvit_Hung Bowl_604118 W
+    Walvit
+     499496
+     938761
+     937571
+  幕墙嵌板
+   System Panel
+    Glazed
+     485464
+     485460
+     931859
+     485462
+     485467
+     931860
+     485469
+     485466
+     931858
+     931861
+     485468
+  幕墙竖梃
+   Rectangular Mullion
+    64 x 128 rectangular
+     485492
+     846351
+     846333
+     485456
+     525603
+     846335
+     846334
+     485505
+     485506
+     485501
+     485494
+     485500
+     485493
+     485458
+     485509
+     485507
+     485508
+     931883
+     931882
+     931884
+     931877
+     931885
+     687033
+     931881
+     931880
+     931878
+     687035
+     687037
+     745035
+     846332
+     931879
+  建筑地坪
+   建筑地坪
+    Pad 2
+     490319
+  栏杆扶手
+   栏杆扶手
+    SH_1100mm
+     931377
+     932401
+     933811
+     932862
+     931630
+     931569
+     567887
+  楼板
+   楼板
+    Generic 300
+     418183
+     549031
+    Insitu Concrete 225mm
+     764691
+  环境
+   RPC Female
+    YinYin
+     954992
+     955125
+  窗
+   Single Window
+    Standard
+     485432
+     554383
+     457542
+     706288
+     457479
+     457534
+     498006
+  结构基础
+   M_Pile Cap-600 Pile
+    600 x 600 x 900mm
+     767153
+   M_Pile-Steel Pipe
+    600mm Diameter
+     767156
+   基础底板
+    150mm Foundation Slab
+     766598
+  结构柱
+   M_L-Anglel-Column
+    L127X127X9.5
+     709725
+  门
+   Curtain Wall Dbl Glass
+    Curtain Wall Dbl Glass
+     485452
+   Pocket_Slider_Door_5851
+    2.027 x 0.945
+     505974
+     939962
+     940221
+   Single-Flush
+    800 x 2100
+     431198
+     431144
+     431064
+     485679
+     430997
+ Roof Line
+  屋顶
+   基本屋顶
+    SG Metal Panels roof
+     243274
+  窗
+   M_Skylight
+    1180 x 1170mm
+     489062
+     488881
+ Untitled
+  地形
+   
+    
+     411452
+     523063
+     490318
+  家具系统
+   hood enclosure
+    hood enclosure
+     697577
+   wardrobe1
+    wardrobe
+     506168
+   wardrobe2
+    wardrobe
+     523531
+  栏杆扶手
+   栏杆扶手
+    SH_1100mm
+     665711
+  楼梯
+   组合楼梯
+    190mm max riser 250mm going
+     665557
+   预浇注楼梯
+    Precast Stair
+     725045
+     513254
+  照明设备
+   Trck_BswySystms_Cooper_RSA_Profile Series_AR111 Closed Back Integral Xfmr
+    Trck_BswySystms_Cooper_RSA_Profile Series_AR111 Closed Back Integral Xfmr
+     767857
+     767870
+     767916
+     767917
+     767871
+     767856
+     757198
+     767797
+  顶部扶栏
+   顶部扶栏类型
+    Rectangular - 50x50mm
+     931634
+     932543
+     931574
+     566600
+     931538
+     568014
+     665842
+     934462
+     932866
+     933815
