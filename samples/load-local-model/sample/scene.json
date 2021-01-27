@@ -1,0 +1,150 @@
+{
+"version":"3.1.1",
+"build":"01271054",
+"source":"rac_basic_sample_project.rvt",
+"type":"model",
+"samplers":[
+  "repeatMipmap"
+],
+"textures":[
+  {
+    "name":"woods and plastics.finish carpentry.wood.paneling.1.jpg",
+    "byteLength":11061
+  },
+  {
+    "name":"finishes.gypsum board.painted.white.jpg",
+    "byteLength":4591
+  },
+  {
+    "name":"sitework.planting.gravel.mixed.jpg",
+    "byteLength":33934
+  },
+  {
+    "name":"sitework.planting.grass.thick.jpg",
+    "byteLength":36742
+  },
+  {
+    "name":"concrete.cast-in-place.formwork.wood.boards.jpg",
+    "byteLength":11466
+  },
+  {
+    "name":"hone.jpg",
+    "byteLength":4949
+  },
+  {
+    "name":"woods _ plastics.finish carpentry.wood.walnut.jpg",
+    "byteLength":14755
+  },
+  {
+    "name":"concrete.cast-in-place.panels.reveal.smooth.jpg",
+    "byteLength":4236
+  },
+  {
+    "name":"finishes.flooring.carpet.needlepunch.white.jpg",
+    "byteLength":25130
+  },
+  {
+    "name":"finishes.masonry flooring.terrazzo.white.jpg",
+    "byteLength":38287
+  },
+  {
+    "name":"thermal_ moisture.shingles.rectangle.jpg",
+    "byteLength":10204
+  },
+  {
+    "name":"furnishings.fabrics.leather.black.jpg",
+    "byteLength":13428
+  },
+  {
+    "name":"woods _ plastics.finish carpentry.wood.red birch.jpg",
+    "byteLength":22718
+  },
+  {
+    "name":"steelplt.jpg",
+    "byteLength":20670
+  },
+  {
+    "name":"furnishings.fabrics.leather.brown.jpg",
+    "byteLength":18734
+  },
+  {
+    "name":"sitework.planting.grass.thick.light rye.jpg",
+    "byteLength":39926
+  },
+  {
+    "name":"furnishings.fabrics.leather.tan.jpg",
+    "byteLength":6387
+  }
+],
+"materials":[
+  "defaultLineMaterial",
+  "SH_resinFloor_255_255_255",
+  "Finishes-Interior-Plasterboard",
+  "Concrete,Sand_CementScreed",
+  "DefaultWall",
+  "Finishes-Exterior-TimberCladding_128_32_64",
+  "Steel-Kohler-NA-Stainless_189_185_187",
+  "Finishes-Interior-GypsumWallBoard",
+  "GypsumWallBoard",
+  "Roofing-MetalStandingSeam_174_0_0",
+  "Earth",
+  "Grass_28_15_35",
+  "Concrete-Cast-in-PlaceConcrete",
+  "SH_Metal-Steel",
+  "Metal-TOTO-Enameled-01Cotton_221_229_225",
+  "Door-Frame",
+  "Glass",
+  "SH_Aluminum,AnodizedBlack",
+  "Metal-PaintFinish-DarkGray,Matte",
+  "Wood_Walnutblack_105_88_96",
+  "127_127_127",
+  "CLConcrete_panels_189_174_193",
+  "Metal-Steel-345MPa",
+  "Carpet(1)_192_171_188",
+  "Buttons_253_0_127",
+  "Mainbody_253_253_253",
+  "Blackpanel_28_28_28",
+  "Logo_191_191_191",
+  "Door_111_142_126",
+  "BlackGlass",
+  "StainlessSteel",
+  "Lighting",
+  "Plastic",
+  "Rubber",
+  "Metal1",
+  "Terrazzo",
+  "Fascia_167_167_167",
+  "EpoxyResin-TOTO-61AngelicWhite",
+  "Roofing-Asphalt",
+  "ChairFabric_21_19_21",
+  "Chairwood_227_128_170",
+  "Glass,ClearGlazing",
+  "Glass-SolarWorld-TemperedGlass",
+  "Metal-SolarWorld-BackSheet-White_230_235_233",
+  "Metal-SolarWorld-SupportFraming-Silver_77_74_78",
+  "Tankworks-Colorbond®-PaleEucalypt®_182_121_165",
+  "Glass,White,HighLuminance",
+  "HermanMiller-SeatFabric8T07CrossingPumpkin",
+  "HermanMiller-VeneerZ5Maple",
+  "Wood-MediumBrown",
+  "TV-Glass",
+  "Flower",
+  "Stem",
+  "RedVase",
+  "Leather-Tan_94_64_88",
+  "Aluminum_Green_229_229_229",
+  "Water",
+  "GreenGlass",
+  "Glass-Aalto-WhitePaint_242_255_242",
+  "Juice",
+  "Glass-CrystalWineGlass"
+],
+"attributes":[
+  "vf08",
+  "vf20",
+  "vf22"
+],
+"scene": {
+  "unit":"feet"
+}
+}
