@@ -61,7 +61,7 @@ const ControlList = [
               {
                 label: {
                   label: '流速',
-                  value: '150 m³/s'
+                  value: '250 m³/s'
                 },
                 unit: 'direction--down'
               },
