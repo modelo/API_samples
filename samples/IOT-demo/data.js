@@ -61,7 +61,7 @@ const ControlList = [
               {
                 label: {
                   label: '流速',
-                  value: '150 m³/s'
+                  value: '250 m³/s'
                 },
                 unit: 'direction--down'
               },
@@ -74,7 +74,7 @@ const ControlList = [
               },
               {
                 label: {
-                  label: '室内漏水',
+                  label: '漏水',
                   value: 'N / a'
                 },
                 unit: 'direction--common'
