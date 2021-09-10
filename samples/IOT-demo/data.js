@@ -74,7 +74,7 @@ const ControlList = [
               },
               {
                 label: {
-                  label: '室内漏水',
+                  label: '漏水',
                   value: 'N / a'
                 },
                 unit: 'direction--common'
