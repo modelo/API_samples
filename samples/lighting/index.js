@@ -20,6 +20,15 @@ document.getElementById("ao").onchange = function(evt) {
   viewer.setEffectEnabled("SSAO", document.getElementById("ao").checked);
 };
 
+$("#range0").range({
+  min: 0,
+  max: 1,
+  start: 0.5,
+  step: 0.01,
+  onChange: function(value) {
+    viewer.setShadowContrast(value);
+  }
+});
 $("#range1").range({
   min: 0,
   max: Math.PI,

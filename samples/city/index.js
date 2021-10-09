@@ -3,7 +3,7 @@ var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-var viewer = new Modelo.View.Viewer3D("model", { isMobile: isMobile() });
+var viewer = new Modelo.View.Viewer3D("model", { isMobile: isMobile() ,useWebGL2:true});
 
 viewer.setRenderingLinesEnabled(true);
 viewer
@@ -25,23 +25,23 @@ viewer
     var images = ["./star.jpg", "./star.jpg", "./star.jpg", "./star.jpg", "./star.jpg", "./star.jpg"];
     viewer.setReflectionImages(images);
 
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat4", "reflectionIntensity", 5.0);
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat4", "reflectionIntensity", 5.0);
 
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat2", "metallic", 0.1);//.setReflectionIntensity(0.1); //topomesh
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat3", "metallic", 0.2);//.setReflectionIntensity(0.2); //watersurf
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat4", "metallic", 0.7);//.setReflectionIntensity(0.7); //bdg-glow
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat5", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg>80a
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat6", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg>80b
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat7", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg<80
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat8", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg<40
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat2", "metallic", 0.1);//.setReflectionIntensity(0.1); //topomesh
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat3", "metallic", 0.2);//.setReflectionIntensity(0.2); //watersurf
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat4", "metallic", 0.7);//.setReflectionIntensity(0.7); //bdg-glow
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat5", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg>80a
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat6", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg>80b
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat7", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg<80
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat8", "metallic", 0.2);//.setReflectionIntensity(0.2); //bdg<40
 
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat2", "roughness", 0.0);//.setReflectionIntensity(0.1); //topomesh
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat3", "roughness", 0.0);//.setReflectionIntensity(0.2); //watersurf
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat4", "roughness", 0.0);//.setReflectionIntensity(0.7); //bdg-glow
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat5", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg>80a
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat6", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg>80b
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat7", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg<80
-    viewer.setMaterialParameter("6YdejQ8WmxPbr-mat8", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg<40
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat2", "roughness", 0.0);//.setReflectionIntensity(0.1); //topomesh
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat3", "roughness", 0.0);//.setReflectionIntensity(0.2); //watersurf
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat4", "roughness", 0.0);//.setReflectionIntensity(0.7); //bdg-glow
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat5", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg>80a
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat6", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg>80b
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat7", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg<80
+    viewer.setMaterialParameter("6YdejQ8W.mxPbr-mat8", "roughness", 0.0);//.setReflectionIntensity(0.2); //bdg<40
 
 
     // Add animating triangles

@@ -44,7 +44,7 @@
       }
 
       .min {
-        right: 190px;
+        right: 160px;
       }
 
       .max {
@@ -52,9 +52,9 @@
       }
 
       .ui.range {
-        left: 100px;
+        left: 120px;
         top: 0;
-        width: 160px;
+        width: 140px;
       }
 
       .wrapper {
@@ -103,6 +103,11 @@
         <label>Specular</label>
       </div>
       <div class="range-wrapper">
+        <label>shadowContrast</label>
+        <span class="min">0</span><span class="max">1</span>
+        <div class="ui range" id="range0"></div>
+      </div>
+      <div class="range-wrapper">
         <label>Latitude</label>
         <span class="min">0</span><span class="max">π/2</span>
         <div class="ui range" id="range1"></div>
@@ -122,7 +127,7 @@
     <div class="wrapper-right">
       <label id="progress">Loading: 0</label>
     </div>
-    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-2.8-lts.js"></script> 
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-3.6-lts.js"></script> 
     <script src="/assets/js/utils.js"></script>
     <script src="index.js"></script>
   </body>

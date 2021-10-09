@@ -3,7 +3,7 @@ var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI
 
 Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
 
-var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
+var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile(),useWebGL2:true });
 
 viewer.setRenderingLinesEnabled(true);
 viewer
