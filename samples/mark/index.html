@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ruler</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+      }
+
+      #model {
+        width: calc(100% - 300px);
+      }
+
+      .form-wrapper {
+        width: 300px;
+        padding: 10px;
+      }
+
+      .right-click {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 0.92857143em;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      #result {
+        word-break: break-all;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="form-wrapper">
+      <form class="ui form">
+        <div class="one field">
+          <div class="field">
+            <label>Mark Type</label>
+            <select class="ui dropdown" id="marktype">
+              <option>Type</option>
+              <option value="0">Select</option>
+              <option value="1">Point</option>
+              <option value="2">Line</option>
+              <option value="3">Area</option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <div class="right-click">Right click to reset measurement</div>
+      <div class="ui message" id="result"></div>
+    </div>
+    <div id="model"></div>
+    <div class="wrapper-right">
+      <label id="progress">Loading: 0</label>
+    </div>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-3.6-lts.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
