@@ -3,6 +3,9 @@
     <meta charset="UTF-8" />
     <title>ruler</title>
     <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
+    <script src="../../assets/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../assets/css/range.css" />
+    <script src="../../assets/js/range.js"></script>
     <style>
       html,
       body {
@@ -17,6 +20,9 @@
       }
 
       #model {
+        position: relative;
+        z-index: 10;
+        float: right;
         width: calc(100% - 300px);
       }
 
@@ -31,6 +37,31 @@
         font-weight: 700;
         cursor: pointer;
       }
+      .ui.range {
+        left: 120px;
+        top: 0;
+        width: 140px;
+      }
+
+      .min {
+        right: 160px;
+      }
+
+      .max {
+        right: 0;
+      }
+
+      .min,
+      .max,
+      .ui.range {
+        position: absolute;
+      }
+
+      .range-wrapper {
+        position: relative;
+        margin: 10px;
+      }
+      
 
       .wrapper label {
         margin: 0 0 0.28571429rem 0;
@@ -53,6 +84,16 @@
       #result {
         word-break: break-all;
       }
+
+      #clearAll{
+        background-color:#ff0000;
+      }
+      #clearSelect{
+        background-color:#ffa600;
+      }
+      #Gizmo{
+        background-color:#00ff2a;
+      }
     </style>
   </head>
 
@@ -61,6 +102,13 @@
       <form class="ui form">
         <div class="one field">
           <div class="field">
+            <label>Default button</label>
+            <div class="buttons-wrapper">
+              <input type="button" id="clearAll" value="clearMaks" class="button" />
+              <input type="button" id="clearSelect" value="clearSelect" class="button" />
+              <input type="button" id="Gizmo" value="Gizmo" class="button" />
+            </div>
+
             <label>Mark Type</label>
             <select class="ui dropdown" id="marktype">
               <option>Type</option>
@@ -68,18 +116,44 @@
               <option value="1">Point</option>
               <option value="2">Line</option>
               <option value="3">Area</option>
+              <option value="4">Rect</option>
+            </select>
+
+            <label>Select Type</label>
+            <select id ="SelectType" class="ui dropdown" id="marktype">
+              <option value="1">HightLight</option>
+              <option value="2">OutLine</option>
             </select>
           </div>
+
+          <label>Mark Property</label>
+          <div class="range-wrapper">
+            <label>RectWidth</label>
+            <span class="min">0.5</span><span class="max">4</span>
+            <div class="ui range" id="range1"></div>
+          </div>
+          <div class="ui toggle checkbox">
+            <input type="checkbox" id="RectWithArrow" checked="true"></input>
+            <label>RectWithArrow</label>
+          </div>
+          <div class="ui toggle checkbox">
+            <input type="checkbox" id="RandomColor" ></input>
+            <label>RandomColor</label>
+          </div>
+
+          <label>Describe:</label>
+          <div><label id="explain1">press CTRL to align xyz when Draw</label></div>
+          <div><label id="explain2">press CTRL to Multiple choice when Select</label></div>
+
+        </div>
         </div>
       </form>
-      <div class="right-click">Right click to reset measurement</div>
-      <div class="ui message" id="result"></div>
-    </div>
     <div id="model"></div>
     <div class="wrapper-right">
       <label id="progress">Loading: 0</label>
     </div>
-    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-3.6-lts.js"></script>
+    <!-- <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-3.7-lts.js"></script> -->
+    <script src="/modelo3d.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script src="index.js"></script>
   </body>
