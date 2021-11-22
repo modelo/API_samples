@@ -38,6 +38,13 @@ document.getElementById("clearAll").onclick = function() {
   markGraph.reset();
 };
 
+document.getElementById('clearSelectedMark').onclick = function(){
+  let selectMarks = markGraph.getSelectMarks();
+  for(let mark of selectMarks){
+    markGraph.remove(mark);
+  }
+}
+
 document.getElementById("clearSelect").onclick = function(){
   markGraph.clearAllSelect();
 }
@@ -49,7 +56,7 @@ document.getElementById("RectWithArrow").onchange = function(){
 
 document.getElementById("RandomColor").onchange = function(){
   var checked = document.getElementById("RandomColor").checked;
-  markGraph.setDefaultColor(checked ? [Math.random(),Math.random(),Math.random()] : null);
+  markGraph.setDefaultColor(checked ? [Math.random(),Math.random(),Math.random()] : null,true); // 覆盖全部mark
 }
 
 // 这个开关表示
