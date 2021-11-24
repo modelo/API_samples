@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Modelo API Sample(model-viewer)</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
+    <link href="./dat.gui.css" rel="stylesheet" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+      }
+
+      .bg-selection {
+        width: 0px;
+        min-width: 0px;
+        padding: 0px;
+      }
+
+      .wrapper {
+        padding: 10px;
+        width: 300px;
+        min-width: 300px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+      
+      #model {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class ="bg-selection">
+      <div class="item">
+        <img class="item-img" id="image1t" src="./wallpaper.jpg" style="visibility: hidden;" />
+      </div>
+    </div>
+
+
+    <!-- <div class="buttons-wrapper"> -->
+      <!-- <input type="button" id="koorender" value="高质量渲染" class="button" /> -->
+    <!-- </div> -->
+    <div class="wrapper-right">
+      <label id="progress">Loading: 0</label>
+    </div>
+
+    <div id="model"></div>
+    <!-- <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/prod/modeloapi-3.6-lts.js"></script> -->
+    <script src="dat.gui.js"></script>
+    <script src="/modelo3d.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
