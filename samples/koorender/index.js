@@ -32,10 +32,10 @@ viewer
     viewer.addInput(keyboard);
 
     var EngineManager = new Modelo.EngineManager(viewer);
-    let image2 =  document.getElementById("image2t");
+    let image1 =  document.getElementById("image1t");
 
 
-    EngineManager.setBackgroundImage(image2);
+    EngineManager.setBackgroundImage(image1);
 
     var options = {
       startKoorender:()=>{
@@ -46,7 +46,7 @@ viewer
           skyBoxConfig.close();
         }else{
           // 设置背景图
-          EngineManager.setBackgroundImage(image2);
+          EngineManager.setBackgroundImage(image1);
           realSkyConfig.close();
           skyBoxConfig.open();
         }
@@ -160,7 +160,7 @@ viewer
     }
     var skyBoxConfig = control.addFolder('天空盒');
     skyBoxConfig.add(skyBoxoptions, 'backgroundMode',["穹顶","平铺"]).onChange((value)=>{
-      EngineManager.setBackgroundImage(image2);
+      EngineManager.setBackgroundImage(image1);
       if(value === "平铺"){
         EngineManager.setBackgroundMode(1);
       }
