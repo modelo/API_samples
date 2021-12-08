@@ -23,6 +23,18 @@
         min-width: 300px;
       }
 
+      .buttons-wrapper .button {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .buttons-wrapper {
+        position:absolute;
+        top:20px;
+        left:20px;
+      }
+
       .wrapper label {
         margin: 0 0 0.28571429rem 0;
         color: rgba(0, 0, 0, 0.87);
@@ -48,7 +60,18 @@
     </style>
   </head>
 
-  <body>
+  <body>    
+    <div class="buttons-wrapper">
+      <form class="ui form">
+        <div class="field">
+          <label>视图类型</label>
+          <select class="ui dropdown" id="viewType">
+            
+          </select>
+        </div>
+      </form>
+    </div>
+
     <div class="wrapper" id="svg-container">
 
     </div>
