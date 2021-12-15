@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Modelo API Sample(model-viewer)</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+      }
+
+      .wrapper {
+        padding: 10px;
+        width: 800px;
+        min-width: 300px;
+
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+      
+      #model {
+        height: 100%;
+        width: 100%;
+      }
+      .sketch-container{
+        height: 3%;
+        background-color: white;
+      }
+      #minimap-container{
+        height: 93%;
+        width: 100%;
+      }
+      #button-list{
+        height:4%;
+        width: 100%;
+        display: flex;
+        padding: 0.1rem;
+      }
+      #button-list div{
+        margin: 0 3px;
+      }
+      .slider{
+        width: 90px;
+      }
+      select.ui.dropdown{
+        padding: 0.2em;
+      }
+      .range{
+        line-height: 38px;
+      }
+      
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper" id="widget-container">
+      <div class="sketch-container">
+        <div class="ui toggle checkbox">
+          <input type="checkbox" name="public" id="sketch">
+          <label>Sketch</label>
+        </div>
+      </div>
+      <div id="minimap-container"></div>
+      <div id="button-list">
+        <div>
+          <select class="ui dropdown" id="editmode" disabled>
+            <option value="add">添加</option>
+            <option value="edit">编辑</option>
+            <option value="remove">删除</option>
+          </select>
+        </div>
+        
+        <div>
+          <button class="ui icon button" id="play" disabled>
+            <i class="play icon"></i>
+          </button>
+          <button class="ui icon button" id="stop" disabled>
+            <i class="stop icon"></i>
+          </button>
+        </div>
+
+        <div class="range">
+          <label for="time">进度：</label><input type="range" min="0" max="100" value="0" id="time" class="slider" disabled>
+        </div>
+        <div class="range">
+          <label for="height">高度：</label><input type="range" min="0" max="100" value="0" id="height" class="slider" disabled>
+        </div>
+        <div>
+          <select class="ui dropdown" id="speed">
+            <option value="0.08">低速</option>
+            <option value="0.5">高速</option>
+            <option value="1.0">超高速</option>
+          </select>
+          <!-- <label for="height">速度</label><input type="range" min="0.08" max="1.0" value="0.08" step="0.05" id="speed"> -->
+        </div>
+      </div>
+    </div>
+    <div class="wrapper-right">
+      <label id="progress">Loading: 0</label>
+    </div>
+    <div id="model"></div>
+    <script src="http://localhost:5000/modeloapi.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
