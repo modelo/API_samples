@@ -47,11 +47,13 @@
         width: 100%;
       }
       .sketch-container{
-        height: 3%;
+        height: 4.2%;
         background-color: white;
+        display: flex;
+        justify-content: space-around;
       }
       #minimap-container{
-        height: 93%;
+        height: 91.8%;
         width: 100%;
       }
       #button-list{
@@ -72,19 +74,51 @@
       .range{
         line-height: 38px;
       }
-      
+      .checkbox{
+        margin-top: 0.5rem;
+      }
+      #paths{
+        width: 100px;
+      }
+      #hint{
+        position: absolute;
+      }
     </style>
   </head>
 
   <body>
     <div class="wrapper" id="widget-container">
       <div class="sketch-container">
+        <!-- <div class="ui toggle checkbox">
+          <input type="checkbox" name="public" id="enable">
+          <label>Enabled</label>
+        </div> -->
+        <div>
+          <button class="ui icon button" id="add" title="添加新漫游">
+            <i class="plus icon"></i>
+          </button>
+          <button class="ui icon button" id="save" disabled title="保存漫游">
+            <i class="save icon"></i>
+          </button>
+          <button class="ui icon button" id="remove" disabled title="删除该漫游">
+            <i class="trash icon"></i>
+          </button>
+        </div>
+        <div>
+          <select class="ui dropdown" id="paths" disabled title="漫游列表">
+          </select>
+        </div>
         <div class="ui toggle checkbox">
           <input type="checkbox" name="public" id="sketch">
-          <label>Sketch</label>
+          <label>建筑师模式</label>
         </div>
       </div>
-      <div id="minimap-container"></div>
+      <div id="minimap-container">
+        <div id="hint">
+          <div>先点击左上角的添加按钮，添加一段漫游</div>
+          <div>再点击三维场景中的平面，生成小地图</div>
+        </div>
+      </div>
       <div id="button-list">
         <div>
           <select class="ui dropdown" id="editmode" disabled>
@@ -95,10 +129,10 @@
         </div>
         
         <div>
-          <button class="ui icon button" id="play" disabled>
+          <button class="ui icon button" id="play" disabled title="播放">
             <i class="play icon"></i>
           </button>
-          <button class="ui icon button" id="stop" disabled>
+          <button class="ui icon button" id="stop" disabled title="停止">
             <i class="stop icon"></i>
           </button>
         </div>
@@ -123,7 +157,7 @@
       <label id="progress">Loading: 0</label>
     </div>
     <div id="model"></div>
-    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-3.7-lts.js"></script>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-3.8-lts.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script src="./index.js"></script>
   </body>

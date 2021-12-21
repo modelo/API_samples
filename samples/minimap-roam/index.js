@@ -15,6 +15,15 @@ var playButton = document.getElementById('play');
 var stopButton = document.getElementById('stop');
 var heightSlider = document.getElementById('height');
 var sketchButton = document.getElementById('sketch');
+// var enableButton = document.getElementById('enable');
+var saveButton = document.getElementById('save');
+var addButton = document.getElementById('add');
+var removeButton = document.getElementById('remove');
+var pathsSelect = document.getElementById('paths');
+var hint = document.getElementById('hint');
+var paths = [];
+var nameCount = 0;
+var currentPath = -1;
 
 viewer
   .loadModel(modelId, progress => {
@@ -26,12 +35,13 @@ viewer
     var mouse = new Modelo.View.Input.Mouse(viewer);
     viewer.addInput(mouse);
 
-    var navigation = new Modelo.View.MiniMapNavigationTool(viewer,miniMapContainer);
+    var navigation = new Modelo.View.Tool.MiniMapNavigation(viewer,miniMapContainer);
     viewer.addTool(navigation);
-    navigation.setEnabled(true);
+
     viewer.getEventEmitter().on('firstPointAdded', ()=>{
       var height = navigation.getViewHeightRatio();
       heightSlider.value = height*100;
+      updateUI(navigation);
     })
     viewer.getEventEmitter().on('afterAddMarker',(marker)=>{
       updateUI(navigation);
@@ -46,6 +56,7 @@ viewer
       progressSlider.value=0;
       updateUI(navigation);
     });
+
     // UI
     progressSlider.oninput=function(e){
       navigation.jumpTo(parseFloat(progressSlider.value)/100);
@@ -89,24 +100,80 @@ viewer
       console.log('sketch change');
       navigation.changeMiniMapStyle(sketchButton.checked);
     }
+
+    saveButton.onclick=function(){
+      if(navigation.playable){
+        if(currentPath>-1){
+          paths[currentPath].data = navigation.exportData();
+        }
+      }
+    }
+
+    addButton.onclick = function(){
+      currentPath = paths.length;
+      nameCount++;
+      const name = '漫游'+nameCount;
+      paths.push({
+        name: name,
+        data: undefined
+      });
+      var option = document.createElement('option');
+      option.setAttribute('value',''+currentPath);
+      option.innerHTML = name;
+      pathsSelect.appendChild(option);
+      pathsSelect.value = ''+currentPath;
+      navigation.setEnabled(true)
+      navigation.restart();
+      updateUI(navigation);
+    }
+
+    removeButton.onclick=function(){
+      if(currentPath>-1){
+        navigation.clearData();
+        paths.splice(currentPath,1);
+        pathsSelect.removeChild(pathsSelect.children[currentPath]);
+        currentPath--;
+        pathsSelect.value = ''+currentPath;
+        if(currentPath>-1 && paths[currentPath].data){
+          navigation.loadData(paths[currentPath].data);
+        }
+        updateUI(navigation);
+      }
+    }
+
+    pathsSelect.onchange=function(e){
+      currentPath = parseInt(pathsSelect.value);
+      if(currentPath>-1 && paths[currentPath].data){
+        navigation.loadData(paths[currentPath].data);
+      }
+      else{
+        navigation.clearData();
+        navigation.restart();
+      }
+      updateUI(navigation);
+    }
   });
   function updateUI(navigation){
     if(navigation.firstPointAdded){
       heightSlider.removeAttribute('disabled')
       editmodeSelect.removeAttribute('disabled')
+      hint.setAttribute('style','display:none;')
     }
     else{
       heightSlider.setAttribute('disabled',true)
       editmodeSelect.setAttribute('disabled',true)
+      hint.setAttribute('style','display:block;')
     }
     if(navigation.playable){
       progressSlider.removeAttribute('disabled')
       playButton.removeAttribute('disabled')
+      saveButton.removeAttribute('disabled')
     }
     else{
       progressSlider.setAttribute('disabled',true)
       playButton.setAttribute('disabled',true)
       stopButton.setAttribute('disabled',true)
+      saveButton.setAttribute('disabled',true)
     }
     if(navigation.isPlaying){
       playButton.setAttribute('disabled',true);
@@ -123,5 +190,13 @@ viewer
       if(navigation.playable){
         playButton.removeAttribute('disabled');
       }
+    }
+    if(paths.length>0){
+      pathsSelect.removeAttribute('disabled')
+      removeButton.removeAttribute('disabled')
+    }
+    else{
+      pathsSelect.setAttribute('disabled',true)
+      removeButton.setAttribute('disabled',true)
     }
   }
