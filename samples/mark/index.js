@@ -59,7 +59,7 @@ document.getElementById("RandomColor").onchange = function(){
   markGraph.setDefaultColor(checked ? [Math.random(),Math.random(),Math.random()] : null,true); // 覆盖全部mark
 }
 
-// 这个开关表示
+// 这个开关表示mark得gizmo
 let useGizmo = false;
 document.getElementById("Gizmo").onclick = function(){
   let marks = markGraph.getSelectMarks();
@@ -73,6 +73,44 @@ document.getElementById("Gizmo").onclick = function(){
   gizmo.setEnabled(useGizmo);
 }
 
+// 参数化绘制点线面
+let type = '';
+let markParameters = [];
+document.getElementById("addKeyPoint").onclick = function(){
+  let keyPoint = [parseFloat(document.getElementById('setx').value),
+  parseFloat(document.getElementById('sety').value),
+  parseFloat(document.getElementById('setz').value)];
+  markParameters.push(keyPoint);
+  updateKeyPoints(markParameters);
+}
+document.getElementById("clearKeyPoints").onclick = function(){
+  markParameters = [];
+  updateKeyPoints(markParameters);
+}
+document.getElementById("drawMark").onclick = function(){
+  var marktype = parseInt(document.getElementById("marktype2").value);
+  if(marktype===1){
+    markParameters.forEach((point)=>{
+      markGraph.drawMark(point,marktype);
+    })
+    markParameters = [];
+    updateKeyPoints(markParameters);
+  }else if(!isNaN(marktype)){
+    markGraph.drawMark(markParameters,marktype);
+    markParameters = [];
+    updateKeyPoints(markParameters);
+  }
+}
+
+function updateKeyPoints(markParameters){
+  let value = '';
+  for(let mark of markParameters){
+    value += '{'+ 'x: '+mark[0]+','+ 'y: '+mark[1]+',' + 'z: '+ mark[2] +'}，'
+  }
+  document.getElementById('keyPoints').innerHTML = value;
+}
+
+
 viewer.loadModel(modelId, updateProgress).then(() => {
   // success
   console.log("loading done");
@@ -83,6 +121,10 @@ viewer.loadModel(modelId, updateProgress).then(() => {
   viewer.getEventEmitter().on("MarkGraph-Removed", function(id){
     console.log('delete mark: ' + id);
   });
+  viewer.getEventEmitter().on("MarkGraph-Selected", function(selects){
+    console.log('select mark:',selects);
+  });
+
 
   $("#range1").range({
     min: 0.5,

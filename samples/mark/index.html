@@ -80,6 +80,11 @@
         margin: 0;
         padding: 0;
       }
+      .border-mode{
+        border: #b6b6b6;
+        border-style: solid;
+        margin-top: 10px;
+      }
 
       #result {
         word-break: break-all;
@@ -102,49 +107,79 @@
       <form class="ui form">
         <div class="one field">
           <div class="field">
-            <label>Default button</label>
+            <div class="border-mode">
+            <label>常用Api</label>
             <div class="buttons-wrapper">
-              <input type="button" id="clearAll" value="clearAllMarks" class="button" />
-              <input type="button" id="clearSelectedMark" value="clearSelectedMark" class="button" />
-              <input type="button" id="clearSelect" value="clearSelect" class="button" />
-              <input type="button" id="Gizmo" value="Gizmo" class="button" />
+              <input type="button" id="clearAll" value="全部清除" class="button" />
+              <input type="button" id="clearSelectedMark" value="指定清除" class="button" /></br>
+              <input type="button" id="clearSelect" value="清除选择" class="button" />
+              <input type="button" id="Gizmo" value="编辑位置" class="button" />
+            </div>
             </div>
 
-            <label>Mark Type</label>
+            <div class="border-mode">
+            <label style="font-weight: bold;">鼠标交互绘制</label></br>
+            <label>标绘类型</label>
             <select class="ui dropdown" id="marktype">
-              <option>Type</option>
-              <option value="0">Select</option>
-              <option value="1">Point</option>
-              <option value="2">Line</option>
-              <option value="3">Area</option>
-              <option value="4">Rect</option>
+              <option>-</option>
+              <option value="0">拾取</option>
+              <option value="1">点</option>
+              <option value="2">线</option>
+              <option value="3">面</option>
+              <option value="4">举行</option>
             </select>
 
-            <label>Select Type</label>
+            <label>拾取效果</label>
             <select id ="SelectType" class="ui dropdown" id="marktype">
-              <option value="1">HightLight</option>
-              <option value="2">OutLine</option>
+              <option value="1">高亮</option>
+              <option value="2">轮廓</option>
             </select>
           </div>
+          </div>
 
-          <label>Mark Property</label>
+          <div class="border-mode">
+          <label style="font-weight: bold;">标绘属性</label>
           <div class="range-wrapper">
-            <label>RectWidth</label>
+            <label>箭头线宽</label>
             <span class="min">0.5</span><span class="max">4</span>
             <div class="ui range" id="range1"></div>
           </div>
           <div class="ui toggle checkbox">
             <input type="checkbox" id="RectWithArrow" checked="true"></input>
-            <label>RectWithArrow</label>
+            <label>开启箭头</label>
           </div>
           <div class="ui toggle checkbox">
             <input type="checkbox" id="RandomColor" ></input>
-            <label>RandomColor</label>
+            <label>随机颜色</label>
+          </div>
           </div>
 
-          <label>Describe:</label>
-          <div><label id="explain1">press CTRL to align xyz when Draw</label></div>
-          <div><label id="explain2">press CTRL to Multiple choice when Select</label></div>
+          <div class="border-mode">
+          <label style="font-weight: bold;">参数化绘制:</label></br>
+          <label>标绘类型</label>
+          <select class="ui dropdown" id="marktype2">
+            <option>-</option>
+            <option value="1">点</option>
+            <option value="2">线</option>
+            <option value="3">面</option>
+            <option value="4">箭头</option>
+          </select>
+
+          <label style="font-weight: bold;">X坐标:</label> <input type="text" id="setx" placeholder="0.00"/></br>
+          <label style="font-weight: bold;">Y坐标:</label> <input type="text" id="sety" placeholder="0.00"/></br>
+          <label style="font-weight: bold;">Z坐标</label> <input type="text" id="setz" placeholder="0.00"/></br>
+          <label style="font-weight: bold;">当前锚点:</label></br>
+          <label id="keyPoints"></label></br>
+          <input type="button" id="addKeyPoint" value="添加锚点" class="button" />
+          <input type="button" id="clearKeyPoints" value="清除锚点" class="button" />
+          <input type="button" id="drawMark" value="绘制标绘" class="button" />
+          </div>
+
+          <div class="border-mode">
+          <label style="fontshih-weight: bold;">其它:</label>
+          <div><label id="explain1">绘制中,按住 CTRL 键对齐可以xyz轴</label></div>
+          <div><label id="explain2">选择时,按住 CTRL 键支持多选</label></div>
+          </div>
 
         </div>
         </div>
@@ -153,7 +188,7 @@
     <div class="wrapper-right">
       <label id="progress">Loading: 0</label>
     </div>
-    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-3.7-lts.js"></script>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-3.8.4-lts.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script src="index.js"></script>
   </body>
