@@ -15,15 +15,15 @@ var playButton = document.getElementById('play');
 var stopButton = document.getElementById('stop');
 var heightSlider = document.getElementById('height');
 var sketchButton = document.getElementById('sketch');
-// var enableButton = document.getElementById('enable');
 var saveButton = document.getElementById('save');
 var addButton = document.getElementById('add');
 var removeButton = document.getElementById('remove');
 var pathsSelect = document.getElementById('paths');
 var hint = document.getElementById('hint');
-var paths = [];
+
+var paths = []; // 存储序列化的漫游数据
 var nameCount = 0;
-var currentPath = -1;
+var currentPath = -1; // 当前激活的漫游
 
 viewer
   .loadModel(modelId, progress => {
@@ -35,23 +35,29 @@ viewer
     var mouse = new Modelo.View.Input.Mouse(viewer);
     viewer.addInput(mouse);
 
+    // 初始化漫游工具
     var navigation = new Modelo.View.Tool.MiniMapNavigation(viewer,miniMapContainer);
     viewer.addTool(navigation);
 
+    // 添加第一个点后，设置高度slider，更新UI界面
     viewer.getEventEmitter().on('firstPointAdded', ()=>{
       var height = navigation.getViewHeightRatio();
       heightSlider.value = height*100;
       updateUI(navigation);
     })
+    // 每次添加一个关键点，更新一次UI界面
     viewer.getEventEmitter().on('afterAddMarker',(marker)=>{
       updateUI(navigation);
     });
+    // 每次移除一个关键点，更新一次UI界面
     viewer.getEventEmitter().on('afterRemoveMarker',(index)=>{
       updateUI(navigation);
     });
+    // 动画播放时，每一帧更新一次播放进度条
     viewer.getEventEmitter().on('navigate',(data)=>{
       progressSlider.value = data.progress*100;
     });
+    // 动画播放结束后, 进度条归零，更新UI界面
     viewer.getEventEmitter().on('animationStopped',()=>{
       progressSlider.value=0;
       updateUI(navigation);
@@ -59,9 +65,11 @@ viewer
 
     // UI
     progressSlider.oninput=function(e){
+      // 进度条拖动时更新场景视角
       navigation.jumpTo(parseFloat(progressSlider.value)/100);
     }
     
+    // 模式切换时，更新漫游工具的模式，0: 添加，1: 编辑, 2: 删除
     editmodeSelect.onchange = function(){
       if(editmodeSelect.value==='add'){
         navigation.editMode = 0;
@@ -73,22 +81,25 @@ viewer
         navigation.editMode = 2;
       }
     }
+    // 点击播放按钮后, 停止之前动画，重新播放动画，更新UI界面
     playButton.onclick=function(){
       navigation.stopAnimation();
       navigation.playAnimation();
       updateUI(navigation);
     }
+    // 点击停止按钮后, 停止之前动画，更新UI界面
     stopButton.onclick=function(){
       navigation.stopAnimation();
-      progressSlider.value = 0;
       updateUI(navigation);
     }
 
+    // 拖动高度slider时，更新漫游视角的高度
     heightSlider.onchange=function(){
       console.log('height change');
       navigation.setViewHeightByRatio(parseFloat(heightSlider.value)/100);
     }
 
+    // 拖动速度slider时，先停止动画播放，然后设置漫游速度
     speedSlider.value = navigation.speed;
     speedSlider.onchange=function(){
       console.log('speed change');
@@ -96,11 +107,13 @@ viewer
       navigation.speed = parseFloat(speedSlider.value);
     }
 
+    // 切换建筑师模式按钮时，更新小地图样式
     sketchButton.onchange=function(){
       console.log('sketch change');
       navigation.changeMiniMapStyle(sketchButton.checked);
     }
 
+    // 点击保存按钮，保存序列化数据
     saveButton.onclick=function(){
       if(navigation.playable){
         if(currentPath>-1){
@@ -109,6 +122,7 @@ viewer
       }
     }
 
+    // 点击添加按钮，重置漫游工具，更新UI界面
     addButton.onclick = function(){
       currentPath = paths.length;
       nameCount++;
@@ -127,6 +141,7 @@ viewer
       updateUI(navigation);
     }
 
+    // 点击删除按钮，清空漫游工具内的数据，删除之前保存在paths里对应的序列化数据
     removeButton.onclick=function(){
       if(currentPath>-1){
         navigation.clearData();
@@ -141,6 +156,7 @@ viewer
       }
     }
 
+    // 切换漫游数据时，用loadData加载保存的序列化数据
     pathsSelect.onchange=function(e){
       currentPath = parseInt(pathsSelect.value);
       if(currentPath>-1 && paths[currentPath].data){
@@ -153,6 +169,7 @@ viewer
       updateUI(navigation);
     }
   });
+  // 根据漫游工具中的状态，更新UI界面
   function updateUI(navigation){
     if(navigation.firstPointAdded){
       heightSlider.removeAttribute('disabled')
