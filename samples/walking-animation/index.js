@@ -23,10 +23,7 @@ var path = [
   [10, 9, 1.0],
   [10, -10, 1.0]
 ];
-var person = new Modelo.View.Pawn("person", viewer.getResourceManager(), viewer.getMaterialManager());
-
-// Load local gltf file with animation info. Note: Modelo3d only support gltf 2.0 version for now.
-person.loadGltfModel("./scene.gltf").then(function() {
+Modelo.View.GLTFLoader.load("./scene.gltf", viewer.getResourceManager(), viewer.getMaterialManager(), "person").then(function (person) {
   viewer.getScene().addPawn(person, false);
   // Get the available animations.
   var skeleton = person.getSkeletons()[0];
@@ -46,8 +43,9 @@ person.loadGltfModel("./scene.gltf").then(function() {
   // Set the path following animation speed.
   pathFollowingAnimator.setSpeed(0.02);
   pathFollowingAnimator.start();
+}).catch(e=>{
+  console.error(e)
 });
-
 
 // Add Animating ribbon below the person to show the walking path.
 var ribbon = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
