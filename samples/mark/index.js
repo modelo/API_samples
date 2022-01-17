@@ -36,6 +36,7 @@ document.getElementById("SelectType").onchange = function() {
 
 document.getElementById("clearAll").onclick = function() {
   markGraph.reset();
+  removeRibbons();
 };
 
 document.getElementById('clearSelectedMark').onclick = function(){
@@ -57,6 +58,60 @@ document.getElementById("RectWithArrow").onchange = function(){
 document.getElementById("RandomColor").onchange = function(){
   var checked = document.getElementById("RandomColor").checked;
   markGraph.setDefaultColor(checked ? [Math.random(),Math.random(),Math.random()] : null,true); // 覆盖全部mark
+}
+
+// 生成动态流线
+let ribbonGroups = {};
+function createRibbon(id,points,platte){
+  points.map(point => [point[0] / 304, point[1] / 304, point[2] / 304]); // 单位转换
+  let ribbonGroup = new Modelo.View.Visualize.AnimatingRibbon(viewer.getRenderScene());
+  ribbonGroup.setEnabled(true);
+  viewer.getScene().addVisualize(ribbonGroup);
+  // TODO：下面的参数客户可以根据自己的需要自行调节
+  ribbonGroup.setParameter("width", 10);
+  ribbonGroup.setParameter("unitLenght", 50);
+  ribbonGroup.setParameter("speed", -0.5);
+  ribbonGroup.setParameter("platteTexture", platte);
+  ribbonGroup.setParameter("depthTest", false);
+  ribbonGroup.addRibbon(points);
+  ribbonGroups[id] = ribbonGroup;
+}
+
+function removeRibbon(id){
+  let ribbon = ribbonGroups[id];
+  if(ribbon){
+    ribbon.setEnabled(false);
+    viewer.getScene().removeVisualize(ribbon);
+  }
+}
+
+// 清空动态流线
+function removeRibbons(){
+  for(let id in ribbonGroups){
+    removeRibbon(id);
+  }
+  ribbonGroups = {};
+}
+
+var isStreamLine = false;
+document.getElementById("streamLine").onchange = function(){
+  isStreamLine = document.getElementById("streamLine").checked;
+  // 获得所有的线
+  let markLines = markGraph.getLines();
+  if(isStreamLine){
+    // 分别获得每一条线的点
+    for(let line of markLines){
+      let linePoints = line.getKeyPoints();
+      // 隐藏线
+      line.setVisible(false);
+      createRibbon(line.id,linePoints,"warm.png");
+    }
+  }else{
+    for(let line of markLines){
+      line.setVisible(true);
+    }
+    removeRibbons();
+  }
 }
 
 // 这个开关表示mark得gizmo
@@ -117,9 +172,22 @@ viewer.loadModel(modelId, updateProgress).then(() => {
 
   viewer.getEventEmitter().on("MarkGraph-Created", function(id){
     console.log('create mark success: ' + id);
+    if(isStreamLine){
+      let mark = this.markGraph.getMark(id);
+      if(mark.type === 'line'){
+        mark.setVisible(false);
+        createRibbon(id,mark.getKeyPoints(),"warm.png");
+      }
+    }
   });
   viewer.getEventEmitter().on("MarkGraph-Removed", function(id){
     console.log('delete mark: ' + id);
+    if(isStreamLine){
+      let mark = this.markGraph.getMark(id);
+      if(mark.type === 'line'){
+        removeRibbon(id);
+      }
+    }
   });
   viewer.getEventEmitter().on("MarkGraph-Selected", function(selects){
     console.log('select mark:',selects);
