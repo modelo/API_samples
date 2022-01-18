@@ -8,7 +8,7 @@ function updateProgress(progress) {
   c.innerHTML = "Loading: " + Math.round(progress * 100) + "%";
 }
 
-var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile() });
+var viewer = new Modelo.View.Viewer3D("model", {   isMobile: isMobile(),useWebGL2:true });
 
 viewer.addInput(new Modelo.View.Input.Mouse(viewer)); // Add mouse to control camera.
 viewer.addInput(new Modelo.View.Input.Touch(viewer));
@@ -68,9 +68,9 @@ function createRibbon(id,points,platte){
   ribbonGroup.setEnabled(true);
   viewer.getScene().addVisualize(ribbonGroup);
   // TODO：下面的参数客户可以根据自己的需要自行调节
-  ribbonGroup.setParameter("width", 10);
+  ribbonGroup.setParameter("width", 2);
   ribbonGroup.setParameter("unitLenght", 50);
-  ribbonGroup.setParameter("speed", -0.5);
+  ribbonGroup.setParameter("speed", 1);
   ribbonGroup.setParameter("platteTexture", platte);
   ribbonGroup.setParameter("depthTest", false);
   ribbonGroup.addRibbon(points);
@@ -104,7 +104,10 @@ document.getElementById("streamLine").onchange = function(){
       let linePoints = line.getKeyPoints();
       // 隐藏线
       line.setVisible(false);
+      // 创建线
       createRibbon(line.id,linePoints,"warm.png");
+      // 开启高亮
+      viewer.setEffectParameter("Glow", "intensity", 0.75); 
     }
   }else{
     for(let line of markLines){
