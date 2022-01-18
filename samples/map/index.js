@@ -70,8 +70,6 @@ document.getElementById("loadmap").onclick = function () {
   addMap(document.getElementById("maps").value);
 };
 
-document.getElementById("maps");
-
 // Load local gltf file with animation info. Note: Modelo3d only support gltf 2.0 version for now.
 Modelo.View.GLTFLoader.load("models/lujiazui.gltf", viewer.getResourceManager(), viewer.getMaterialManager(), "buildings").then(function (buildings) {
   // buildings.setScaling(1, 1, 1);
