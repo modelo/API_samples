@@ -1,11 +1,19 @@
-let map;
+var modelId = "q8ZdPw1a";
+var appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUzLCJ1c2VybmFtZSI6Ik1vZGVsbyIsImlzUGVybWFuZW50Ijp0cnVlLCJpYXQiOjE1Njc1NjI0MTksImV4cCI6MzMxMDM1NjI0MTl9.EbW_cSPca4kWLedgNtfrGguog_o-3CCM5WhM7fFi0GA"
+Modelo.init({ endpoint: "https://build-portal.modeloapp.com", appToken });
+
+var map;
 
 var viewer = new Modelo.View.Viewer3D("model", {
   isMobile: isMobile(),
   useWebGL2: true,
 });
-viewer.addInput(new Modelo.View.Input.Mouse(viewer));
-viewer.addInput(new Modelo.View.Input.Touch(viewer));
+viewer.loadModel(modelId).then(() => {
+  viewer.setMaterialParameter(modelId+'.white_0', "color", [0.0,0.6,1.0]);
+  viewer.addInput(new Modelo.View.Input.Mouse(viewer));
+  viewer.addInput(new Modelo.View.Input.Touch(viewer));
+});
+
 // add keyboard callback.
 // var keyboard = new Modelo.View.Input.Keyboard(viewer);
 // viewer.addInput(keyboard);
@@ -69,10 +77,3 @@ document.getElementById("loadmap").onclick = function () {
   }
   addMap(document.getElementById("maps").value);
 };
-
-// Load local gltf file with animation info. Note: Modelo3d only support gltf 2.0 version for now.
-Modelo.View.GLTFLoader.load("models/lujiazui.gltf", viewer.getResourceManager(), viewer.getMaterialManager(), "buildings").then(function (buildings) {
-  // buildings.setScaling(1, 1, 1);
-  // buildings.setTranslation(0, 0, 0);
-  viewer.getScene().addPawn(buildings);
-});

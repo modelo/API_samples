@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ruler</title>
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+      }
+
+      .wrapper {
+        position: fixed;
+        padding: 10px;
+        min-width: 300px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      #model {
+        height: 100%;
+        width: 100%;
+      }
+      .infobox{
+        transform: translate(-50%,-100%);
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+        border-radius: 5px;
+        position: absolute;
+        z-index: 1;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .title{
+        border-bottom: 1px solid rgba(169, 215, 56, 0.85);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="width: 100%; height: 100%">
+      <div class="wrapper">
+        <div id="info" style="width: 100%; padding: 10px">
+          <select name="stations" id="stations" class="ui dropdown">
+            <option value="metro">地铁站</option>
+            <option value="bus">公交站</option>
+          </select>
+          <span style="margin-left: 10px;">点选处经纬度: <span id="lonlatHint"></span></span>
+          <div style="margin-top: 10px;">东方明珠模型，公交/地铁点位，地铁线路是通过经纬度坐标绘制到对应位置的，点击地图上橙色点查看详情</div>
+
+        </div>
+      </div>
+      <div class="wrapper-right">
+        <label id="progress"></label>
+      </div>
+      <div id="model">
+        <div id="infobox" style="width: 200px; position: absolute; color: yellow">
+          <div class="infobox">
+            <div class="title"></div>
+            <div></div>
+          </div>
+        </div>
+        <div id="infobox2" style="width: 200px; position: absolute; color: yellow; display: none;">
+          <div class="infobox">
+            <div class="title">东方明珠</div>
+            <div>按照经纬度121.495208°, 31.241954°摆放在此处</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-3.9.0-lts.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="poi.js"></script>
+    <script src="metrolines.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

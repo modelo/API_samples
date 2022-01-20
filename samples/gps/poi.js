@@ -1,0 +1,603 @@
+const busStations = [{
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "老西门-公交站",
+    "hotPointID": "808604063DE8221F",
+    "stationData": [{
+        "stationUuid": "1431588",
+        "lineName": "11外",
+        "uuid": "240463"
+    }, {
+        "stationUuid": "1460897",
+        "lineName": "18路",
+        "uuid": "240943"
+    }, {
+        "stationUuid": "1440777",
+        "lineName": "23路",
+        "uuid": "242467"
+    }, {
+        "stationUuid": "1461146",
+        "lineName": "135路",
+        "uuid": "240102"
+    }, {
+        "stationUuid": "1450188",
+        "lineName": "220路",
+        "uuid": "241575"
+    }, {
+        "stationUuid": "1428978",
+        "lineName": "304路",
+        "uuid": "242196"
+    }, {
+        "stationUuid": "1460897",
+        "lineName": "318路",
+        "uuid": "242778"
+    }, {
+        "stationUuid": "1429878",
+        "lineName": "451路",
+        "uuid": "241494"
+    }, {
+        "stationUuid": "1446396",
+        "lineName": "454路",
+        "uuid": "242664"
+    }, {
+        "stationUuid": "1461146",
+        "lineName": "537路",
+        "uuid": "241692"
+    }, {
+        "stationUuid": "1461199",
+        "lineName": "736路",
+        "uuid": "241531"
+    }, {
+        "stationUuid": "1446396",
+        "lineName": "782路",
+        "uuid": "241585"
+    }, {
+        "stationUuid": "1437605",
+        "lineName": "789路",
+        "uuid": "240851"
+    }, {
+        "stationUuid": "1433390",
+        "lineName": "911路",
+        "uuid": "242182"
+    }, {
+        "stationUuid": "1434777",
+        "lineName": "920路",
+        "uuid": "241883"
+    }, {
+        "stationUuid": "1446566",
+        "lineName": "930路",
+        "uuid": "243008"
+    }],
+    "lonlat": "121.479856 31.22246"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "老北门-公交站",
+    "hotPointID": "90BE24850DA5C494",
+    "stationData": [{
+        "stationUuid": "1450184",
+        "lineName": "11内",
+        "uuid": "241385"
+    }, {
+        "stationUuid": "1428972",
+        "lineName": "304路",
+        "uuid": "242196"
+    }, {
+        "stationUuid": "1450184",
+        "lineName": "320路",
+        "uuid": "240902"
+    }, {
+        "stationUuid": "1450184",
+        "lineName": "736路",
+        "uuid": "241532"
+    }, {
+        "stationUuid": "1450184",
+        "lineName": "920路",
+        "uuid": "241883"
+    }, {
+        "stationUuid": "1460921",
+        "lineName": "930路",
+        "uuid": "243008"
+    }, {
+        "stationUuid": "1460921",
+        "lineName": "932路",
+        "uuid": "241340"
+    }, {
+        "stationUuid": "1450184",
+        "lineName": "969路",
+        "uuid": "242430"
+    }, {
+        "stationUuid": "1460921",
+        "lineName": "上川专线",
+        "uuid": "241968"
+    }, {
+        "stationUuid": "1460921",
+        "lineName": "隧道八线",
+        "uuid": "241737"
+    }],
+    "lonlat": "121.48175 31.230288"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "新北门-公交站",
+    "hotPointID": "C0E661013A52972E",
+    "stationData": [{
+        "stationUuid": "1459230",
+        "lineName": "11外",
+        "uuid": "240463"
+    }, {
+        "stationUuid": "1436892",
+        "lineName": "26路",
+        "uuid": "242499"
+    }, {
+        "stationUuid": "1434966",
+        "lineName": "64路",
+        "uuid": "240933"
+    }, {
+        "stationUuid": "1428973",
+        "lineName": "304路",
+        "uuid": "242196"
+    }, {
+        "stationUuid": "1428973",
+        "lineName": "736路",
+        "uuid": "241532"
+    }, {
+        "stationUuid": "1426843",
+        "lineName": "805路",
+        "uuid": "242906"
+    }, {
+        "stationUuid": "1459703",
+        "lineName": "920路",
+        "uuid": "241883"
+    }, {
+        "stationUuid": "1436892",
+        "lineName": "926路",
+        "uuid": "241394"
+    }, {
+        "stationUuid": "1436892",
+        "lineName": "930路",
+        "uuid": "243109"
+    }],
+    "lonlat": "121.487512 31.231371"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市虹口区",
+    "poiType": "102",
+    "name": "提篮桥-公交站",
+    "hotPointID": "41B04580C7A9CD5F",
+    "stationData": [{
+        "stationUuid": "1442227",
+        "lineName": "13路",
+        "uuid": "241008"
+    }, {
+        "stationUuid": "1459146",
+        "lineName": "28路",
+        "uuid": "241011"
+    }, {
+        "stationUuid": "1437330",
+        "lineName": "134路",
+        "uuid": "240145"
+    }, {
+        "stationUuid": "1437748",
+        "lineName": "135路",
+        "uuid": "240110"
+    }, {
+        "stationUuid": "1442227",
+        "lineName": "319路",
+        "uuid": "240769"
+    }, {
+        "stationUuid": "1437330",
+        "lineName": "330路",
+        "uuid": "241705"
+    }, {
+        "stationUuid": "1435569",
+        "lineName": "854路",
+        "uuid": "241853"
+    }, {
+        "stationUuid": "1447004",
+        "lineName": "868路",
+        "uuid": "241584"
+    }],
+    "lonlat": "121.502783 31.253745"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市浦东新区",
+    "poiType": "102",
+    "name": "陆家嘴-公交站",
+    "hotPointID": "C18401822034F078",
+    "stationData": [{
+        "stationUuid": "1432861",
+        "lineName": "82路",
+        "uuid": "240482"
+    }, {
+        "stationUuid": "1428262",
+        "lineName": "314路",
+        "uuid": "242519"
+    }, {
+        "stationUuid": "1459473",
+        "lineName": "583路",
+        "uuid": "241620"
+    }, {
+        "stationUuid": "1459473",
+        "lineName": "870路",
+        "uuid": "242361"
+    }, {
+        "stationUuid": "1459473",
+        "lineName": "961路",
+        "uuid": "241797"
+    }, {
+        "stationUuid": "1432861",
+        "lineName": "961区间",
+        "uuid": "242719"
+    }, {
+        "stationUuid": "1459473",
+        "lineName": "985路",
+        "uuid": "241557"
+    }],
+    "lonlat": "121.49271 31.238455"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "小北门-公交站",
+    "hotPointID": "C0CA2481B9A3153F",
+    "stationData": [{
+        "stationUuid": "1461147",
+        "lineName": "11外",
+        "uuid": "240463"
+    }, {
+        "stationUuid": "1461147",
+        "lineName": "135路",
+        "uuid": "240110"
+    }, {
+        "stationUuid": "1461147",
+        "lineName": "220路",
+        "uuid": "241575"
+    }, {
+        "stationUuid": "1439563",
+        "lineName": "304路",
+        "uuid": "242196"
+    }, {
+        "stationUuid": "1461147",
+        "lineName": "736路",
+        "uuid": "241531"
+    }, {
+        "stationUuid": "1433391",
+        "lineName": "911路",
+        "uuid": "242182"
+    }, {
+        "stationUuid": "1461148",
+        "lineName": "930路",
+        "uuid": "243008"
+    }],
+    "lonlat": "121.478513 31.226543"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "小东门-公交站",
+    "hotPointID": "50E2458064F984DB",
+    "stationData": [{
+        "stationUuid": "1461152",
+        "lineName": "11外",
+        "uuid": "240463"
+    }, {
+        "stationUuid": "1461152",
+        "lineName": "64路",
+        "uuid": "240933"
+    }, {
+        "stationUuid": "1428975",
+        "lineName": "304路",
+        "uuid": "242196"
+    }, {
+        "stationUuid": "1428975",
+        "lineName": "736路",
+        "uuid": "241532"
+    }, {
+        "stationUuid": "1461153",
+        "lineName": "920路",
+        "uuid": "241883"
+    }, {
+        "stationUuid": "1461152",
+        "lineName": "930路",
+        "uuid": "243109"
+    }],
+    "lonlat": "121.492528 31.227651"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "大东门-公交站",
+    "hotPointID": "50E04406BB3419FE",
+    "stationData": [{
+        "stationUuid": "1461197",
+        "lineName": "11外",
+        "uuid": "240463"
+    }, {
+        "stationUuid": "1461151",
+        "lineName": "64路",
+        "uuid": "240935"
+    }, {
+        "stationUuid": "1428976",
+        "lineName": "304路",
+        "uuid": "242196"
+    }, {
+        "stationUuid": "1461139",
+        "lineName": "324路",
+        "uuid": "240820"
+    }, {
+        "stationUuid": "1461139",
+        "lineName": "920路",
+        "uuid": "241883"
+    }, {
+        "stationUuid": "1461151",
+        "lineName": "930路",
+        "uuid": "243008"
+    }],
+    "lonlat": "121.494358 31.223952"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "十六铺-公交站",
+    "hotPointID": "C09600063BCF38A5",
+    "stationData": [{
+        "stationUuid": "1446569",
+        "lineName": "55路",
+        "uuid": "242257"
+    }, {
+        "stationUuid": "1446569",
+        "lineName": "65路",
+        "uuid": "241324"
+    }, {
+        "stationUuid": "1439427",
+        "lineName": "305路",
+        "uuid": "241012"
+    }, {
+        "stationUuid": "1446569",
+        "lineName": "736路",
+        "uuid": "241532"
+    }, {
+        "stationUuid": "1439427",
+        "lineName": "866路",
+        "uuid": "240856"
+    }, {
+        "stationUuid": "1446569",
+        "lineName": "868路",
+        "uuid": "241583"
+    }],
+    "lonlat": "121.496006 31.226762"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "大南门-公交站",
+    "hotPointID": "0020018758F366FF",
+    "stationData": [{
+        "stationUuid": "1460949",
+        "lineName": "11内",
+        "uuid": "241385"
+    }, {
+        "stationUuid": "1437916",
+        "lineName": "304路",
+        "uuid": "242196"
+    }, {
+        "stationUuid": "1460949",
+        "lineName": "324路",
+        "uuid": "240820"
+    }, {
+        "stationUuid": "1460949",
+        "lineName": "920路",
+        "uuid": "241883"
+    }],
+    "lonlat": "121.489535 31.217325"
+}];
+
+const metroStations = [{
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市浦东新区",
+    "poiType": "102",
+    "name": "世纪大道-地铁站",
+    "hotPointID": "117C6483587F97E8",
+    "stationData": [{
+        "stationUuid": "1449034",
+        "lineName": "地铁2号线",
+        "uuid": "240832"
+    }, {
+        "stationUuid": "1449034",
+        "lineName": "地铁4号线",
+        "uuid": "240651"
+    }, {
+        "stationUuid": "1449034",
+        "lineName": "地铁6号线",
+        "uuid": "240605"
+    }, {
+        "stationUuid": "1449034",
+        "lineName": "地铁9号线",
+        "uuid": "241685"
+    }],
+    "lonlat": "121.522548 31.230903"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市浦东新区",
+    "poiType": "102",
+    "name": "浦东大道-地铁站",
+    "hotPointID": "40A441020D4334C7",
+    "stationData": [{
+        "stationUuid": "1450945",
+        "lineName": "地铁14号线",
+        "uuid": "243161"
+    }, {
+        "stationUuid": "1440484",
+        "lineName": "地铁4号线",
+        "uuid": "240651"
+    }],
+    "lonlat": "121.515011 31.242246"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市静安区",
+    "poiType": "102",
+    "name": "汉中路-地铁站",
+    "hotPointID": "41CE210562E03716",
+    "stationData": [{
+        "stationUuid": "1450963",
+        "lineName": "地铁12号线",
+        "uuid": "240853"
+    }, {
+        "stationUuid": "1450963",
+        "lineName": "地铁13号线",
+        "uuid": "240215"
+    }, {
+        "stationUuid": "1448990",
+        "lineName": "地铁1号线",
+        "uuid": "241996"
+    }],
+    "lonlat": "121.454256 31.243682"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市静安区",
+    "poiType": "102",
+    "name": "南京西路-地铁站",
+    "hotPointID": "1134240273C4D669",
+    "stationData": [{
+        "stationUuid": "1435098",
+        "lineName": "地铁12号线",
+        "uuid": "240853"
+    }, {
+        "stationUuid": "1435099",
+        "lineName": "地铁13号线",
+        "uuid": "240215"
+    }, {
+        "stationUuid": "1449022",
+        "lineName": "地铁2号线",
+        "uuid": "240832"
+    }],
+    "lonlat": "121.455004 31.22977"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市徐汇区",
+    "poiType": "102",
+    "name": "陕西南路-地铁站",
+    "hotPointID": "01DA6585AED0E5B4",
+    "stationData": [{
+        "stationUuid": "1436852",
+        "lineName": "地铁10号线",
+        "uuid": "241517"
+    }, {
+        "stationUuid": "1432136",
+        "lineName": "地铁12号线",
+        "uuid": "240853"
+    }, {
+        "stationUuid": "1449030",
+        "lineName": "地铁1号线",
+        "uuid": "241996"
+    }],
+    "lonlat": "121.454717 31.217955"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "人民广场-地铁站",
+    "hotPointID": "114604873EF58F2C",
+    "stationData": [{
+        "stationUuid": "1431383",
+        "lineName": "地铁1号线",
+        "uuid": "241996"
+    }, {
+        "stationUuid": "1431384",
+        "lineName": "地铁2号线",
+        "uuid": "240832"
+    }, {
+        "stationUuid": "1449029",
+        "lineName": "地铁8号线",
+        "uuid": "241610"
+    }],
+    "lonlat": "121.470861 31.234335"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市静安区",
+    "poiType": "102",
+    "name": "曲阜路-地铁站",
+    "hotPointID": "909A01833AE80B38",
+    "stationData": [{
+        "stationUuid": "1449027",
+        "lineName": "地铁12号线",
+        "uuid": "240853"
+    }, {
+        "stationUuid": "1449027",
+        "lineName": "地铁8号线",
+        "uuid": "241610"
+    }],
+    "lonlat": "121.466976 31.244277"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "豫园-地铁站",
+    "hotPointID": "80DE408579E7D79C",
+    "stationData": [{
+        "stationUuid": "1440431",
+        "lineName": "地铁10号线",
+        "uuid": "241516"
+    }, {
+        "stationUuid": "1450943",
+        "lineName": "地铁14号线",
+        "uuid": "243161"
+    }],
+    "lonlat": "121.482907 31.229896"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市静安区",
+    "poiType": "102",
+    "name": "天潼路-地铁站",
+    "hotPointID": "907A248670AE0024",
+    "stationData": [{
+        "stationUuid": "1436854",
+        "lineName": "地铁10号线",
+        "uuid": "241516"
+    }, {
+        "stationUuid": "1436854",
+        "lineName": "地铁12号线",
+        "uuid": "240853"
+    }],
+    "lonlat": "121.477825 31.245785"
+}, {
+    "eaddress": "",
+    "ename": "",
+    "address": "上海市黄浦区",
+    "poiType": "102",
+    "name": "南京东路-地铁站",
+    "hotPointID": "510E40860692DFFA",
+    "stationData": [{
+        "stationUuid": "1449520",
+        "lineName": "地铁10号线",
+        "uuid": "241517"
+    }, {
+        "stationUuid": "1429086",
+        "lineName": "地铁2号线",
+        "uuid": "240832"
+    }],
+    "lonlat": "121.478872 31.239031"
+}];
