@@ -66,12 +66,14 @@ function addMap(type) {
         if (!mouse.moved) {
           var position = viewer.getCamera().unproject(mouse.x, mouse.y);
           if(position){
+            // 将场景坐标转成经纬度坐标，结果的单位是弧度
             var cartographic = map.sceneCoordinateToCartographic(position[0], position[1], position[2]);
+            // 将弧度转成度
             lonlatHint.innerHTML = '经度: '+(cartographic[0]/Math.PI*180).toFixed(6) +'° 纬度: '+ (cartographic[1]/Math.PI*180).toFixed(6)+'°';
           }
         }
       });
-      // 将经纬度转成场景坐标
+      
       viewer.loadModel(modelId).then(() => {
         viewer.setMaterialParameter(modelId+'.white_0', "color", [0.7,0.7,0.7]);
 
@@ -83,9 +85,11 @@ function addMap(type) {
         markGraph = new Modelo.View.Tool.MarkGraph(viewer);
         viewer.addTool(markGraph);
         markGraph.setEnabled(true);
-
+        // 地图的经纬度范围，包含属性west(最西边经度), south(最南边纬度), east(最东边经度), north(最北边纬度)，单位弧度
         const extent = map.extentInCartographic;
+        // 弧度转成度
         console.log(extent.west*180/Math.PI, extent.south*180/Math.PI, extent.east*180/Math.PI, extent.north*180/Math.PI);
+        // centerInCartographic: 地图的中心点经纬度，单位弧度
         console.log(map.centerInCartographic.x*180/Math.PI, map.centerInCartographic.y*180/Math.PI);
         console.log("地图绘制完成");
         document.getElementById("progress").innerHTML = "Map Loaded";
@@ -125,7 +129,7 @@ function addMap(type) {
         });
       });
       // 根据经纬度放置东方明珠模型
-      position = map.cartographicToSceneCoordinate(model2longitude/180*Math.PI,model2latitude/180*Math.PI,0);
+      position = map.cartographicToSceneCoordinate(model2longitude/180*Math.PI,model2latitude/180*Math.PI,0); // 将弧度单位的经纬度转成场景坐标，结果的单位为英尺
       viewer.loadModel(model2Id, {initialTransform: [1,0,0,0, 0,1,0,0, 0,0,1,0, position[0],position[1],position[2],1]}, false).then(() => {
         infoBox2.style.display='block';
         position[2]=1200
