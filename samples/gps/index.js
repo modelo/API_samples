@@ -25,14 +25,14 @@ stationSelect.onchange=function(){
 }
 var lonlatHint = document.getElementById('lonlatHint');
 
-const model2longitude = 121.495208;
-const model2latitude = 31.241954;
-const longitude = 121.498;
-const latitude = 31.2402;
-const level = 14;
-const width = 10000;
-const height = 6000;
-const maximumTilesNumber = 40;
+const model2longitude = 121.495208; // 东方明珠模型的经度
+const model2latitude = 31.241954; // 东方明珠模型的纬度
+const longitude = 121.498; // 地图中心点的经度
+const latitude = 31.2402; // 地图中心点的纬度
+const level = 14; // 地图的LOD层级（精度）
+const width = 10000; // 地图的长度，单位米
+const height = 6000; // 地图的宽度，单位米
+const maximumTilesNumber = 40; // 允许的最大地图瓦片数量
 function addMap(type) {
   document.getElementById("progress").innerHTML = "Loading Map";
   let config = {};
@@ -56,12 +56,13 @@ function addMap(type) {
       level: level,
       width: width,
       height: height,
-      imageryProviderOptions: config,
+      imageryProviderOptions: config, // 地图服务的配置，包含服务地址
       maximumTilesNumber:maximumTilesNumber
     })
     .then((result) => {
       map = result;
       var mouse = new Modelo.View.Input.Mouse(viewer);
+      // 鼠标点击事件，计算当前点击位置的经纬度
       mouse.addMouseUpListener(mouse => {
         if (!mouse.moved) {
           var position = viewer.getCamera().unproject(mouse.x, mouse.y);
@@ -74,6 +75,7 @@ function addMap(type) {
         }
       });
       
+      // 加载城市白模
       viewer.loadModel(modelId).then(() => {
         viewer.setMaterialParameter(modelId+'.white_0', "color", [0.7,0.7,0.7]);
 
@@ -130,6 +132,7 @@ function addMap(type) {
       });
       // 根据经纬度放置东方明珠模型
       position = map.cartographicToSceneCoordinate(model2longitude/180*Math.PI,model2latitude/180*Math.PI,0); // 将弧度单位的经纬度转成场景坐标，结果的单位为英尺
+      // 将模型放到position的位置
       viewer.loadModel(model2Id, {initialTransform: [1,0,0,0, 0,1,0,0, 0,0,1,0, position[0],position[1],position[2],1]}, false).then(() => {
         infoBox2.style.display='block';
         position[2]=1200
