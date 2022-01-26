@@ -62,6 +62,9 @@ function addMap(type) {
     .then((result) => {
       map = result;
       var mouse = new Modelo.View.Input.Mouse(viewer);
+      var touch = new Modelo.View.Input.Touch(viewer);
+      viewer.addInput(mouse);
+      viewer.addInput(touch);
       // 鼠标点击事件，计算当前点击位置的经纬度
       mouse.addMouseUpListener(mouse => {
         if (!mouse.moved) {
@@ -78,11 +81,6 @@ function addMap(type) {
       // 加载城市白模
       viewer.loadModel(modelId).then(() => {
         viewer.setMaterialParameter(modelId+'.white_0', "color", [0.7,0.7,0.7]);
-
-        var touch = new Modelo.View.Input.Touch(viewer);
-        viewer.addInput(mouse);
-        viewer.addInput(touch);
-        mouse.add
         console.log("loading done");
         markGraph = new Modelo.View.Tool.MarkGraph(viewer);
         viewer.addTool(markGraph);
