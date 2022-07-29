@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link href="../../assets/css/semantic.min.css" rel="stylesheet" />
+    <script src="../../assets/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../assets/css/range.css" />
+    <script src="../../assets/js/range.js"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+      }
+
+      .range-wrapper {
+        position: relative;
+        margin: 10px 0px 10px 0px;
+      }
+      
+      .min,
+      .max,
+      .ui.range {
+        position: absolute;
+      }
+
+      .min {
+        right: 140px;
+      }
+
+      .max {
+        right: 0;
+      }
+
+      .ui.range {
+        left: 95px;
+        top: 0;
+        width: 130px;
+      }
+
+      .buttons-wrapper {
+        padding: 10px;
+        width: 250px;
+        min-width: 250px;
+      }
+
+      .ui.buttons{
+        display: -webkit-box;
+      }
+      .ui.button{
+        padding: .78571429em 0em .78571429em;
+      }
+
+      .buttons-wrapper label {
+        margin: 0 10 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .buttons-wrapper .button {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .wrapper {
+        padding: 10px;
+        width: 300px;
+        min-width: 300px;
+      }
+
+      .wrapper label {
+        margin: 0 0 0.28571429rem 0;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .wrapper-right label {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 1rem;
+        font-weight: 700;
+        position: fixed;
+        top: 0.68571429rem;
+        right: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      #model {
+        width: calc(100% - 250px);
+      }
+    </style>
+  </head>
+
+  <body>
+      
+
+    
+
+    <div class="buttons-wrapper">
+      
+      <label>选择模式</label>
+      <select class="ui dropdown" id="admode">
+        <option value="0">按构件</option>
+        <option value="1">按材质</option>
+        <option value="2">按图层</option>
+      </select>
+
+      <!-- <label id="element">Select element with left button: N/A</label> -->
+      <div class="range-wrapper">
+        <label>勾边线宽</label>
+        <span class="min">0</span><span class="max">5</span>
+        <div class="ui range" id="range1"></div>
+      </div>
+
+      <label>上色</label>
+      <div class="ui buttons">
+        <button type="button" class="ui button white" id="reset">Default</button>
+        <button type="button" class="ui button red" id="red">Red</button>
+        <button type="button" class="ui button green" id="green">Green</button>
+        <button type="button" class="ui button blue" id="blue">Blue</button>
+      </div>
+
+      <label>选中态边线颜色</label>
+      <div class="ui buttons">
+        <button type="button" class="ui button red" id="selectedRed">Red</button>
+        <button type="button" class="ui button green" id="selectedGreen">Green</button>
+        <button type="button" class="ui button blue" id="selectedBlue">Blue</button>
+      </div>
+
+      <label>hover态边线颜色</label>
+      <div class="ui buttons">
+        <button type="button" class="ui button red" id="hoveringRed">Red</button>
+        <button type="button" class="ui button green" id="hoveringGreen">Green</button>
+        <button type="button" class="ui button blue" id="hoveringBlue">Blue</button>
+      </div>
+    </div>
+    <div class="wrapper-right">
+      <label id="progress">Loading: 0</label>
+    </div>
+
+    <div id="model"></div>
+    <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-3.13.0-ENGINE-1367-lts.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="index.js"></script>
+    <script></script>
+  </body>
+</html>

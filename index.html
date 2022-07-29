@@ -179,7 +179,29 @@
                     height: 56px;
                 }
             }
+            .beian {
+              padding: 20px 0;
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              align-items: center;
+              justify-content: center;
+            }
 
+            .beian a {
+                color: #333;
+            }
+
+            .icp {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+            }
+
+            .icp img {
+              width: 20px;
+              height: 20px;
+            }
         </style>
     </head>
     <body>
@@ -192,6 +214,13 @@
                 <span></span>
             </a>
             <div id="content"></div>
+            <div class="beian">
+              <a href="https://beian.miit.gov.cn/" target="__black">©2022 沪ICP备17003425号-2</a>
+              <a target="__black" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010102004368" class="icp">
+                <img src="//qhstaticssl.kujiale.com/image/png/1655783308239/icp-icon.png" alt="">
+                <div>沪公网安备31010102004368号</div>
+              </a>
+            </div>
         </div>
         <iframe id="viewer" allowfullscreen></iframe>
 
@@ -252,7 +281,8 @@
                 "框选构件|region-select",
                 "标绘|mark",
                 "位置编辑器|gizmo",
-                "小地图漫游工具|minimap-roam"
+                "小地图漫游工具|minimap-roam",
+                "构件上色描边|arch-design"
             ],
             "模型|Model": [
                 "上传模型|upload-model",
