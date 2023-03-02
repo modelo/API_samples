@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Modelo API sample (Hello World)</title>
+  <link href="../../assets/css/semantic.min.css" rel="stylesheet">
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+    }
+
+    .wrapper {
+      padding: 10px;
+      width: 300px;
+      min-width: 300px;
+    }
+
+    .wrapper label {
+      margin: 0 0 .28571429rem 0;
+      color: rgba(0, 0, 0, .87);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .wrapper-right label {
+      color: rgba(0, 0, 0, .87);
+      font-size: 1rem;
+      font-weight: 700;
+      position: fixed;
+      top: .68571429rem;
+      right: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    #model {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-wrapper">
+    <form class="ui form">
+      <div class="one field">
+        <div class="field">
+          <label>Category</label>
+          <select class="ui dropdown" id="Categories">
+          </select>
+        </div>
+      </div>
+    </form>
+    <button type="button" class="ui button transition" id="growAnimation">生长动画</button>
+    <button type="button" class="ui button explodeAll" id="flowAnimation">流体动画</button>
+    <button type="button" class="ui button reset" id="stop">停止</button>
+  </div>
+  <div class="wrapper-right">
+    <label id="progress">Loading: 0</label>
+  </div>
+  <div id="model"></div>
+  <script src="https://s3.cn-north-1.amazonaws.com.cn/api-release.modeloapp.com/dev/modeloapi-3.27.3-lts.js"></script>
+  <!-- <script src="http://localhost:5000/modeloapi.js"></script> -->
+  <script src="/assets/js/utils.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+[{
+		"name":	"level4",
+		"visible":	true,
+		"color":	[0.600000023841858, 0, 1],
+		"nodes":	4697,
+		"index":	0,
+		"layers":	[]
+	}, {
+		"name":	"level1",
+		"visible":	true,
+		"color":	[0.40000000596046448, 0.26666668057441711, 0],
+		"nodes":	1895,
+		"index":	1,
+		"layers":	[]
+	}, {
+		"name":	"level2",
+		"visible":	true,
+		"color":	[0, 0.600000023841858, 0.529411792755127],
+		"nodes":	3349,
+		"index":	2,
+		"layers":	[]
+	}, {
+		"name":	"level3",
+		"visible":	true,
+		"color":	[0.46666666865348816, 0.46666666865348816, 0.600000023841858],
+		"nodes":	87752,
+		"index":	3,
+		"layers":	[]
+	}]
